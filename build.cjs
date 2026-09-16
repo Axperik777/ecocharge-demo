@@ -6,7 +6,8 @@ fs.writeFileSync('dist/assets/ecocharge-mark.svg',favicon);
 // Content hashes prevent a cached stylesheet/script from showing the previous identity.
 const finalize=html=>html.replace(/((?:src|href)=")([^"?#]+\.(?:css|js|svg))(\")/g,(match,start,file,end)=>{
  if(file.includes(':')||!fs.existsSync('dist/'+file))return match;
- const version=crypto.createHash('sha256').update(fs.readFileSync('dist/'+file)).digest('hex').slice(0,10);
+ const content=fs.readFileSync('dist/'+file,'utf8').replaceAll('\r\n','\n');
+ const version=crypto.createHash('sha256').update(content).digest('hex').slice(0,10);
  return start+file+'?v='+version+end;
 });
 const {pages,renderPage}=require('./src/site-pages.cjs');
