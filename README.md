@@ -8,6 +8,7 @@ Mobile-friendly investor portal and manager workspace. Plain HTML, CSS and JavaS
 - Manager: `?view=admin`
 - Use the **?** help button for a short walkthrough.
 - On a phone, the navigation stays at the bottom. Explore stations through the photo cards or the Map tab.
+- The overview offers plan guidance, document questions and callback requests. **My manager** stays reachable as you browse.
 
 Suggested flow:
 
@@ -34,11 +35,14 @@ Manager changes to published rates affect new plan applications. Previously reco
 ## Scope
 
 - 1,184 real US DC charging locations from an AFDC snapshot dated 2026-09-15 UTC.
-- Seven exact-location photographs with source credits and license links. A station without a matched photo shows its actual address and a no-photo state. Pictures do not establish current equipment or availability.
+- 14 real photographs across 10 matched locations, with source credits and license links. Search the photo directory, switch angles and enlarge pictures. A station without a matched photo shows its actual address and a no-photo state. Pictures do not establish current equipment or availability.
 - Map search, state filtering, zoom, station facts and source links.
 - A single interactive demo client and a complete manager workflow for that account.
 - Demo requests, daily accruals, messages, client edits, plan editing and station-specific photo settings.
 - Optional manager WhatsApp, Telegram and email fields. They remain unconfigured until real contact details are entered.
+- Contextual questions from stations, plans, assets and documents. Plan inquiries include the draft amount and station selection; callbacks include the preferred date, time and US time zone and await confirmation.
+- Client/manager conversation threads, follow-ups, unread reply badges, inbox filters and manager-initiated demo messages. External messages and calls are never sent automatically.
+- Shorter mobile overview, compact plan comparison, scrollable dialogs with fixed close/action controls, and stacked manager table rows at phone widths.
 
 All data changes stay in the current browser's localStorage. Visitors have independent demo state. Role switching is a demo control, not authentication. There are no real payments, live telemetry, actual earnings, executed contracts or ownership claims. Public station listings do not establish affiliation or investment availability.
 

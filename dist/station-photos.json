@@ -1,4 +1,16 @@
 {
+  "121746": {
+    "path": "assets/121746-elko-walmart.jpg",
+    "alt": "Electrify America at Walmart 2402 (Elko, NV), 2944 Mountian City Highway. Location photograph.",
+    "location": "2944 Mountian City Highway, Elko, NV",
+    "credit": "Gregory Varnum / CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_EV_charger_0319.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "dateTaken": "2021-11-20",
+    "position": "50% 50%",
+    "locationEvidence": "Commons camera coordinates 40.840100, -115.790847 match AFDC 121746 within 7 meters."
+  },
   "127227": {
     "path": "assets/127227-tallahassee-village-commons.jpg",
     "alt": "Electrify America chargers at Village Commons, Tallahassee, Florida. Photographed April 2026.",
@@ -19,7 +31,33 @@
     "license": "CC BY-SA 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
     "dateTaken": "2020-08-06",
-    "position": "50% 60%"
+    "position": "50% 60%",
+    "gallery": [
+      {
+        "path": "assets/147079-falls-church-display.jpg",
+        "alt": "Electrify America at Target T1431 (Falls Church, VA), 6100 Arlington Blvd. Location photograph.",
+        "location": "6100 Arlington Blvd, Falls Church, VA",
+        "credit": "Ken Fields / CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_VA_Target.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "dateTaken": "2020-08-06",
+        "position": "50% 50%",
+        "locationEvidence": "Source explicitly names Falls Church VA Target. Charger screen shows 200223-03, matching the same station as the primary photo."
+      },
+      {
+        "path": "assets/147079-falls-church-connectors.jpg",
+        "alt": "Electrify America at Target T1431 (Falls Church, VA), 6100 Arlington Blvd. Location photograph.",
+        "location": "6100 Arlington Blvd, Falls Church, VA",
+        "credit": "Ken Fields / CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_Charging_Plugs.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "dateTaken": "2020-08-06",
+        "position": "50% 50%",
+        "locationEvidence": "Source explicitly names Falls Church Virginia Target. Same charger and background as the primary photograph."
+      }
+    ]
   },
   "152577": {
     "path": "assets/152577-somerville-assembly-row.jpg",
@@ -32,12 +70,65 @@
     "dateTaken": "2025-07-05",
     "position": "50% 45%"
   },
+  "164538": {
+    "path": "assets/164538-elizabeth-jersey-gardens.png",
+    "alt": "Electrify America at Simon Mills at Jersey Gardens (Elizabeth NJ), 651 Kapkowski Road. Location photograph.",
+    "location": "651 Kapkowski Road, Elizabeth, NJ",
+    "credit": "Curlyrnd / CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Mills_-_Electrify_America_Charging_Station.png",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "dateTaken": "2021-12-24",
+    "position": "50% 50%",
+    "locationEvidence": "Commons names The Mills at Jersey Gardens, Elizabeth, NJ. Camera coordinates are within the mall property; AFDC 164538 is the EA listing for this mall."
+  },
   "165658": {
     "path": "assets/baker.jpg",
     "alt": "Electrify America charging plaza in Baker, California",
     "location": "Baker, CA",
     "credit": "TaurusEmerald / CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_Charging_Station_Baker,_California.jpg"
+    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_Charging_Station_Baker,_California.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "dateTaken": "2025-03-13"
+  },
+  "167597": {
+    "path": "assets/167597-abingdon-walmart.jpg",
+    "alt": "Electrify America at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
+    "location": "401 Constant Friendship Blvd., Abingdon, MD",
+    "credit": "Ken Fields / CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_SuperChargers.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "dateTaken": "2019-09-05",
+    "position": "50% 50%",
+    "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. EA site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277",
+    "gallery": [
+      {
+        "path": "assets/167597-abingdon-charger.jpg",
+        "alt": "Electrify America at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
+        "location": "401 Constant Friendship Blvd., Abingdon, MD",
+        "credit": "Ken Fields / CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_Fast_Charging_Station.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "dateTaken": "2020-07-26",
+        "position": "50% 50%",
+        "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. EA site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277"
+      },
+      {
+        "path": "assets/167597-abingdon-350kw.jpg",
+        "alt": "Electrify America at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
+        "location": "401 Constant Friendship Blvd., Abingdon, MD",
+        "credit": "Ken Fields from New York, NY, United States / CC BY-SA 2.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Electrify_American_350_KW_Station_(50138567992).jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+        "dateTaken": "2019-09-05",
+        "position": "50% 50%",
+        "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. EA site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277"
+      }
+    ]
   },
   "187647": {
     "path": "assets/187647-west-wendover-smiths.jpg",
