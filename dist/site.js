@@ -10,8 +10,10 @@
   const arrow = '<svg class="ec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>';
   const rates = [{id:'single',name:'Single',count:1,rate:3},{id:'network',name:'Network',count:3,rate:5.6},{id:'portfolio',name:'Portfolio',count:5,rate:7.9},{id:'scale',name:'Scale',count:10,rate:11.2}];
   if (page === 'home' && params.has('view')) {
-    location.replace(new URL((['admin','staff'].includes(params.get('view'))?'team/':'login/')+'?next='+encodeURIComponent(params.get('tab')||''),root));
-    return;
+    // Legacy shared links still open the public home, even with a saved session.
+    const clean=new URL(location.href);
+    for(const key of ['view','tab','preview'])clean.searchParams.delete(key);
+    history.replaceState(null,'',clean);
   }
   // Keep first-touch campaign context locally; this demo sends no analytics events.
   try {
@@ -21,6 +23,13 @@
   } catch {}
   const activeNav = $('.ec-nav [aria-current]');
   if(activeNav && activeNav.getBoundingClientRect().right>innerWidth-20) activeNav.parentElement.scrollLeft = Math.max(0,activeNav.offsetLeft-activeNav.parentElement.offsetLeft-20);
+  const menu=$('#site-menu'),menuButton=$('#open-site-menu');
+  if(menu&&menuButton){
+    menuButton.addEventListener('click',()=>{menu.showModal();menuButton.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';$('#close-site-menu').focus();});
+    $('#close-site-menu').addEventListener('click',()=>menu.close());
+    menu.addEventListener('close',()=>{menuButton.setAttribute('aria-expanded','false');document.body.style.overflow='';menuButton.focus();});
+    menu.addEventListener('click',e=>{if(e.target===menu){const r=menu.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)menu.close();}});
+  }
   // Avoid competing with an on-screen main action or the mobile keyboard.
   const mobileAction=$('.ec-mobile-action');
   if(mobileAction && 'IntersectionObserver' in window){
@@ -41,9 +50,20 @@
   }
   const preview = $('#preview-panel');
   if(preview){
+    let heroAmount=250;
     const original=preview.innerHTML;
-    const views={plan:original,stations:`<div class="ec-preview-list"><span aria-hidden="true">⌖</span><div><strong>Baker, California</strong><small>12 DC ports · Public location reference</small></div></div><div class="ec-preview-bottom"><span>Photos, address and a checkable source</span><a class="ec-text-link" href="stations/">Browse stations ${arrow}</a></div>`,documents:`<div class="ec-preview-list"><span aria-hidden="true">▤</span><div><strong>Your participation summary</strong><small>Amount · Plan · Weekly illustration</small></div></div><div class="ec-preview-bottom"><span>Sample available to preview and print</span><a class="ec-text-link" href="resources/">Read the sample ${arrow}</a></div>`};
-    wireTabs('[data-preview]',b=>{preview.innerHTML=views[b.dataset.preview];preview.setAttribute('aria-labelledby',b.id);});
+    const views={plan:original,stations:`<div class="ec-preview-list"><span aria-hidden="true">⌖</span><div><strong>Clermont, Florida</strong><small>6 DC ports · Public location reference</small></div></div><div class="ec-preview-bottom"><span>Photos, address and a checkable source</span><a class="ec-text-link" href="stations/">Browse stations ${arrow}</a></div>`,documents:`<div class="ec-preview-list"><span aria-hidden="true">▤</span><div><strong>Your participation summary</strong><small>Amount · Plan · Weekly illustration</small></div></div><div class="ec-preview-bottom"><span>Sample available to preview and print</span><a class="ec-text-link" href="resources/">Read the sample ${arrow}</a></div>`};
+    function syncHeroAmount(){
+      const capital=$('#hero-example-capital'),credit=$('#hero-example-credit');
+      if(capital)capital.innerHTML=`$${heroAmount}<span>.00</span>`;
+      if(credit){const [whole,cents]=(heroAmount*.03).toFixed(2).split('.');credit.innerHTML=`$${whole}<span>.${cents}</span>`;}
+      $$('[data-hero-amount]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.heroAmount)===heroAmount)));
+      $('#hero-build-plan').href=new URL(`register/?next=tariffs&amount=${heroAmount}&tier=single`,root);
+      const compare=$('#hero-calculation-link');if(compare)compare.href=new URL(`plans/?amount=${heroAmount}&tier=single`,root);
+    }
+    preview.addEventListener('click',e=>{const b=e.target.closest('[data-hero-amount]');if(b){heroAmount=Number(b.dataset.heroAmount);syncHeroAmount();}});
+    wireTabs('[data-preview]',b=>{preview.innerHTML=views[b.dataset.preview];preview.setAttribute('aria-labelledby',b.id);syncHeroAmount();});
+    syncHeroAmount();
   }
   const model=$('#model-panel');
   if(model){
@@ -72,14 +92,20 @@
     $$('[data-amount]').forEach(b=>b.addEventListener('click',()=>{amount.value=b.dataset.amount;update();}));
     cta.addEventListener('click',e=>{if(cta.getAttribute('aria-disabled')==='true'){e.preventDefault();amount.focus();}});
     const tier=rates.find(t=>t.id===params.get('tier'));if(tier)$(`[name="public-plan"][value="${tier.id}"]`).checked=true;
+    const requested=Number(params.get('amount'));if(params.has('amount')&&requested>=1&&requested<=100000&&Number.isFinite(requested))amount.value=String(requested);
     update();
   }
 
   const search=$('#public-station-search'),state=$('#public-state-filter');
   if(search){
-    const filter=()=>{const q=search.value.trim().toLowerCase();let count=0;$$('[data-station-card]').forEach(card=>{const match=(!state.value||card.dataset.state===state.value)&&card.dataset.search.includes(q);card.hidden=!match;if(match)count++;});$('#public-station-count').textContent=`${count} photographed ${count===1?'location':'locations'}`;$('#station-empty').hidden=count!==0;};
-    search.addEventListener('input',filter);state.addEventListener('change',filter);
-    $('#clear-station-search').addEventListener('click',()=>{search.value='';state.value='';filter();search.focus();});
+    let imageType='all',limit=12;
+    const filter=()=>{const q=search.value.trim().toLowerCase();let count=0,shown=0;$$('[data-station-card]').forEach(card=>{const match=(!state.value||card.dataset.state===state.value)&&(imageType==='all'||card.dataset.kind===imageType)&&card.dataset.search.includes(q);if(match)count++;const show=match&&count<=limit;card.hidden=!show;if(show)shown++;});$('#public-station-count').textContent=`${count} matching ${count===1?'location':'locations'}`;$('#station-empty').hidden=count!==0;$('#load-more-stations').hidden=shown>=count;$('#load-more-stations').textContent=`Show ${Math.min(12,count-shown)} more locations`;$('#station-page-count').textContent=count?`Showing ${shown} of ${count} locations`:'';};
+    const reset=()=>{limit=12;filter();};
+    search.addEventListener('input',reset);state.addEventListener('change',reset);
+    $$('[data-visual-filter]').forEach(b=>b.addEventListener('click',()=>{imageType=b.dataset.visualFilter;$$('[data-visual-filter]').forEach(t=>t.setAttribute('aria-pressed',String(t===b)));reset();}));
+    $('#load-more-stations').addEventListener('click',()=>{limit+=12;filter();});
+    $('#clear-station-search').addEventListener('click',()=>{search.value='';state.value='';imageType='all';$$('[data-visual-filter]').forEach(t=>t.setAttribute('aria-pressed',String(t.dataset.visualFilter==='all')));reset();search.focus();});
+    filter();
   }
 
   const dialog=$('#site-dialog');
@@ -99,9 +125,9 @@
     try{
       const [directory,photos]=await catalogs();
       if(!dialog.open)return;
-      const s=directory.stations.find(s=>s.id===Number(id)),p=photos[id],gallery=[p,...(p.gallery||[])];let index=0;
+      const s=directory.stations.find(s=>s.id===Number(id)),p=photos[id]||window.ECOCHARGE_STATION_VISUALS?.illustrations[id],gallery=[p,...(p.gallery||[])];let index=0;
       $('#site-dialog-content').innerHTML=`<div class="ec-dialog-photo"><img id="gallery-image" src="${escape(p.path)}" alt="${escape(p.alt)}" width="900" height="600"></div><div class="ec-gallery-controls"><button id="gallery-prev" aria-label="Previous photo">←</button><span id="gallery-index" role="status"></span><button id="gallery-next" aria-label="Next photo">→</button></div><div class="ec-photo-credit" id="gallery-credit"></div><div class="ec-dialog-body"><span class="ec-kicker">PUBLIC STATION RECORD · ${s.id}</span><h2 id="site-dialog-title">${escape(s.city)}, ${escape(s.state)}</h2><p>${escape(s.name)}<br>${escape(s.address)}, ${escape(s.city)}, ${escape(s.state)} ${escape(s.zip)}</p><dl class="ec-dialog-specs"><div><dt>Operator listing</dt><dd>${escape(s.network)}</dd></div><div><dt>DC charging ports</dt><dd>${s.ports}</dd></div><div><dt>Maximum listed power</dt><dd>${s.maxKw?s.maxKw+' kW':'Not listed'}</dd></div><div><dt>Directory snapshot</dt><dd>${escape(directory.fetchedAt.slice(0,10))}</dd></div></dl><div class="ec-dialog-note">Public location reference. Ownership and live occupancy are not verified by this demo. ${p.operationalNote?escape(p.operationalNote):'Check the operator for current availability.'}</div><div class="ec-dialog-actions"><a class="ec-button ec-button-outline" href="${escape(s.source)}" target="_blank" rel="noopener">Open public source ↗</a><a class="ec-button" href="register/?next=map">Explore in my demo account ${arrow}</a></div></div>`;
-      const renderPhoto=()=>{const item=gallery[index];$('#gallery-image').src=item.path;$('#gallery-image').alt=item.alt;$('#gallery-image').style.objectPosition=item.position||'center';$('#gallery-index').textContent=`Photo ${index+1} of ${gallery.length}`;$('#gallery-prev').disabled=index===0;$('#gallery-next').disabled=index===gallery.length-1;$('#gallery-credit').innerHTML=`Photographed ${escape(item.dateTaken||'date not listed')} · ${escape(item.credit)}<br><a href="${escape(item.source)}" target="_blank" rel="noopener">Original photo ↗</a> · <a href="${escape(item.licenseUrl)}" target="_blank" rel="noopener">License ↗</a>`;};
+      const renderPhoto=()=>{const item=gallery[index];$('#gallery-image').src=item.path;$('#gallery-image').alt=item.alt;$('#gallery-image').style.objectPosition=item.position||'center';$('#gallery-index').textContent=item.kind==='illustration'?'Concept illustration · not a photograph':`Photo ${index+1} of ${gallery.length}`;$('#gallery-prev').disabled=index===0;$('#gallery-next').disabled=index===gallery.length-1;$('#gallery-credit').innerHTML=item.kind==='illustration'?`EcoCharge concept illustration. This image does not depict the actual location.<br><a href="${escape(item.source)}" target="_blank" rel="noopener">View the public station record ↗</a>`:`Photographed ${escape(item.dateTaken||'date not listed')} · ${escape(item.credit)}<br><a href="${escape(item.source)}" target="_blank" rel="noopener">Original photo ↗</a> · <a href="${escape(item.licenseUrl)}" target="_blank" rel="noopener">License ↗</a>`;};
       $('#gallery-prev').addEventListener('click',()=>{if(index>0){index--;renderPhoto();}});$('#gallery-next').addEventListener('click',()=>{if(index<gallery.length-1){index++;renderPhoto();}});renderPhoto();
     }catch{if(dialog.open)$('#site-dialog-content').innerHTML='<div class="ec-dialog-body"><h2 id="site-dialog-title">The station record could not load.</h2><p>Close this window and open the location again to retry. The photos and addresses on the page remain available.</p></div>';}
   }));

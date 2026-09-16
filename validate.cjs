@@ -6,4 +6,7 @@ const stations=JSON.parse(fs.readFileSync(path.join(root,'stations.json'))).stat
 const uniquePhotos=new Set();
 for(const [id,p]of Object.entries(photos)){if(!stations.some(s=>s.id===Number(id)))throw Error('Photo has no matching station: '+id);for(const item of [p,...(p.gallery||[])]){if(!fs.existsSync(path.join(root,item.path)))throw Error('Missing photo: '+id);if(!item.source.startsWith('https://')||!item.credit||!item.licenseUrl?.startsWith('https://'))throw Error('Missing source or license: '+id);if(uniquePhotos.has(item.path))throw Error('Photo reused across records: '+item.path);uniquePhotos.add(item.path)}}
 if(photos.network)throw Error('Generic station-photo fallback is forbidden');
-console.log(JSON.stringify({valid:true,stations:stations.length,photographedLocations:Object.keys(photos).length,exactLocationPhotos:uniquePhotos.size,entryAssets:true,javascriptSyntax:true}));
+const visuals=JSON.parse(fs.readFileSync(path.join(root,'station-visuals.json'),'utf8'));
+if(visuals.featuredIds.length!==50||new Set(visuals.featuredIds).size!==50)throw Error('Expected 50 unique featured stations');
+for(const id of visuals.featuredIds){if(!stations.some(s=>s.id===id))throw Error('Featured station missing: '+id);if(photos[id])continue;const p=visuals.illustrations[id];if(p?.kind!=='illustration'||!fs.existsSync(path.join(root,p.path))||!p.alt.includes('Not a photograph'))throw Error('Missing or unlabelled station illustration: '+id);}
+console.log(JSON.stringify({valid:true,stations:stations.length,featuredLocations:visuals.featuredIds.length,photographedLocations:Object.keys(photos).length,exactLocationPhotos:uniquePhotos.size,illustratedLocations:Object.keys(visuals.illustrations).length,entryAssets:true,javascriptSyntax:true}));

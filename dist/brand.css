@@ -1,0 +1,13 @@
+/* Shared identity across public pages, sign-in and both demo workspaces. */
+.charge-brand,.brand.charge-brand{--brand-ink:#152b39;--brand-accent:#126b59;--brand-caption:#61756f;display:inline-flex;flex-shrink:0;align-items:center;gap:11px;color:var(--brand-ink);text-decoration:none;font-family:Manrope,Arial,sans-serif;line-height:1;letter-spacing:normal;font-weight:700;white-space:nowrap}
+.charge-brand[data-brand-theme=dark]{--brand-ink:#eef5f4;--brand-accent:#a8d7c7;--brand-caption:#a4b7bb}
+.charge-brand .charge-symbol{display:block;width:46px;height:46px;flex-shrink:0;overflow:visible;filter:none}
+.charge-brand .charge-shell{fill:var(--brand-ink)}.charge-brand .charge-core{fill:var(--brand-accent)}
+.charge-brand>.charge-wordmark{display:block;font-size:30px;letter-spacing:-.07em;font-weight:700;line-height:1.04}
+.charge-wordmark>span{color:var(--brand-accent)}
+.charge-brand .charge-wordmark>small{display:block;color:var(--brand-caption);font-size:7px;letter-spacing:.17em;font-weight:600;line-height:1.4;margin-top:8px;padding-left:2px}
+.charge-brand:focus-visible{outline:3px solid #468c79;outline-offset:6px;border-radius:3px}
+.brand.charge-brand .charge-symbol{width:42px;height:42px}.brand.charge-brand>.charge-wordmark{font-size:28px}.brand.charge-brand .charge-wordmark>small{font-size:7px;letter-spacing:.17em;margin-top:7px}
+@media(max-width:1150px){.charge-brand .charge-symbol{width:43px;height:43px}.charge-brand>.charge-wordmark{font-size:28px}}
+@media(max-width:650px){.charge-brand,.brand.charge-brand{gap:8px}.charge-brand .charge-symbol{width:36px;height:36px}.charge-brand>.charge-wordmark{font-size:26px}.charge-brand .charge-wordmark>small{font-size:6px;letter-spacing:.14em;margin-top:6px}.brand.charge-brand .charge-symbol{width:33px;height:33px}.brand.charge-brand>.charge-wordmark{font-size:23px}.brand.charge-brand .charge-wordmark>small{font-size:6px;letter-spacing:.12em;margin-top:6px}}
+@media(max-width:360px){.charge-brand .charge-symbol{width:32px;height:32px}.charge-brand>.charge-wordmark{font-size:24px}.brand.charge-brand>.charge-wordmark{font-size:21px}.brand.charge-brand .charge-symbol{width:30px;height:30px}}

@@ -10,7 +10,7 @@ $('.role-switch')?.remove();
 $('.prototype-bar>span').innerHTML='<i></i> INTERACTIVE DEMO <span class="prototype-explain">· Sample finances · browser-only accounts</span>';
 $('.prototype-bar').insertAdjacentHTML('beforeend',`<a href="./" class="portal-home-link">${icon('out')} Project overview</a>`);
 $('.account-actions').insertAdjacentHTML('beforeend','<button class="icon-btn portal-signout" data-action="signout" aria-label="Sign out" title="Sign out">'+icon('out')+'</button>');
-$('.brand>span').innerHTML='ECOCHARGE<small>BY ALT-INFRA</small>';
+// Shared EcoCharge branding is rendered in the page template.
 $('.balance-card .card-heading').firstChild.textContent='AVAILABLE DEMO BALANCE ';
 $('.balance-card [data-action="topup"]').innerHTML=icon('plus')+' Add demo funds';
 $('.balance-card [data-action="withdraw"]').innerHTML=icon('download')+' Request withdrawal';
