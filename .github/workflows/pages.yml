@@ -18,6 +18,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
+      - name: Build demo workspaces
+        run: node build.cjs
       - name: Validate static demo
         run: node validate.cjs
       - uses: actions/configure-pages@v5

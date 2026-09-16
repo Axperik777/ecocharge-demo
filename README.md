@@ -1,70 +1,82 @@
-# Eco-Charge interactive demo
+# EcoCharge participation demo
 
-Mobile-friendly investor portal and manager workspace. Plain HTML, CSS and JavaScript, with a public AFDC charging-station directory. No build or dependency install is required.
+Public introduction, separate client and team sign-ins, and linked client/manager workspaces. Plain HTML, CSS and JavaScript with a source-linked AFDC station directory.
 
-## Try the demo
+## Demo accounts
 
-- Client: `?view=client`
-- Manager: `?view=admin`
-- Use the **?** help button for a short walkthrough.
-- On a phone, the navigation stays at the bottom. Explore stations through the photo cards or the Map tab.
-- The overview offers plan guidance, document questions and callback requests. **My manager** stays reachable as you browse.
+| Workspace | Entry | Username | Password |
+| --- | --- | --- | --- |
+| Client | `login/` | `lox` | `lox1` |
+| Team | `team/` | `admin` | `admin1` |
 
-Suggested flow:
+These are public demo credentials. The static site uses a browser session gate, **not secure server authentication**. Do not enter real personal, financial or confidential information. Client and team tabs share localStorage on the same origin/browser. Different browsers and devices have independent data.
 
-1. Open a station card and select it for a demo allocation.
-2. Choose a plan, amount and reference stations, then apply it.
-3. Choose **Simulate day** to create a test accrual. Each date can be credited only once.
-4. Preview/print a draft agreement, download a fact sheet or message the manager.
-5. Switch to **Staff console** to edit the client or plan, review requests, reply to messages and manage station photos.
-6. **Reset demo** clears this browser's test data.
+- `/` explains the participation model and links to the two entry screens.
+- `client/` opens the client workspace after demo sign-in.
+- `staff/` opens the team workspace after demo sign-in.
+- Old `?view=client` / `?view=admin` links go to the appropriate sign-in.
+- Each workspace has its own navigation and sign-out action. No inline role switch.
 
-## Daily model
+## Participation and weekly terms
 
-| Reference stations | Daily demo rate |
-| --- | --- |
-| 1 | 3% |
-| 3 | 5.6% |
-| 5 | 7.9% |
-| 10 | 11.2% |
+The proposed model assumes a **43% company participation in a network whose scope and ownership documents have not been supplied**. This is explicitly a demo assumption, not a verified US market share or a claim of ownership over the public EA directory.
 
-Daily demo accrual = total plan capital × daily rate. Simple accrual only, without compounding. Station count does not multiply the capital. These proposed rates are simulations, not verified investment returns or an offer. No station revenue is imported.
+Charging payments are the proposed source of operating revenue. Client calculations use the weekly tariff, with no additional payment per car and no compounding:
 
-Manager changes to published rates affect new plan applications. Previously recorded accruals retain their original basis; changing plans preserves history. Initial migration from the old per-session prototype updates the active plan to the corresponding daily tier and keeps legacy events labeled separately.
+| Reference stations | Weekly demo rate | Illustration on $250 |
+| --- | --- | --- |
+| 1 | 3% | $7.50/week |
+| 3 | 5.6% | $14.00/week |
+| 5 | 7.9% | $19.75/week |
+| 10 | 11.2% | $28.00/week |
 
-## Scope
+These proposed rates are simulations, not verified investment returns or an offer. No operating revenue is imported. Historical daily/session credits remain labeled with their original units; the current plan migrates to weekly terms.
 
-- 1,184 real US DC charging locations from an AFDC snapshot dated 2026-09-15 UTC.
-- 14 real photographs across 10 matched locations, with source credits and license links. Search the photo directory, switch angles and enlarge pictures. A station without a matched photo shows its actual address and a no-photo state. Pictures do not establish current equipment or availability.
-- Map search, state filtering, zoom, station facts and source links.
-- A single interactive demo client and a complete manager workflow for that account.
-- Demo requests, daily accruals, messages, client edits, plan editing and station-specific photo settings.
-- Optional manager WhatsApp, Telegram and email fields. They remain unconfigured until real contact details are entered.
-- Contextual questions from stations, plans, assets and documents. Plan inquiries include the draft amount and station selection; callbacks include the preferred date, time and US time zone and await confirmation.
-- Client/manager conversation threads, follow-ups, unread reply badges, inbox filters and manager-initiated demo messages. External messages and calls are never sent automatically.
-- Shorter mobile overview, compact plan comparison, scrollable dialogs with fixed close/action controls, and stacked manager table rows at phone widths.
+## Complete demo flow
 
-All data changes stay in the current browser's localStorage. Visitors have independent demo state. Role switching is a demo control, not authentication. There are no real payments, live telemetry, actual earnings, executed contracts or ownership claims. Public station listings do not establish affiliation or investment availability.
+1. Sign in as `lox`. A fresh account starts with $0 and no assigned stations.
+2. Choose a plan and amount. If available funds are insufficient, the plan is saved as a draft.
+3. Submit a funding request. No real payment is collected.
+4. In a second tab, sign in as `admin` and approve the request in Inbox.
+5. Return to the client account and activate the saved plan. Available funds move into invested demo capital.
+6. The manager records a sample week. One Monday-Sunday week can be credited only once; the credit uses invested capital multiplied by the weekly rate.
+7. Review allocation history, print the sample agreement, browse location photos and exchange messages.
+
+The team can directly edit the client's available balance, invested amount, tariff and station count through **Edit client account**. Changing the tariff suggests its default station count; staff can override the reference count separately. Each adjustment records its before/after values and reason. Previous credits retain their original terms. Reserved withdrawal requests must remain covered.
+
+Staff can also edit the client profile, manager contacts, station selection/photos and proposed rates. Changes to the general tariff schedule affect future plan applications; an existing plan retains its agreed demo rate until edited/applied again. Reset demo is available only in the team interface.
+
+## Scope and limits
+
+- 1,184 public US DC charging locations, AFDC snapshot 2026-09-15 UTC.
+- 14 real photos across 10 matched locations, with sources, dates and licenses. Unmatched locations show a no-photo state.
+- Map search, filtering, zoom, station facts and exact-location photo galleries.
+- One interactive client account and one team demo account.
+- Local funding/withdrawal requests, weekly credits, account adjustments and messages.
+- Contextual plan/station/document questions, follow-up threads, unread replies and callback requests with US time zones.
+- Manager WhatsApp, Telegram and email remain placeholders until details are entered. No external message or call is sent automatically.
+- Mobile navigation, scrollable dialogs, fixed dialog actions, browser Back support and cross-tab updates.
+
+No real payments, live occupancy, executed contracts, verified ownership or server-backed accounts. A public station listing does not establish affiliation or investment availability. State is local under `ecocharge-demo-v1`; role sessions use sessionStorage.
+
+## Build, run and deploy
+
+```sh
+node build.cjs
+node validate.cjs
+node server.cjs
+```
+
+Open `http://127.0.0.1:4317/`. Optional `PORT` changes the local server port. `src/home.html`, `src/login.html` and `src/portal.html` generate the entry pages via `build.cjs`. The GitHub workflow builds, validates and publishes `dist/` only.
+
+Validation checks all five entry pages, JavaScript syntax and station-photo mappings. Runtime QA covered credentials and separate routes; funding, activation and weekly credits; duplicate week prevention; all four tariff calculations; manager adjustments and cross-tab sync; messages; map/photos; print terms and PDF download; persistence/reset; delayed directory loading; legacy migration; and 10 views at 320, 360, 390, 430 and 768 px. Phone checks use Chrome mobile emulation; physical iPhone/Safari remains a separate check.
 
 ## Attribution
 
-- Station data: [US Department of Energy AFDC](https://afdc.energy.gov/stations).
-- Map: Esri World Dark Gray Base, HERE, Garmin and OpenStreetMap contributors. Attribution is displayed on the map.
-- Photos: exact sources, photographers, dates and licenses are in `dist/station-photos.json` and `dist/assets/photo-credits.json`. Commons thumbnails are displayed with CSS crops. CC BY-SA photo adaptations remain under their original licenses. Baker: TaurusEmerald, CC BY-SA 4.0, with source link in its record.
-- Starting image: Costco Clermont, Declan M. Martin, public domain, [source](https://commons.wikimedia.org/wiki/File:Clermont_Costco_EV_Charging.jpg).
-- Manager portrait: fictional AI-generated demo illustration.
-- Manrope fonts: SIL Open Font License, included in `dist/assets/manrope-LICENSE.txt`.
-- Leaflet and jsPDF: original license notices are retained in the vendored assets.
-
-Lovelock has a dated operator upgrade-closure note. Directory availability is not live occupancy.
-
-## Local run and deployment
-
-```sh
-node server.cjs
-node validate.cjs
-```
-
-Open `http://127.0.0.1:4317/`. `validate.cjs` checks entry assets, JavaScript syntax and station-photo mappings. The GitHub Actions workflow publishes only `dist/` to GitHub Pages.
-
-QA performed before release: client and manager workflows, daily calculation and duplicate protection, request approvals, support replies, printed agreement terms, exact-location photos, no-photo state, photo settings, local persistence, deep-linked tabs, reset and responsive layouts at 320, 360, 375, 390, 430 and 768 pixels. Touch flows were checked using mobile browser emulation; physical iPhone/Safari verification is still separate.
+- Station data: [US DOE AFDC](https://afdc.energy.gov/stations).
+- Map: Esri, HERE, Garmin and OpenStreetMap; on-map attribution retained.
+- Photos: exact source, photographer, date and license in `dist/station-photos.json` and `dist/assets/photo-credits.json`. CSS display crops; CC BY-SA adaptations retain their original licenses.
+- Homepage: Abingdon, Maryland, Ken Fields, CC BY-SA 2.0; source linked alongside the image.
+- Manager portrait: fictional AI-generated illustration.
+- Manrope: SIL Open Font License, included in assets.
+- Leaflet and jsPDF: original license notices retained.
