@@ -46,6 +46,16 @@ The team can directly edit the client's available balance, invested amount, tari
 
 Staff can also edit the client profile, manager contacts, station selection/photos and proposed rates. Changes to the general tariff schedule affect future plan applications; an existing plan retains its agreed demo rate until edited/applied again. Reset demo is available only in the team interface.
 
+## Client research workspace
+
+- The overview follows the actual account state: first visit, saved draft, funding request awaiting review, available demo funds, active plan, or unread manager reply.
+- A shortlist holds up to 50 locations, with the last 12 viewed locations kept separately. Saving a station does not allocate funds or modify an existing plan.
+- Compare up to three stations by address, ports, power, connectors and photo source. A comparison can be included in a local manager inquiry.
+- Saved drafts reopen with their amount, tariff and station selection. The account activity panel links to requests, conversations and individual weekly calculation records.
+- A three-part walkthrough explains the business model, the weekly calculation and the documentation still required. The phone layout retains dedicated navigation and a compact inbox/shortlist toolbar.
+
+Research preferences live under `demo.exploration` in the existing browser storage. They reset with the team demo reset and are not synchronized across devices.
+
 ## Scope and limits
 
 - 1,184 public US DC charging locations, AFDC snapshot 2026-09-15 UTC.
