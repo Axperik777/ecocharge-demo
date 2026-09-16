@@ -3,7 +3,7 @@ const managerDefaults=()=>({name:'Alexander Brown',title:'Account Manager',whats
 function ensureManager(){if(!demo.manager)demo.manager=managerDefaults()}
 ensureManager();
 let photoCatalog={};
-fetch('station-photos.json').then(r=>r.ok?r.json():{}).then(v=>{photoCatalog=v;if(selected)updateStationPhoto(selected)}).catch(()=>{});
+fetch('station-photos.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(v=>{photoCatalog=v;if(selected)updateStationPhoto(selected)}).catch(()=>{});
 function updateStationPhoto(s){const item=photoCatalog[s.id]||photoCatalog.network;const image=$('.station-photo img');if(!item)return;image.src=item.path;image.alt=item.alt;$('.photo-location').textContent=photoCatalog[s.id]?`${s.city}, ${s.state} · Station photo`:`Network photo · ${item.location}`;$('.photo-credit').textContent=item.credit;$('.photo-credit').href=item.source}
 const originalSelectStation=selectStation;
 selectStation=function(id,zoom=false){const ok=originalSelectStation(id,zoom);if(ok){updateStationPhoto(selected);if(zoom&&role==='client')actions.station()}return ok};

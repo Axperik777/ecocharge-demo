@@ -1,8 +1,12 @@
 {
   "featuredIds": [
     371815,
-    167597,
+    121704,
+    405811,
+    191770,
     127227,
+    190761,
+    167597,
     152577,
     147079,
     164538,
@@ -10,6 +14,13 @@
     187647,
     199184,
     165658,
+    121703,
+    121706,
+    121720,
+    121727,
+    127934,
+    168359,
+    279410,
     279342,
     279398,
     150357,
@@ -35,31 +46,12 @@
     165405,
     255331,
     279358,
-    121715,
     457929,
     190406,
     279347,
-    121845,
-    150478,
-    448203,
-    145683,
-    461456,
-    170338,
-    279481,
-    279490,
-    279379,
-    279382,
-    129330
+    121845
   ],
   "illustrations": {
-    "121715": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-121715.svg",
-      "alt": "Concept illustration for Boise, ID. Not a photograph of this station.",
-      "location": "8300 W. Overland Rd, Boise, ID",
-      "source": "https://afdc.energy.gov/stations#/station/121715",
-      "credit": "EcoCharge · original concept illustration"
-    },
     "121739": {
       "kind": "illustration",
       "path": "assets/illustrations/station-121739.svg",
@@ -100,36 +92,12 @@
       "source": "https://afdc.energy.gov/stations#/station/124686",
       "credit": "EcoCharge · original concept illustration"
     },
-    "129330": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-129330.svg",
-      "alt": "Concept illustration for Albuquerque, NM. Not a photograph of this station.",
-      "location": "2701 Carlisle Blvd, Albuquerque, NM",
-      "source": "https://afdc.energy.gov/stations#/station/129330",
-      "credit": "EcoCharge · original concept illustration"
-    },
-    "145683": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-145683.svg",
-      "alt": "Concept illustration for Woodbury, MN. Not a photograph of this station.",
-      "location": "10240 Hudson Rd., Woodbury, MN",
-      "source": "https://afdc.energy.gov/stations#/station/145683",
-      "credit": "EcoCharge · original concept illustration"
-    },
     "150357": {
       "kind": "illustration",
       "path": "assets/illustrations/station-150357.svg",
       "alt": "Concept illustration for Los Angeles, CA. Not a photograph of this station.",
       "location": "12316 W Washington Blvd, Los Angeles, CA",
       "source": "https://afdc.energy.gov/stations#/station/150357",
-      "credit": "EcoCharge · original concept illustration"
-    },
-    "150478": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-150478.svg",
-      "alt": "Concept illustration for Scarborough, ME. Not a photograph of this station.",
-      "location": "500 Gallery Blvd., Scarborough, ME",
-      "source": "https://afdc.energy.gov/stations#/station/150478",
       "credit": "EcoCharge · original concept illustration"
     },
     "165405": {
@@ -154,14 +122,6 @@
       "alt": "Concept illustration for Charlotte, NC. Not a photograph of this station.",
       "location": "7735 North Tryon Street, Charlotte, NC",
       "source": "https://afdc.energy.gov/stations#/station/168271",
-      "credit": "EcoCharge · original concept illustration"
-    },
-    "170338": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-170338.svg",
-      "alt": "Concept illustration for Gulfport, MS. Not a photograph of this station.",
-      "location": "10000 Factory Shops Blv, Gulfport, MS",
-      "source": "https://afdc.energy.gov/stations#/station/170338",
       "credit": "EcoCharge · original concept illustration"
     },
     "170404": {
@@ -260,14 +220,6 @@
       "source": "https://afdc.energy.gov/stations#/station/279358",
       "credit": "EcoCharge · original concept illustration"
     },
-    "279379": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-279379.svg",
-      "alt": "Concept illustration for Omaha, NE. Not a photograph of this station.",
-      "location": "17810 W Center Rd, Omaha, NE",
-      "source": "https://afdc.energy.gov/stations#/station/279379",
-      "credit": "EcoCharge · original concept illustration"
-    },
     "279381": {
       "kind": "illustration",
       "path": "assets/illustrations/station-279381.svg",
@@ -276,36 +228,12 @@
       "source": "https://afdc.energy.gov/stations#/station/279381",
       "credit": "EcoCharge · original concept illustration"
     },
-    "279382": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-279382.svg",
-      "alt": "Concept illustration for Merrimack, NH. Not a photograph of this station.",
-      "location": "80 Premium Outlet Blvd, Merrimack, NH",
-      "source": "https://afdc.energy.gov/stations#/station/279382",
-      "credit": "EcoCharge · original concept illustration"
-    },
     "279398": {
       "kind": "illustration",
       "path": "assets/illustrations/station-279398.svg",
       "alt": "Concept illustration for San Diego, CA. Not a photograph of this station.",
       "location": "7007 Friars Road, San Diego, CA",
       "source": "https://afdc.energy.gov/stations#/station/279398",
-      "credit": "EcoCharge · original concept illustration"
-    },
-    "279481": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-279481.svg",
-      "alt": "Concept illustration for Helena, MT. Not a photograph of this station.",
-      "location": "3303 N Montana Ave, Helena, MT",
-      "source": "https://afdc.energy.gov/stations#/station/279481",
-      "credit": "EcoCharge · original concept illustration"
-    },
-    "279490": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-279490.svg",
-      "alt": "Concept illustration for Jamestown, ND. Not a photograph of this station.",
-      "location": "2617 8th Ave SW, Jamestown, ND",
-      "source": "https://afdc.energy.gov/stations#/station/279490",
       "credit": "EcoCharge · original concept illustration"
     },
     "417769": {
@@ -322,14 +250,6 @@
       "alt": "Concept illustration for Chicago, IL. Not a photograph of this station.",
       "location": "2746 N Clybourn Ave, Chicago, IL",
       "source": "https://afdc.energy.gov/stations#/station/421384",
-      "credit": "EcoCharge · original concept illustration"
-    },
-    "448203": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-448203.svg",
-      "alt": "Concept illustration for Troy, MI. Not a photograph of this station.",
-      "location": "272 John R Rd, Troy, MI",
-      "source": "https://afdc.energy.gov/stations#/station/448203",
       "credit": "EcoCharge · original concept illustration"
     },
     "449153": {
@@ -362,14 +282,6 @@
       "alt": "Concept illustration for Philadelphia, PA. Not a photograph of this station.",
       "location": "2206 S Christopher Columbus Blvd, Philadelphia, PA",
       "source": "https://afdc.energy.gov/stations#/station/458385",
-      "credit": "EcoCharge · original concept illustration"
-    },
-    "461456": {
-      "kind": "illustration",
-      "path": "assets/illustrations/station-461456.svg",
-      "alt": "Concept illustration for Springfield, MO. Not a photograph of this station.",
-      "location": "1825 E Primrose St, Springfield, MO",
-      "source": "https://afdc.energy.gov/stations#/station/461456",
       "credit": "EcoCharge · original concept illustration"
     }
   }

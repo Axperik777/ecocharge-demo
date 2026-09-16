@@ -49,7 +49,7 @@ Staff can also edit the client profile, manager contacts, station selection/phot
 ## Scope and limits
 
 - 1,184 public US DC charging locations, AFDC snapshot 2026-09-15 UTC.
-- 14 real photos across 10 matched locations, with sources, dates and licenses. Unmatched locations show a no-photo state.
+- 27 real photos across 21 matched locations, with source and license credits. The 50-location featured catalogue uses clearly labeled concept illustrations for the remaining 29 locations.
 - Map search, filtering, zoom, station facts and exact-location photo galleries.
 - One interactive client account and one team demo account.
 - Local funding/withdrawal requests, weekly credits, account adjustments and messages.
@@ -58,6 +58,12 @@ Staff can also edit the client profile, manager contacts, station selection/phot
 - Mobile navigation, scrollable dialogs, fixed dialog actions, browser Back support and cross-tab updates.
 
 No real payments, live occupancy, executed contracts, verified ownership or server-backed accounts. A public station listing does not establish affiliation or investment availability. State is local under `ecocharge-demo-v1`; role sessions use sessionStorage.
+
+### Location photographs
+
+`dist/station-photos.json` records the source, photographer, license, and address/coordinate matching evidence for each location. Wikimedia Commons photographs retain their individual licenses. Open Charge Map contributor photos are attributed under CC BY 4.0; [contributor guidance](https://www.openchargemap.org/about/guidance) explicitly includes photos in its open-data contributions, and the [provider license](https://openchargemap.org/about) identifies CC BY 4.0.
+
+Open Charge Map dates are stored as `dateUploaded`, not `dateTaken`. Public and account galleries distinguish the publication date from the capture date. WebP copies are resized for display, with no new equipment added or source watermarks removed. A photo does not prove current equipment availability, ownership or investment rights.
 
 ## Build, run and deploy
 

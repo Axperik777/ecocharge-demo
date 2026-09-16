@@ -2,9 +2,11 @@ const fs=require('fs');
 const directory=JSON.parse(fs.readFileSync('dist/stations.json','utf8')).stations;
 const photos=JSON.parse(fs.readFileSync('dist/station-photos.json','utf8'));
 const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const featuredIds=[371815,167597,127227,152577,147079,164538,121746,187647,199184,165658];
+const featuredIds=[371815,121704,405811,191770,127227,190761,167597,152577,147079,164538,121746,187647,199184,165658];
 const available=directory.filter(s=>!/taxi|tnc only|private|fleet/i.test(s.name));
 const add=s=>{if(s&&!featuredIds.includes(s.id)&&featuredIds.length<50)featuredIds.push(s.id);};
+// Surface every sourced location photograph before filling the catalogue with illustrations.
+for(const id of Object.keys(photos))add(available.find(s=>s.id===Number(id)));
 // Start with recognized metros, then spread the remaining locations across states.
 for(const city of ['San Francisco','San Diego','Los Angeles','Santa Monica','Seattle','Portland','Denver','Austin','Dallas','Houston','Miami','Orlando','Atlanta','Chicago','Phoenix','Las Vegas','Boston','New York','Philadelphia','Nashville','Charlotte','Minneapolis'])add(available.filter(s=>s.city===city).sort((a,b)=>b.ports-a.ports)[0]);
 const represented=new Set(featuredIds.map(id=>directory.find(s=>s.id===id).state));
