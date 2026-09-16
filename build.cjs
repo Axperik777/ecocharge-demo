@@ -3,6 +3,8 @@ const crypto=require('crypto');
 const {brand,favicon}=require('./src/brand.cjs');
 require('./src/station-visuals.cjs').buildVisuals();
 fs.writeFileSync('dist/assets/ecocharge-mark.svg',favicon);
+const trustContent=require('./src/trust-content.json');
+fs.writeFileSync('dist/trust-content.js','window.ECOCHARGE_TRUST_CONTENT='+JSON.stringify(trustContent).replaceAll('<','\\u003c')+';\n');
 // Content hashes prevent a cached stylesheet/script from showing the previous identity.
 const finalize=html=>html.replace(/((?:src|href)=")([^"?#]+\.(?:css|js|svg))(\")/g,(match,start,file,end)=>{
  if(file.includes(':')||!fs.existsSync('dist/'+file))return match;

@@ -15,3 +15,5 @@ Public photos are optimized copies of the existing source photos listed in `dist
 The public root always stays on the home page, including legacy `?view=client` / `?view=admin` links and existing demo sessions. Internal sign-in and workspace links remain explicit actions. Legacy navigation parameters are removed while campaign parameters are retained.
 
 The hero uses the sourced Clermont, Florida photo. Its $200 / $250 / $300 choices retain their value across preview tabs and pass into the calculator or registration. Generated HTML includes content hashes for scripts, styles and the favicon to avoid mixing a new page with old cached assets.
+
+Evidence and transparency sections are rendered by `trust-sections.cjs`, with editable placeholders in `trust-content.json`. See `CONTENT-HANDOFF.md` for video, team, contact and document replacement instructions. The `/terms/` page covers pending rights, capital access, fees and risk conditions. Public station dialogs separate sourced location facts from unverified ownership and unavailable operating figures. Account credits expose the original recorded calculation.
