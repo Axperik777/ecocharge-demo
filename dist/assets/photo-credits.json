@@ -1,0 +1,65 @@
+{
+  "note": "All six accepted photographs are original documentary images of the matched locations. Dates describe when photographed; photos do not establish current equipment or charger availability. Credit the photographer, link the Commons source and license, and disclose displayed cropping/resizing. CC BY-SA adaptations retain the same license. Originals are unmodified.",
+  "photos": [
+    {
+      "afdcId": 127227,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:EV_chargers_at_Village_Commons,_Tallahassee,_Florida.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/89/EV_chargers_at_Village_Commons%2C_Tallahassee%2C_Florida.jpg",
+      "photographer": "The Bushranger",
+      "dateTaken": "2026-04-07",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "caption": "Electrify America chargers at Village Commons, Tallahassee, Florida. Photographed April 2026."
+    },
+    {
+      "afdcId": 371815,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Clermont_Costco_EV_Charging.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Clermont_Costco_EV_Charging.jpg",
+      "photographer": "Declan M. Martin",
+      "dateTaken": "2024-04-04",
+      "license": "Public domain (released by copyright holder)",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/File:Clermont_Costco_EV_Charging.jpg#Licensing",
+      "caption": "Vehicles charging at Electrify America, Costco Clermont, Florida. Photographed April 2024."
+    },
+    {
+      "afdcId": 152577,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Nissan_Leaf_charging_Assembly_Square_July_2025.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/Nissan_Leaf_charging_Assembly_Square_July_2025.jpg",
+      "photographer": "4300streetcar",
+      "dateTaken": "2025-07-05",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "caption": "A Nissan Leaf charging at Electrify America in the Assembly Row garage, Somerville, Massachusetts. Photographed July 2025."
+    },
+    {
+      "afdcId": 147079,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Electrify_America_Falls_Church_Target_(50196589572).jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Electrify_America_Falls_Church_Target_%2850196589572%29.jpg",
+      "photographer": "Ken Fields",
+      "dateTaken": "2020-08-06",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "caption": "Electrify America at Target, 6100 Arlington Boulevard, Falls Church, Virginia. Photographed August 2020."
+    },
+    {
+      "afdcId": 187647,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Electrify_America_EV_charger_in_Nevada_0320.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/31/Electrify_America_EV_charger_in_Nevada_0320.jpg",
+      "photographer": "Gregory Varnum",
+      "dateTaken": "2021-11-20",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "caption": "Electrify America chargers at Smith's, West Wendover, Nevada. Photographed November 2021."
+    },
+    {
+      "afdcId": 199184,
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Electrify_America_at_Safeway_0316.jpg",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Electrify_America_at_Safeway_0316.jpg",
+      "photographer": "Gregory Varnum",
+      "dateTaken": "2021-11-20",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "caption": "Electrify America at Safeway, Lovelock, Nevada, at night. Photographed November 2021."
+    }
+  ]
+}
