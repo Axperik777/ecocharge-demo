@@ -23,7 +23,7 @@ const clientTabBeforeMobile=renderClientTab;
 renderClientTab=function(){clientTabBeforeMobile();renderPhotoExplorer();const heading=$('#client-page-title');if(heading)heading.textContent=({dashboard:'Investor overview',map:'Charging station map',assets:'Your reference stations',documents:'Documents and support',tariffs:'Weekly demo plans'})[tab]||'Investor portal'};
 const roleBeforeMobile=setRole;
 let routeRestored=false;
-setRole=function(next){if(!routeRestored){const t=new URL(location).searchParams.get('tab');if(next==='admin'&&['overview','clients','requests','stations','tariffs','plan'].includes(t))adminTab=t;if(next!=='admin'&&['dashboard','map','assets','documents','tariffs'].includes(t))tab=t;routeRestored=true}roleBeforeMobile(next)};
+setRole=function(next){if(!routeRestored){const t=new URL(location).searchParams.get('tab');if(next==='admin'&&['overview','clients','requests','stations','tariffs','plan','settings'].includes(t))adminTab=t;if(next!=='admin'&&['dashboard','map','assets','documents','tariffs'].includes(t))tab=t;routeRestored=true}roleBeforeMobile(next)};
 const openModalBeforeMobile=openModal;
 openModal=function(html){openModalBeforeMobile(html);const heading=$('#modal-content h2');if(heading){heading.id='dialog-title';$('#modal').setAttribute('aria-labelledby','dialog-title')}$('#modal').scrollTop=0};
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.exploreStation){selectStation(b.dataset.exploreStation);actions.station()}if(b.dataset.tab||b.dataset.managerView)window.scrollTo({top:0,behavior:'instant'})});

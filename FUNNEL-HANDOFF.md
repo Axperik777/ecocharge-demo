@@ -2,6 +2,10 @@
 
 ## Shipped
 
+- Client overview follows the account state: new, saved selection, funding pending, ready to activate, active demo. One next action, a four-value summary, compact station photos, manager contact and a linked activity timeline replace the long discovery feed. Photo catalog, shortlist and comparison remain in Stations.
+- Staff navigation is Today / Clients / Messages / Settings. The Today queue combines money requests, conversations, call scheduling and client follow-ups. The single interactive demo account has a searchable entry and a unified Profile / Plan & stations / Operations / Messages / History card. On mobile, the client list and record use separate screens with an explicit back action.
+- Plan and balance adjustments use separate forms, a required reason and a before/after review. The plan editor enforces the tariff's exact station count; directory shortcuts prepare an edit instead of assigning silently. Balance corrections protect reserved withdrawals. A confirmation is rejected if financial state has changed in another tab. Previous weekly credits retain their recorded terms.
+- Staff contact details, reference directory, tariff configuration and diagnostics live in Settings. Client follow-up tasks are local organizational fields; they do not schedule reminders or send messages. Existing EN / RU, conversations, calendar samples and documents remain available.
 - Compact public home, with no investment amounts or plan rates.
 - `/inside-a-station/`: attributed location photography and AFDC record, followed by an explicitly invented, adjustable 30-day operating example. Surplus and shortfall are both supported. No investor payout is derived from the example.
 - Guest entry through `/client/?guest=1&tab=dashboard`. This is a browser-only demo gate, not authentication.
