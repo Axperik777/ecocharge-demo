@@ -35,7 +35,7 @@
     const visibleActions=new Set();
     const refresh=()=>{mobileAction.hidden=visibleActions.size>0||document.activeElement?.matches('input,select,textarea');};
     const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting&&entry.intersectionRatio>=.4)visibleActions.add(entry.target);else visibleActions.delete(entry.target);}refresh();},{threshold:[0,.4],rootMargin:'0px 0px -80px 0px'});
-    $$('main a.ec-button[href*="register/"]').forEach(a=>observer.observe(a));
+    $$('main a.ec-button[href*="register/"],main a.ec-button[href*="guest=1"]').forEach(a=>observer.observe(a));
     document.addEventListener('focusin',refresh);document.addEventListener('focusout',()=>setTimeout(refresh,0));
   }
 
@@ -90,7 +90,7 @@
       const [directory,photos]=await catalogs();
       if(!dialog.open)return;
       const s=directory.stations.find(s=>s.id===Number(id)),p=photos[id]||window.ECOCHARGE_STATION_VISUALS?.illustrations[id],gallery=[p,...(p.gallery||[])];let index=Math.min(gallery.length-1,Math.max(0,Number(b.dataset.photoIndex)||0));
-      $('#site-dialog-content').innerHTML=`<div class="ec-dialog-photo"><img id="gallery-image" src="${escape(p.path)}" alt="${escape(p.alt)}" width="900" height="600"></div><div class="ec-gallery-controls"><button id="gallery-prev" aria-label="Previous photo">←</button><span id="gallery-index" role="status"></span><button id="gallery-next" aria-label="Next photo">→</button></div><div class="ec-photo-credit" id="gallery-credit"></div><div class="ec-dialog-body"><span class="ec-kicker">PUBLIC STATION RECORD · ${s.id}</span><h2 id="site-dialog-title">${escape(s.city)}, ${escape(s.state)}</h2><p>${escape(s.name)}<br>${escape(s.address)}, ${escape(s.city)}, ${escape(s.state)} ${escape(s.zip)}</p><dl class="ec-dialog-specs"><div><dt>Operator listing</dt><dd>${escape(s.network)}</dd></div><div><dt>DC charging ports</dt><dd>${s.ports}</dd></div><div><dt>Maximum listed power</dt><dd>${s.maxKw?s.maxKw+' kW':'Not listed'}</dd></div><div><dt>Directory snapshot</dt><dd>${escape(directory.fetchedAt.slice(0,10))}</dd></div></dl><div class="ec-dialog-note">Public location reference. Ownership and live occupancy are not verified by this demo. ${p.operationalNote?escape(p.operationalNote):'Check the operator for current availability.'}</div>${window.EcoChargeTrust?.stationEvidence(s)||''}<div class="ec-dialog-actions"><a class="ec-button ec-button-outline" href="${escape(s.source)}" target="_blank" rel="noopener">Open public source ↗</a><a class="ec-button" href="register/?next=map">Explore in my demo account ${arrow}</a></div></div>`;
+      $('#site-dialog-content').innerHTML=`<div class="ec-dialog-photo"><img id="gallery-image" src="${escape(p.path)}" alt="${escape(p.alt)}" width="900" height="600"></div><div class="ec-gallery-controls"><button id="gallery-prev" aria-label="Previous photo">←</button><span id="gallery-index" role="status"></span><button id="gallery-next" aria-label="Next photo">→</button></div><div class="ec-photo-credit" id="gallery-credit"></div><div class="ec-dialog-body"><span class="ec-kicker">PUBLIC STATION RECORD · ${s.id}</span><h2 id="site-dialog-title">${escape(s.city)}, ${escape(s.state)}</h2><p>${escape(s.name)}<br>${escape(s.address)}, ${escape(s.city)}, ${escape(s.state)} ${escape(s.zip)}</p><dl class="ec-dialog-specs"><div><dt>Operator listing</dt><dd>${escape(s.network)}</dd></div><div><dt>DC charging ports</dt><dd>${s.ports}</dd></div><div><dt>Maximum listed power</dt><dd>${s.maxKw?s.maxKw+' kW':'Not listed'}</dd></div><div><dt>Directory snapshot</dt><dd>${escape(directory.fetchedAt.slice(0,10))}</dd></div></dl><div class="ec-dialog-note">Public location reference. Ownership and live occupancy are not verified by this demo. ${p.operationalNote?escape(p.operationalNote):'Check the operator for current availability.'}</div>${window.EcoChargeTrust?.stationEvidence(s)||''}<div class="ec-dialog-actions"><a class="ec-button ec-button-outline" href="${escape(s.source)}" target="_blank" rel="noopener">Open public source ↗</a><a class="ec-button" href="client/?guest=1&tab=map&station=${s.id}">Explore in the demo ${arrow}</a></div></div>`;
       const renderPhoto=()=>{const item=gallery[index];$('#gallery-image').src=item.path;$('#gallery-image').alt=item.alt;$('#gallery-image').style.objectPosition=item.position||'center';$('#gallery-index').textContent=item.kind==='illustration'?'Concept illustration · not a photograph':`Photo ${index+1} of ${gallery.length}`;$('#gallery-prev').disabled=index===0;$('#gallery-next').disabled=index===gallery.length-1;$('#gallery-credit').innerHTML=item.kind==='illustration'?`EcoCharge concept illustration. This image does not depict the actual location.<br><a href="${escape(item.source)}" target="_blank" rel="noopener">View the public station record ↗</a>`:`${item.dateTaken?'Photographed '+escape(item.dateTaken):item.dateUploaded?'Published '+escape(item.dateUploaded)+' · capture date not listed':'Photo date not listed'} · ${escape(item.credit)}<br><a href="${escape(item.source)}" target="_blank" rel="noopener">Original photo ↗</a> · <a href="${escape(item.licenseUrl)}" target="_blank" rel="noopener">License ↗</a>`;};
       $('#gallery-prev').addEventListener('click',()=>{if(index>0){index--;renderPhoto();}});$('#gallery-next').addEventListener('click',()=>{if(index<gallery.length-1){index++;renderPhoto();}});renderPhoto();
     }catch{if(dialog.open)$('#site-dialog-content').innerHTML='<div class="ec-dialog-body"><h2 id="site-dialog-title">The station record could not load.</h2><p>Close this window and open the location again to retry. The photos and addresses on the page remain available.</p></div>';}
@@ -107,7 +107,7 @@
   const form=$('#registration-form');
   if(form){
     const next=$('#register-next');
-    if(['dashboard','tariffs','map','documents'].includes(params.get('next')))next.value=params.get('next');
+    if(['dashboard','tariffs','map','documents','assets'].includes(params.get('next')))next.value=params.get('next');
     const tier=groups.find(t=>t.id===params.get('tier'));
     const intent=tier?{tierId:tier.id}:null;
     if(intent){$('#registration-plan').hidden=false;$('#registration-plan').textContent=`Your selection: ${tier.name} · ${tier.count} reference ${tier.count===1?'station':'stations'}. Choose the amount and see the calculation inside your account.`;}
@@ -127,9 +127,21 @@
         demo.client={...demo.client,name,email:email||'demo@example.com',status:demo.client?.status||'Active',note:demo.client?.note||''};
         demo.registration={at:demo.registration?.at||new Date().toISOString(),mode:'local-demo'};
         const attribution=sessionStorage.getItem('ecocharge-attribution');if(attribution&&!demo.attribution)demo.attribution=JSON.parse(attribution);
+        let pending=null;
+        try{pending=JSON.parse(sessionStorage.getItem('ecocharge-plan-review')||'null');}catch{}
+        const group=groups.find(g=>g.id===pending?.tierId);
+        if(group&&Number.isFinite(pending.capital)&&pending.capital>=250&&pending.capital<=1e7&&Math.abs(pending.capital*100-Math.round(pending.capital*100))<.00001&&Array.isArray(pending.stationIds)&&new Set(pending.stationIds).size===group.count&&pending.stationIds.every(Number.isInteger)){
+          const rate=demo.tariffs?.find(t=>t.id===group.id)?.rate||({single:3,network:5.6,portfolio:7.9,scale:11.2})[group.id];
+          demo.planDraft={tierId:group.id,name:group.name,capital:pending.capital,stationIds:pending.stationIds.slice(),rate,period:'week',appliedAt:new Date().toISOString()};
+          next.value='assets';
+        }
         sessionStorage.setItem('ecocharge-entry:client',JSON.stringify({role:'client',user:'lox',at:Date.now()}));
         if(intent)sessionStorage.setItem('ecocharge-explore',JSON.stringify(intent));
         localStorage.setItem('ecocharge-demo-v1',JSON.stringify(demo));
+        sessionStorage.removeItem('ecocharge-plan-review');
+        sessionStorage.removeItem('ecocharge-working-plan');
+        window.EcoChargeFunnel?.track('registration_completed',{page:'register'});
+        if(pending&&demo.planDraft)window.EcoChargeFunnel?.track('plan_saved',{tier:demo.planDraft.tierId});
         form.querySelector('[type=submit]').disabled=true;
         location.assign(new URL('client/?tab='+next.value,root));
       }catch(error){$('#registration-error').textContent=error.message==='saved-data'?'Existing demo data could not be read. Use client sign-in to review it before creating a profile.':'Browser storage is unavailable. Allow site storage, then try again. No account was created on a server.';}

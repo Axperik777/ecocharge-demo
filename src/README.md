@@ -2,6 +2,8 @@
 
 Run `node build.cjs` and `node validate.cjs` from the repository root.
 
+The public funnel now uses `funnel-pages.cjs`, `dist/funnel.css` and `dist/funnel.js` for the compact homepage and `/inside-a-station/` operating example. `dist/decision.js` connects guest exploration, plan review and registration at save, and simplifies the client navigation. Local event diagnostics use `dist/funnel-events.js`; they do not send analytics or create real leads. See `../FUNNEL-HANDOFF.md` for the completed demo flow and the separate production integrations still needed.
+
 - `site-pages.cjs` renders the public overview, how-it-works, stations, plans, about, resources and registration pages. All use `dist/site.css` and `dist/site.js`.
 - `login.html` renders client and team sign-in, using `dist/public.css` and `dist/public.js`.
 - `portal.html` renders separate client and staff workspaces. Their existing app scripts remain in `dist/`.

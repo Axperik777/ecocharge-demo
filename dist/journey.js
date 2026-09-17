@@ -29,7 +29,7 @@ function nextJourneyStep() {
     return {tag:'Pick up where you left off',title:'Your plan. Saved for later.',copy:`${demo.planDraft.name} · ${demo.planDraft.stationIds.length} stations · ${money(demo.planDraft.capital)}. Continue when you are ready.`,action:'journey-resume',label:'Continue my plan'};
   }
   if (isActivePlan()) return {tag:'Your demo plan is active',title:'Your charging workspace.',copy:`Review your ${demo.plan.stationIds.length} reference stations, account activity and manager conversations.`,action:'journey-my-plan',label:'Open my plan'};
-  return {tag:'Start with a real location',title:'Find your place in EV charging.',copy:'Explore the stations. Save what interests you. Build a demo plan at your own pace.',action:'journey-discover',label:'Explore the stations'};
+  return {tag:'Start with a real location',title:'Explore the business. Build your example.',copy:'Start with a location. Review the equipment, try a sample plan and keep your questions together.',action:'journey-discover',label:'Explore the stations'};
 }
 
 function journeyRows(mode,query='') {
