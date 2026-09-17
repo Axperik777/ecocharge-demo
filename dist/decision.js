@@ -34,7 +34,7 @@ actions['decision-register-plan']=decisionSaveForRegistration;
 actions['decision-ask-plan']=()=>{
   if(!planIsComplete())return;
   const p=planTerms();contactComposer('plan',{entry:'plan-review',topic:'plan',plan:p.name,capital:p.capital,rate:p.rate,stationIds:p.stationIds.slice()});
-  $('#support-message').value='I am reviewing this sample plan. Please explain the proposed investment rights, the evidence supporting the rate, fees and access to funds.';
+  $('#support-message').value=(window.EcoLocale?.t('I am reviewing this sample plan. Please explain the proposed investment rights, the evidence supporting the rate, fees and access to funds.')||'I am reviewing this sample plan. Please explain the proposed investment rights, the evidence supporting the rate, fees and access to funds.');
 };
 const confirmBeforeDecision=actions['confirm-plan'];
 actions['confirm-plan']=()=>{if(isGuest()){decisionSaveForRegistration();return;}confirmBeforeDecision();if(demo.planDraft||isActivePlan()){try{sessionStorage.removeItem('ecocharge-working-plan');}catch{}decisionTrack('plan_saved',{tier:(demo.planDraft||demo.plan).tierId});}};

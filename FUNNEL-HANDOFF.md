@@ -39,6 +39,10 @@ Production measurement should use authenticated server events for verified regis
 
 ## Next validation
 
+### Demo languages
+
+EN / RU is available on the public pages and both workspaces. English remains the fresh-browser default; `?lang=ru` opens Russian directly. The selection persists without resetting the plan, browser profile or message drafts. Russian print previews, sample PDFs and calendar exports are included. Message contents and original station/address records are preserved. Translation maintenance is documented in `src/locales/README.md`.
+
 - Observe US English speakers answering: what is being offered, who receives funds, what supports distributions, how can capital be accessed?
 - Test headline angle, registration timing and optional manager assistance separately.
 - Measure confirmed funding, CAC, servicing cost and misunderstanding-related support/withdrawal requests. Visitor time on site is not the primary success metric.
