@@ -9,6 +9,10 @@
 - Four client navigation items: Overview, Stations, My plan, Documents. My plan contains the builder and saved/active selection.
 - Questions from plan review carry the plan context to the local staff inbox.
 - Staff overview exposes local event diagnostics and a JSON export without names, email, amounts or message bodies.
+- Staff work queue, searchable conversations, priority, internal UI notes, next-action dates and explicit close/reopen behavior. Dates are organizational fields; no reminders are scheduled.
+- Client and staff message drafts survive navigation and reload, and clear after a successful send. They are stored locally, not in secure private server storage.
+- Demo callback proposal, client acceptance/cancellation, US time-zone validation and sample calendar-file download. Past times, nonexistent spring-forward times and ambiguous fall-back times are rejected. No actual call or invitation is sent.
+- Photo thumbnails in the plan picker. The 21 primary portal photos use existing optimized WebP files (2,521,518 bytes in total versus 8,387,327 original bytes); the lightbox retains access to the original images. Credits remain attached to their exact locations.
 
 ## What this release does not establish
 
