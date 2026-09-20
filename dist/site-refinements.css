@@ -1,0 +1,22 @@
+/* The public page previews actions, not unverified financial results. */
+.r-hero-steps{padding:20px 22px;background:#152b39;border-radius:0 0 9px 9px;color:#f0f6f4}
+.r-hero-steps>small{font-size:11px;letter-spacing:.8px;color:#b8d9d0;display:block;margin-bottom:10px}
+.r-hero-steps>a{display:flex;align-items:center;gap:12px;min-height:48px;text-decoration:none;color:inherit;font-size:14px;border-top:1px solid #37535c}
+.r-hero-steps>a>span{font-size:11px;color:#a9d4c7;width:22px}.r-hero-steps>a>.ec-icon{margin-left:auto;width:17px}
+.r-hero-steps a:focus-visible{outline:2px solid #c0e4d5;outline-offset:3px}.r-hero-steps a:hover{color:#c0e4d5}
+.ec-photo figcaption{font-size:11px}.f-sequence p,.f-business-diagram small,.f-business-diagram>p,.f-dark .f-dark-footnote{font-size:12px}
+.f-questions p{font-size:14px}.f-questions b{font-size:14px;min-height:44px}
+.f-quiet{font-size:13px}.ec-nav a{font-size:13px}.ec-footer-legal p{font-size:12px;line-height:1.8}
+@media(max-width:700px){
+ .ec-header .ec-nav{display:none}.ec-header .ec-header-inner{display:flex;min-height:76px;gap:10px;padding-top:12px;padding-bottom:12px}
+ .ec-header .ec-header-actions{margin-left:auto;gap:8px;flex-wrap:nowrap}.ec-header .ec-header-actions .locale-switch{order:0;margin:0}.ec-header .ec-header-actions .locale-switch button{min-height:40px;min-width:30px}
+ .ec-header .ec-sign-in{display:none}.ec-header .ec-menu-trigger{width:44px;height:44px;min-width:44px;order:2}.ec-header .ec-brand{max-width:160px}
+ .f-hero{padding-top:27px;gap:26px}.f-hero h1{font-size:36px;line-height:1.12;letter-spacing:-1.6px}.f-hero-copy>p{font-size:16px;line-height:1.75}
+ .f-actions{gap:9px 18px;margin-top:20px}.f-actions .ec-button{font-size:14px;min-height:48px;padding:13px 18px}.f-actions .ec-text-link{font-size:14px;min-height:44px;display:inline-flex;align-items:center}.f-quiet{font-size:12px;line-height:1.6;margin-top:9px}
+ .f-photo-label{font-size:11px;letter-spacing:.4px}.f-photo-label>span{font-size:10px}.f-hero-location .ec-photo img{height:220px}
+ .r-hero-steps{padding:16px 18px}.r-hero-steps>a{font-size:14px;min-height:48px}.r-hero-steps>small{font-size:11px}
+ .f-section p,.f-study-heading>p,.f-study-location p{font-size:15px;line-height:1.75}.f-section h2{font-size:29px}.f-sequence strong{font-size:15px}.f-sequence p{font-size:13px;line-height:1.7}.f-business-diagram small,.f-business-diagram>p,.f-dark .f-dark-footnote{font-size:12px;line-height:1.8}.f-business-diagram span{font-size:16px}.f-questions p{font-size:15px}.f-questions b{font-size:14px;min-height:44px}.f-start .ec-faq p{font-size:14px}
+ .f-economics-inputs>label,.f-facts>div{font-size:13px}.f-scenarios button{font-size:12px;min-height:44px}.f-economics-result>small,.f-econ-bottom small,.f-assumptions,.f-assumptions p{font-size:12px;line-height:1.7}.f-economics-result dl>div{font-size:14px}.f-economics-result>p{font-size:14px}
+ .ec-footer-legal p{font-size:12px}.ec-photo figcaption{font-size:11px;line-height:1.6;gap:10px}.ec-photo figcaption a{min-height:32px;display:inline-flex;align-items:center}
+}
+@media(max-width:370px){.ec-header .ec-brand{max-width:137px}.ec-header .ec-header-actions{gap:7px}.ec-header .ec-header-actions .locale-switch button{min-width:26px;padding:5px}.f-hero h1{font-size:33px}.ec-header .ec-header-inner{gap:7px}.f-photo-label{flex-wrap:wrap}}

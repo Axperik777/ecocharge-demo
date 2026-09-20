@@ -7,11 +7,14 @@
  async function documentFont(){if(!fontPromise)fontPromise=fetch('assets/manrope-regular.ttf').then(r=>{if(!r.ok)throw Error('font');return r.arrayBuffer()}).then(buffer=>{let binary='';for(const byte of new Uint8Array(buffer))binary+=String.fromCharCode(byte);return btoa(binary)}).catch(e=>{fontPromise=null;throw e});return fontPromise;}
  actions['print-contract']=()=>{const win=window.open('','_blank');if(!win){toast('Allow a new tab to open the print preview.');return}const language=window.EcoLocale?.language||'en',content=window.EcoLocale?.html(contractContent())||contractContent();win.document.write(`<!doctype html><html lang="${language}"><head><meta charset="utf-8"><title>EcoCharge — ${language==='ru'?'Образец договора':'Agreement preview'}</title><style>body{font:14px/1.65 Arial,sans-serif;color:#14253c;max-width:740px;margin:32px auto;padding:0 24px}h1{font-size:25px}h2{font-size:16px;margin-top:24px}.draft-banner{padding:12px;border:1px solid #ba9237;background:#fffaeb;font-size:12px;font-weight:bold}table{width:100%;border-collapse:collapse}td{padding:9px;border-bottom:1px solid #ddd}td:last-child{text-align:right}footer{margin:35px 0;border-top:1px solid #ccc;padding:10px 0;font-size:10px}button{padding:12px 20px;background:#095897;color:white;border:0;border-radius:5px;cursor:pointer}h2,table{break-inside:avoid}h2{break-after:avoid}@page{size:A4;margin:18mm}@media print{body{max-width:none;margin:0;padding:0;font-size:11px}.print-toolbar{display:none}.draft-banner{background:none}h2{margin-top:15px;font-size:13px}h1{font-size:21px}}</style></head><body><div class="print-toolbar"><button onclick="window.print()">${language==='ru'?'Печать / Сохранить PDF':'Print / Save as PDF'}</button></div>${content}</body></html>`);win.document.close();win.opener=null;win.focus();};
  downloadPdf=async function(kind){
-  if(window.EcoLocale?.language!=='ru')return original(kind);
-  if(!window.jspdf){toast('PDF module is unavailable. Please reload.');return}if(kind==='factsheet'&&!selected){toast('Select a station first.');return}
+  if(kind==='factsheet'&&!selected){toast('Select a station first.');return}
+  const russian=window.EcoLocale?.language==='ru',client={...demo.client};
   // Capture values before the asynchronous font load, so switching stations cannot alter this download.
-  const station=selected?{...selected}:null,agreement=kind==='contract'?window.EcoLocale.html(contractContent()):null,confirmedLabel=station?window.EcoLocale.t(station.confirmed):'';
+  const station=selected?{...selected}:null,agreement=kind==='contract'&&russian?window.EcoLocale.html(contractContent()):null,confirmedLabel=station?window.EcoLocale.t(station.confirmed):'';
   try{
+   if(!window.jspdf)toast('Preparing your PDF…');
+   await window.ecoLoadLibrary('pdf');
+   if(!russian)return original(kind,{station,client});
    const font=await documentFont(),pdf=new window.jspdf.jsPDF({unit:'pt',format:'a4'});pdf.addFileToVFS('Manrope-Regular.ttf',font);pdf.addFont('Manrope-Regular.ttf','Manrope','normal');pdf.setFont('Manrope','normal');pdf.setProperties({title:kind==='contract'?'EcoCharge — Образец договора':'EcoCharge — Паспорт станции',author:'EcoCharge demo',subject:'Демонстрационный документ. Не подтверждает инвестиционные права.'});
    const margin=46,width=503;let y=50;const lineHeight=15;
    const page=()=>{pdf.addPage();y=50;};
@@ -26,6 +29,6 @@
    }
    const pages=pdf.getNumberOfPages();for(let n=1;n<=pages;n++){pdf.setPage(n);pdf.setDrawColor(207,220,223);pdf.line(margin,797,549,797);pdf.setTextColor(91,111,120);pdf.setFontSize(8);pdf.text(`ДЕМО · ${new Intl.DateTimeFormat('ru-RU',{timeZone:'UTC'}).format(new Date())} · Страница ${n} из ${pages}`,margin,814);}
    pdf.save(kind==='contract'?'DEMO-agreement-RU.pdf':`AFDC-${station.id}-RU.pdf`);toast(kind==='contract'?'Demo agreement preview downloaded.':'Station fact sheet downloaded.');
-  }catch{toast('Не удалось создать PDF. Обновите страницу или воспользуйтесь печатью образца.');}
+  }catch{toast('The PDF could not be created. Try again or use the print preview.');}
  };
 })();

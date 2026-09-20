@@ -42,7 +42,7 @@ These proposed rates are simulations, not verified investment returns or an offe
 6. The manager records a sample week. One Monday-Sunday week can be credited only once; the credit uses invested capital multiplied by the weekly rate.
 7. Review allocation history, print the sample agreement, browse location photos and exchange messages.
 
-The team can directly edit the client's available balance, invested amount, tariff and station count through **Edit client account**. Changing the tariff suggests its default station count; staff can override the reference count separately. Each adjustment records its before/after values and reason. Previous credits retain their original terms. Reserved withdrawal requests must remain covered.
+The team edits the available balance and plan in separate forms in the client card. A plan uses the selected tariff's exact station count. Each change requires a reason and a before/after review; previous credits retain their original terms. Reserved withdrawal requests must remain covered.
 
 Staff can also edit the client profile, manager contacts, station selection/photos and proposed rates. Changes to the general tariff schedule affect future plan applications; an existing plan retains its agreed demo rate until edited/applied again. Reset demo is available only in the team interface.
 
@@ -55,6 +55,17 @@ Staff can also edit the client profile, manager contacts, station selection/phot
 - A three-part walkthrough explains the business model, the weekly calculation and the documentation still required. The phone layout retains dedicated navigation and a compact inbox/shortlist toolbar.
 
 Research preferences live under `demo.exploration` in the existing browser storage. They reset with the team demo reset and are not synchronized across devices.
+
+## Responsive workspaces
+
+- A new client starts with business education, station exploration or a sample plan. Balance operations appear when there is a plan or financial activity.
+- The plan builder follows amount, station group, exact locations and review. Its desktop summary stays beside the selection; phones have a review bar above the navigation. Additional weekly scenarios are expandable.
+- Stations have map and list views with shared search and filters. The list loads 18 records at a time; map clusters zoom into their locations. Filters collapse on phones, and selecting a marker opens a compact station preview.
+- Leaflet loads on first map use, and the PDF library on first PDF download. Both support retry. The directory remains usable if map assets fail. Resizing preserves map zoom.
+- The agent sees the current client plan, open question and next action alongside the client card. Replies also retain client context.
+- EN/RU switching preserves plan fields and selected stations. Public mobile navigation uses one menu.
+
+Browser checks are in `tests/workspace-refinements.cjs` and `tests/optional-library-recovery.cjs`. They need Playwright and Chrome (or a Playwright Chromium installation). Set `PLAYWRIGHT_PATH` to a module path if it is not locally installed, `CHROME_PATH` for a custom browser executable, and `QA_URL` for a running preview or deployed URL. Run from the repository root; screenshots and reports go into the ignored `qa/` directory. These checks use isolated demo browser contexts. Physical iOS/Android testing is still separate.
 
 ## Scope and limits
 
