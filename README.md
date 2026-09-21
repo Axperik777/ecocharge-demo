@@ -71,7 +71,9 @@ Browser checks are in `tests/workspace-refinements.cjs` and `tests/optional-libr
 
 ### Team-provided partner list
 
-The homepage includes the eleven companies named by the project team in `src/partners.cjs`, with industry labels and official corporate links. The team reports these relationships as confirmed; partnership scope and supporting documents have not yet been supplied for review. Keep that status visible in EN/RU until supporting materials are available. Corporate links identify the companies and are not evidence of a relationship with EcoCharge.
+The homepage includes the thirteen companies named by the project team in `src/partners.cjs`, with industry labels and official corporate links. The team reports these relationships as confirmed; partnership scope and supporting documents have not yet been supplied for review. Keep that status visible in EN/RU until supporting materials are available. Corporate links identify the companies and are not evidence of a relationship with EcoCharge.
+
+AMEC is described as a semiconductor manufacturing equipment company, consistent with its [official company profile](https://www.amec-inc.com/uploads/files/20250611/17496080859885.pdf). The reported procurement relationship needs product/specification details before describing AMEC as a supplier of charging-station semiconductors. NVIDIA uses its correct brand spelling and public computing profile.
 
 ### Demo capabilities
 

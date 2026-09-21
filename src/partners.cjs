@@ -11,14 +11,22 @@ const companies = [
   {name:'Amazon', sector:'Online retail & delivery', url:'https://www.aboutamazon.com/'},
   {name:'Disney', sector:'Entertainment & theme parks', url:'https://thewaltdisneycompany.com/'},
   {name:'Nike', sector:'Sportswear & footwear', url:'https://about.nike.com/en/'},
-  {name:'Tesla', sector:'Electric vehicles & energy', url:'https://www.tesla.com/'}
+  {name:'Tesla', sector:'Electric vehicles & energy', url:'https://www.tesla.com/'},
+  {name:'NVIDIA', sector:'AI & accelerated computing', url:'https://www.nvidia.com/en-us/'},
+  {name:'AMEC', sector:'Semiconductor manufacturing equipment', detail:'Advanced Micro-Fabrication Equipment Inc.', url:'https://www.amec-inc.com/'}
 ];
 
 function renderPartners({esc, kicker, link}) {
+  // Balance desktop rows as the directory grows: 13 entries use 4 / 3 / 3 / 3.
+  const rows=Math.ceil(companies.length/4), perRow=Math.floor(companies.length/rows);
+  const spans=Array.from({length:rows},(_,row)=>{
+    const size=perRow+(row<companies.length%rows?1:0);
+    return Array(size).fill(12/size);
+  }).flat();
   return `<section class="ec-wrap f-section r-partners" id="partners" aria-labelledby="partners-heading" aria-describedby="partners-status">
     <div class="r-partners-heading"><div>${kicker('PROJECT RELATIONSHIPS')}<h2 id="partners-heading">Our partners</h2></div><span class="r-partners-status">Documentation pending</span></div>
     <p id="partners-status">List provided by the EcoCharge team. Partnership scope and supporting documents are pending review.</p>
-    <ul class="r-partner-grid" role="list">${companies.map(company=>`<li><a class="r-partner" href="${esc(company.url)}" target="_blank" rel="noopener noreferrer"><span class="r-partner-sector">${esc(company.sector)}</span><strong translate="no">${esc(company.name)}</strong>${company.detail?`<span class="r-partner-detail" translate="no">${esc(company.detail)}</span>`:''}<span class="r-partner-visit">Official website <span aria-hidden="true">↗</span><span class="r-partner-sr"> (opens in a new tab)</span></span></a></li>`).join('')}</ul>
+    <ul class="r-partner-grid" role="list">${companies.map((company,index)=>`<li style="--partner-span:${spans[index]}"><a class="r-partner" href="${esc(company.url)}" target="_blank" rel="noopener noreferrer"><span class="r-partner-sector">${esc(company.sector)}</span><strong translate="no">${esc(company.name)}</strong>${company.detail?`<span class="r-partner-detail" translate="no">${esc(company.detail)}</span>`:''}<span class="r-partner-visit">Official website <span aria-hidden="true">↗</span><span class="r-partner-sr"> (opens in a new tab)</span></span></a></li>`).join('')}</ul>
     <div class="r-partners-footer">${link('Company & documents','resources/#company-documents')}</div>
   </section>`;
 }
