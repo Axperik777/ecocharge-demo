@@ -11,3 +11,12 @@
 @media(max-width:1150px){.charge-brand .charge-symbol{width:43px;height:43px}.charge-brand>.charge-wordmark{font-size:28px}}
 @media(max-width:650px){.charge-brand,.brand.charge-brand{gap:8px}.charge-brand .charge-symbol{width:36px;height:36px}.charge-brand>.charge-wordmark{font-size:26px}.charge-brand .charge-wordmark>small{font-size:6px;letter-spacing:.14em;margin-top:6px}.brand.charge-brand .charge-symbol{width:33px;height:33px}.brand.charge-brand>.charge-wordmark{font-size:23px}.brand.charge-brand .charge-wordmark>small{font-size:6px;letter-spacing:.12em;margin-top:6px}}
 @media(max-width:360px){.charge-brand .charge-symbol{width:32px;height:32px}.charge-brand>.charge-wordmark{font-size:24px}.brand.charge-brand>.charge-wordmark{font-size:21px}.brand.charge-brand .charge-symbol{width:30px;height:30px}}
+
+/* Uppercase lockup: one identity with a brighter conductor on dark surfaces. */
+.charge-brand,.brand.charge-brand{--brand-accent:#007e5d;gap:9px}
+.charge-brand[data-brand-theme=dark]{--brand-accent:#d0f279;--brand-ink:#f4f9f7;--brand-caption:#b2c9c7}
+.charge-brand>.charge-wordmark,.brand.charge-brand>.charge-wordmark{font-size:26px;font-weight:800;letter-spacing:-.045em;line-height:1.05}
+.charge-brand .charge-symbol,.brand.charge-brand .charge-symbol{width:43px;height:43px}
+.charge-brand .charge-wordmark>small{font-size:7px;letter-spacing:.19em;margin-top:8px}
+@media(max-width:700px){.charge-brand>.charge-wordmark,.brand.charge-brand>.charge-wordmark{font-size:21px}.charge-brand .charge-symbol,.brand.charge-brand .charge-symbol{width:33px;height:33px}.charge-brand .charge-wordmark>small{font-size:6px;letter-spacing:.13em;margin-top:6px}}
+@media(max-width:370px){.charge-brand,.brand.charge-brand{gap:6px}.charge-brand>.charge-wordmark,.brand.charge-brand>.charge-wordmark{font-size:18px}.charge-brand .charge-symbol,.brand.charge-brand .charge-symbol{width:28px;height:28px}.charge-brand .charge-wordmark>small{font-size:5px}}

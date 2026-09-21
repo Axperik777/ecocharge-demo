@@ -1,0 +1,91 @@
+{
+  "note": "Logos identify the listed companies. They are not evidence of a commercial relationship, approval or endorsement.",
+  "retrieved": "2026-09-21",
+  "logos": [
+    {
+      "file": "cocacola.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/cocacola.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#D00013"
+    },
+    {
+      "file": "mcdonalds.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/mcdonalds.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#FBC817"
+    },
+    {
+      "file": "ford.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/ford.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#00274E"
+    },
+    {
+      "file": "generalmotors.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/generalmotors.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#0170CE"
+    },
+    {
+      "file": "apple.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/apple.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#111111"
+    },
+    {
+      "file": "amazon.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/amazon.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#111111"
+    },
+    {
+      "file": "nike.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/nike.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#111111"
+    },
+    {
+      "file": "tesla.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/tesla.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#CC0000"
+    },
+    {
+      "file": "nvidia.svg",
+      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/nvidia.svg",
+      "upstream": "Simple Icons 11.15.0",
+      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
+      "color": "#76B900"
+    },
+    {
+      "file": "walmart.svg",
+      "source": "https://corporate.walmart.com/content/dam/corporate/site-images/WMT-Wordmark-New-Small-Black_RGB.svg",
+      "license": "Company trademark; all rights retained by the owner"
+    },
+    {
+      "file": "microsoft.png",
+      "source": "https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png",
+      "license": "Company trademark; all rights retained by the owner"
+    },
+    {
+      "file": "disney.svg",
+      "source": "https://thewaltdisneycompany.com/",
+      "sourceElement": "Header logo SVG",
+      "license": "Company trademark; all rights retained by the owner"
+    },
+    {
+      "file": "amec.png",
+      "source": "https://www.amec-inc.com/uploads/images/20200929/1601381065768909.png",
+      "license": "Company trademark; all rights retained by the owner"
+    }
+  ],
+  "presentation": "SVG viewBox whitespace trimmed without changing the logo paths. Simple Icons shapes use brand colors. McDonald’s mark is displayed on a red tile."
+}

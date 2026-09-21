@@ -15,18 +15,14 @@ const companies = [
   {name:'NVIDIA', sector:'AI & accelerated computing', url:'https://www.nvidia.com/en-us/'},
   {name:'AMEC', sector:'Semiconductor manufacturing equipment', detail:'Advanced Micro-Fabrication Equipment Inc.', url:'https://www.amec-inc.com/'}
 ];
+const logoFiles=['walmart.svg','cocacola.svg','mcdonalds.svg','ford.svg','generalmotors.svg','apple.svg','microsoft.png','amazon.svg','disney.svg','nike.svg','tesla.svg','nvidia.svg','amec.png'];
 
 function renderPartners({esc, kicker, link}) {
-  // Balance desktop rows as the directory grows: 13 entries use 4 / 3 / 3 / 3.
-  const rows=Math.ceil(companies.length/4), perRow=Math.floor(companies.length/rows);
-  const spans=Array.from({length:rows},(_,row)=>{
-    const size=perRow+(row<companies.length%rows?1:0);
-    return Array(size).fill(12/size);
-  }).flat();
   return `<section class="ec-wrap f-section r-partners" id="partners" aria-labelledby="partners-heading" aria-describedby="partners-status">
     <div class="r-partners-heading"><div>${kicker('PROJECT RELATIONSHIPS')}<h2 id="partners-heading">Our partners</h2></div><span class="r-partners-status">Documentation pending</span></div>
     <p id="partners-status">List provided by the EcoCharge team. Partnership scope and supporting documents are pending review.</p>
-    <ul class="r-partner-grid" role="list">${companies.map((company,index)=>`<li style="--partner-span:${spans[index]}"><a class="r-partner" href="${esc(company.url)}" target="_blank" rel="noopener noreferrer"><span class="r-partner-sector">${esc(company.sector)}</span><strong translate="no">${esc(company.name)}</strong>${company.detail?`<span class="r-partner-detail" translate="no">${esc(company.detail)}</span>`:''}<span class="r-partner-visit">Official website <span aria-hidden="true">↗</span><span class="r-partner-sr"> (opens in a new tab)</span></span></a></li>`).join('')}</ul>
+    <ul class="r-partner-grid" role="list">${companies.map((company,index)=>`<li><a class="r-partner" href="${esc(company.url)}" target="_blank" rel="noopener noreferrer"><span class="v-partner-logo v-logo-${logoFiles[index].split('.')[0]}"><img src="assets/partners/${logoFiles[index]}" width="140" height="56" loading="lazy" decoding="async" alt=""></span><strong translate="no">${esc(company.name)}</strong><span class="r-partner-sr">Official website (opens in a new tab)</span></a></li>`).join('')}</ul>
+    <details class="v-partner-profiles"><summary>Company profiles & sources</summary><ul>${companies.map(company=>`<li><strong translate="no">${esc(company.name)}</strong><span>${esc(company.sector)}</span>${company.detail?`<small translate="no">${esc(company.detail)}</small>`:''}</li>`).join('')}</ul><p>Logos identify the companies. They do not verify a relationship or endorsement.</p><a href="assets/partners/sources.json" target="_blank" rel="noopener">Logo sources ↗</a></details>
     <div class="r-partners-footer">${link('Company & documents','resources/#company-documents')}</div>
   </section>`;
 }

@@ -75,6 +75,10 @@ The homepage includes the thirteen companies named by the project team in `src/p
 
 AMEC is described as a semiconductor manufacturing equipment company, consistent with its [official company profile](https://www.amec-inc.com/uploads/files/20250611/17496080859885.pdf). The reported procurement relationship needs product/specification details before describing AMEC as a supplier of charging-station semiconductors. NVIDIA uses its correct brand spelling and public computing profile.
 
+### Public identity and entry flow
+
+The shared logo reads **ECO CHARGE** in uppercase, with a lime conductor/wordmark on dark surfaces. The homepage uses a navy hero, a direct guest plan-builder CTA, source-linked equipment photos and functional workspace-preview links. Partner logos are local assets with source records in `dist/assets/partners/sources.json`; they identify companies and do not independently substantiate a relationship. Company profiles remain available in an expandable section. Photo and partnership disclosures stay visible.
+
 ### Demo capabilities
 
 - 1,184 public US DC charging locations, AFDC snapshot 2026-09-15 UTC.
