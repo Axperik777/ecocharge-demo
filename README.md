@@ -69,6 +69,12 @@ Browser checks are in `tests/workspace-refinements.cjs` and `tests/optional-libr
 
 ## Scope and limits
 
+### Team-provided partner list
+
+The homepage includes the eleven companies named by the project team in `src/partners.cjs`, with industry labels and official corporate links. The team reports these relationships as confirmed; partnership scope and supporting documents have not yet been supplied for review. Keep that status visible in EN/RU until supporting materials are available. Corporate links identify the companies and are not evidence of a relationship with EcoCharge.
+
+### Demo capabilities
+
 - 1,184 public US DC charging locations, AFDC snapshot 2026-09-15 UTC.
 - 27 real photos across 21 matched locations, with source and license credits. The 50-location featured catalogue uses clearly labeled concept illustrations for the remaining 29 locations.
 - Map search, filtering, zoom, station facts and exact-location photo galleries.
