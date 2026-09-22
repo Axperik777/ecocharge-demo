@@ -75,7 +75,13 @@ The homepage includes the thirteen companies named by the project team in `src/p
 
 AMEC is described as a semiconductor manufacturing equipment company, consistent with its [official company profile](https://www.amec-inc.com/uploads/files/20250611/17496080859885.pdf). The reported procurement relationship needs product/specification details before describing AMEC as a supplier of charging-station semiconductors. NVIDIA uses its correct brand spelling and public computing profile.
 
-### Public identity and entry flow
+### English (US) and Russian
+
+The English UI uses `en-US`, short public-facing copy, US date formatting and "plan" terminology. Russian covers page text, dynamic account states, form errors, image descriptions, metadata and sample documents. Translation changes display only: inputs, stored amounts, station IDs/addresses and message bodies remain intact. Language switches update `?lang=` and preserve the current selection; an explicit language URL also works when local storage is unavailable.
+
+The September 22 localization audit covered 97 page/dialog states (1,576 distinct rendered text/attribute pairs), 152 page/language/viewport checks at 320/390/768/1440 px, 19 additional document/conversation states, language round trips, dates, currencies, plural forms and generated calendar/PDF files. English and Russian agreement downloads now use the same sample content as the print preview. Both PDF pages were rendered and visually reviewed. Responsive checks used Chromium emulation, not physical phones.
+
+### Brand and company content
 
 ECO CHARGE is the only public project brand, including both workspaces and demo document headings. The former secondary brand has been removed.
 

@@ -35,7 +35,7 @@
       if(pending&&['single','network','portfolio','scale'].includes(pending.tierId)&&Number.isFinite(pending.capital)&&Array.isArray(pending.stationIds)){
         const box=document.createElement('div');box.className='f-registration-selection';
         const title=document.createElement('strong');title.textContent='Your example is ready to save';
-        const detail=document.createElement('div');detail.textContent=`${pending.stationIds.length} reference stations · ${new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(pending.capital)}`;
+        const detail=document.createElement('div');detail.textContent=`${pending.stationIds.length} ${pending.stationIds.length===1?'reference station':'reference stations'} · ${new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(pending.capital)}`;
         const note=document.createElement('p');note.textContent='Your selection stays with you. This creates a local demo profile, not an investment or a server account.';
         box.append(title,detail,note);$('#registration-form').before(box);
         $('.ec-registration-card h2').textContent='Save your demo plan';

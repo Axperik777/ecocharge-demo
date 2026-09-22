@@ -45,7 +45,7 @@ function refineBuilder() {
   if (scenarios) {const details = document.createElement('details'); details.className = 'r-scenario-details'; details.innerHTML = '<summary>See the example over several weeks</summary>'; scenarios.before(details); details.append(scenarios);}
   const historyPanel = area.querySelector('.session-panel'); if (historyPanel) historyPanel.hidden = !demo.sessions.length;
   const help = document.createElement('a'); help.href = 'inside-a-station/'; help.className = 'r-model-link'; help.textContent = 'Explore charging revenue and operating costs →'; area.append(help);
-  area.insertAdjacentHTML('beforeend', `<div class="r-plan-dock"><div><span>Sample plan</span><strong id="r-dock-capital"></strong><small><span id="r-dock-count"></span> <span>stations selected</span></small></div><button class="button primary" data-action="r-review-plan">Review plan ${icon('arrow')}</button></div>`);
+  area.insertAdjacentHTML('beforeend', `<div class="r-plan-dock"><div><span>Sample plan</span><strong id="r-dock-capital"></strong><small><span>Selected stations:</span> <span id="r-dock-count"></span></small></div><button class="button primary" data-action="r-review-plan">Review plan ${icon('arrow')}</button></div>`);
   refinePlanSummary();
 }
 
