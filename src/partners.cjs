@@ -2,20 +2,16 @@
 // company's public website. Keep the review status visible until evidence exists.
 const companies = [
   {name:'Walmart', sector:'Retail & home essentials', url:'https://corporate.walmart.com/'},
-  {name:'Coca-Cola', sector:'Beverages', url:'https://www.coca-colacompany.com/'},
-  {name:'McDonald’s', sector:'Restaurants', url:'https://corporate.mcdonalds.com/corpmcd/home.html'},
   {name:'Ford', sector:'Automotive', url:'https://corporate.ford.com/'},
   {name:'General Motors', sector:'Automotive', detail:'Chevrolet · Cadillac', url:'https://www.gm.com/'},
   {name:'Apple', sector:'Consumer electronics', url:'https://www.apple.com/'},
   {name:'Microsoft', sector:'Software & technology', url:'https://www.microsoft.com/en-us'},
   {name:'Amazon', sector:'Online retail & delivery', url:'https://www.aboutamazon.com/'},
-  {name:'Disney', sector:'Entertainment & theme parks', url:'https://thewaltdisneycompany.com/'},
-  {name:'Nike', sector:'Sportswear & footwear', url:'https://about.nike.com/en/'},
   {name:'Tesla', sector:'Electric vehicles & energy', url:'https://www.tesla.com/'},
   {name:'NVIDIA', sector:'AI & accelerated computing', url:'https://www.nvidia.com/en-us/'},
   {name:'AMEC', sector:'Semiconductor manufacturing equipment', detail:'Advanced Micro-Fabrication Equipment Inc.', url:'https://www.amec-inc.com/'}
 ];
-const logoFiles=['walmart.svg','cocacola.svg','mcdonalds.svg','ford.svg','generalmotors.svg','apple.svg','microsoft.png','amazon.svg','disney.svg','nike.svg','tesla.svg','nvidia.svg','amec.png'];
+const logoFiles=['walmart.svg','ford.svg','generalmotors.svg','apple.svg','microsoft.png','amazon.svg','tesla.svg','nvidia.svg','amec.png'];
 
 function renderPartners({esc, kicker, link}) {
   return `<section class="ec-wrap f-section r-partners" id="partners" aria-labelledby="partners-heading" aria-describedby="partners-status">

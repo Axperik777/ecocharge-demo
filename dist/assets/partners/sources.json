@@ -3,20 +3,6 @@
   "retrieved": "2026-09-21",
   "logos": [
     {
-      "file": "cocacola.svg",
-      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/cocacola.svg",
-      "upstream": "Simple Icons 11.15.0",
-      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
-      "color": "#D00013"
-    },
-    {
-      "file": "mcdonalds.svg",
-      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/mcdonalds.svg",
-      "upstream": "Simple Icons 11.15.0",
-      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
-      "color": "#FBC817"
-    },
-    {
       "file": "ford.svg",
       "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/ford.svg",
       "upstream": "Simple Icons 11.15.0",
@@ -40,13 +26,6 @@
     {
       "file": "amazon.svg",
       "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/amazon.svg",
-      "upstream": "Simple Icons 11.15.0",
-      "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
-      "color": "#111111"
-    },
-    {
-      "file": "nike.svg",
-      "source": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/nike.svg",
       "upstream": "Simple Icons 11.15.0",
       "license": "CC0-1.0 (icon artwork; trademarks remain with their owners)",
       "color": "#111111"
@@ -76,16 +55,10 @@
       "license": "Company trademark; all rights retained by the owner"
     },
     {
-      "file": "disney.svg",
-      "source": "https://thewaltdisneycompany.com/",
-      "sourceElement": "Header logo SVG",
-      "license": "Company trademark; all rights retained by the owner"
-    },
-    {
       "file": "amec.png",
       "source": "https://www.amec-inc.com/uploads/images/20200929/1601381065768909.png",
       "license": "Company trademark; all rights retained by the owner"
     }
   ],
-  "presentation": "SVG viewBox whitespace trimmed without changing the logo paths. Simple Icons shapes use brand colors. McDonald’s mark is displayed on a red tile."
+  "presentation": "SVG viewBox whitespace trimmed without changing the logo paths. Simple Icons shapes use brand colors."
 }
