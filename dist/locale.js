@@ -5,6 +5,10 @@
  let language='en';try{language=valid(localStorage.getItem(key))}catch{}
  const requested=new URL(location.href).searchParams.get('lang');if(['en','ru'].includes(requested)){language=requested;try{localStorage.setItem(key,language)}catch{}}
  const messages=window.ECOCHARGE_RU||{},normalize=s=>s.replace(/\s+/g,' ').trim();
+ const english=window.ECOCHARGE_EN||{};
+ const englishLower=new Map(Object.entries(english).map(([k,v])=>[k.toLowerCase(),v]));
+ const englishTemplates=Object.entries(english).filter(([k])=>/\{\d+\}/.test(k)).sort((a,b)=>b[0].length-a[0].length).map(([k,v])=>{const slots=[];return {re:new RegExp('^'+k.split(/(\{\d+\})/).map(p=>/^\{\d+\}$/.test(p)?(slots.push(p),'(.+?)'):p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('')+'$','i'),value:v,slots};});
+ function englishCopy(source,depth=0){const s=normalize(source);let result=english[s]??englishLower.get(s.toLowerCase());if(result===undefined&&depth<3){for(const t of englishTemplates){const match=s.match(t.re);if(match){result=t.value.replace(/\{\d+\}/g,slot=>match[t.slots.indexOf(slot)+1]);break;}}if(result===undefined&&/[↗→←]$/.test(s))result=englishCopy(s.slice(0,-1).trim(),depth+1)+' '+s.slice(-1);if(result===undefined&&s.includes(' · '))result=s.split(' · ').map(x=>englishCopy(x,depth+1)).join(' · ');}if(result===undefined)return source;if(s===s.toUpperCase()&&/[A-Z]/.test(s))result=result.toUpperCase();return (source.match(/^\s*/)?.[0]||'')+result+(source.match(/\s*$/)?.[0]||'');}
  const lower=new Map(Object.entries(messages).map(([k,v])=>[k.toLowerCase(),v]));
  const templates=Object.entries(messages).filter(([k])=>/\{\d+\}/.test(k)).sort((a,b)=>b[0].replace(/\{\d+\}/g,'').length-a[0].replace(/\{\d+\}/g,'').length).map(([k,v])=>{const slots=[];const parts=k.split(/(\{\d+\})/),numeric=/^\{0\} (?:stations?|locations?|ports?|weeks?|photos?|real locations|DC ports?|new repl(?:y|ies)|unread(?: replies)?|total|conversations|weekly illustration)\b/.test(k);return {re:new RegExp('^'+parts.map(p=>/^\{\d+\}$/.test(p)?(slots.push(p),numeric&&p==='{0}'?'([+−-]?\\$?[\\d,.]+)':'(.+?)'):p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('')+'$','i'),value:v,slots};});
  const sources=new WeakMap(),attributes=new WeakMap();
@@ -27,7 +31,7 @@
   return s.replace(/г\.\.(?=\s|$)/g,'г.');
  }
  function translate(source,depth=0){
-  const s=normalize(String(source??''));if(!s)return String(source??'');if(language!=='ru')return displayDates(String(source??''),'en-US');
+  const s=normalize(String(source??''));if(!s)return String(source??'');if(language!=='ru')return displayDates(englishCopy(String(source??'')),'en-US');
   let result=countedRussian(s)??messages[s];
   if(result===undefined){const v=lower.get(s.toLowerCase());if(v!==undefined)result=s===s.toUpperCase()?v.toUpperCase():v;}
   if(result===undefined&&/[↗→←]$/.test(s)){const end=s.slice(-1);result=translate(s.slice(0,-1).trim(),depth+1)+' '+end;}
@@ -39,7 +43,7 @@
  }
  function ignored(el){return !el||el.closest(skip)||el.isContentEditable;}
  function textNode(node){if(ignored(node.parentElement))return;const current=node.nodeValue;let entry=sources.get(node);if(!entry||current!==entry.output)entry={source:current};const output=translate(entry.source);entry.output=output;sources.set(node,entry);if(current!==output)node.nodeValue=output;}
- function attrs(el){if(ignored(el)&&el.tagName!=='TEXTAREA')return;let entries=attributes.get(el);if(!entries){entries={};attributes.set(el,entries)}for(const name of ['placeholder','aria-label','title','alt','data-label']){if(!el.hasAttribute(name))continue;const current=el.getAttribute(name);let e=entries[name];if(!e||e.output!==current)e={source:current};e.output=language==='ru'?translate(e.source):e.source;entries[name]=e;if(e.output!==current)el.setAttribute(name,e.output);}}
+ function attrs(el){if(ignored(el)&&el.tagName!=='TEXTAREA')return;let entries=attributes.get(el);if(!entries){entries={};attributes.set(el,entries)}for(const name of ['placeholder','aria-label','title','alt','data-label']){if(!el.hasAttribute(name))continue;const current=el.getAttribute(name);let e=entries[name];if(!e||e.output!==current)e={source:current};e.output=translate(e.source);entries[name]=e;if(e.output!==current)el.setAttribute(name,e.output);}}
  function localize(root=document.body){if(!root)return;if(root.nodeType===3){textNode(root);return}if(root.nodeType!==1)return;attrs(root);if(ignored(root))return;const walker=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT,{acceptNode:n=>{if(n.nodeType===1&&n.tagName==='TEXTAREA')attrs(n);return n.nodeType===1&&ignored(n)?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT}});while(walker.nextNode()){const n=walker.currentNode;if(n.nodeType===3)textNode(n);else attrs(n);}}
  function controls(){document.querySelectorAll('[data-locale-switch]').forEach(w=>{w.setAttribute('aria-label',language==='ru'?'Язык интерфейса':'Interface language');w.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.language===language)))});}
  function mount(){const host=document.querySelector('.ec-header-actions')||document.querySelector('.prototype-bar')||document.querySelector('.site-header');if(!host||host.querySelector('[data-locale-switch]'))return;const wrap=document.createElement('div');wrap.className='locale-switch';wrap.dataset.localeSwitch='';wrap.setAttribute('role','group');wrap.innerHTML='<button type="button" data-language="en" lang="en" title="English">EN</button><button type="button" data-language="ru" lang="ru" title="Русский">RU</button>';if(host.classList.contains('ec-header-actions'))host.prepend(wrap);else host.append(wrap);controls();}

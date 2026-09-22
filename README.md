@@ -77,6 +77,10 @@ AMEC is described as a semiconductor manufacturing equipment company, consistent
 
 ### English (US) and Russian
 
+The academic presentation uses `src/locales/en.json` for concise English UI copy and `src/locales/ru.json` for Russian. The build applies matching copy to static text; `locale.js` applies the same language choices to dynamic dialogs without changing IDs, stored records or calculations. The site identifies itself as an academic project, with simulated financial activity and clearly marked academic agreement samples.
+
+The introduction cover remains in place until a video is supplied. Set `video.src`, and optionally `video.poster` and `video.captions`, in `src/trust-content.json` to render the existing video player. Empty team and legal-entity fields display a finished explanation of the academic workflows. Company logos are industry references; the AI and founder story remain explicitly illustrative.
+
 The English UI uses `en-US`, short public-facing copy, US date formatting and "plan" terminology. Russian covers page text, dynamic account states, form errors, image descriptions, metadata and sample documents. Translation changes display only: inputs, stored amounts, station IDs/addresses and message bodies remain intact. Language switches update `?lang=` and preserve the current selection; an explicit language URL also works when local storage is unavailable.
 
 The September 22 localization audit covered 97 page/dialog states (1,576 distinct rendered text/attribute pairs), 152 page/language/viewport checks at 320/390/768/1440 px, 19 additional document/conversation states, language round trips, dates, currencies, plural forms and generated calendar/PDF files. English and Russian agreement downloads now use the same sample content as the print preview. Both PDF pages were rendered and visually reviewed. Responsive checks used Chromium emulation, not physical phones.

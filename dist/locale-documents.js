@@ -15,7 +15,7 @@
    if(!window.jspdf)toast('Preparing your PDF…');
    await window.ecoLoadLibrary('pdf');
    if(!russian&&kind!=='contract')return original(kind,{station,client});
-   const font=await documentFont(),pdf=new window.jspdf.jsPDF({unit:'pt',format:'a4'});pdf.addFileToVFS('Manrope-Regular.ttf',font);pdf.addFont('Manrope-Regular.ttf','Manrope','normal');pdf.setFont('Manrope','normal');pdf.setProperties({title:russian?(kind==='contract'?'EcoCharge — Образец договора':'EcoCharge — Паспорт станции'):'EcoCharge - Agreement preview',author:'ECO CHARGE demo',subject:russian?'Демонстрационный документ. Не подтверждает инвестиционные права.':'Demo document. Does not establish investment rights.'});
+   const font=await documentFont(),pdf=new window.jspdf.jsPDF({unit:'pt',format:'a4'});pdf.addFileToVFS('Manrope-Regular.ttf',font);pdf.addFont('Manrope-Regular.ttf','Manrope','normal');pdf.setFont('Manrope','normal');pdf.setProperties({title:russian?(kind==='contract'?'EcoCharge — Образец договора':'EcoCharge — Паспорт станции'):'EcoCharge - Agreement preview',author:'ECO CHARGE academic project',subject:russian?'Учебный документ. Не подтверждает инвестиционные права.':'Academic sample. Does not establish investment rights.'});
    const margin=46,width=503;let y=50;const lineHeight=15;
    const page=()=>{pdf.addPage();y=50;};
    const write=(text,size=10.5,color=[32,52,66],space=10)=>{pdf.setFontSize(size);pdf.setTextColor(...color);const lines=pdf.splitTextToSize(text,width);for(const line of lines){if(y+lineHeight>783)page();pdf.text(line,margin,y);y+=size>16?27:lineHeight;}y+=space;};
@@ -27,8 +27,8 @@
     const rows=[['Станция',station.name],['Адрес',`${station.address}, ${station.city}, ${station.state} ${station.zip}, USA`],['Сеть / ID AFDC',`${station.network} / ${station.id}`],['Оборудование',`Быстрых разъёмов DC: ${station.ports}. Максимальная указанная мощность: ${station.maxKw||'не указана'} кВт.`],['Разъёмы',station.connectors.join(', ')],['Дата подтверждения',`${confirmedLabel.replace(/\.$/,'')}. Доступность указана в каталоге, занятость не обновляется онлайн.`],['Источник',station.source],['Статус записи','Публичная запись не подтверждает партнёрство, владение или доступность инвестиции.']];
     for(const [label,value] of rows){if(y>718)page();write(label,10,[24,112,109],0);write(value,11,[32,52,66],14);}
    }
-   const pages=pdf.getNumberOfPages();for(let n=1;n<=pages;n++){pdf.setPage(n);pdf.setDrawColor(207,220,223);pdf.line(margin,797,549,797);pdf.setTextColor(91,111,120);pdf.setFontSize(8);const date=new Intl.DateTimeFormat(russian?'ru-RU':'en-US',{timeZone:'UTC',year:'numeric',month:russian?'2-digit':'short',day:russian?'2-digit':'numeric'}).format(new Date());pdf.text(russian?`ДЕМО · ${date} · Страница ${n} из ${pages}`:`DEMO · ${date} · Page ${n} of ${pages}`,margin,814);}
-   pdf.save(kind==='contract'?`DEMO-agreement-${russian?'RU':'EN'}.pdf`:`AFDC-${station.id}-RU.pdf`);toast(kind==='contract'?'Demo agreement preview downloaded.':'Station fact sheet downloaded.');
+   const pages=pdf.getNumberOfPages();for(let n=1;n<=pages;n++){pdf.setPage(n);pdf.setDrawColor(207,220,223);pdf.line(margin,797,549,797);pdf.setTextColor(91,111,120);pdf.setFontSize(8);const date=new Intl.DateTimeFormat(russian?'ru-RU':'en-US',{timeZone:'UTC',year:'numeric',month:russian?'2-digit':'short',day:russian?'2-digit':'numeric'}).format(new Date());pdf.text(russian?`УЧЕБНЫЙ ОБРАЗЕЦ · ${date} · Страница ${n} из ${pages}`:`ACADEMIC SAMPLE · ${date} · Page ${n} of ${pages}`,margin,814);}
+   pdf.save(kind==='contract'?`ECO-CHARGE-academic-agreement-${russian?'RU':'EN'}.pdf`:`AFDC-${station.id}-RU.pdf`);toast(kind==='contract'?'Demo agreement preview downloaded.':'Station fact sheet downloaded.');
   }catch{toast('The PDF could not be created. Try again or use the print preview.');}
  };
 })();
