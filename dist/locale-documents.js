@@ -19,7 +19,7 @@
    const margin=46,width=503;let y=50;const lineHeight=15;
    const page=()=>{pdf.addPage();y=50;};
    const write=(text,size=10.5,color=[32,52,66],space=10)=>{pdf.setFontSize(size);pdf.setTextColor(...color);const lines=pdf.splitTextToSize(text,width);for(const line of lines){if(y+lineHeight>783)page();pdf.text(line,margin,y);y+=size>16?27:lineHeight;}y+=space;};
-   write('ECOCHARGE / ALT-INFRA',10,[24,112,109],12);
+   write('ECO CHARGE',10,[24,112,109],12);
    if(kind==='contract'){
     const root=document.createElement('div');root.innerHTML=agreement;root.querySelectorAll('br').forEach(br=>br.replaceWith(document.createTextNode('\n')));for(const el of root.children){if(el.tagName==='TABLE'){for(const tr of el.querySelectorAll('tr'))write([...tr.cells].map(td=>td.textContent.trim()).join(': '));}else if(el.tagName==='H1')write(el.textContent,22);else if(el.tagName==='H2'){if(y>725)page();write(el.textContent,13,[24,112,109],5);}else if(el.classList.contains('draft-banner'))write(el.textContent,10,[131,93,18],14);else if(el.tagName==='FOOTER')continue;else write(el.innerText||el.textContent);}
    }else{

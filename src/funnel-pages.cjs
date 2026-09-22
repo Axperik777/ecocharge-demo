@@ -1,6 +1,8 @@
 // Public explanations use sourced location records and explicitly invented economics.
 module.exports = ({esc,icon,kicker,link,button,faq,photo,directory,trust,hardware}) => {
   const partners=require('./partners.cjs').renderPartners({esc,kicker,link});
+  const technology=require('./technology-section.cjs')({icon,kicker});
+  const companyStory=require('./company-story.cjs')({esc,icon,kicker,link});
   const station=directory.stations.find(s=>s.id===371815);
   const explore=(label='Explore the demo',next='dashboard')=>`<a class="ec-button" href="client/?guest=1&tab=${next}" data-funnel-cta="explore">${label}${icon('arrow')}</a>`;
   const home=`<div class="v-hero-shell"><section class="ec-wrap f-hero">
@@ -11,6 +13,8 @@ module.exports = ({esc,icon,kicker,link,button,faq,photo,directory,trust,hardwar
   ${hardware}
   <section class="v-workspace-shell"><div class="ec-wrap v-workspace"><div>${kicker('YOUR PERSONAL WORKSPACE')}<h2>Everything you need<br>to explore your plan.</h2><p>Your station selection, sample calculation and questions stay together. Save your example when you are ready.</p>${explore('Build my demo plan','tariffs')}</div><div class="v-workspace-preview"><div class="v-workspace-top"><strong translate="no">ECO CHARGE</strong><span>WORKSPACE PREVIEW</span></div><a href="client/?guest=1&tab=map">${icon('pin')}<span><strong>Choose your stations</strong><small>Map, real photos and source records</small></span>${icon('arrow')}</a><a href="client/?guest=1&tab=tariffs">${icon('grid')}<span><strong>See your sample calculation</strong><small>Your amount, station group and weekly example</small></span>${icon('arrow')}</a><a href="client/?guest=1&tab=dashboard&contact=manager">${icon('chat')}<span><strong>Keep your questions together</strong><small>Open a demo conversation from your plan</small></span>${icon('arrow')}</a></div></div></section>
   <section class="ec-wrap f-section f-model-preview"><div>${kicker('FOLLOW THE MONEY')}<h2>Revenue is only<br>the beginning.</h2><p>More charging activity can increase receipts. Electricity prices, maintenance and downtime change what remains.</p><p>Try an operating example that shows both a surplus and a shortfall.</p>${button('Explore a station’s economics','inside-a-station/#operating-example',true)}</div><div class="f-business-diagram" aria-label="Revenue minus costs gives an operating balance"><div>${icon('bolt')}<span>Charging receipts<small>Payments from drivers</small></span></div><div><b>−</b><span>Electricity & operating costs<small>Costs continue when activity slows</small></span></div><div><b>=</b><span>Operating balance<small>Before financing, tax and distribution rules</small></span></div><p>A positive balance is not automatically an investor payout.</p></div></section>
+  ${technology}
+  ${companyStory.teaser}
   ${partners}
   <section class="f-dark"><div class="ec-wrap f-section"><div class="f-section-heading">${kicker('BEFORE YOU MAKE A DECISION')}<h2>Know what you would own.<br>Know what still needs proof.</h2><p>This is a participation concept. No investment rights are created by this demo.</p></div><div class="f-questions">
     <a href="terms/#client-rights"><span>YOUR PARTICIPATION</span><h3>What am I buying?</h3><p>The proposed instrument and client rights still need a final agreement.</p><b>Review the open terms ${icon('arrow')}</b></a>

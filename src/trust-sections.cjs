@@ -47,7 +47,7 @@ module.exports = function ({esc, icon, kicker, link, button, faq}) {
 
   function company() {
     const labels = [['legalName','Registered legal name'],['jurisdiction','Jurisdiction'],['registrationNumber','Registration number'],['registeredAddress','Registered address'],['instrument','Proposed client instrument'],['networkScope','Network covered by the 43% assumption']];
-    return `<section class="ec-section ec-company-identity" id="company"><div>${kicker('THE ENTITY BEHIND THE PROJECT')}<h2>A brand and a legal entity<br>have different roles.</h2><p>EcoCharge / ALT-INFRA identifies this demo. The company that would issue an investment and sign the agreement still needs to be documented.</p>${link('View the document register','resources/#company-documents')}</div><dl>${labels.map(([key,label])=>`<div><dt>${label}</dt><dd>${field(content.company[key])}</dd></div>`).join('')}</dl></section>`;
+    return `<section class="ec-section ec-company-identity" id="company"><div>${kicker('THE ENTITY BEHIND THE PROJECT')}<h2>A brand and a legal entity<br>have different roles.</h2><p>ECO CHARGE identifies this demo. The company that would issue an investment and sign the agreement still needs to be documented.</p>${link('View the document register','resources/#company-documents')}</div><dl>${labels.map(([key,label])=>`<div><dt>${label}</dt><dd>${field(content.company[key])}</dd></div>`).join('')}</dl></section>`;
   }
 
   function team() {

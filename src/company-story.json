@@ -1,0 +1,20 @@
+{
+  "status": "supplied-demo-narrative-unverified",
+  "brand": "EcoCharge",
+  "founder": "James R. Whitaker",
+  "fullName": "James Robert Whitaker",
+  "role": "Founder & Chief Executive Officer",
+  "location": "Clermont, Florida",
+  "founded": "2018",
+  "source": {
+    "archive": "S6oTdwIKC57SoRQY-grok-workspace.zip",
+    "content": "src/lib/content.ts",
+    "openEvidence": "src/lib/spec-content.ts"
+  },
+  "milestones": [
+    { "year": "1998", "title": "Whitaker Electric", "body": "The supplied story begins with a commercial and industrial electrical business." },
+    { "year": "2011", "title": "First charging installation", "body": "The biography describes a first charging project for a small delivery fleet." },
+    { "year": "2014", "title": "A base in Clermont", "body": "The story places the move to Central Florida and a local electrical shop in 2014." },
+    { "year": "2018", "title": "The EcoCharge brand", "body": "The supplied narrative dates the separation of the charging business to 2018. Corporate records have not been supplied." }
+  ]
+}

@@ -77,6 +77,12 @@ AMEC is described as a semiconductor manufacturing equipment company, consistent
 
 ### Public identity and entry flow
 
+ECO CHARGE is the only public project brand, including both workspaces and demo document headings. The former secondary brand has been removed.
+
+The About page `#founder` and `#company-story` sections use text from the supplied `S6oTdwIKC57SoRQY-grok-workspace.zip` concept website. `src/company-story.json` records the source and milestones. James R. Whitaker's profile, Clermont location and 1998/2011/2014/2018 dates are explicitly unverified demo biography, not verified corporate history. Legal entity and registration fields remain empty. No archive images or executable files are published or executed. The homepage links to this profile; all new copy is available in EN/RU.
+
+The homepage `#technology` section presents **ECO AI**, described by the team as analyzing charging sessions and forecasting station demand, alongside the team's reported compute resources and NVIDIA hardware. `src/technology-section.cjs` keeps these claims attributed. Processor model and compute capacity use dashes pending specifications; no benchmark or operating demonstration is invented. The section opens the existing demo manager contact flow; it does not connect an AI service or compute backend.
+
 The shared logo reads **ECO CHARGE** in uppercase, with a lime conductor/wordmark on dark surfaces. The homepage uses a navy hero, a direct guest plan-builder CTA, source-linked equipment photos and functional workspace-preview links. Partner logos are local assets with source records in `dist/assets/partners/sources.json`; they identify companies and do not independently substantiate a relationship. Company profiles remain available in an expandable section. Photo and partnership disclosures stay visible.
 
 ### Demo capabilities
