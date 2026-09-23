@@ -144,7 +144,7 @@
         window.EcoChargeFunnel?.track('registration_completed',{page:'register'});
         if(pending&&demo.planDraft)window.EcoChargeFunnel?.track('plan_saved',{tier:demo.planDraft.tierId});
         form.querySelector('[type=submit]').disabled=true;
-        location.assign(new URL('client/?tab='+next.value,root));
+        location.assign(window.EcoPlatform.url('account','client/?tab='+next.value));
       }catch(error){$('#registration-error').textContent=error.message==='saved-data'?'Existing demo data could not be read. Use client sign-in to review it before creating a profile.':'Browser storage is unavailable. Allow site storage, then try again. No account was created on a server.';}
     });
   }

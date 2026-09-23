@@ -7,15 +7,24 @@ Public introduction, separate client and team sign-ins, and linked client/manage
 | Workspace | Entry | Username | Password |
 | --- | --- | --- | --- |
 | Client | `login/` | `lox` | `lox1` |
-| Team | `team/` | `admin` | `admin1` |
+| FTD | `team/` → `crm/` | `ftd` | `ftd1` |
+| Administrator | `team/` → `staff/` | `admin` | `admin1` |
 
 These are public demo credentials. The static site uses a browser session gate, **not secure server authentication**. Do not enter real personal, financial or confidential information. Client and team tabs share localStorage on the same origin/browser. Different browsers and devices have independent data.
 
-- `/` explains the participation model and links to the two entry screens.
+- `/` explains the participation model and leads to the client account. Team access uses a separate saved link.
 - `client/` opens the client workspace after demo sign-in.
-- `staff/` opens the team workspace after demo sign-in.
-- Old `?view=client` / `?view=admin` links go to the appropriate sign-in.
+- `staff/` opens the administrator workspace; `crm/` opens the simplified FTD workspace.
+- Old `?view=client` / `?view=admin` links open the public homepage.
 - Each workspace has its own navigation and sign-out action. No inline role switch.
+
+## Three connected applications
+
+`apps/website`, `apps/account` and `apps/crm` provide separate entry modules and exportable deployment bundles. Website hero profiles and destination URLs are configurable, so multiple landing domains can link to one account app and one CRM. See [architecture and deployment guide](ARCHITECTURE.md) for commands, configuration and demo limits.
+
+FTD agents only credit/debit the sample balance or edit client details. Operations require a reason and before/after confirmation; audit history, duplicate checks, reserved withdrawals and stale-tab checks are preserved. Administrators retain the full workspace. These browser gates are not server-enforced permissions.
+
+Starting plans now cost **$250 / $500 / $800, with no company commission**. Unpaid starter requests lose their old fee; completed historical receipts retain their original breakdown.
 
 ## Participation and weekly terms
 
@@ -122,9 +131,9 @@ node validate.cjs
 node server.cjs
 ```
 
-Open `http://127.0.0.1:4317/`. Optional `PORT` changes the local server port. `src/home.html`, `src/login.html` and `src/portal.html` generate the entry pages via `build.cjs`. The GitHub workflow builds, validates and publishes `dist/` only.
+Open `http://127.0.0.1:4317/`. Optional `PORT` changes the local server port. The entry modules in `apps/` use shared templates in `src/` via `build.cjs`. The GitHub workflow builds all applications, validates them, runs model tests and publishes `dist/`.
 
-Validation checks all five entry pages, JavaScript syntax and station-photo mappings. Runtime QA covered credentials and separate routes; funding, activation and weekly credits; duplicate week prevention; all four tariff calculations; manager adjustments and cross-tab sync; messages; map/photos; print terms and PDF download; persistence/reset; delayed directory loading; legacy migration; and 10 views at 320, 360, 390, 430 and 768 px. Phone checks use Chrome mobile emulation; physical iPhone/Safari remains a separate check.
+Validation checks all generated entry pages, JavaScript syntax and station-photo mappings. Runtime QA covered credentials and separate routes; funding, activation and weekly credits; duplicate week prevention; all four tariff calculations; manager adjustments and cross-tab sync; messages; map/photos; print terms and PDF download; persistence/reset; delayed directory loading; legacy migration; and 10 views at 320, 360, 390, 430 and 768 px. The app split additionally checks FTD at 320/390/768/1440 px in both languages, pending approvals, stale confirmations, profile sync and exported cross-origin landing-to-account registration. Phone checks use Chrome emulation; physical iPhone/Safari remains a separate check.
 
 ## Attribution
 

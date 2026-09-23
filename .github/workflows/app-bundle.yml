@@ -1,0 +1,43 @@
+name: Export one application
+on:
+  workflow_dispatch:
+    inputs:
+      app:
+        description: Application to export
+        type: choice
+        required: true
+        options: [website, account, crm]
+      variant:
+        description: Landing hero profile
+        type: choice
+        default: main
+        options: [main, stations, how-it-works, documents, guided, mobile]
+      config:
+        description: Configuration file in this repository
+        type: string
+        default: config/github-pages.json
+        required: true
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify shared models and boundaries
+        run: node --test tests/*.test.cjs
+      - name: Export selected application
+        env:
+          APP_NAME: ${{ inputs.app }}
+          LANDING_VARIANT: ${{ inputs.variant }}
+          CONFIG_PATH: ${{ inputs.config }}
+        run: node scripts/export-app.cjs --app "$APP_NAME" --variant "$LANDING_VARIANT" --config "$CONFIG_PATH"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ecocharge-${{ inputs.app }}-${{ inputs.variant }}
+          path: release/
+          include-hidden-files: true
+          if-no-files-found: error

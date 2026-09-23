@@ -3,3 +3,5 @@ node_modules/
 *.log
 qa/
 .env*
+
+release/

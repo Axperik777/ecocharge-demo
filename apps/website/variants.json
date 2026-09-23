@@ -1,0 +1,8 @@
+{
+ "main":{},
+ "stations":{"heading":"Start with a real station.","secondLine":"See the details for yourself.","description":"Explore public U.S. charging locations, equipment and photos. Keep your questions together in one account."},
+ "how-it-works":{"heading":"Understand EV charging.","secondLine":"Then explore your options.","description":"Follow the business model, review the operating example and explore the account at your own pace."},
+ "documents":{"heading":"Know what you are reviewing.","secondLine":"Keep the details in view.","description":"Explore the proposed model, documents and access terms before building your sample plan."},
+ "guided":{"heading":"A clear next step.","secondLine":"A person to ask.","description":"Explore charging locations and keep your plan and manager questions together in one workspace."},
+ "mobile":{"heading":"Your charging workspace.","secondLine":"Ready when you are.","description":"Review locations, save your starting plan and follow its status from your phone or computer."}
+}

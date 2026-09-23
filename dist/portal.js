@@ -17,11 +17,11 @@ $('.balance-card [data-action="topup"]').innerHTML=icon('plus')+' Add demo funds
 $('.balance-card [data-action="withdraw"]').innerHTML=icon('download')+' Request withdrawal';
 $('.metrics-grid .metric-card:nth-last-child(2)>span').textContent='Assigned stations';
 document.title='EcoCharge — '+(workspaceRole==='admin'?'Team workspace':'Client account');
-actions.signout=()=>{sessionStorage.removeItem('ecocharge-entry:'+(workspaceRole==='admin'?'staff':'client'));location.assign(currentPortalBase)};
+actions.signout=()=>{sessionStorage.removeItem('ecocharge-entry:'+(workspaceRole==='admin'?'staff':'client'));location.assign(window.EcoPlatform.url(workspaceRole==='admin'?'crm':'website',workspaceRole==='admin'?'team/':''))};
 const setRoleBeforePortal=setRole;
-setRole=function(next){if(next!==workspaceRole){location.assign(new URL(next==='admin'?'team/':'login/',currentPortalBase));return}setRoleBeforePortal(next)};
-actions['view-client']=()=>location.assign(new URL('client/?preview=1',currentPortalBase));
-actions['guide-manager']=()=>location.assign(new URL('team/',currentPortalBase));
+setRole=function(next){if(next!==workspaceRole){location.assign(window.EcoPlatform.url(next==='admin'?'crm':'account',next==='admin'?'team/':'login/'));return}setRoleBeforePortal(next)};
+actions['view-client']=()=>location.assign(window.EcoPlatform.url('account','client/?preview=1'));
+actions['guide-manager']=()=>location.assign(window.EcoPlatform.url('crm','team/'));
 actions['contact-show-staff']=actions['guide-manager'];
 actions['open-staff']=actions['guide-manager'];
 actions['demo-guide']=()=>openModal(`<h2>Your EcoCharge demo</h2><ol class="engine-explanation"><li><strong>Choose a weekly plan.</strong><span>Select an amount and reference stations.</span></li><li><strong>Request demo funding.</strong><span>The manager can approve the request in the separate team account. No money is collected.</span></li><li><strong>Activate your allocation.</strong><span>Available demo funds move to invested demo capital. Your manager can record a sample weekly credit.</span></li></ol><button class="button primary" data-action="engine-details">Understand the revenue model</button>`);

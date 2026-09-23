@@ -11,7 +11,7 @@ function isGuest(){try{return workspaceRole==='client'&&JSON.parse(sessionStorag
 function planIsComplete(){const tier=demo.tariffs.find(t=>t.id===chosenTier);return tier&&validDemoInvestment(investmentDraft)&&new Set(chosenStations).size===tier.count&&chosenStations.every(id=>stations.some(s=>s.id===id));}
 function decisionSaveForRegistration(){
   if(!planIsComplete()){toast('Choose a valid amount and the required reference stations first.');return;}
-  try{sessionStorage.setItem('ecocharge-plan-review',JSON.stringify(planTerms()));location.assign(new URL('register/?next=assets',document.baseURI));}
+  try{sessionStorage.setItem('ecocharge-plan-review',JSON.stringify(planTerms()));location.assign(window.EcoPlatform.url('account','register/?next=assets'));}
   catch{toast('Browser storage is unavailable. Allow site storage to keep your selection.');}
 }
 
