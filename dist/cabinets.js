@@ -193,6 +193,8 @@ const cabReviewRequestBefore = reviewRequest;
 reviewRequest = function (id, decision) {
   if (role !== 'admin') return;
   cabReviewRequestBefore(id, decision);
+  const request=demo.requests.find(r=>r.id===id);
+  if(request?.type==='withdraw'){const form=$('#review-form');if(form){form.insertAdjacentHTML('beforebegin',withdrawalNotice());if(decision==='approve')form.querySelector('[type=submit]').disabled=!EcoWithdrawals.state(demo).timingReady;refreshWithdrawalPolicy();}}
   const p = $('#modal-content>p');
   if (p?.firstChild?.nodeType === Node.TEXT_NODE) p.firstChild.textContent = p.firstChild.textContent.replace('John Doe', demo.client.name);
 };
@@ -234,7 +236,7 @@ function cabPlanPanel() {
 }
 
 function cabOperationsPanel() {
-  return `<section class="cab-card-section"><div class="cab-section-heading"><div><h2>Account operations</h2><p>Available balance: <strong>${money(demo.balance - pendingWithdrawals())}</strong></p></div>${cabButton('cab-edit-balance', 'Adjust demo balance')}</div><div class="cab-operation-actions">${cabButton('simulate-session', 'Record a demo week')}${cabButton('sessions', 'Weekly credit history')}</div>${requestTable()}</section>`;
+  return `<section class="cab-card-section"><div class="cab-section-heading"><div><h2>Account operations</h2><p>Available balance: <strong>${money(demo.balance - pendingWithdrawals())}</strong></p></div>${cabButton('cab-edit-balance', 'Adjust demo balance')}</div><div class="cab-operation-actions">${cabButton('simulate-session', 'Record a demo week')}${cabButton('sessions', 'Weekly credit history')}</div>${withdrawalNotice()}${requestTable()}</section>`;
 }
 
 function cabClientCard() {
@@ -336,6 +338,7 @@ actions['cab-confirm-change'] = () => {
   if (c.kind === 'balance') demo.balance = c.after.balance;
   else {
     const tier = demo.tariffs.find(t => t.id === c.tierId);
+    EcoWithdrawals.markActivation(demo);
     demo.plan = {tierId: tier.id, name: tier.name, rate: tier.rate, period: 'week', capital: c.capital, stationIds: c.ids.slice(), status: 'active', appliedAt: new Date().toISOString()};
     demo.portfolio = c.ids.slice(); delete demo.planDraft;
   }

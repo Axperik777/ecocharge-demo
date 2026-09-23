@@ -2,7 +2,7 @@
 // Optional libraries are loaded only by the feature that needs them.
 window.ecoLoadLibrary = (() => {
   const pending = new Map();
-  const libraries = {map: ['assets/leaflet.js', () => Boolean(window.L)], pdf: ['assets/jspdf.umd.min.js', () => Boolean(window.jspdf)]};
+  const libraries = {qr: ['assets/qrcode-2.0.4.js', () => typeof window.qrcode==='function'], map: ['assets/leaflet.js', () => Boolean(window.L)], pdf: ['assets/jspdf.umd.min.js', () => Boolean(window.jspdf)]};
   return name => {
     const [src, ready] = libraries[name];
     if (ready()) return Promise.resolve();

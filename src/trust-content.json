@@ -8,19 +8,78 @@
     "instrument": "",
     "networkScope": ""
   },
-  "video": { "src": "", "poster": "", "captions": "" },
+  "video": {
+    "src": "",
+    "poster": "",
+    "captions": ""
+  },
   "team": {
-    "name": "", "role": "", "photo": "", "email": "",
-    "phone": "", "telegram": "", "hours": "", "timeZone": "", "bookingUrl": ""
+    "name": "",
+    "role": "",
+    "photo": "",
+    "email": "",
+    "phone": "",
+    "telegram": "",
+    "hours": "",
+    "timeZone": "",
+    "bookingUrl": ""
   },
   "documents": [
-    { "id": "company", "title": "Company registration", "description": "Legal issuer, jurisdiction, registration number and authorized representatives.", "href": "", "publishedAt": "" },
-    { "id": "ownership", "title": "Network & ownership", "description": "The specific business and assets covered by the proposed 43% interest, with evidence of the company's rights.", "href": "", "publishedAt": "" },
-    { "id": "rights", "title": "Client participation rights", "description": "The instrument, contracting entity, voting or revenue rights, and what the client actually acquires.", "href": "", "publishedAt": "" },
-    { "id": "financials", "title": "Operating results", "description": "Dated charging receipts, operating costs and the basis for any proposed distribution.", "href": "", "publishedAt": "" },
-    { "id": "fees", "title": "Fees & payment handling", "description": "All charges, the recipient of client funds, custody arrangements and payment processing.", "href": "", "publishedAt": "" },
-    { "id": "withdrawals", "title": "Withdrawals & exit", "description": "Capital access, any lock-up, notice period, limits, fees and possible delays.", "href": "", "publishedAt": "" },
-    { "id": "risks", "title": "Risk disclosures", "description": "Potential loss of capital, operating shortfalls, downtime, illiquidity and counterparty risks.", "href": "", "publishedAt": "" },
-    { "id": "eligibility", "title": "Offering & eligibility", "description": "Final offering documents, who may participate and the legal basis for the offer.", "href": "", "publishedAt": "" }
+    {
+      "id": "company",
+      "title": "Company registration",
+      "description": "Legal issuer, jurisdiction, registration number and authorized representatives.",
+      "href": "",
+      "publishedAt": ""
+    },
+    {
+      "id": "ownership",
+      "title": "Network & ownership",
+      "description": "The specific business and assets covered by the proposed 43% interest, with evidence of the company's rights.",
+      "href": "",
+      "publishedAt": ""
+    },
+    {
+      "id": "rights",
+      "title": "Client participation rights",
+      "description": "The instrument, contracting entity, voting or revenue rights, and what the client actually acquires.",
+      "href": "",
+      "publishedAt": ""
+    },
+    {
+      "id": "financials",
+      "title": "Operating results",
+      "description": "Dated charging receipts, operating costs and the basis for any proposed distribution.",
+      "href": "",
+      "publishedAt": ""
+    },
+    {
+      "id": "fees",
+      "title": "Fees & payment handling",
+      "description": "All charges, the recipient of client funds, custody arrangements and payment processing.",
+      "href": "",
+      "publishedAt": ""
+    },
+    {
+      "id": "withdrawals",
+      "title": "Withdrawals & exit",
+      "description": "Withdrawals are available every 4 days. The first withdrawal opens 4 days after plan activation. Each successful withdrawal starts a new 4-day period. Processing times, fees and capital-exit conditions are separate terms.",
+      "href": "",
+      "publishedAt": ""
+    },
+    {
+      "id": "risks",
+      "title": "Risk disclosures",
+      "description": "Potential loss of capital, operating shortfalls, downtime, illiquidity and counterparty risks.",
+      "href": "",
+      "publishedAt": ""
+    },
+    {
+      "id": "eligibility",
+      "title": "Offering & eligibility",
+      "description": "Final offering documents, who may participate and the legal basis for the offer.",
+      "href": "",
+      "publishedAt": ""
+    }
   ]
 }
