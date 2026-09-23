@@ -2,7 +2,7 @@
 // Local demo diagnostics only. No network requests, identity, amounts or message bodies.
 (() => {
   const key='ecocharge-funnel-events-v1';
-  const allowed=new Set(['page_view','demo_opened','model_explored','station_viewed','station_saved','plan_reviewed','registration_completed','plan_saved','terms_viewed','question_saved','demo_funding_requested','demo_funding_reviewed']);
+  const allowed=new Set(['page_view','demo_opened','model_explored','station_viewed','station_saved','plan_reviewed','registration_completed','plan_saved','terms_viewed','question_saved','demo_funding_requested','demo_funding_reviewed','starter_selected','first_deposit_confirmed']);
   const routes=new Set(['home','inside-a-station','how-it-works','stations','plans','about','resources','terms','register','client','staff','login','team']);
   let visit;
   try {visit=sessionStorage.getItem('ecocharge-funnel-visit');if(!visit){visit=crypto.randomUUID();sessionStorage.setItem('ecocharge-funnel-visit',visit);}}catch{visit='session-only';}
