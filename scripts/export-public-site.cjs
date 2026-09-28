@@ -30,7 +30,10 @@ const excluded = /^(?:client|login|register|team|staff|crm)(?:\/|$)/;
 for (const route of manifest.routes) {
   const file = path.join(output, route, 'index.html');
   let html = fs.readFileSync(file, 'utf8');
-  html = html.replace(/<div><h2>Your (?:workspace|account)<\/h2>(?:<a\b[^>]*>[\s\S]*?<\/a>)*<\/div>/g, '');
+  // A workspace promo has no content once its account links are excluded.
+  // Remove the whole section, including its background and preview shell.
+  html = html.replace(/<section\b[^>]*class="[^"]*\b(?:v-workspace-shell|f-study-finish)\b[^"]*"[^>]*>[\s\S]*?<\/section>/g, '');
+  html = html.replace(/<footer\b[\s\S]*?<\/footer>/g, footer => footer.replace(/<div><h2>Your (?:workspace|account)<\/h2>(?:<a\b[^>]*>[\s\S]*?<\/a>)*<\/div>/g, ''));
   html = html.replace(/<section class="ec-finish[\s\S]*?<\/section>/g, '');
   html = html.replace(/<a\b[^>]*\bhref="([^"]+)"[^>]*>[\s\S]*?<\/a>/g, (whole, ref) => {
     const url = new URL(ref.replaceAll('&amp;', '&'), websiteBase);

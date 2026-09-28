@@ -21,6 +21,7 @@ for(const file of files){
   assert(!/https?:\/\/(?:localhost|127\.0\.0\.1)(?=[:/])/i.test(text),'Local URL: '+rel);
   if(file.endsWith('.html')){
    assert(text.includes('website-only.js'),'Missing public-only boundary: '+rel);
+   assert(!/<section\b[^>]*class="[^"]*\b(?:v-workspace-shell|f-study-finish)\b/.test(text),'Orphaned account preview section: '+rel);
    for(const match of text.matchAll(/(?:href|src)="([^"#]+)"/g)){
     const ref=match[1].replaceAll('&amp;','&');
     if(/^(?:data:|mailto:|tel:)/.test(ref)||ref==='../')continue;
