@@ -1,0 +1,1 @@
+window.ECO_PLATFORM_CONFIG={"mode":"website-only","websiteOnly":true,"localeMode":"development","websiteBase":"https://axperik777.github.io/ecocharge-demo/","accountBase":"","crmBase":"","apiBase":"","landingId":"main"};

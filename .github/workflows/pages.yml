@@ -1,4 +1,4 @@
-name: Publish demo to GitHub Pages
+name: Publish EcoGrid website
 on:
   push:
     branches: [main]
@@ -18,16 +18,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
-      - name: Build demo workspaces
-        run: node build.cjs
-      - name: Validate static demo
-        run: node validate.cjs
-      - name: Verify funding and CRM operations
-        run: node --test tests/*.test.cjs
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify public website and publication boundary
+        run: node scripts/verify-public-site.cjs public-site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: public-site
       - name: Publish
         id: deployment
         uses: actions/deploy-pages@v4

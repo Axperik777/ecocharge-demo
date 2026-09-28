@@ -1,0 +1,1 @@
+(()=>{'use strict';function render(){const lang=window.EcoLocale?.language||'en';document.querySelectorAll('[data-business-model]').forEach(el=>{el.outerHTML=EcoBusiness.flow(lang);});}document.addEventListener('ecocharge:locale',render);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render,{once:true});else render();})();

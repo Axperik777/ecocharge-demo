@@ -1,0 +1,156 @@
+'use strict';
+(() => {
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const root = new URL('./', document.baseURI);
+  const params = new URL(location.href).searchParams;
+  const page = document.documentElement.dataset.page;
+  const escape = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const arrow = '<svg class="ec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>';
+  const groups = EcoFinance.tiers;
+  if (page === 'home' && params.has('view')) {
+    // Legacy shared links still open the public home, even with a saved session.
+    const clean=new URL(location.href);
+    for(const key of ['view','tab','preview'])clean.searchParams.delete(key);
+    history.replaceState(null,'',clean);
+  }
+  // Keep first-touch campaign context locally; this workspace sends no analytics events.
+  try {
+    const context = {};
+    for (const key of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid']) if(params.has(key)) context[key]=params.get(key).slice(0,300);
+    if(['website','lead-form'].includes(params.get('lead_route')))context.lead_route=params.get('lead_route');
+    if(Object.keys(context).length && !sessionStorage.getItem('ecocharge-attribution')) sessionStorage.setItem('ecocharge-attribution',JSON.stringify(context));
+  } catch {}
+  const activeNav = $('.ec-nav [aria-current]');
+  if(activeNav && activeNav.getBoundingClientRect().right>innerWidth-20) activeNav.parentElement.scrollLeft = Math.max(0,activeNav.offsetLeft-activeNav.parentElement.offsetLeft-20);
+  const menu=$('#site-menu'),menuButton=$('#open-site-menu');
+  if(menu&&menuButton){
+    menuButton.addEventListener('click',()=>{menu.showModal();menuButton.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';$('#close-site-menu').focus();});
+    $('#close-site-menu').addEventListener('click',()=>menu.close());
+    menu.addEventListener('close',()=>{menuButton.setAttribute('aria-expanded','false');document.body.style.overflow='';menuButton.focus();});
+    menu.addEventListener('click',e=>{if(e.target===menu){const r=menu.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)menu.close();}});
+  }
+  // Avoid competing with an on-screen main action or the mobile keyboard.
+  const mobileAction=$('.ec-mobile-action');
+  if(mobileAction && 'IntersectionObserver' in window){
+    const visibleActions=new Set();
+    const refresh=()=>{mobileAction.hidden=visibleActions.size>0||document.activeElement?.matches('input,select,textarea');};
+    const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting&&entry.intersectionRatio>=.4)visibleActions.add(entry.target);else visibleActions.delete(entry.target);}refresh();},{threshold:[0,.4],rootMargin:'0px 0px -80px 0px'});
+    $$('main a.ec-button[href*="register/"],main a.ec-button[href*="guest=1"]').forEach(a=>observer.observe(a));
+    document.addEventListener('focusin',refresh);document.addEventListener('focusout',()=>setTimeout(refresh,0));
+  }
+
+  function wireTabs(selector, callback) {
+    const buttons = $$(selector);
+    const activate = button => {buttons.forEach(b=>{const selected=b===button;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;});callback(button);};
+    buttons.forEach((b,i)=>{
+      b.addEventListener('click',()=>activate(b));
+      b.addEventListener('keydown',e=>{let j;if(['ArrowRight','ArrowDown'].includes(e.key))j=(i+1)%buttons.length;else if(['ArrowLeft','ArrowUp'].includes(e.key))j=(i-1+buttons.length)%buttons.length;else if(e.key==='Home')j=0;else if(e.key==='End')j=buttons.length-1;else return;e.preventDefault();activate(buttons[j]);buttons[j].focus();});
+    });
+  }
+  const preview = $('#preview-panel');
+  if(preview){
+    const views={plan:preview.innerHTML,stations:`<div class="ec-preview-list"><div><strong>Real locations, clear sources.</strong><small>Photos, addresses and public station records.</small></div></div><div class="ec-preview-bottom"><span>Your selection stays together in the workspace</span><a class="ec-text-link" href="stations/">Browse stations ${arrow}</a></div>`,documents:`<div class="ec-preview-list"><div><strong>Your documents, in one place.</strong><small>Sample terms and the evidence still to be supplied.</small></div></div><div class="ec-preview-bottom"><span>Read before making a decision</span><a class="ec-text-link" href="resources/">Open resources ${arrow}</a></div>`};
+    wireTabs('[data-preview]',b=>{preview.innerHTML=views[b.dataset.preview];preview.setAttribute('aria-labelledby',b.id);});
+  }
+
+  const model=$('#model-panel');
+  if(model){
+    const views=Object.fromEntries($$('[data-model-template]').map(template=>[template.dataset.modelTemplate,template.innerHTML]));
+    wireTabs('[data-model]',b=>{model.innerHTML=views[b.dataset.model];model.setAttribute('aria-labelledby',b.id);});
+  }
+
+  const search=$('#public-station-search'),state=$('#public-state-filter'),country=$('#public-country-filter');
+  if(search){
+    let imageType='all',limit=12;
+    const filter=()=>{const q=search.value.trim().toLowerCase();let count=0,shown=0;$$('[data-station-card]').forEach(card=>{const match=(!country?.value||card.dataset.country===country.value)&&(!state.value||card.dataset.state===state.value)&&(imageType==='all'||card.dataset.kind===imageType)&&card.dataset.search.includes(q);if(match)count++;const show=match&&count<=limit;card.hidden=!show;if(show)shown++;});$('#public-station-count').textContent=`${count} matching ${count===1?'location':'locations'}`;$('#station-empty').hidden=count!==0;$('#load-more-stations').hidden=shown>=count;$('#load-more-stations').textContent=`Show ${Math.min(12,count-shown)} more locations`;$('#station-page-count').textContent=count?`Showing ${shown} of ${count} locations`:'';};
+    const reset=()=>{limit=12;filter();};
+    search.addEventListener('input',reset);state.addEventListener('change',reset);
+    const regions=()=>{const selected=state.value,values=[...new Set($$('[data-station-card]').filter(c=>!country?.value||c.dataset.country===country.value).map(c=>c.dataset.state))].sort();state.replaceChildren(new Option(window.EcoLocale?.language==='ru'?'Все регионы':'All regions',''),...values.map(v=>new Option(v,v)));state.value=values.includes(selected)?selected:'';};
+    if(country){country.value=['US','CA'].includes(params.get('country'))?params.get('country'):'';country.addEventListener('change',()=>{regions();reset();});regions();}
+    $$('[data-visual-filter]').forEach(b=>b.addEventListener('click',()=>{imageType=b.dataset.visualFilter;$$('[data-visual-filter]').forEach(t=>t.setAttribute('aria-pressed',String(t===b)));reset();}));
+    $('#load-more-stations').addEventListener('click',()=>{limit+=12;filter();});
+    $('#clear-station-search').addEventListener('click',()=>{search.value='';if(country)country.value='';regions();state.value='';imageType='all';$$('[data-visual-filter]').forEach(t=>t.setAttribute('aria-pressed',String(t.dataset.visualFilter==='all')));reset();search.focus();});
+    filter();
+  }
+
+  const dialog=$('#site-dialog');
+  let lastFocus;
+  function openDialog(html){if(!dialog.open)lastFocus=document.activeElement;$('#site-dialog-content').innerHTML=html;dialog.showModal();dialog.scrollTop=0;document.body.style.overflow='hidden';$('#close-site-dialog').focus();}
+  $('#close-site-dialog').addEventListener('click',()=>dialog.close());
+  dialog.addEventListener('click',e=>{const r=dialog.getBoundingClientRect();if(e.target===dialog&&(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom))dialog.close();});
+  dialog.addEventListener('close',()=>{document.body.style.overflow='';lastFocus?.focus();});
+  let catalogPromise;
+  async function catalogs(){
+    if(!catalogPromise)catalogPromise=Promise.all(['stations.json','station-photos.json'].map(path=>fetch(new URL(path,root),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Directory unavailable');return r.json();}))).catch(e=>{catalogPromise=null;throw e;});
+    return catalogPromise;
+  }
+  $$('[data-station]').forEach(b=>b.addEventListener('click',async()=>{
+    const id=b.dataset.station;
+    openDialog('<div class="ec-dialog-body"><h2 id="site-dialog-title">Loading station details…</h2></div>');
+    try{
+      const [directory,photos]=await catalogs();
+      if(!dialog.open)return;
+      const s=directory.stations.find(s=>s.id===Number(id)),p=photos[id]||window.ECOCHARGE_STATION_VISUALS?.illustrations[id],gallery=[p,...(p.gallery||[])];let index=Math.min(gallery.length-1,Math.max(0,Number(b.dataset.photoIndex)||0));
+      $('#site-dialog-content').innerHTML=`<div class="ec-dialog-photo"><img id="gallery-image" src="${escape(p.path)}" alt="${escape(p.alt)}" width="900" height="600"></div><div class="ec-gallery-controls"><button id="gallery-prev" aria-label="Previous photo">←</button><span id="gallery-index" role="status"></span><button id="gallery-next" aria-label="Next photo">→</button></div><div class="ec-photo-credit" id="gallery-credit"></div><div class="ec-dialog-body"><span class="ec-kicker">PUBLIC STATION RECORD · ${s.id}</span><span class="station-selection-badge ${s.selectionClosed?'is-closed':'is-open'}">${s.selectionClosed?'Enrollment closed':'Open for selection'}</span><h2 id="site-dialog-title">${escape(s.city)}, ${escape(s.state)} · ${s.country==='CA'?'Canada':'US'}</h2><p>${escape(s.name)}<br>${escape(s.address)}, ${escape(s.city)}, ${escape(s.state)} ${escape(s.zip)}</p><dl class="ec-dialog-specs"><div><dt>Operator listing</dt><dd>${escape(s.network)}</dd></div><div><dt>DC charging ports</dt><dd>${s.ports}</dd></div><div><dt>Maximum listed power</dt><dd>${s.maxKw?s.maxKw+' kW':'Not listed'}</dd></div><div><dt>Directory snapshot</dt><dd>${escape(s.confirmed||directory.fetchedAt.slice(0,10))}</dd></div></dl><div class="ec-dialog-note">Public location reference. Ownership and live occupancy are not verified by this workspace. ${p.operationalNote?escape(p.operationalNote):'Check the operator for current availability.'}</div>${window.EcoChargeTrust?.stationEvidence(s)||''}<div class="ec-dialog-actions"><a class="ec-button ec-button-outline" href="${escape(s.source)}" target="_blank" rel="noopener">Open public source ↗</a><a class="ec-button" href="client/?guest=1&tab=map&station=${s.id}">Explore in the workspace ${arrow}</a></div></div>`;
+      const renderPhoto=()=>{const item=gallery[index];$('#gallery-image').src=item.path;$('#gallery-image').alt=item.alt;$('#gallery-image').style.objectPosition=item.position||'center';$('#gallery-index').textContent=item.kind==='illustration'?'Concept illustration · not a photograph':`Photo ${index+1} of ${gallery.length}`;$('#gallery-prev').disabled=index===0;$('#gallery-next').disabled=index===gallery.length-1;$('#gallery-credit').innerHTML=item.kind==='illustration'?`EcoGrid concept illustration. This image does not depict the actual location.<br><a href="${escape(item.source)}" target="_blank" rel="noopener">View the public station record ↗</a>`:`${item.dateTaken?'Photographed '+escape(item.dateTaken):item.dateUploaded?'Published '+escape(item.dateUploaded)+' · capture date not listed':'Photo date not listed'} · ${escape(item.credit)}<br><a href="${escape(item.source)}" target="_blank" rel="noopener">Original photo ↗</a> · <a href="${escape(item.licenseUrl)}" target="_blank" rel="noopener">License ↗</a>`;};
+      $('#gallery-prev').addEventListener('click',()=>{if(index>0){index--;renderPhoto();}});$('#gallery-next').addEventListener('click',()=>{if(index<gallery.length-1){index++;renderPhoto();}});renderPhoto();
+    }catch{if(dialog.open)$('#site-dialog-content').innerHTML='<div class="ec-dialog-body"><h2 id="site-dialog-title">The station record could not load.</h2><p>Close this window and open the location again to retry. The photos and addresses on the page remain available.</p></div>';}
+  }));
+  const documents={
+    summary:`<div class="ec-dialog-body"><span class="ec-kicker">DOCUMENT PREVIEW</span><h2 id="site-dialog-title">Sample participation summary</h2><p>A readable example of the plan information. This is not a signed contract or proof of an investment.</p><article class="ec-document-paper"><header><b>EcoGrid</b><span>ILLUSTRATIVE SAMPLE</span></header><h3>Participation summary</h3><dl><div><dt>Client</dt><dd>Sample client</dd></div><div><dt>Demo allocation</dt><dd>Set inside the account</dd></div><div><dt>Selected model</dt><dd>Chosen inside the account</dd></div><div><dt>Weekly assumption</dt><dd>Defined by the selected group</dd></div><div><dt>One-week illustration</dt><dd>Calendar-month amount prorated by days</dd></div><div><dt>Additional per-car credit</dt><dd>None</dd></div><div><dt>Withdrawal schedule</dt><dd>Every 4 days after plan activation or the last successful withdrawal</dd></div></dl><p><b>Proposed model.</b> The energy model combines solar generation, battery storage, EV charging, commercial energy contracts and grid sales. Documents for assets and contracts are still required.</p><p><b>Pending terms.</b> Legal issuer, ownership evidence, eligibility, fees, withdrawal rules, client rights and risk disclosures require verified documentation. The monthly rate is not supported by operating data in this workspace.</p><footer>SAMPLE ONLY · NO SIGNATURE · NO REAL TRANSACTION</footer></article><div class="ec-dialog-actions"><button class="ec-button" id="print-summary">Print sample / save as PDF ${arrow}</button><a class="ec-text-link" href="register/?next=documents">Explore account documents ${arrow}</a></div></div>`,
+    ownership:`<div class="ec-dialog-body"><span class="ec-kicker">DOCUMENTS NOT YET PROVIDED</span><h2 id="site-dialog-title">Company & ownership verification</h2><p>Before considering a real investment, request documents that connect the legal issuer to the specific business and assets.</p><ul class="ec-review-list"><li>Registered company name, registration number, jurisdiction and authorized representatives.</li><li>Solar sites, battery storage, commercial supply contracts and grid-sale arrangements included in the model.</li><li>Ownership and participation records showing what the company owns and what rights a client receives.</li><li>Evidence connecting financial reports to the stated network.</li><li>Final offering documents and investor eligibility requirements.</li></ul><div class="ec-dialog-note">Public directory listings, station photos and the EcoGrid brand do not establish ownership, endorsement or an investment right.</div></div>`,
+    terms:`<div class="ec-dialog-body"><span class="ec-kicker">QUESTIONS BEFORE REAL FUNDING</span><h2 id="site-dialog-title">Understand the terms and risks</h2><p>These conditions are not finalized in the workspace. Get written answers before making a real-money decision.</p><ul class="ec-review-list"><li>What supports the monthly rate, and what happens if charging revenue falls short?</li><li>Which operating costs, fees, reserves and taxes reduce distributions?</li><li>Can the invested capital be lost, and which party bears each risk?</li><li>Withdrawals are available every 4 days. The first withdrawal opens 4 days after plan activation. Each successful withdrawal starts a new 4-day period. Processing times, fees and capital-exit conditions are separate terms.</li><li>What legal rights and recourse does a client have?</li><li>Who may participate, and which offering rules apply?</li></ul><div class="ec-dialog-note">The calculator is illustrative. It does not establish guaranteed income, liquidity, insurance or capital protection.</div></div>`
+  };
+  $$('[data-document]').forEach(b=>b.addEventListener('click',()=>{openDialog(documents[b.dataset.document]);$('#print-summary')?.addEventListener('click',()=>window.print());}));
+  function showPrivacy(){if(page==='resources'&&location.hash==='#privacy'){const detail=$('#privacy');if(detail){detail.open=true;requestAnimationFrame(()=>detail.scrollIntoView());}}}
+  showPrivacy();window.addEventListener('hashchange',showPrivacy);
+
+  const form=$('#registration-form');
+  if(form){
+    const next=$('#register-next');
+    if(['dashboard','tariffs','map','documents','assets'].includes(params.get('next')))next.value=params.get('next');
+    const tier=groups.find(t=>t.id===params.get('tier'));
+    const intent=tier?{tierId:tier.id}:null;
+    if(intent){$('#registration-plan').hidden=false;$('#registration-plan').textContent=`Your selection: ${tier.name} · ${tier.count} reference ${tier.count===1?'station':'stations'}. Choose the amount and see the calculation inside your account.`;}
+    try{
+      const saved=JSON.parse(localStorage.getItem('ecocharge-demo-v1'));
+      if(saved?.client){$('#register-name').value=saved.client.name==='Lox'?'':saved.client.name;$('#register-email').value=saved.client.email==='lox@example.com'?'':saved.client.email;}
+      if(saved?.registration){form.insertAdjacentHTML('beforebegin','<div class="ec-continue">You already have a profile on this device. Your balance, plan and messages will be kept.<a class="ec-button ec-button-outline" href="login/">Continue with demo sign-in '+arrow+'</a></div>');}
+    }catch{}
+    form.addEventListener('submit',e=>{
+      e.preventDefault();const name=$('#register-name').value.trim(),email=$('#register-email').value.trim();
+      if(name.length<2){$('#registration-error').textContent='Enter a display name with at least two characters.';$('#register-name').focus();return;}
+      if(!form.reportValidity())return;
+      try{
+        const raw=localStorage.getItem('ecocharge-demo-v1');let demo=raw?JSON.parse(raw):null;
+        if(demo&&(!Number.isFinite(demo.balance)||!['portfolio','requests','tickets','activity'].every(k=>Array.isArray(demo[k]))))throw Error('saved-data');
+        if(!demo)demo={balance:0,portfolio:[],requests:[],tickets:[],activity:[]};
+        demo.client={...demo.client,name,email:email||'demo@example.com',status:demo.client?.status||'Active',note:demo.client?.note||''};
+        demo.registration={at:demo.registration?.at||new Date().toISOString(),mode:'local-demo'};
+        const attribution=sessionStorage.getItem('ecocharge-attribution');if(attribution&&!demo.attribution)demo.attribution=JSON.parse(attribution);
+        let pending=null;
+        try{pending=JSON.parse(sessionStorage.getItem('ecocharge-plan-review')||'null');}catch{}
+        const group=groups.find(g=>g.id===pending?.tierId);
+        if(group&&Number.isFinite(pending.capital)&&pending.capital>=250&&pending.capital<=1e7&&Math.abs(pending.capital*100-Math.round(pending.capital*100))<.00001&&Array.isArray(pending.stationIds)&&new Set(pending.stationIds).size===group.count&&pending.stationIds.every(Number.isInteger)){
+          const rate=group.rate;
+          demo.planDraft={tierId:group.id,name:group.name,capital:pending.capital,stationIds:pending.stationIds.slice(),rate,period:'week',appliedAt:new Date().toISOString()};
+          next.value='assets';
+        }
+        sessionStorage.setItem('ecocharge-entry:client',JSON.stringify({role:'client',user:'lox',at:Date.now()}));
+        if(intent)sessionStorage.setItem('ecocharge-explore',JSON.stringify(intent));
+        localStorage.setItem('ecocharge-demo-v1',JSON.stringify(demo));
+        sessionStorage.removeItem('ecocharge-plan-review');
+        sessionStorage.removeItem('ecocharge-working-plan');
+        window.EcoChargeFunnel?.track('registration_completed',{page:'register'});
+        if(pending&&demo.planDraft)window.EcoChargeFunnel?.track('plan_saved',{tier:demo.planDraft.tierId});
+        form.querySelector('[type=submit]').disabled=true;
+        location.assign(window.EcoPlatform.url('account','client/?tab='+next.value));
+      }catch(error){$('#registration-error').textContent=error.message==='saved-data'?'Existing account data could not be read. Use client sign-in to review it before creating a profile.':'Browser storage is unavailable. Allow site storage, then try again. No account was created on a server.';}
+    });
+  }
+  window.EcoChargePublic={openDialog};
+})();
+
+// Use the account calculator for current calendar-month estimates on public pages.
+(()=>{function update(){if(!window.EcoFinance)return;const locale=window.EcoLocale?.locale||'en-US',money=n=>n.toLocaleString(locale,{style:'currency',currency:'USD'});document.querySelectorAll('[data-public-plan]').forEach(node=>{const tier=EcoFinance.tiers.find(t=>t.id===node.dataset.publicPlan);if(!tier)return;const target=node.querySelector('[data-public-plan-estimate]');if(target)target.textContent=money(EcoFinance.weekly(tier.minimum,tier.rate));const capital=node.querySelector('[data-public-plan-capital]');if(capital)capital.textContent=money(tier.minimum);});}document.addEventListener('ecocharge:locale',update);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',update);else update();})();
