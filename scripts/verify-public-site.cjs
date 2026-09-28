@@ -2,7 +2,9 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(process.argv[2]||'public-site');
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
-const files=walk(root),manifest=JSON.parse(fs.readFileSync(path.join(root,'app-manifest.json'),'utf8'));
+const previewRoot=path.join(root,'cabinet');
+const preview=fs.existsSync(previewRoot)?require('./verify-client-preview.cjs')(previewRoot):null;
+const files=walk(root).filter(f=>!f.startsWith(previewRoot+path.sep)),manifest=JSON.parse(fs.readFileSync(path.join(root,'app-manifest.json'),'utf8'));
 assert.equal(manifest.app,'website');
 assert.equal(manifest.routes.length,11);
 const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),context);
@@ -40,4 +42,4 @@ const stations=JSON.parse(fs.readFileSync(path.join(root,'stations.json'),'utf8'
 assert.equal(stations.length,3980);assert.equal(stations.filter(s=>s.selectionClosed).length,1910);
 const runtime=fs.readFileSync(path.join(root,'website-only.js'),'utf8');
 assert(runtime.includes('event.stopImmediatePropagation()')&&runtime.includes('el.disabled = true'));
-console.log(JSON.stringify({ok:true,pages:manifest.routes.length,files:files.length,bytes:files.reduce((n,f)=>n+fs.statSync(f).size,0),privateData:false,workspaceRoutes:false,apiConnected:false}));
+console.log(JSON.stringify({ok:true,pages:manifest.routes.length,files:files.length,bytes:files.reduce((n,f)=>n+fs.statSync(f).size,0),privateData:false,workspaceRoutes:false,apiConnected:false,clientPreview:preview}));

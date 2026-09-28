@@ -1,0 +1,22 @@
+{
+  "id": "/client/",
+  "name": "EcoGrid",
+  "short_name": "EcoGrid",
+  "description": "Your EcoGrid client account, plan and manager chat.",
+  "start_url": "/client/?tab=dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#102631",
+  "theme_color": "#102631",
+  "lang": "en-US",
+  "icons": [
+    { "src": "/client/app-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/client/app-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/client/app-icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "My account", "url": "/client/?tab=dashboard" },
+    { "name": "My money", "url": "/client/?tab=money" },
+    { "name": "Contact my manager", "url": "/client/?tab=help" }
+  ]
+}

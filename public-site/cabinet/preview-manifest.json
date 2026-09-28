@@ -1,0 +1,12 @@
+{
+  "kind": "client-preview",
+  "sampleData": true,
+  "authentication": false,
+  "apiConnected": false,
+  "source": "fresh-isolated-fixture",
+  "energyCapital": 250,
+  "miningCapital": 5000,
+  "available": 30.23,
+  "startedAt": "2026-08-28T23:37:52.955Z",
+  "completedWeeks": 4
+}

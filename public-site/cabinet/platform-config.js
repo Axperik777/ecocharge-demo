@@ -1,0 +1,1 @@
+window.ECO_PLATFORM_CONFIG={"mode":"client-preview","clientPreview":true,"localeMode":"development","websiteBase":"https://axperik777.github.io/ecocharge-demo/","accountBase":"https://axperik777.github.io/ecocharge-demo/cabinet/","crmBase":"","apiBase":"","landingId":"main"};
