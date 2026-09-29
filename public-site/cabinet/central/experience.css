@@ -22,3 +22,16 @@
 
 .eco-shell .prototype-bar{display:none!important}.eco-shell .topbar.panel{display:flex;align-items:center;gap:16px;padding:16px 4px;border:0;border-radius:0;box-shadow:none}.eco-shell .topbar .charge-wordmark{display:inline!important}.eco-shell .topbar>.locale-switch{margin-left:auto;flex:none}.eco-shell .topbar>#eco-top{margin-left:0}.eco-shell .topbar .charge-brand{min-width:0}.eco-shell .eg-project-row .eg-project-amount small{max-width:140px}.eg-profile-header{display:flex;align-items:center;gap:16px;margin:18px 0 26px}.eg-profile-header .eg-avatar{display:grid;place-items:center;width:60px;height:60px}.eg-profile-header h1{margin:0!important}.eg-profile-header p{margin:5px 0 0}.eg-profile-links{display:grid;gap:1px;border-radius:16px;overflow:hidden}.eg-profile-links button{display:flex;align-items:center;justify-content:space-between;min-height:60px;border:0;border-bottom:1px solid var(--eco-line);padding:16px 20px;background:var(--eco-card);color:var(--eco-text);font:inherit;text-align:left;cursor:pointer}
 @media(max-width:760px){.eco-shell .topbar.panel{padding:10px 0;gap:8px}.eco-shell .topbar>.locale-switch{gap:0}.eco-shell .locale-switch button{min-width:33px;padding:8px 5px}.eco-shell .charge-symbol{width:28px;height:28px}.eco-shell .topbar .charge-wordmark{font-size:19px!important}.eco-shell .charge-brand{gap:5px}.eco-shell #eco-top{gap:0}.eco-shell .eco-mobile-chat{display:none}.eco-shell .eg-welcome{margin-top:15px}}
+
+/* One scroll clearance for the current shell, instead of stacked legacy docks. */
+body.eco-shell{padding-bottom:0;--eco-bottom-clearance:24px}
+body.eco-shell .app-shell{padding-bottom:var(--eco-bottom-clearance)}
+body.eco-shell #client-view{padding-bottom:0}
+body.eco-shell #eco-workspace{margin-bottom:0}
+body.eco-shell .app-shell>footer{margin:0;padding:12px 0 0}
+body.eco-shell.pages-client-preview .app-shell>footer{display:none}
+@media(max-width:760px){
+ body.eco-shell{--eco-bottom-clearance:calc(82px + env(safe-area-inset-bottom,0px))}
+ body.eco-shell.r-builder-open{--eco-bottom-clearance:calc(164px + env(safe-area-inset-bottom,0px))}
+}
+@media(max-width:370px){body.eco-shell.r-builder-open{--eco-bottom-clearance:calc(184px + env(safe-area-inset-bottom,0px))}}
