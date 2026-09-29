@@ -56,7 +56,7 @@ const app=createServer({database:path.join(work,'isolated-preview.sqlite'),seedF
   html=html.replace('<script src="central/support-chat.js"></script>','');
   html=html.replace('<script src="central/app-install.js"></script>','');
   html=html.replace(/<div class="role-switch"[\s\S]*?<\/div>/,'');
-  html=html.replace('</body>','<script src="pages-client-ready.js"></script></body>');
+  html=html.replace('</body>','<script src="pages-client-ready.js"></script><script src="pages-client-preview-ui.js"></script></body>');
   fs.mkdirSync(path.join(output,'client'),{recursive:true});
   fs.writeFileSync(path.join(output,'client/index.html'),html);
   fs.writeFileSync(path.join(output,'index.html'),'<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=client/?lang=ru"><a href="client/?lang=ru">EcoGrid · Client preview</a>');
@@ -71,6 +71,9 @@ const app=createServer({database:path.join(work,'isolated-preview.sqlite'),seedF
   fs.writeFileSync(appPath,code);
   fs.writeFileSync(path.join(output,'pages-client-data.js'),'window.ECO_PAGES_FIXTURE='+JSON.stringify(fixture).replaceAll('<','\\u003c')+';\n');
   fs.writeFileSync(path.join(output,'preview-manifest.json'),JSON.stringify({kind:'client-preview',sampleData:true,authentication:false,apiConnected:false,source:'fresh-isolated-fixture',energyCapital:250,miningCapital:5000,available:snapshot.state.balance,startedAt:started.toISOString(),completedWeeks:weeks},null,2));
+  // Content-address local scripts and styles so published UI fixes bypass stale browser caches.
+  html=html.replace(/((?:src|href)=")([^"?#]+\.(?:js|css))(?:[?#][^"]*)?(")/g,(all,prefix,ref,suffix)=>{if(ref.includes(':'))return all;const target=path.join(output,ref);if(!fs.existsSync(target))return all;return prefix+ref+'?v='+crypto.createHash('sha256').update(fs.readFileSync(target)).digest('hex').slice(0,12)+suffix;});
+  fs.writeFileSync(path.join(output,'client/index.html'),html);
   fs.writeFileSync(path.join(output,'.nojekyll'),'');
   console.log('CLIENT PREVIEW READY: '+output);
  }finally{await app.close();}
