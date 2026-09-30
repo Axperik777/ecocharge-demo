@@ -54,6 +54,12 @@ module.exports=function verify(root){
  const brief=request('client/account').state.energyBriefs.at(-1);assert(brief.report);assert(brief.createdAt);assert(brief.authorName);
  request('client/chat','POST',{id:'message-test',text:'Вопрос клиента',clientId:a.client.id});const chat=request('staff/chats').threads.find(t=>t.clientId===a.client.id);assert(chat?.awaitingReply);
  request('staff/clients/'+a.client.id+'/chat','POST',{id:'reply-test',ticketId:chat.id,text:'Ответ менеджера',clientId:a.client.id});assert.equal(request('client/chat').threads.find(t=>t.id===chat.id).messages.at(-1).text,'Ответ менеджера');assert.equal(request('client/account').state.tickets.find(t=>t.id===chat.id).status,'Resolved');assert.equal(request('staff/chats').threads.find(t=>t.id===chat.id).awaitingReply,false);
+ const baseline={like:1293,useful:702,interested:2526},welcome=()=>request('client/community').posts.find(p=>p.id==='welcome');
+ assert.equal(JSON.stringify(welcome().reactions),JSON.stringify(baseline));
+ let reacted=request('client/community/reaction','POST',{postId:'welcome',reaction:'like'});assert.equal(reacted.reactions.like,1294);
+ reacted=request('client/community/reaction','POST',{postId:'welcome',reaction:'useful'});assert.equal(reacted.reactions.like,1293);assert.equal(reacted.reactions.useful,703);
+ db=JSON.parse(JSON.stringify(db));assert.equal(welcome().myReaction,'useful');
+ reacted=request('client/community/reaction','POST',{postId:'welcome',reaction:''});assert.equal(JSON.stringify(reacted.reactions),JSON.stringify(baseline));
  const post=request('staff/community','POST',{titleRu:'Новость',titleEn:'News',bodyRu:'Текст новости',bodyEn:'News text',category:'news',status:'published'});request('client/community/reaction','POST',{postId:post.id,reaction:'useful'});assert.equal(request('staff/community').posts.find(p=>p.id===post.id).reactions.useful,1);
  db=JSON.parse(JSON.stringify(db));assert.equal(request('client/account').state.balance,100);assert.equal(request('client/chat').threads.find(t=>t.id===chat.id).messages.length,2);
  ctx.role='ftd';bad(()=>request('staff/clients/'+a.client.id+'/delete','POST'));ctx.role='admin';request('staff/clients/'+a.client.id+'/delete','POST');assert(!db.accounts[a.client.id]);assert(!db.leads[lead.id].client_id);

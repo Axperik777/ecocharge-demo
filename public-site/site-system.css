@@ -342,3 +342,36 @@ html[data-app=website] .participate-copy>.product-name{font-size:clamp(22px,2vw,
 html[data-app=website] .story-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
 html[data-app=website] .story-club{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:48px;align-items:start}
 @media(max-width:700px){html[data-app=website] .story-steps,html[data-app=website] .story-club{grid-template-columns:minmax(0,1fr);gap:24px}}
+
+/* EC-91: a concrete project offer and separate equipment/community routes. */
+html[data-app=website] .grid-hero{grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:48px}
+html[data-app=website] .grid-hero h1{font-size:clamp(36px,3.8vw,50px);line-height:1.13;max-width:680px}
+html[data-app=website] .grid-hero-visual{box-shadow:none}
+html[data-app=website] .grid-hero-visual figure img{height:490px;object-position:right center}
+html[data-app=website] .grid-direction-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-app=website] .grid-direction-cards h3{margin:0 0 8px}
+html[data-app=website] .grid-direction-cards .grid-direction-description{color:var(--ink);font-weight:600;margin:0 0 14px}
+html[data-app=website] .grid-plans-link{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;padding:20px 0 28px}
+html[data-app=website] .grid-plans-link p{margin:0;color:var(--muted)}
+html[data-app=website] .grid-equipment-entry{display:flex;align-items:center;justify-content:space-between;gap:24px 40px;background:var(--pale);border:1px solid var(--line);border-radius:20px;padding:28px 30px}
+html[data-app=website] .grid-equipment-entry h3{margin:0 0 10px;font-size:24px}
+html[data-app=website] .grid-equipment-entry p{margin:0;max-width:690px;color:var(--muted)}
+html[data-app=website] .grid-equipment-entry>a{flex-shrink:0}
+html[data-app=website] .grid-community-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;margin-top:34px}
+html[data-app=website] .grid-community-links>a{display:flex;flex-direction:column;align-items:start;border-top:1px solid var(--line);padding-block:24px 0}
+html[data-app=website] .grid-community-links h3{margin:0 0 10px;font-size:23px}
+html[data-app=website] .grid-community-links p{margin:0 0 14px;color:var(--muted)}
+html[data-app=website] .grid-community-links b{margin-top:auto;color:var(--teal);font-size:15px;min-height:44px;display:flex;align-items:center;gap:8px}
+html[data-app=website] #equipment-catalog{grid-template-columns:1fr 1.2fr;gap:48px}
+html[data-app=website] .web86-equipment .grid-catalog-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+html[data-app=website] .grid-catalog-links>a{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--teal);min-height:76px}
+html[data-app=website] .grid-catalog-links>a:hover{border-color:var(--teal)}
+@media(max-width:1000px){html[data-app=website] .grid-equipment-entry{align-items:start;flex-direction:column}html[data-app=website] .grid-plans-link{align-items:start;flex-direction:column;gap:2px}html[data-app=website] #equipment-catalog{grid-template-columns:1fr;gap:24px}}
+@media(max-width:800px){html[data-app=website] .grid-hero{grid-template-columns:minmax(0,1fr);gap:28px}html[data-app=website] .grid-hero h1{font-size:clamp(32px,5.8vw,44px)}html[data-app=website] .grid-hero-visual figure img{height:auto;aspect-ratio:3/2}html[data-app=website] .grid-direction-cards{grid-template-columns:minmax(0,1fr)}html[data-app=website] .grid-community-links{gap:24px}html[data-app=website] .grid-equipment-entry{padding:24px}}
+@media(max-width:480px){html[data-app=website] .grid-community-links,html[data-app=website] .web86-equipment .grid-catalog-links{grid-template-columns:minmax(0,1fr)}html[data-app=website] .grid-equipment-entry>a{width:100%;justify-content:center}html[data-app=website] .grid-catalog-links>a{min-height:64px}}
+
+html[data-app=website] #site-menu .ec-menu-language{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:16px 0;margin-bottom:10px;border-bottom:1px solid var(--line);color:var(--muted)}
+html[data-app=website] #site-menu .ec-menu-language:not(:has([data-locale-switch])){display:none}
+html[data-app=website] #site-menu .locale-switch{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:3px;gap:2px}
+html[data-app=website] #site-menu .locale-switch button{min-width:48px;min-height:44px;padding:10px;font-family:var(--eg-font);font-size:13px;border-radius:7px;color:var(--muted)}
+html[data-app=website] #site-menu .locale-switch button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 4px #123a2414}
