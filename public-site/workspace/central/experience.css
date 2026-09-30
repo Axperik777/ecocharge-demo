@@ -486,3 +486,6 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 .eco-shell .eco-scenario strong{font-size:18px}.eco-shell .eco-scenario small{font-size:13px;line-height:1.6;color:var(--eco-muted)}
 .eco-shell .eco-scenario .eco-actions{flex-wrap:wrap;gap:8px 18px;margin-top:12px}.eco-shell .eco-scenario .eco-actions button{min-height:44px}
 .eco-shell .identity-empty{color:var(--eco-muted);border-color:var(--eco-line)}
+
+/* EC-92: account amounts must follow the selected theme. */
+.eco-shell .eco-live-card :is([data-live-capital],[data-live-confirmed]){color:var(--eg-text)}
