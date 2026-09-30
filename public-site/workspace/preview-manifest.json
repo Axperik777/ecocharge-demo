@@ -1,0 +1,9 @@
+{
+  "kind": "workspace-sandbox",
+  "source": "fresh-isolated-fixture",
+  "sampleData": true,
+  "authentication": false,
+  "apiConnected": false,
+  "persistence": "browser-localStorage",
+  "realPayments": false
+}

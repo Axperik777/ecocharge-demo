@@ -1,0 +1,1 @@
+window.ECO_PLATFORM_CONFIG={"mode":"shared-local","localeMode":"development","websiteBase":"https://axperik777.github.io/ecocharge-demo/","accountBase":"https://axperik777.github.io/ecocharge-demo/workspace/","crmBase":"https://axperik777.github.io/ecocharge-demo/workspace/","apiBase":"","landingId":"main","browserSandbox":true};

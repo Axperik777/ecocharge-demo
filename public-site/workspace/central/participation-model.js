@@ -1,0 +1,6 @@
+'use strict';
+(function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('../account-finance.js'):root.EcoFinance);if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoParticipation=api;})(typeof window==='object'?window:globalThis,finance=>{
+ function issue(state){const open=(state.tickets||[]).find(t=>t.status==='Open'&&!t.service?.closed);if(open)return {kind:'support',id:open.id};const requests=(state.requests||[]).filter(r=>r.type==='withdraw').slice().sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));const r=requests[0];return r&&['Pending','Rejected'].includes(r.status)?{kind:'withdrawal',id:r.id}:null;}
+ function compare(state,selection){const s=finance.summary(state),tier=finance.tiers.find(t=>t.id===selection?.tierId),capital=selection?.capital;if(!s.active||!tier||!finance.valid(capital)||!finance.eligible(capital,tier.id))return null;const delta=finance.round(capital-s.capital),gap=finance.round(Math.max(0,delta-s.available));return {before:{capital:s.capital,rate:s.active.rate,weekly:finance.planWeekly(s.active),available:s.available},after:{capital,rate:tier.rate,weekly:finance.weekly(capital,tier.rate),available:finance.round(Math.max(0,s.available-delta))},delta,gap,reserved:s.reserved,issue:issue(state)};}
+ return {issue,compare};
+});

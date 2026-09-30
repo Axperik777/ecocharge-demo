@@ -1,27 +1,28 @@
-# EcoGrid — public website
+# EcoGrid — сайт и интерактивный просмотр
 
-Current website: **https://axperik777.github.io/ecocharge-demo/?lang=ru**
+1. [Сайт](https://axperik777.github.io/ecocharge-demo/?lang=ru)
+2. [CRM администратора](https://axperik777.github.io/ecocharge-demo/workspace/crm/?lang=ru&role=admin)
+3. [Кабинет менеджера](https://axperik777.github.io/ecocharge-demo/workspace/crm/?lang=ru&role=manager)
+4. [Кабинет клиента](https://axperik777.github.io/ecocharge-demo/workspace/client/?lang=ru)
 
-The current GitHub Pages workflow publishes **only `public-site/`**. It contains the 11 public pages, RU/EN content, equipment catalogues, mining calculations and the public station directory from the portable EcoGrid project (EC-70).
+Вход без паролей. Это интерактивный учебный просмотр, который хранит изменения в localStorage одного браузера. Вкладки сайта, CRM и кабинета используют общее состояние. Данные не передаются на сервер и не синхронизируются между устройствами. Реальные переводы и отправка Email/SMS не выполняются.
 
-Client preview: **https://axperik777.github.io/ecocharge-demo/cabinet/client/?lang=ru**
+## Что проверить
 
-The separate static client preview uses a newly generated example: $250 in charging at 13% per calendar month, activated one month before export, plus an ASIC presentation position. It opens without a password. Completed sample weeks are calculated with the shared finance module; forms do not submit and no server transactions run here.
+1. Оставить заявку на сайте.
+2. Открыть CRM администратора → «Все заявки» → выбрать заявку → «Назначить менеджера».
+3. Открыть кабинет менеджера → «Мои заявки» → создать аккаунт клиента.
+4. В карточке клиента открыть кабинет, изменить учебный баланс, подготовить план, ответить в чате.
+5. В админской CRM публиковать новости для клиентской ленты и удалять созданных клиентов.
 
-Staff workspaces, APIs, databases, private configuration and access credentials are excluded. The working local platform is unchanged. See [client preview notes](docs/client-pages-preview.md).
+Небольшая кнопка с ползунками открывает выбор клиента, роль и сброс учебных данных. Прямая ссылка на созданного клиента работает в том же браузере, где он создан.
 
-To validate the current publication:
+## Публикация
+
+GitHub Actions публикует только `public-site/`. `public-site/workspace/` собран из актуальных исходников переносного проекта с новой изолированной базой примеров. Рабочая SQLite-база, пароли, приватные настройки и серверные маршруты не копируются в публикацию. Старый просмотр `cabinet/client/` оставлен для прежних ссылок.
 
 ```sh
 node scripts/verify-public-site.cjs public-site
 ```
 
-To export a new copy from the current portable package, use its bundled Node.js 24 and mapped `scripts/export-public-site.cjs`:
-
-```sh
-node scripts/export-public-site.cjs --portable "/path/to/ECO CHARGE" --out "/new/output/directory" --url "https://axperik777.github.io/ecocharge-demo/"
-```
-
-The output directory must be new. Validate it before replacing `public-site/`. Historical source files below are retained for project history; they are not the current published artifact.
-
----
+Исторические исходники в остальных папках репозитория не являются текущим опубликованным артефактом. Канонический проект — переносной комплект EcoGrid, файлы которого перечислены в `project-map.json`.
