@@ -8,7 +8,7 @@ const workspaceRoot=path.join(root,'workspace');
 const workspace=fs.existsSync(workspaceRoot)?require('./verify-workspace-preview.cjs')(workspaceRoot):null;
 const files=walk(root).filter(f=>!f.startsWith(previewRoot+path.sep)&&!f.startsWith(workspaceRoot+path.sep)),manifest=JSON.parse(fs.readFileSync(path.join(root,'app-manifest.json'),'utf8'));
 assert.equal(manifest.app,'website');
-assert.equal(manifest.routes.length,15);for(const r of ['learn','participate/charge','participate/solar','participate/mining'])assert(manifest.routes.includes(r));
+assert.equal(manifest.routes.length,16);for(const r of ['learn','club','participate/charge','participate/solar','participate/mining'])assert(manifest.routes.includes(r));
 const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),context);
 const config=context.window.ECO_PLATFORM_CONFIG;
 assert.equal(config.websiteOnly,true);

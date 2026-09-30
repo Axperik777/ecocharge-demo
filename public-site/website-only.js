@@ -14,9 +14,7 @@
   links(document);const nav=document.querySelector('#site-menu nav');
   if(nav&&!nav.querySelector('[data-preview-menu]')){const a=document.createElement('a');a.dataset.previewMenu='';a.setAttribute('translate','no');nav.prepend(a);}
   document.querySelectorAll('[data-preview-menu]').forEach(a=>{a.href=new URL('workspace/client/?lang='+(ru()?'ru':'en'),base).href;const label=ru()?'Кабинет':'Client account';if(a.textContent!==label+'↗')a.innerHTML='<span><strong>'+label+'</strong></span><span aria-hidden="true">↗</span>';});
-  document.querySelectorAll('[data-website-workspace-note]').forEach(el=>{el.textContent=ru()?'Заявка появится в CRM этого браузера.':'Your request will appear in this browser’s CRM.';});
  }
- document.querySelectorAll('[data-lead-form]').forEach(form=>{const note=document.createElement('p');note.className='lead-hint';note.dataset.websiteWorkspaceNote='';note.setAttribute('translate','no');form.append(note);});
  update();document.addEventListener('ecocharge:locale',update);
  new MutationObserver(rows=>rows.forEach(row=>row.addedNodes.forEach(links))).observe(document.body,{childList:true,subtree:true});
 })();

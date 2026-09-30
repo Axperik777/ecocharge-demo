@@ -34,6 +34,7 @@
   const initial=!data;data=await api('staff/overview');
   if(initial)EcoSupportChat.initStaff({onChange:renderReplyQueue});
   if(initial&&!new URL(location).searchParams.has('tab'))tab='today';
+  if(initial){const requestedLead=new URL(location).searchParams.get('lead');if(requestedLead&&data.leads.some(l=>l.id===requestedLead)){leadId=requestedLead;tab='leads';}}
   if(selected&&!data.clients.some(c=>c.id===selected)){selected=null;account=null;}
   if(leadId&&!data.leads.some(l=>l.id===leadId)){leadId=null;lead=null;}
   if(callRecord&&!(callRecord.kind==='lead'?data.leads:data.clients).some(r=>r.id===callRecord.key)){callRecord=null;EcoCallDesk.unmount();}
@@ -58,7 +59,7 @@
   const navHtml=groups.map(([title,ids])=>{const items=ids.map(id=>nav.find(n=>n[0]===id)).filter(Boolean);return items.length?'<section class="crm-nav-group"><h2>'+title[0]+'</h2>'+items.map(navButton).join('')+'</section>':'';}).join('');
   const navRoot=$('#central-nav');if(navRoot.innerHTML!==navHtml){const focus=document.activeElement?.closest('#central-nav button')?.dataset.tab,scroll=$('.crm-sidebar').scrollTop;navRoot.innerHTML=navHtml;$('.crm-sidebar').scrollTop=scroll;if(focus)navRoot.querySelector('[data-tab="'+focus+'"]')?.focus({preventScroll:true});}
   navRoot.setAttribute('aria-label',t('Workspace sections','Разделы CRM'));$('#central-nav-toggle').textContent=t('Sections','Разделы')+' · '+(nav.find(n=>n[0]===tab)?.[1]||t('Workspace','Кабинет'));$('.crm-skip').textContent=t('Skip to workspace','Перейти к рабочей области');syncMenu();
-  const overdue=data.leads.filter(l=>EcoFunnel.sla({...l,funnel:l.crm.funnel}).overdue).length,callAlert=$('#central-first-call-alert'),callAlertText=overdue&&tab!=='today'?'<div class="call-policy">'+t('Over 15 minutes without a first call: ','Без первого звонка более 15 минут: ')+overdue+' '+button(t('Open call queue','Открыть очередь звонков'),'data-tab="today"')+'</div>':'';if(callAlert&&callAlert.innerHTML!==callAlertText)callAlert.innerHTML=callAlertText;
+  const overdue=EcoCRMWorkbench.derive(data).allFirstCalls.filter(l=>EcoFunnel.sla({...l,funnel:l.crm.funnel}).overdue).length,callAlert=$('#central-first-call-alert'),callAlertText=overdue&&tab!=='today'?'<div class="call-policy">'+t('Over 15 minutes without a first call: ','Без первого звонка более 15 минут: ')+overdue+' '+button(t('Open call queue','Открыть очередь звонков'),'data-tab="today"')+'</div>':'';if(callAlert&&callAlert.innerHTML!==callAlertText)callAlert.innerHTML=callAlertText;
   $('#central-funding-alert').innerHTML=fundingInbox.banner();$('#central-withdrawal-alert').innerHTML=withdrawalInbox.banner();
   if(tab==='community'){EcoCallDesk.unmount();EcoKnowledge.unmount();EcoCallerGuide.unmount();EcoSupportChat.unmount();EcoCommunityUI.staff($('#central-main'));return;}EcoCommunityUI.unmount();
   if(['funnel','followups'].includes(tab)){EcoCallDesk.unmount();EcoKnowledge.unmount();EcoCallerGuide.unmount();EcoSupportChat.unmount();EcoFunnelUI.mount($('#central-main'),tab,data);return;}EcoFunnelUI.unmount();

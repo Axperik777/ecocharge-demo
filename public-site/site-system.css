@@ -326,3 +326,19 @@ html[data-app=website] .v-workspace-top>strong,html[data-app=website] .v-workspa
  html[data-app=website] .web86-project-preview{padding:14px;gap:12px}
 }
 @media(prefers-reduced-motion:reduce){html[data-app=website] *,html[data-app=website] *::before,html[data-app=website] *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* EC90: concise navigation and form guidance at readable sizes. */
+html[data-app=website] .ec-mobile-action{justify-content:center}
+html[data-app=website] .ec-mobile-action>.ec-button{width:100%;max-width:480px}
+html[data-app=website] :is(.lead-hint,.lead-submit-note){font-size:13px!important;line-height:1.6!important}
+html[data-app=website] .club-intro>p:first-of-type{font-size:clamp(24px,3vw,34px);line-height:1.3;font-weight:500;letter-spacing:-.025em;color:var(--ec-ink,#19382c)}
+html[data-app=website] .journey-club-grid .ec-text-link{display:inline-flex;min-height:44px;align-items:center}
+
+/* Product names identify the direction, rather than decorate the page. */
+html[data-app=website] main .product-name{font-size:clamp(24px,2.5vw,30px)!important;font-weight:700;letter-spacing:-.035em;line-height:1.2;text-transform:none;color:var(--teal);margin:0 0 14px}
+html[data-app=website] main .journey-guide-subtitle{font-size:clamp(19px,2vw,24px)!important;font-weight:600;line-height:1.35;letter-spacing:-.025em;color:var(--ink);margin:0 0 16px}
+html[data-app=website] .participate-copy>.product-name{font-size:clamp(22px,2vw,28px)!important;margin-bottom:20px}
+
+html[data-app=website] .story-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-app=website] .story-club{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:48px;align-items:start}
+@media(max-width:700px){html[data-app=website] .story-steps,html[data-app=website] .story-club{grid-template-columns:minmax(0,1fr);gap:24px}}

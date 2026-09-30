@@ -12,6 +12,7 @@
     "solar",
     "mining",
     "learn",
+    "club",
     "participate/charge",
     "participate/solar",
     "participate/mining",
@@ -28,5 +29,5 @@
     "apiBase": "",
     "landingId": "main"
   },
-  "createdAt": "2026-09-30T11:47:52.087Z"
+  "createdAt": "2026-09-30T12:46:58.838Z"
 }

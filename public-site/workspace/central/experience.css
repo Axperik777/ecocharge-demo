@@ -346,23 +346,23 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .lightline{stroke:#d2e4d9}
 .eco-shell #eco-header-actions .eco-badge{position:absolute;top:0;right:0;display:grid;place-items:center;min-width:16px;height:16px;padding:0 3px;border:2px solid var(--eg-surface);border-radius:10px;background:var(--eg-brand);color:var(--eg-on-brand);font:700 9px/1 Manrope,system-ui,sans-serif}
 .eco-shell #eco-header-actions .eco-badge[hidden]{display:none}
 @media(min-width:981px){
- .eco-shell #eco-header-actions{position:fixed;top:0;left:var(--eg-sidebar);right:0;height:84px;z-index:100;display:flex;align-items:center;justify-content:flex-end;padding:0 28px;background:var(--eg-surface);border-bottom:1px solid var(--eg-border)}
- .eco-shell #eco-header-actions .eco-notifications{position:absolute;left:calc((100% - var(--eg-sidebar)) / 2);transform:translateX(-50%)}
+ .eco-shell #eco-header-actions{position:fixed;top:0;left:var(--eg-sidebar);right:0;height:84px;z-index:100;display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:0 28px;background:var(--eg-surface);border-bottom:1px solid var(--eg-border)}
+ .eco-shell #eco-header-actions .eco-notifications{position:relative;left:auto;transform:none}
  .eco-shell #client-view{padding-top:112px}
  .eco-shell .eg-page-heading,.eco-shell .eg-profile-header{padding-right:0}
  .eco-shell #eco-top{margin-top:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:980px){
- .eco-shell .topbar.panel{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);align-items:center;column-gap:8px}
+ .eco-shell .topbar.panel{display:flex;align-items:center;justify-content:space-between;column-gap:10px}
  .eco-shell .topbar .charge-brand{grid-column:1;grid-row:1;justify-self:start}
  .eco-shell .topbar #eco-top{display:none}
- .eco-shell #eco-header-actions{display:contents}
- .eco-shell #eco-header-actions .eco-notifications{grid-column:2;grid-row:1;justify-self:center}
- .eco-shell .eco-header-preferences{grid-column:3;grid-row:1;justify-self:end}
+ .eco-shell #eco-header-actions{display:flex;align-items:center;gap:8px;margin-left:auto;flex:none}
+ .eco-shell #eco-header-actions .eco-notifications{position:relative;left:auto;transform:none}
+ .eco-shell .eco-header-preferences{flex:none}
 }
 @media(max-width:360px){
  .eco-shell .topbar.panel{padding-inline:12px;column-gap:6px}
- .eco-shell .eco-header-preferences{gap:6px}
+ .eco-shell .eco-header-preferences,.eco-shell #eco-header-actions{gap:6px}
  .eco-shell .eco-header-preferences [data-locale-switch]{padding:2px}
  .eco-shell .eco-header-preferences [data-locale-switch] button{min-width:32px;min-height:38px;padding:0 4px}
  .eco-shell #eco-header-actions .eco-theme-toggle{width:40px;min-width:40px}
@@ -424,3 +424,65 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .face{fill:var(--eg-art-face)}htm
 @media(min-width:981px){.eco-shell #eco-top{grid-template-columns:1fr;gap:8px}.eco-shell #eco-top .eco-wallet{width:100%;justify-content:space-between}.eco-shell #eco-top [data-open-live-chat]{display:none}}
 @media(max-width:760px){.eco-shell .eg-service{min-height:196px;padding:18px 16px;gap:8px}.eco-shell .eg-service-icon{width:60px;height:60px;border-radius:17px}.eco-shell .eg-service-icon .eg-art{width:50px;height:50px}.eco-shell .eg-service strong{font-size:15px}.eco-shell .eg-service small{font-size:13px}.eco-shell .eg-service-arrow{top:17px;right:13px}.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)>summary{padding:16px 14px;gap:10px}.eco-shell .eg-disclosure-copy small{font-size:12px;line-height:1.45}.eco-shell .eg-disclosure-chevron{margin-left:3px}.eco-shell #eco-workspace .energy-journal{padding:20px 16px}.eco-shell .eco-fund-lab>.energy-lab{margin:8px}.eco-shell #eco-workspace .club-pass-main,.eco-shell #eco-workspace .club-offer{padding:22px}.eco-shell .club-metrics{gap:10px}.eco-shell .club-metrics>div{padding:16px}.eco-shell #eco-workspace .club-panel{padding:20px}.eco-shell .club-offer>strong{font-size:36px}.eco-shell .club-copy input{flex-basis:100%}.eco-shell .club-copy button{width:100%}}
 @media(prefers-reduced-motion:reduce){.eco-shell .eg-service,.eco-shell .eg-disclosure-chevron{transition:none}}
+
+/* EC90: one illustration family and readable profile/research surfaces. */
+.eco-shell .eg-project-symbol,.eco-shell .eg-card-icon,.eco-shell .eg-list-icon{border:1px solid color-mix(in srgb,var(--eg-brand) 14%,var(--eg-surface));background:linear-gradient(145deg,var(--eg-surface),var(--eg-brand-soft));box-shadow:inset 0 1px 0 #ffffff30,0 2px 6px #194b370a}
+.eco-shell .eg-project-symbol .eg-art{width:42px;height:42px}.eco-shell .eg-card-icon .eg-art{width:44px;height:44px}
+.eco-shell #eco-workspace :is(.care-profile-grid,.care-settings) label,.eco-shell .care-dialog label{color:var(--eco-text);font-size:14px;line-height:1.5}
+.eco-shell #eco-workspace .care-profile-grid :is(small,.care-hint),.eco-shell .care-dialog small{color:var(--eco-muted);font-size:13px;line-height:1.55}
+.eco-shell :is(#eco-workspace,.care-dialog) .care-field-error{color:#ac3326;font-size:13px;line-height:1.5}
+html[data-eco-theme=dark] .eco-shell :is(#eco-workspace,.care-dialog) .care-field-error{color:#ffb7a9}
+.eco-shell #eco-workspace .eco-kicker{font-size:12px;line-height:1.5;letter-spacing:.055em}
+html[data-portal=client] .eco-shell{--j-bg:var(--eco-bg);--j-panel:var(--eco-card);--j-border:var(--eco-line);--j-ink:var(--eco-text);--j-muted:var(--eco-muted);--j-mint:var(--eco-accent);--j-accent:var(--eco-accent)}
+.eco-shell :is(.j-card,.j-empty,.j-plan-summary,.j-progress,.j-discovery,.j-section,.j-library-header,.j-station-tools){color:var(--eco-text);background:var(--eco-card);border-color:var(--eco-line)}
+.eco-shell :is(.j-card,.j-empty,.j-plan-summary,.j-progress,.j-discovery,.j-section,.j-library-header,.j-station-tools) :is(p,small){color:var(--eco-muted)}
+.eco-shell .j-arrow{width:18px;height:18px;flex:none}
+@media(max-width:760px){.eco-shell .eg-project-symbol .eg-art{width:36px;height:36px}}
+
+/* EC90: modal components share the account theme instead of legacy hard-coded graphite. */
+.eco-shell #modal #modal-content,.eco-shell #modal #modal-content .payment-checkout{--pay-ink:var(--eco-text);--pay-muted:var(--eco-muted);--pay-line:var(--eco-line);--pay-panel:var(--eco-raised);color:var(--eco-text)}
+.eco-shell #modal #modal-content :is(.care-dialog,.withdrawal-checkout,.payment-result,.payment-card-simple,.conversation-summary){color:var(--eco-text)}
+.eco-shell #modal #modal-content :is(label,legend){font-size:14px;line-height:1.5;color:var(--eco-text)}
+.eco-shell #modal #modal-content :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea){background:var(--eco-raised);color:var(--eco-text);border-color:var(--eco-line);font-family:inherit;font-size:16px;border-radius:10px}
+.eco-shell #modal #modal-content :is(input,textarea)::placeholder,.eco-shell #eco-workspace :is(input,textarea)::placeholder{color:var(--eco-muted);opacity:1}
+.eco-shell #modal #modal-content :is(.care-note,.care-context dt,.payment-preview-note,.payment-card-simple p,.payment-links>span,.payment-result>p,.payment-review-note p,.withdrawal-checkout small,.withdrawal-rules p,.withdrawal-funds dt,.withdrawal-funds>span,.withdrawal-preview>span){color:var(--eco-muted);font-size:13px;line-height:1.6}
+.eco-shell #modal #modal-content :is(.care-context,.withdrawal-funds,.payment-switch,.thread-bubble,.payment-review-note){background:var(--eco-raised);border-color:var(--eco-line);border-radius:12px;color:var(--eco-text)}
+.eco-shell #modal #modal-content .care-context{padding:16px;margin:18px 0}
+.eco-shell #modal #modal-content .care-context summary{font-size:14px;line-height:1.5;color:var(--eco-text)}
+.eco-shell #modal #modal-content .care-context :is(dt,dd){font-size:13px;line-height:1.5}
+.eco-shell #modal #modal-content :is(.care-feedback,.care-field-error,.form-error){color:#ac3326;font-size:13px;line-height:1.6}
+.eco-shell #modal #modal-content :is(.care-feedback,.care-field-error,.form-error):empty{display:none}
+html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.care-feedback,.care-field-error,.form-error){color:#ffb7a9}
+.eco-shell #modal #modal-content :is(.care-dialog form>.eco-button,.payment-submit){margin-top:18px}
+.eco-shell #modal #modal-content .payment-submit{background:var(--eco-card);padding-block:10px}
+.eco-shell #modal #modal-content .payment-preview-label{background:var(--eg-brand-soft);color:var(--eco-muted);font-size:11px;white-space:normal;line-height:1.4}
+.eco-shell #modal #modal-content .payment-header{align-items:flex-start;flex-wrap:wrap}
+.eco-shell #modal #modal-content :is(.payment-switch button,.payment-amount-chips button,.withdrawal-input button){color:var(--eco-text);border-color:var(--eco-line)}
+.eco-shell #modal #modal-content :is(.payment-switch button,.payment-amount-chips button)[aria-pressed=true]{background:var(--eg-brand-soft);color:var(--eg-brand);border-color:var(--eg-brand);box-shadow:inset 0 -2px var(--eg-brand)}
+.eco-shell #modal #modal-content :is(.payment-submit>.button,.payment-result>.button,.withdrawal-checkout button[type=submit]){background:var(--eco-accent);color:#fff;border-color:var(--eco-accent);font-size:15px;font-weight:600;min-height:48px}
+html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.button,.payment-result>.button,.withdrawal-checkout button[type=submit]){color:#153123}
+.eco-shell #modal #modal-content :is(.payment-card-simple>.icon,.payment-terms a,.payment-links>button,.withdrawal-window time){color:var(--eg-brand)}
+.eco-shell #modal #modal-content :is(.payment-terms summary,.payment-terms p,.payment-terms a,.payment-links>button,.payment-wallet>small,.payment-result-details,.withdrawal-preview){font-size:13px;line-height:1.6}
+.eco-shell #modal #modal-content #payment-amount{font-size:30px;font-weight:600}
+.eco-shell #modal #modal-content :is(.withdrawal-funds dl,.withdrawal-preview,.withdrawal-input,.withdrawal-rules){border-color:var(--eco-line)}
+.eco-shell #modal #modal-content :is(input,select,textarea,button,summary):focus-visible{outline:2px solid var(--eco-accent);outline-offset:3px}
+.eco-shell #eco-workspace label{color:var(--eco-text);font-size:14px;line-height:1.5}
+.eco-shell .eco-help-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.eco-shell .eco-help-actions .eco-button{margin:0}
+.eco-shell #eco-workspace .care-settings{border-color:var(--eco-line)}
+@media(max-width:440px){.eco-shell #modal #modal-content .payment-links{flex-direction:column;align-items:stretch;gap:4px}.eco-shell #modal #modal-content .payment-links>span{max-width:none;text-align:left}.eco-shell .eco-help-actions>.eco-button{flex:1 1 100%}}
+
+.eco-shell #modal .modal-heading .modal-eyebrow{display:none}.eco-shell #modal .modal-heading{justify-content:flex-end;padding-block:8px;min-height:44px}
+.eco-shell #modal #modal-content .payment-preview-label{font-size:12px}
+.eco-shell #modal #modal-content .withdrawal-checkout>.eco-kicker{display:none}
+
+.eco-shell #modal #modal-content .withdrawal-input{background:var(--eco-raised);border:1px solid var(--eco-line);border-radius:10px;overflow:hidden}
+.eco-shell #modal #modal-content .withdrawal-input:focus-within{border-color:var(--eco-accent);outline:2px solid var(--eco-accent);outline-offset:2px;box-shadow:none}
+.eco-shell #modal #modal-content .withdrawal-input #withdrawal-amount{border:0;border-radius:0;box-shadow:none;outline:none;background:transparent;font-size:22px}
+.eco-shell #modal #modal-content .withdrawal-input button{align-self:stretch;background:var(--eg-brand-soft);color:var(--eg-brand);border:0;border-radius:0;min-width:90px;font-size:13px;font-weight:600}
+.eco-shell #modal #modal-content .withdrawal-rules h3{font-size:15px;line-height:1.5;margin:0 0 12px}.eco-shell #modal #modal-content .withdrawal-rules ul{padding-left:20px;margin:0 0 18px;color:var(--eco-muted);font-size:13px;line-height:1.6}.eco-shell #modal #modal-content .withdrawal-rules li+li{margin-top:9px}
+.eco-shell :is(.cashflow-zone,.withdrawal-window) [data-withdraw-zone]{font:inherit;min-height:44px;white-space:normal;text-align:left;color:var(--eg-brand);padding:0}
+
+.eco-shell .eco-scenario{background:var(--eco-card);border:1px solid var(--eco-line);border-radius:18px;padding:24px;box-shadow:var(--eco-shadow)}
+.eco-shell .eco-scenario strong{font-size:18px}.eco-shell .eco-scenario small{font-size:13px;line-height:1.6;color:var(--eco-muted)}
+.eco-shell .eco-scenario .eco-actions{flex-wrap:wrap;gap:8px 18px;margin-top:12px}.eco-shell .eco-scenario .eco-actions button{min-height:44px}
+.eco-shell .identity-empty{color:var(--eco-muted);border-color:var(--eco-line)}
