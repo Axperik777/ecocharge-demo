@@ -11,6 +11,7 @@ module.exports=function verify(root){
  const request=(p,method='GET',b={})=>{const r=m.execute(db,p,method,b,ctx);if(method!=='GET')db=r.db;checks++;return r.result;};
  const bad=(fn)=>{const before=JSON.stringify(db);assert.throws(fn);assert.equal(JSON.stringify(db),before);checks++;};
  assert(!/"(?:password|token|secret)"\s*:/i.test(JSON.stringify(seed)));
+ const opening=db.accounts[uid].state.adjustments.find(v=>v.operationId==='opening-balance');assert(opening);assert(Date.parse(opening.date)<=Date.parse(db.accounts[uid].state.plan.appliedAt));
  for(const route of ['staff/overview','staff/funding-requests','staff/withdrawal-requests','staff/chats','staff/funnel','staff/followups','staff/club','staff/knowledge','staff/community','client/account','client/chat','client/identity','client/plan-document','client/club'])assert(request(route));
  bad(()=>request('public/leads','POST',{name:'Заявка сайта',email:'site@example.com',consent:false}));
  const web=request('public/leads','POST',{name:'Заявка сайта',email:'site@example.com',consent:true,attribution:{utm_source:'qa',utm_campaign:'website-to-crm'},context:{intent:'mining',mining:{minerId:'s21-pro'}},emailConsent:true});
