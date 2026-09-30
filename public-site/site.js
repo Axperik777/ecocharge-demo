@@ -36,7 +36,7 @@
     const visibleActions=new Set();
     const refresh=()=>{mobileAction.hidden=visibleActions.size>0||document.activeElement?.matches('input,select,textarea');};
     const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting&&entry.intersectionRatio>=.4)visibleActions.add(entry.target);else visibleActions.delete(entry.target);}refresh();},{threshold:[0,.4],rootMargin:'0px 0px -80px 0px'});
-    $$('main a.ec-button[href*="register/"],main a.ec-button[href*="guest=1"]').forEach(a=>observer.observe(a));
+    $$('main a.ec-button[href*="register/"],main a.ec-button[href*="guest=1"],html[data-page="club"] main a.ec-button[href*="#request-access"],html[data-page="club"] form button[type="submit"]').forEach(a=>observer.observe(a));
     document.addEventListener('focusin',refresh);document.addEventListener('focusout',()=>setTimeout(refresh,0));
   }
 

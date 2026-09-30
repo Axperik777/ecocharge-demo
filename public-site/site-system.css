@@ -398,6 +398,30 @@ html[data-app=website] .club-entry .club-intro{padding:0;margin:0;max-width:none
 html[data-app=website] .club-intro h1{font-size:clamp(34px,4vw,54px);line-height:1.13;letter-spacing:-.04em}
 html[data-app=website] .club-intro h1 em{font-style:normal;color:var(--ec-green,#006a4d)}
 html[data-app=website] .club-intro>p:first-of-type{font-size:20px;line-height:1.55;font-weight:500}
+html[data-app=website] .club-offer-entry{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:44px;padding-block:28px 40px}
+html[data-app=website] .club-offer-entry h1{font-size:clamp(34px,4.4vw,58px);margin:0 0 24px}
+html[data-app=website] .club-offer-entry h1 em{display:block}
+html[data-app=website] .club-offer-actions{flex-direction:column;align-items:flex-start;gap:16px;margin-top:26px}
+html[data-app=website] .club-offer-actions .ec-button{font-size:17px;min-height:58px;padding:18px 24px;white-space:normal;text-align:center}
+html[data-app=website] .club-offer-benefits{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-wrap:wrap;gap:12px 24px;font-size:15px;color:var(--ec-ink,#102019)}
+html[data-app=website] .club-offer-benefits li{display:flex;gap:8px;align-items:center}
+html[data-app=website][data-page=club] .ec-mobile-action .ec-button{font-size:15px;line-height:1.4;min-height:56px;white-space:normal;text-align:center;padding:12px 18px}
+html[data-app=website] .club-offer-benefits svg{width:20px;height:20px;flex:none;fill:none;stroke:#006a4d;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+html[data-app=website] .club-welcome-card{border:1px solid #bad3c6;border-radius:24px;padding:clamp(24px,3vw,38px);background:#eaf4ee;color:#102019}
+html[data-app=website] .club-welcome-token{display:flex;align-items:center;gap:20px;padding-bottom:24px;border-bottom:1px solid #c3d8cc}
+html[data-app=website] .club-welcome-token .club-coin-badge{width:86px;height:86px;font-size:44px;flex:none}
+html[data-app=website] .club-welcome-token>strong{font-size:clamp(34px,3.6vw,48px);letter-spacing:-.04em;color:#006a4d}
+html[data-app=website] .club-welcome-card h2{font-size:27px;line-height:1.25;margin:24px 0 12px}
+html[data-app=website] .club-welcome-card>p{font-size:17px;line-height:1.6;color:#3b5549;margin:0}
+html[data-app=website] .club-welcome-rewards{display:grid;gap:14px;margin-block:24px}
+html[data-app=website] .club-welcome-rewards>div{display:flex;align-items:center;gap:12px;font-size:16px;line-height:1.4;font-weight:600}
+html[data-app=website] .club-welcome-rewards svg{width:30px;height:30px;flex:none;fill:none;stroke:#006a4d;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+html[data-app=website] .club-welcome-path{border-top:1px solid #c3d8cc;padding-top:20px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;line-height:1.5;color:#3b5549}
+html[data-app=website] .club-welcome-path strong{color:#006a4d}
+html[data-app=website] .club-ai-support{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:36px}
+html[data-app=website] .club-ai-support>div>h2{font-size:clamp(28px,3vw,38px);line-height:1.2}
+html[data-app=website] .club-ai-support>div>p{font-size:18px;line-height:1.65;color:var(--ec-muted,#53675e)}
+html[data-app=website] .club-ai-support .ec-button,html[data-app=website] #request-access .ec-button{white-space:normal;text-align:center}
 html[data-app=website] .club-ai-example{border:1px solid #c6d9d0;background:#fff;border-radius:22px;padding:26px;color:#102019;box-shadow:0 12px 36px #19382c08}
 html[data-app=website] .club-example-top{display:flex;justify-content:space-between;gap:16px;align-items:center;padding-bottom:18px;border-bottom:1px solid #d8e4de;font-size:12px;color:#53675e}
 html[data-app=website] .club-example-top>span:first-child{font-size:18px;font-weight:700;color:#006a4d;white-space:nowrap}
@@ -462,5 +486,5 @@ html[data-app=website] .club-coin-return h3{font-size:24px}
 html[data-app=website] #club-wallet{scroll-margin-top:100px}
 html[data-app=website] .club-reward-preview>span{text-align:center}
 html[data-app=website] .club-questions p{font-size:16px;line-height:1.65;color:var(--ec-muted,#53675e)}
-@media(max-width:800px){html[data-app=website] .club-entry,html[data-app=website] .club-life,html[data-app=website] .club-coin-intro{grid-template-columns:1fr;gap:28px}html[data-app=website] .club-entry{padding-block:26px}html[data-app=website] .club-intro>p:first-of-type{font-size:18px}}
+@media(max-width:800px){html[data-app=website] .club-entry,html[data-app=website] .club-life,html[data-app=website] .club-coin-intro,html[data-app=website] .club-ai-support{grid-template-columns:1fr;gap:28px}html[data-app=website] .club-entry{padding-block:26px}html[data-app=website] .club-intro>p:first-of-type{font-size:18px}html[data-app=website] .club-offer-actions .ec-button{width:100%;font-size:16px}html[data-app=website] .club-offer-actions{margin-top:20px}html[data-app=website] .club-offer-entry h1{margin-bottom:18px}}
 @media(max-width:600px){html[data-app=website] .club-socials nav,html[data-app=website] .club-benefits,html[data-app=website] .club-coin-uses,html[data-app=website] .club-claim-grid{grid-template-columns:1fr}html[data-app=website] .club-channel{padding:20px;gap:14px}html[data-app=website] .club-ai-example{padding:20px}html[data-app=website] .club-ai-request{margin-left:12px}html[data-app=website] .club-ai-result{margin-right:12px}html[data-app=website] .club-example-top{align-items:start}html[data-app=website] .club-example-top>span:last-child{max-width:130px;text-align:right}html[data-app=website] .club-reward-preview{padding:18px}html[data-app=website] .club-reward-row{gap:10px;padding:12px}html[data-app=website] .club-reward-row svg{width:34px;height:34px}}
