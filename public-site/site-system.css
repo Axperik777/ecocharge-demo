@@ -457,6 +457,10 @@ html[data-app=website] .club-claim-grid{display:grid;grid-template-columns:repea
 html[data-app=website] .club-claim-grid h4{font-size:18px;margin:0 0 10px}
 html[data-app=website] .club-claim-grid p{font-size:16px}
 html[data-app=website] .club-claim .ec-button{white-space:normal;text-align:center}
+html[data-app=website] .club-coin-return{border-top:1px solid var(--ec-border,#d8e4de);margin-top:30px;padding-top:24px}
+html[data-app=website] .club-coin-return h3{font-size:24px}
+html[data-app=website] #club-wallet{scroll-margin-top:100px}
+html[data-app=website] .club-reward-preview>span{text-align:center}
 html[data-app=website] .club-questions p{font-size:16px;line-height:1.65;color:var(--ec-muted,#53675e)}
 @media(max-width:800px){html[data-app=website] .club-entry,html[data-app=website] .club-life,html[data-app=website] .club-coin-intro{grid-template-columns:1fr;gap:28px}html[data-app=website] .club-entry{padding-block:26px}html[data-app=website] .club-intro>p:first-of-type{font-size:18px}}
 @media(max-width:600px){html[data-app=website] .club-socials nav,html[data-app=website] .club-benefits,html[data-app=website] .club-coin-uses,html[data-app=website] .club-claim-grid{grid-template-columns:1fr}html[data-app=website] .club-channel{padding:20px;gap:14px}html[data-app=website] .club-ai-example{padding:20px}html[data-app=website] .club-ai-request{margin-left:12px}html[data-app=website] .club-ai-result{margin-right:12px}html[data-app=website] .club-example-top{align-items:start}html[data-app=website] .club-example-top>span:last-child{max-width:130px;text-align:right}html[data-app=website] .club-reward-preview{padding:18px}html[data-app=website] .club-reward-row{gap:10px;padding:12px}html[data-app=website] .club-reward-row svg{width:34px;height:34px}}
