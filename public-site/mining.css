@@ -20,3 +20,37 @@ html[data-page="mining"] .ec-mobile-action{background:#1f1f22;color:#d8d8db;bord
 
 .ec-header .ec-menu-trigger{min-width:40px;min-height:44px;align-items:center;justify-content:center;border:1px solid #67676a;border-radius:5px;background:#323235;color:#becaaa;padding:8px}.ec-header .ec-menu-trigger svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5}
 @media(max-width:650px){.ec-header .ec-header-inner{flex-wrap:nowrap;gap:6px;padding-block:9px}.ec-header .charge-brand{gap:5px;margin-right:auto}.ec-header .charge-symbol{width:28px;height:28px}.ec-header .charge-wordmark{font-size:23px}.ec-header .ec-header-actions{flex:0 1 auto;width:auto;gap:5px;margin-left:0}.ec-header .ec-header-actions>.ec-button{display:none}.ec-header .ec-header-actions .locale-switch{margin:0}.ec-header .ec-menu-trigger{position:static;order:3;padding:8px;min-width:36px}.ec-header .ec-sign-in{padding:10px 7px;font-size:11px}.ec-header .ec-header-actions .locale-switch button{min-width:26px;padding:6px;min-height:40px}}
+
+/* EC-85: light promotional surface and explicit dark-form text. */
+.mining-entry{background:#edf5ef;border:1px solid #d3e1d7;border-radius:16px;color:#20392e}
+.mining-entry h2{color:#20392e}
+.mining-entry p,.mining-entry .solar-eyebrow{color:#425e4e}
+.mining-entry .ec-button{background:#176447;color:#fff;border-color:#176447}
+.mining-entry .ec-button:hover{background:#124e38;border-color:#124e38}
+.mining-page .lead-section p,.mining-page .lead-section li{color:#cccccf}
+.mining-page .lead-hint{color:#c2c8c5!important;font-size:12px!important}
+.mining-page [data-lead-result][data-error=true]{color:#ffb6b6}
+.mining-page [data-lead-result][data-success=true]{color:#b5e6c6;border-color:#709a81}
+.grid-plan-preview strong{font-family:var(--eg-font,Manrope,system-ui,sans-serif);font-weight:600;font-variant-numeric:tabular-nums}
+.grid-plan-preview small{font-size:12px;line-height:1.65;color:#c8ceca}
+.grid-hero-summary{font-size:12px;line-height:1.7;color:#c0c8c2}
+.grid-plan-preview>div,.grid-plan-preview a,.grid-direction-cards small{font-size:12px}
+.grid-eyebrow{font-size:12px;letter-spacing:.08em}
+@media(max-width:760px){
+ .grid-hero-summary{font-size:12px;gap:8px 12px}
+ .grid-plan-preview{padding:18px}
+ .grid-plan-preview>div,.grid-plan-preview a{font-size:12px}
+ .grid-plan-preview a{min-height:36px;align-content:center}
+ .grid-direction-cards small{font-size:12px;letter-spacing:.04em}
+ .grid-direction-cards b{font-size:14px;line-height:1.6}
+ .grid-hero-visual figcaption{font-size:11px;line-height:1.5;background:linear-gradient(transparent,rgba(15,26,21,.94) 35%)}
+ .grid-hero-visual{grid-template-columns:1fr}
+ .grid-hero-visual img{height:180px;min-height:0;object-position:center 60%}
+ .grid-plan-preview>div{display:flex;align-items:start;justify-content:space-between;gap:16px}
+ .grid-plan-preview>div>span{max-width:55%}
+ .grid-plan-preview a{margin-top:0}
+ .grid-plan-preview p{display:flex;align-items:baseline;gap:14px;margin:12px 0}
+ .grid-plan-preview p span{margin:0}
+ .mining-entry{padding:24px 20px;gap:20px;margin-inline:20px;width:auto}
+ .mining-page .solar-eyebrow{font-size:12px!important;letter-spacing:.08em}
+}

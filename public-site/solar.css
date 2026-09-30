@@ -1,4 +1,4 @@
-/* Home solar: real product photography and the existing EcoGrid navy, lime and mint identity. */
+/* Home solar: real product photography and the existing EcoGrid identity. */
 .solar-page,.solar-home-entry{--solar-ink:#28282b;--solar-blue:#acacaf;--solar-light:#f2f2f5;--solar-accent:#becaaa;--solar-line:#505053;background:#212124;color:#f3f3f6}
 .solar-page h1,.solar-page h2,.solar-page h3,.solar-home-entry h2{color:#f3f3f6}.solar-page .solar-lead{color:#cfcfd2}.solar-page .ec-text-link{color:#e4e4e7}.solar-home-entry{border-radius:4px}.solar-quote .lead-card{background:#2a2a2d;border-color:#5c5c5f;color:#f3f3f6}.solar-quote .lead-card input:not([type=checkbox]){background:#212124;color:#f3f3f6;border-color:#6f6f72}.solar-quote p,.solar-quote li{color:#cdcdd0}.solar-quote .lead-hint{color:#bdbdc0!important}.solar-quote [data-lead-result][data-success=true]{color:#e4e4e7}.solar-quote [data-lead-result][data-error=true]{color:#ffb6b6}.solar-quote [data-lead-again],.solar-quote [data-lead-followup] a{color:#e4e4e7}.solar-quote .lead-followup-consent{border-color:#5c5c5f}
 .solar-page section[id]{scroll-margin-top:110px}.solar-eyebrow{font-size:11px!important;font-weight:600;letter-spacing:.15em;line-height:1.7;color:var(--solar-blue);margin:0 0 15px!important}.solar-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,6vw,100px);padding-top:32px;padding-bottom:70px;align-items:center}.solar-intro h1{font-size:clamp(48px,6.5vw,84px);letter-spacing:-.055em;line-height:1.03;margin:0 0 28px;font-weight:600}.solar-intro h1 span{color:var(--solar-accent)}.solar-lead{max-width:500px;font-size:17px;line-height:1.8}.solar-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin:30px 0}.solar-page .ec-button,.solar-home-entry .ec-button{font-size:13px;min-height:48px}.solar-actions .ec-text-link{font-size:12px}.solar-hero-bottom{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;border-top:1px solid var(--solar-line);padding-top:25px;margin-top:38px}.solar-hero-bottom strong{font-size:24px;white-space:nowrap;font-weight:600}.solar-hero-bottom small{font-size:12px;font-weight:400}.solar-hero-bottom>span{font-size:12px;max-width:185px;line-height:1.7;color:#c0c0c3}
@@ -32,3 +32,22 @@
 @media(prefers-reduced-motion:reduce){.solar-page *{scroll-behavior:auto!important}}
 
 [data-landing=main][data-page=home] .investment-lab-entry .public-energy-entry{display:grid;max-width:640px;margin:28px auto}.investment-lab-entry{padding-block:15px 20px}
+
+/* EC-85: keep text paired with its actual surface, including expanded details. */
+.solar-hardware-body details p{color:inherit}
+.solar-equipment>div>p:not(.solar-eyebrow){color:#c8c8cb}
+.solar-participation h2{color:#20392e}
+.solar-participation p{color:#34483d}
+.solar-participation .ec-button{background:#20392e;color:#fff;border-color:#20392e}
+.solar-participation .ec-button:hover{background:#164d38;color:#fff;border-color:#164d38}
+.solar-page .solar-fine,.solar-package-body>small,.solar-participation small{font-size:12px;line-height:1.7}
+.solar-hardware-body details{font-size:13px;line-height:1.7}
+.solar-hardware-body summary{min-height:44px;align-content:center;cursor:pointer}
+.solar-hardware-body details p{margin-block:10px}
+@media(max-width:760px){
+ .solar-eyebrow,.solar-hardware-body>.solar-eyebrow{font-size:12px!important;letter-spacing:.08em}
+ .solar-page .ec-button,.solar-select{font-size:14px!important}
+ .solar-package dl>div,.solar-spec-list>div,.solar-hardware-body>a{font-size:13px;line-height:1.65}
+ .solar-home-price span,.solar-home-price small,.solar-package-body>small{font-size:12px}
+ .solar-home-price strong{font-variant-numeric:tabular-nums}
+}
