@@ -15,3 +15,5 @@
  .story-contents a{font-size:13px;min-height:44px}
  .story-stats dt,.story-stats dd{font-size:12px}
 }
+
+.story-founder{display:flex;align-items:center;gap:16px}.story-founder-details{display:grid;gap:5px;min-width:0}.story-founder .v-founder-photo{width:80px}
