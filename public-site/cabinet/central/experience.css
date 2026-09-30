@@ -49,7 +49,7 @@ body.eco-shell.pages-client-preview .app-shell>footer{display:none}
 }
 html[data-eco-theme="light"]{color-scheme:light}
 html[data-eco-theme="dark"]{color-scheme:dark}
-html[data-eco-theme="dark"] .eco-shell{--eg-bg:#071416;--eg-surface:#0d2021;--eg-surface-soft:#142b29;--eg-surface-raised:#102725;--eg-border:#294741;--eg-border-strong:#43655e;--eg-text:#f5fbf7;--eg-muted:#b9cac2;--eg-brand:#b9ff66;--eg-brand-deep:#0b7655;--eg-brand-soft:#183c2e;--eg-brand-hover:#d0ff99;--eg-on-brand:#0b1b18;--eg-accent:#b9ff66;--eg-positive:#b9ff66;--eg-danger:#ffaaa4;--eg-shadow:0 14px 36px rgba(0,0,0,.34);color-scheme:dark}
+html[data-eco-theme="dark"] .eco-shell{--eg-bg:#191d20;--eg-surface:#242a2e;--eg-surface-soft:#2c3438;--eg-surface-raised:#272f33;--eg-border:#3a454a;--eg-border-strong:#607078;--eg-text:#f0f4f2;--eg-muted:#b0bdb8;--eg-brand:#93d7b6;--eg-brand-deep:#23604c;--eg-brand-soft:#2b443b;--eg-brand-hover:#afe4c9;--eg-on-brand:#0b1b18;--eg-accent:#98d7b8;--eg-positive:#93d7b6;--eg-danger:#f4a29b;--eg-shadow:0 6px 20px rgba(0,0,0,.12);color-scheme:dark}
 .eco-shell .topbar .charge-shell{fill:var(--eg-brand-deep)}
 .eco-shell .topbar .charge-core{fill:var(--eg-brand)}
 .eco-shell .topbar .charge-wordmark>span{color:var(--eg-brand)!important}
@@ -193,3 +193,142 @@ html[data-eco-theme="dark"] .eco-shell .topbar .charge-shell{fill:#f4f9f7}
  .eco-shell #client-view{padding-inline:12px}.eco-shell .topbar .charge-wordmark{display:none}.eco-shell .eg-summary-grid{gap:8px}.eco-shell .eg-summary-card{min-height:132px;padding:13px}.eco-shell .eg-summary-card>strong{font-size:20px}.eco-shell .eg-money-actions{flex-direction:column}.eco-shell .eg-money-actions .eco-button{width:100%}.eco-shell .eg-project-row{grid-template-columns:38px minmax(0,1fr) 9px}.eco-shell .eg-project-symbol{width:38px;height:38px}.eco-shell .eg-project-amount{grid-column:2;text-align:left}.eco-shell .eg-status{grid-column:2}.eco-shell .eg-row-arrow{grid-column:3;grid-row:1/4}.eco-shell .eg-service-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.eco-shell *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* EC-80: readable page headings, compact portfolio and one theme control. */
+.eco-shell{font-family:Manrope,system-ui,sans-serif}
+.eco-shell button,.eco-shell input,.eco-shell select,.eco-shell textarea{font-family:inherit}
+.eco-shell .eco-button{font-size:14px;font-weight:650;line-height:1.4}
+.eco-shell .eco-text{font-size:14px;font-weight:600;line-height:1.4}
+.eco-shell #eco-workspace h1{font-weight:700;letter-spacing:-1.1px}
+.eco-shell #eco-workspace h2{font-weight:700;letter-spacing:-.35px}
+.eco-shell #eco-workspace .eg-page-heading h1{margin:0!important}
+.eco-shell .eg-page-heading.eg-editorial-heading{display:block;max-width:760px}
+.eco-shell .eg-editorial-heading>.eco-kicker{display:block;margin-bottom:9px}
+.eco-shell .eg-editorial-heading p{max-width:640px;margin:9px 0 0;font-size:15px;line-height:1.55}
+.eco-shell .eg-editorial-heading .eg-preview-reactions{font-size:12px!important;margin-top:6px}
+.eco-shell .eg-summary-grid .eg-balance{margin:0;min-height:190px}
+.eco-shell .eg-balance-number{font-weight:700;margin:4px 0 0}
+.eco-shell .eg-summary-card{min-height:190px}
+.eco-shell .eg-summary-card>span:first-child{max-width:calc(100% - 30px);font-size:14px;line-height:1.4}
+.eco-shell .eg-summary-card>strong{font-weight:700}
+.eco-shell .eg-summary-card>small{font-size:13px;line-height:1.5;max-width:25ch}
+.eco-shell .eg-summary-glyph{width:32px;height:32px;right:14px;top:14px}
+.eco-shell .eg-summary-glyph .eg-art{width:23px;height:23px}
+.eco-shell .eg-dashboard-grid{grid-template-areas:"projects event" "operations support"}
+.eco-shell .eg-project-list{margin:0}
+.eco-shell .eg-next-event{grid-template-columns:36px minmax(0,1fr);gap:10px;padding:18px}
+.eco-shell .eg-next-event>.eg-card-icon{width:36px;height:36px;border-radius:10px}
+.eco-shell .eg-next-event .eg-art{width:28px;height:28px}
+.eco-shell .eg-next-event .eco-kicker{font-size:10px;letter-spacing:.55px;line-height:1.5}
+.eco-shell .eg-next-event h2{font-size:21px!important;margin:3px 0!important}
+.eco-shell .eg-next-event small{font-size:12px}
+.eco-shell .eg-next-event>.eco-text{grid-column:2;min-height:36px;padding:3px 0}
+.eco-shell .eg-recent-operations{margin:0}
+.eco-shell .eg-project-copy strong{font-size:14px}
+.eco-shell .eg-project-copy small,.eco-shell .eg-project-amount small{font-size:12px;line-height:1.45}
+.eco-shell .eg-status{font-size:11px;line-height:1.4}
+.eco-shell .eco-event strong{font-size:14px;line-height:1.45}
+.eco-shell .eco-event small,.eco-shell .eco-event time{font-size:12px;line-height:1.5}
+.eco-shell .eco-event-dot::before{content:none}
+.eco-shell .eco-event-dot.is-outgoing::after{content:"↑";color:var(--eg-muted)}
+.eco-shell .eco-event-dot.is-info::after{content:"•"}
+.eco-shell .eg-wallet-summary{padding:0;border:0;box-shadow:none;background:none}
+.eco-shell .eg-wallet-summary .eg-balance{min-height:190px;margin:0}
+.eco-shell.pages-client-preview .eg-wallet-summary .eg-balance{min-height:150px;justify-content:center}
+.eco-shell.pages-client-preview .eg-wallet-summary .eg-money-actions{display:none}
+.eco-shell .eg-wallet-totals{margin:0}
+.eco-shell .eg-wallet-totals dt{font-size:13px;line-height:1.5}
+.eco-shell .eg-wallet-totals dd{font-weight:700}
+.eco-shell .topbar>.eco-theme-toggle{display:grid;place-items:center;flex:none;width:44px;min-width:44px;height:44px;padding:0;border:1px solid var(--eg-border);border-radius:11px;background:var(--eg-surface);color:var(--eg-text)}
+.eco-shell .topbar>.eco-theme-toggle:hover{background:var(--eg-surface-soft);border-color:var(--eg-brand)}
+.eco-shell .eg-operation-details h2{margin:16px 0 10px;font-size:23px;line-height:1.3;letter-spacing:-.5px}
+.eco-shell .eg-operation-amount{display:block;font-size:32px;font-weight:700;letter-spacing:-1px;font-variant-numeric:tabular-nums;margin-bottom:20px}
+.eco-shell .eg-operation-details dl{margin:0}
+.eco-shell .eg-operation-details dl>div{display:grid;grid-template-columns:1fr 1.3fr;gap:12px;padding:12px 0;border-top:1px solid var(--eg-border)}
+.eco-shell .eg-operation-details dt{color:var(--eg-muted);font-size:13px;line-height:1.5}
+.eco-shell .eg-operation-details dd{margin:0;font-size:14px;font-weight:600;text-align:right;overflow-wrap:anywhere;line-height:1.5}
+.eco-shell .eg-operation-details p{font-size:13px;line-height:1.6;color:var(--eg-muted)}
+.eco-shell .view-dashboard [data-community-preview]{display:block;margin:24px 0 0}
+.eco-shell .eg-post{background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border);border-radius:var(--eg-radius);box-shadow:var(--eg-shadow)}
+.eco-shell .eg-post>header small,.eco-shell .eg-reaction b{color:var(--eg-muted)}
+.eco-shell .eg-post-body{color:var(--eg-muted)!important;font-size:15px;line-height:1.65}
+.eco-shell .eg-post footer,.eco-shell .eg-reaction,.eco-shell .eg-feed-filters button{border-color:var(--eg-border-strong);color:var(--eg-muted)}
+.eco-shell .eg-post-brand,.eco-shell .eg-feed-filters [aria-pressed=true],.eco-shell .eg-reaction[aria-pressed=true]{background:var(--eg-brand-soft);color:var(--eg-brand);border-color:var(--eg-border-strong)}
+.eco-shell .eg-post-terms{background:var(--eg-surface-soft)}
+.eco-shell .eg-feed-account{margin-bottom:20px}
+.eco-shell .eg-feed-update{display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%;padding:14px 0;background:none;border:0;border-top:1px solid var(--eg-border);color:var(--eg-text);font:inherit;text-align:left}
+.eco-shell .eg-feed-update strong,.eco-shell .eg-feed-update small{display:block}
+.eco-shell .eg-feed-update strong{font-size:14px}
+.eco-shell .eg-feed-update small{font-size:13px;line-height:1.5;color:var(--eg-muted);margin-top:4px}
+.eco-shell .eg-feed-update:hover{background:var(--eg-surface-soft)}
+.eco-shell .eg-service small{font-size:13px;line-height:1.55}
+.eco-shell .eg-service:hover{background:var(--eg-surface-soft)}
+html[data-eco-theme="dark"] .eco-shell .eg-balance{background:linear-gradient(120deg,#275946,#337057);box-shadow:none;border-color:#49856b}
+html[data-eco-theme="dark"] .eco-shell .eg-art .face{fill:#dbece3}
+html[data-eco-theme="dark"] .eco-shell .eg-art .shade{fill:#759887}
+html[data-eco-theme="dark"] .eco-shell .eg-art .dark{fill:#203c30}
+html[data-eco-theme="dark"] .eco-shell .eg-art .deep{fill:#395e4d}
+html[data-eco-theme="dark"] .eco-shell .eg-art .line{stroke:#496855}
+html[data-eco-theme="dark"] .eco-shell .eg-art .lightline{stroke:#d2e4d9}
+@media(min-width:981px){
+ .eco-shell .topbar>.eco-theme-toggle{position:fixed;top:24px;right:28px;z-index:110}
+ .eco-shell .eg-page-heading,.eco-shell .eg-profile-header{padding-right:58px}
+ .eco-shell #eco-top{grid-template-columns:repeat(2,46px)}
+ .eco-shell #eco-top .eco-icon:last-child{grid-column:2}
+}
+@media(max-width:980px){
+ .eco-shell .topbar>.eco-theme-toggle{position:static;order:3;margin-left:6px}
+ .eco-shell #eco-top{margin-left:auto}
+ .eco-shell #eco-top>[data-eco-route="profile"]{display:none}
+}
+@media(max-width:760px){
+ .eco-shell .eg-page-heading{gap:12px;align-items:flex-start}
+ .eco-shell .eg-page-heading>.eco-text{flex:none;max-width:108px;text-align:right;white-space:normal}
+ .eco-shell .eg-page-heading p{font-size:14px;line-height:1.5}
+ .eco-shell .eg-page-heading.eg-editorial-heading p{font-size:14px}
+ .eco-shell .eg-summary-grid .eg-balance{min-height:0;padding:18px 20px;margin:0}
+ .eco-shell .eg-balance-number{font-size:36px;margin:4px 0 0;letter-spacing:-1px}
+ .eco-shell .eg-balance-note{font-size:12px;margin-top:3px}
+ .eco-shell .eg-money-actions{margin-top:14px;padding-top:0;flex-direction:row;flex-wrap:nowrap}
+ .eco-shell .eg-money-actions .eco-button{font-size:13px;min-height:44px;width:auto;padding:10px 8px}
+ .eco-shell .eg-summary-card{min-height:115px;padding:14px}
+ .eco-shell .eg-summary-card>span:first-child{max-width:none;font-size:12px;padding:0}
+ .eco-shell .eg-summary-card>strong{font-size:23px;margin:9px 0 3px;letter-spacing:-.5px}
+ .eco-shell .eg-summary-card>small{font-size:12px;line-height:1.45}
+ .eco-shell .eg-summary-glyph{display:none}
+ .eco-shell .eg-dashboard-grid{grid-template-areas:"projects" "event" "operations" "support";gap:12px}
+ .eco-shell .eg-project-copy strong{font-size:14px}
+ .eco-shell .eg-project-copy small{font-size:12px}
+ .eco-shell .eg-project-amount strong{font-size:14px}
+ .eco-shell .eg-next-event{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:10px;padding:14px}
+ .eco-shell .eg-next-event>.eg-card-icon{width:32px;height:32px}
+ .eco-shell .eg-next-event h2{font-size:18px!important}
+ .eco-shell .eg-next-event .eco-kicker{font-size:10px;letter-spacing:.25px}
+ .eco-shell .eg-next-event small{display:none}
+ .eco-shell .eg-next-event>.eco-text{grid-column:3;grid-row:1;align-self:center;font-size:12px;min-height:44px}
+ .eco-shell .eg-wallet-summary .eg-balance{min-height:0;padding:20px}
+ .eco-shell.pages-client-preview .eg-wallet-summary .eg-balance{min-height:130px}
+ .eco-shell .eg-wallet-totals dt{font-size:12px}
+ .eco-shell .eg-wallet-totals dd{font-size:21px}
+ .eco-shell .eg-post h2{font-size:19px!important;line-height:1.4!important}
+ .eco-shell .eg-service strong{font-size:15px}
+ .eco-shell .eg-service small{font-size:13px}
+}
+@media(max-width:360px){
+ .eco-shell .topbar .charge-wordmark{display:none!important}
+ .eco-shell .eg-page-heading{flex-wrap:wrap}
+ .eco-shell .eg-summary-card{padding:12px}
+ .eco-shell .eg-summary-card>strong{font-size:21px}
+ .eco-shell .eg-project-row{grid-template-columns:36px minmax(0,1fr) 9px}
+ .eco-shell .eg-next-event{grid-template-columns:minmax(0,1fr) auto}
+ .eco-shell .eg-next-event>.eg-card-icon{display:none}
+ .eco-shell .eg-next-event>.eco-text{grid-column:2}
+ .eco-shell .eg-operation-details dl>div{grid-template-columns:1fr;gap:3px}
+ .eco-shell .eg-operation-details dd{text-align:left}
+}
+.eco-shell .main-nav{box-shadow:none}
+.eco-shell #modal .modal-heading{background:var(--eg-surface);color:var(--eg-muted);border-color:var(--eg-border)}
+.eco-shell #modal #close-modal{background:var(--eg-surface-soft);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell.pages-client-preview [data-action="eco-message"]{display:none}
+
+@media(min-width:761px) and (max-width:1200px){.eco-shell .eg-dashboard-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:'projects' 'event' 'operations' 'support'}}
