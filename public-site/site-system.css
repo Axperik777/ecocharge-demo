@@ -375,3 +375,16 @@ html[data-app=website] #site-menu .ec-menu-language:not(:has([data-locale-switch
 html[data-app=website] #site-menu .locale-switch{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:3px;gap:2px}
 html[data-app=website] #site-menu .locale-switch button{min-width:48px;min-height:44px;padding:10px;font-family:var(--eg-font);font-size:13px;border-radius:7px;color:var(--muted)}
 html[data-app=website] #site-menu .locale-switch button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 4px #123a2414}
+
+/* EC95: AI explains the operation of projects; it is not a product tile. */
+.grid-direction-cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ec-ai-note{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:24px;padding:28px;border:1px solid var(--ec-border,#d5e3dd);border-radius:20px;background:var(--ec-soft,#ebf5ef);margin-block:28px;align-items:start}
+.ec-ai-note .product-name{display:block;color:var(--ec-accent,#007b60);font-size:20px;font-weight:750;margin:0 0 10px}
+.ec-ai-note h2{font-size:clamp(20px,2.2vw,28px);line-height:1.25;margin:0}
+.ec-ai-note p{margin:0;line-height:1.65;color:var(--ec-ink,#20362e)}
+.journey-guide .ec-ai-note{grid-template-columns:1fr;gap:12px;padding:20px;margin:24px 0}
+.journey-guide .ec-ai-note h2{font-size:20px}
+@media(max-width:800px){.grid-direction-cards,.ec-ai-note{grid-template-columns:1fr}.ec-ai-note{gap:16px;padding:22px}.ec-ai-note.ec-wrap{width:calc(100% - 32px)}}
+
+/* Equipment category labels use one treatment on photos and cutouts. */
+html[data-app=website] :is(.solar-hardware,.solar-charger) .solar-hardware-type{color:#fff;background:#173e31;padding:5px 9px;border-radius:4px;left:17px;top:13px;font-size:12px;font-weight:600;line-height:1.5;letter-spacing:0}

@@ -1,13 +1,11 @@
 'use strict';
 (()=>{
- const M=window.EcoJourney,t=(en,ru)=>window.EcoLocale?.language==='ru'?ru:en,params=new URL(location).searchParams,key='ecogrid-learning-v1';let read=[];
- try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))read=v.filter(x=>Object.hasOwn(M.topics,x));}catch{}
+ const M=window.EcoJourney,t=(en,ru)=>window.EcoLocale?.language==='ru'?ru:en,params=new URL(location).searchParams;
  function consultLink(){const f=document.querySelector('[data-journey-form]'),topic=f?.elements.journeyTopic.value||params.get('topic')||'energy',country=f?.elements.journeyCountry.value||'US';document.querySelectorAll('[data-journey-consult]').forEach(a=>{const p=['charge','solar','mining'].includes(topic)?'participate/'+topic+'/':'./';a.href=new URL(p+'?journey=fast&topic='+topic+'&country='+country+'&lang='+(window.EcoLocale?.language||'en')+'#request-access',document.baseURI).href;});}
- function progress(){document.querySelectorAll('[data-guide-read]').forEach(b=>{const done=read.includes(b.dataset.guideRead);b.setAttribute('aria-pressed',String(done));b.textContent=done?t('Read · undo','Прочитано · отменить'):t('Mark as read','Отметить прочитанным');});const n=document.querySelector('[data-journey-progress]');if(n)n.textContent=t('Read: ','Прочитано: ')+read.length+' / '+Object.keys(M.topics).length;}
  function track(event,details){window.EcoChargeFunnel?.track(event,details);}
  document.querySelectorAll('[data-journey-form]').forEach(form=>{
   const nurture=form.hasAttribute('data-journey-nurture'),fixed=form.hasAttribute('data-journey-fast'),routes=[...form.querySelectorAll('[name=journeyRoute]')],topic=form.elements.journeyTopic;
-  if(!fixed&&Object.hasOwn(M.topics,params.get('topic')))topic.value=params.get('topic');
+  if(!fixed&&Object.hasOwn(M.projectTopics,params.get('topic')))topic.value=params.get('topic');
   if(['US','CA'].includes(params.get('country')))form.elements.journeyCountry.value=params.get('country');
   if(!fixed&&Object.hasOwn(M.purposes,params.get('purpose'))&&params.get('purpose')!=='updates')form.elements.journeyPurpose.value=params.get('purpose');
   const initial=nurture?'nurture':fixed?'fast':['fast','nurture'].includes(params.get('journey'))?params.get('journey'):document.documentElement.dataset.page==='learn'?'nurture':'fast';routes.forEach(r=>r.checked=r.value===initial);
@@ -15,8 +13,8 @@
   form.addEventListener('change',e=>{if(e.target.name==='journeyRoute'){sync();track('journey_selected',{journey:form.elements.journeyRoute.value,topic:topic.value});}});
   document.addEventListener('ecocharge:locale',sync);document.querySelectorAll('[data-journey-choose]').forEach(a=>a.addEventListener('click',()=>{routes.forEach(r=>r.checked=r.value===a.dataset.journeyChoose);sync();}));sync();
  });
- document.addEventListener('click',e=>{const b=e.target.closest('[data-guide-read]');if(!b)return;const topic=b.dataset.guideRead;read=read.includes(topic)?read.filter(x=>x!==topic):[...read,topic];try{localStorage.setItem(key,JSON.stringify(read));}catch{}progress();track('guide_read',{topic,complete:read.includes(topic)});});
  document.querySelectorAll('[data-guide-topic]').forEach(a=>a.addEventListener('click',()=>{const f=document.querySelector('[data-journey-form]');if(f)f.elements.journeyTopic.value=a.dataset.guideTopic;consultLink();track('topic_selected',{topic:a.dataset.guideTopic});}));
- document.addEventListener('change',consultLink);document.addEventListener('ecocharge:locale',consultLink);document.addEventListener('ecocharge:locale',progress);progress();consultLink();
+ document.addEventListener('change',consultLink);document.addEventListener('ecocharge:locale',consultLink);consultLink();
+ if(params.get('topic')==='ai')document.getElementById('guide-energy')?.scrollIntoView({block:'start'});
  if(document.documentElement.dataset.page==='learn'&&Object.hasOwn(M.topics,params.get('topic'))&&!location.hash)document.getElementById('guide-'+params.get('topic'))?.scrollIntoView({block:'start'});
 })();
