@@ -392,43 +392,71 @@ html[data-app=website] :is(.solar-hardware,.solar-charger) .solar-hardware-type{
 
 html[data-app=website] .lead-hint{color:var(--muted)!important}
 
-/* Club community funnel */
-html[data-app=website] .club-intro{max-width:var(--ec-wrap,1200px)}
-html[data-app=website] .club-intro h1{max-width:980px;font-size:clamp(32px,4.6vw,64px);line-height:1.12}
-html[data-app=website] .club-intro h1 em{font-style:normal;color:var(--ec-green,#006a4d)}
-html[data-app=website] .club-intro>p:first-of-type{font-size:clamp(19px,2vw,24px);line-height:1.5;max-width:800px}
-html[data-app=website] .club-benefits{column-gap:36px;row-gap:12px}
-html[data-app=website] .club-benefits h3{margin:0 0 12px}
-html[data-app=website] .club-protection{background:var(--ec-surface,#fff);border:1px solid var(--ec-border,#d8e4de);border-radius:22px;padding:32px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
-html[data-app=website] .club-protection h2{font-size:clamp(25px,3vw,34px);line-height:1.25;margin:18px 0}
-html[data-app=website] .club-protection p,html[data-app=website] .club-steps p,html[data-app=website] .club-questions p{font-size:16px;line-height:1.65;color:var(--ec-muted,#53675e)}
-html[data-app=website] .club-program-status{display:inline-block;font-size:13px;color:var(--ec-muted,#53675e);border:1px solid var(--ec-border,#d8e4de);border-radius:6px;padding:5px 9px}
-html[data-app=website] .club-protection summary,html[data-app=website] .club-questions summary{cursor:pointer;font-weight:600;font-size:17px;min-height:44px;padding:12px 0}
-html[data-app=website] .club-steps ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
-html[data-app=website] .club-steps li>span{display:block;font-size:18px;color:var(--ec-green,#006a4d);border-bottom:1px solid var(--ec-border,#d8e4de);padding-bottom:16px}
-html[data-app=website] .club-steps h3{font-size:21px;line-height:1.4}
-html[data-app=website] .club-questions details{border-top:1px solid var(--ec-border,#d8e4de);padding:8px 0}
-@media(max-width:720px){html[data-app=website] .club-protection{grid-template-columns:1fr;gap:14px;padding:22px}html[data-app=website] .club-steps ol{grid-template-columns:1fr;gap:16px}}
-
-/* Online community and welcome gift */
-html[data-app=website] .club-entry{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,1fr);gap:clamp(28px,5vw,72px);align-items:center;padding-block:42px}
+/* Club: practical AI, conversations and member rewards. */
+html[data-app=website] .club-entry{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center;padding-block:44px}
 html[data-app=website] .club-entry .club-intro{padding:0;margin:0;max-width:none}
-html[data-app=website] .club-entry .club-intro h1{font-size:clamp(34px,3.7vw,52px)}
-html[data-app=website] .club-entry .club-entry-note{font-size:14px;margin-top:18px;color:var(--ec-muted,#53675e)}
-html[data-app=website] .club-welcome{background:#e8f2ed;border:1px solid #c3dacf;border-radius:24px;padding:clamp(24px,3vw,40px);color:#102019}
-html[data-app=website] .club-welcome h2{font-size:clamp(44px,5vw,66px);letter-spacing:-.04em;color:#006a4d;margin:20px 0 12px}
-html[data-app=website] .club-welcome p{font-size:17px;line-height:1.6;color:#354e41}
-html[data-app=website] .club-welcome ul{list-style:none;padding:12px 0;margin:18px 0;border-block:1px solid #bfd3c8}
-html[data-app=website] .club-welcome li{padding:9px 0;font-size:15px}
-html[data-app=website] .club-welcome .ec-text-link{color:#006a4d}
-html[data-app=website] .club-online{margin-block:24px;padding:32px;background:var(--ec-surface,#fff);border:1px solid var(--ec-border,#d8e4de);border-radius:24px}
-html[data-app=website] .club-online header{max-width:780px}
-html[data-app=website] .club-online h2{font-size:clamp(26px,3vw,36px);line-height:1.25}
-html[data-app=website] .club-online p{font-size:16px;line-height:1.65;color:var(--ec-muted,#53675e)}
-html[data-app=website] .club-topic-number{color:var(--ec-green,#006a4d);font-size:15px}
-html[data-app=website] #club-gift{scroll-margin-top:100px}
-@media(max-width:800px){html[data-app=website] .club-entry{grid-template-columns:1fr;padding-block:28px;gap:28px}html[data-app=website] .club-online{padding:22px}html[data-app=website] .club-welcome{padding:24px}}
-
-html[data-app=website] .club-socials nav{display:flex;gap:12px;flex-wrap:wrap}html[data-app=website] .club-socials a{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:12px 18px;border:1px solid var(--ec-border,#d8e4de);border-radius:12px;text-decoration:none;background:var(--ec-surface,#fff);color:var(--ec-ink,#102019);font-size:15px}html[data-app=website] .club-socials a:hover{border-color:var(--ec-green,#006a4d);background:#e8f2ed;color:#102019}html[data-app=website] .club-socials svg{width:22px;height:22px;fill:currentColor;flex:none}html[data-app=website] .club-socials a:focus-visible{outline:3px solid var(--ec-green,#006a4d);outline-offset:3px}
-
-html[data-app=website] .club-life{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}html[data-app=website] .club-life h2,html[data-app=website] .club-gifts h2{font-size:clamp(26px,3vw,36px);line-height:1.25}html[data-app=website] .club-life p,html[data-app=website] .club-gifts>p{font-size:17px;line-height:1.7;color:var(--ec-muted,#53675e);max-width:860px}html[data-app=website] .club-format-list details{border-top:1px solid var(--ec-border,#d8e4de);padding-block:8px}html[data-app=website] .club-format-list summary{cursor:pointer;font-size:19px;font-weight:600;padding:14px 0;min-height:44px}html[data-app=website] .club-gift-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}html[data-app=website] .club-gift-items span{padding:12px 16px;background:var(--ec-surface,#fff);border:1px solid var(--ec-border,#d8e4de);border-radius:10px;font-size:15px}html[data-app=website] .club-comfort{border-block:1px solid var(--ec-border,#d8e4de);margin-block:16px}@media(max-width:720px){html[data-app=website] .club-life{grid-template-columns:1fr;gap:20px}}
+html[data-app=website] .club-intro h1{font-size:clamp(34px,4vw,54px);line-height:1.13;letter-spacing:-.04em}
+html[data-app=website] .club-intro h1 em{font-style:normal;color:var(--ec-green,#006a4d)}
+html[data-app=website] .club-intro>p:first-of-type{font-size:20px;line-height:1.55;font-weight:500}
+html[data-app=website] .club-ai-example{border:1px solid #c6d9d0;background:#fff;border-radius:22px;padding:26px;color:#102019;box-shadow:0 12px 36px #19382c08}
+html[data-app=website] .club-example-top{display:flex;justify-content:space-between;gap:16px;align-items:center;padding-bottom:18px;border-bottom:1px solid #d8e4de;font-size:12px;color:#53675e}
+html[data-app=website] .club-example-top>span:first-child{font-size:18px;font-weight:700;color:#006a4d;white-space:nowrap}
+html[data-app=website] .club-ai-example h2{font-size:25px;line-height:1.3;margin:22px 0 18px}
+html[data-app=website] .club-ai-request,html[data-app=website] .club-ai-result{border-radius:14px;padding:17px 19px;margin-block:12px}
+html[data-app=website] .club-ai-request{background:#f1f5f3;margin-left:26px}
+html[data-app=website] .club-ai-result{background:#e7f2ed;margin-right:26px;border-left:3px solid #006a4d}
+html[data-app=website] .club-ai-example small{font-size:12px;font-weight:600;color:#3b5549}
+html[data-app=website] .club-ai-example p{font-size:16px;line-height:1.55;color:#263c31;margin:7px 0 0}
+html[data-app=website] .club-ai-example .club-example-note{font-size:14px;color:#53675e;margin:18px 0}
+html[data-app=website] .club-gift-link{display:flex;gap:12px;align-items:center;border-top:1px solid #c6d9d0;padding-top:18px;color:#006a4d;font-size:15px;font-weight:600;text-decoration:none;min-height:50px}
+html[data-app=website] .club-gift-link svg{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}
+html[data-app=website] .club-socials header{max-width:780px;margin-bottom:24px}
+html[data-app=website] .club-socials h2,html[data-app=website] .club-life h2,html[data-app=website] .club-coin h2{font-size:clamp(28px,3vw,38px);line-height:1.2}
+html[data-app=website] .club-socials p,html[data-app=website] .club-life p,html[data-app=website] .club-coin p{font-size:17px;line-height:1.65;color:var(--ec-muted,#53675e)}
+html[data-app=website] .club-socials nav{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+html[data-app=website] .club-channel{display:flex;gap:18px;align-items:start;padding:24px;border:1px solid var(--ec-border,#d8e4de);border-radius:18px;background:var(--ec-surface,#fff);text-decoration:none;color:var(--ec-ink,#102019)}
+html[data-app=website] .club-channel:hover{border-color:#006a4d;box-shadow:0 6px 22px #19382c08}
+html[data-app=website] .club-channel:focus-visible,html[data-app=website] .club-gift-link:focus-visible{outline:3px solid #006a4d;outline-offset:4px}
+html[data-app=website] .club-brand{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:12px;background:#f2f6f4;color:#102019}
+html[data-app=website] .club-brand svg{display:block;width:32px;height:32px;fill:currentColor;stroke:none}
+html[data-app=website] .club-brand-telegram{color:#229ed9;background:#edf7fc}
+html[data-app=website] .club-brand-facebook{color:#0866ff;background:#edf3ff}
+html[data-app=website] .club-brand-x,html[data-app=website] .club-brand-tiktok{color:#111;background:#f1f2f3}
+html[data-app=website] .club-channel-copy{display:flex;flex-direction:column;gap:9px;min-width:0}
+html[data-app=website] .club-channel-copy strong{font-size:20px;line-height:1.2}
+html[data-app=website] .club-channel-copy b{font-size:16px;line-height:1.45;font-weight:500}
+html[data-app=website] .club-channel-copy>span{font-size:15px;line-height:1.6;color:var(--ec-muted,#53675e)}
+html[data-app=website] .club-channel-arrow{margin-left:auto;color:#53675e}
+html[data-app=website] .club-benefits{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px;row-gap:12px}
+html[data-app=website] .club-benefits h3{margin:0 0 12px}
+html[data-app=website] .club-life{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+html[data-app=website] .club-format-list details,html[data-app=website] .club-questions details{border-top:1px solid var(--ec-border,#d8e4de);padding-block:8px}
+html[data-app=website] .club-format-list summary,html[data-app=website] .club-questions summary{cursor:pointer;font-size:18px;font-weight:600;padding:14px 0;min-height:44px}
+html[data-app=website] .club-discussion-example{padding:24px;background:#eaf2ef;border-radius:2px 20px 20px 20px;border-left:3px solid #006a4d;margin-top:26px;color:#102019}
+html[data-app=website] .club-discussion-example p{color:#263c31;font-weight:500}
+html[data-app=website] .club-discussion-example>span:last-child{font-size:13px;color:#53675e}
+html[data-app=website] .club-comfort{border-block:1px solid var(--ec-border,#d8e4de)}
+html[data-app=website] .club-coin{scroll-margin-top:100px;border:1px solid var(--ec-border,#d8e4de);border-radius:24px;background:var(--ec-surface,#fff);padding:clamp(22px,4vw,44px);margin-block:32px}
+html[data-app=website] .club-coin-intro{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center}
+html[data-app=website] .club-reward-preview{border:1px solid #c6d9d0;border-radius:20px;padding:26px;background:#edf5f1;color:#102019;display:flex;flex-direction:column;align-items:center}
+html[data-app=website] .club-coin-badge{width:68px;height:68px;border:5px double #91b3a3;border-radius:50%;display:grid;place-items:center;font-size:35px;font-weight:700;color:#fff;background:#006a4d;line-height:1}
+html[data-app=website] .club-reward-preview>strong{font-size:25px;margin-top:10px;color:#006a4d}
+html[data-app=website] .club-reward-preview>span{font-size:15px;margin-bottom:20px}
+html[data-app=website] .club-reward-row{display:flex;align-items:center;gap:15px;background:#fff;border:1px solid #d8e4de;border-radius:12px;padding:16px;width:100%;margin-top:10px}
+html[data-app=website] .club-reward-row svg{width:44px;height:44px;flex:none;fill:none;stroke:#006a4d;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+html[data-app=website] .club-reward-row b{display:block;font-size:16px;line-height:1.4}
+html[data-app=website] .club-reward-row small{display:block;font-size:13px;line-height:1.4;color:#53675e;margin-top:4px}
+html[data-app=website] .club-coin-subtitle{font-size:26px;margin-top:38px}
+html[data-app=website] .club-coin-uses{display:grid;grid-template-columns:1fr 1fr;gap:16px 32px}
+html[data-app=website] .club-coin-uses article{border-top:1px solid var(--ec-border,#d8e4de);padding-top:20px}
+html[data-app=website] .club-coin-uses h3{font-size:21px;line-height:1.35;margin-bottom:10px}
+html[data-app=website] .club-coin .club-coin-terms{font-size:15px;padding-block:18px}
+html[data-app=website] .club-claim{border-top:1px solid var(--ec-border,#d8e4de);padding-top:22px}
+html[data-app=website] .club-claim h3{font-size:26px}
+html[data-app=website] .club-claim-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:24px 0}
+html[data-app=website] .club-claim-grid h4{font-size:18px;margin:0 0 10px}
+html[data-app=website] .club-claim-grid p{font-size:16px}
+html[data-app=website] .club-claim .ec-button{white-space:normal;text-align:center}
+html[data-app=website] .club-questions p{font-size:16px;line-height:1.65;color:var(--ec-muted,#53675e)}
+@media(max-width:800px){html[data-app=website] .club-entry,html[data-app=website] .club-life,html[data-app=website] .club-coin-intro{grid-template-columns:1fr;gap:28px}html[data-app=website] .club-entry{padding-block:26px}html[data-app=website] .club-intro>p:first-of-type{font-size:18px}}
+@media(max-width:600px){html[data-app=website] .club-socials nav,html[data-app=website] .club-benefits,html[data-app=website] .club-coin-uses,html[data-app=website] .club-claim-grid{grid-template-columns:1fr}html[data-app=website] .club-channel{padding:20px;gap:14px}html[data-app=website] .club-ai-example{padding:20px}html[data-app=website] .club-ai-request{margin-left:12px}html[data-app=website] .club-ai-result{margin-right:12px}html[data-app=website] .club-example-top{align-items:start}html[data-app=website] .club-example-top>span:last-child{max-width:130px;text-align:right}html[data-app=website] .club-reward-preview{padding:18px}html[data-app=website] .club-reward-row{gap:10px;padding:12px}html[data-app=website] .club-reward-row svg{width:34px;height:34px}}
