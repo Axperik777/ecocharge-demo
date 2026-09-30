@@ -28,7 +28,7 @@ const openModalBeforeMobile=openModal;
 openModal=function(html){openModalBeforeMobile(html);const heading=$('#modal-content h2');if(heading){heading.id='dialog-title';$('#modal').setAttribute('aria-labelledby','dialog-title')}$('#modal').scrollTop=0};
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.exploreStation){selectStation(b.dataset.exploreStation);actions.station()}if(b.dataset.tab||b.dataset.managerView)window.scrollTo({top:0,behavior:'instant'})});
 document.body.insertAdjacentHTML('afterbegin','<a id="skip-content" class="skip-link" href="#client-view">Skip to content</a>');
-$('#client-view').insertAdjacentHTML('afterbegin','<h1 id="client-page-title" class="sr-only">Investor overview</h1>');
+$('#client-view').insertAdjacentHTML('afterbegin','<span id="client-page-title" class="sr-only">Investor overview</span>');
 $('#client-view').setAttribute('tabindex','-1');$('#admin-view').setAttribute('tabindex','-1');
 $('#modal').addEventListener('close',()=>{if(document.activeElement===$('#skip-content'))$(role==='admin'?'#admin-view':'#client-view').focus({preventScroll:true})});
 $('.prototype-bar>span').insertAdjacentHTML('beforeend','<button class="demo-help" data-action="demo-guide" aria-label="How to use the workspace">?</button>');

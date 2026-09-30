@@ -12,6 +12,12 @@ function verify(root){
  const finance=require(path.join(root,'account-finance.js'));
  for(const week of state.sessions)assert.equal(week.payout,finance.weekly(250,13,Date.parse(week.periodStart),'calendar-month'));
  const html=fs.readFileSync(path.join(root,'client/index.html'),'utf8');
+ const profileAt=html.indexOf('src="central/profile-model.js'),ecosystemAt=html.indexOf('src="central/ecosystem.js');
+ assert(profileAt>=0&&profileAt<ecosystemAt,'Profile model must load before the account UI');
+ const profile=require(path.join(root,'central/profile-model.js'));
+ assert.equal(typeof profile.selectedZone,'function','Client preview profile model is outdated');
+ assert.equal(profile.selectedZone('America/New_York'),'America/New_York');
+ assert(!html.includes('href="client/?tab=dashboard" aria-label="EcoGrid home"'),'Home logo must point to the website');
  assert(html.includes('pages-client-bootstrap.js'));assert(html.includes('pages-client-adapter.js'));
  assert(!html.includes('src="central/client.js"'));assert(!html.includes('sessionStorage.setItem("ecocharge-entry'));
  for(const [,ref]of html.matchAll(/(?:src|href)="([^"?#]+\.(?:js|css|svg|png|webmanifest))(?:[?#][^"]*)?"/g))if(!ref.includes(':'))assert(fs.existsSync(path.join(root,ref)),'Missing '+ref);

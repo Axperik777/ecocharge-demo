@@ -41,8 +41,15 @@
   if(callRecord&&!(callRecord.kind==='lead'?data.leads:data.clients).some(r=>r.id===callRecord.key)){callRecord=null;EcoCallDesk.unmount();}
   if(selected)account=await api('staff/clients/'+selected);
   if(leadId)lead=await api('staff/leads/'+leadId);
-  checked=new Set([...checked].filter(id=>data.leads.some(l=>l.id===id)));render();fundingInbox.refresh();withdrawalInbox.refresh();
+  checked=new Set([...checked].filter(id=>data.leads.some(l=>l.id===id)));refreshView();fundingInbox.refresh();withdrawalInbox.refresh();
  }finally{refreshing=false;}}
+ function refreshView(){
+  // A polling update must not collapse the information someone is reading.
+  const root=$('#central-main'),key=d=>d.id||d.querySelector('summary')?.textContent.trim();
+  const details=[...root.querySelectorAll('details')].map(d=>({key:key(d),open:d.open,focused:document.activeElement===d.querySelector('summary')}));
+  render();
+  for(const d of root.querySelectorAll('details')){const previous=details.find(row=>row.key===key(d));if(previous){d.open=previous.open;if(previous.focused)d.querySelector('summary')?.focus({preventScroll:true});}}
+ }
  function render(){if(!data)return;
   if(['links','club'].includes(tab)&&!isAdmin())tab='today';
   const route=new URL(location);route.searchParams.set('tab',tab);window.history.replaceState(history.state,'',route);
@@ -190,4 +197,3 @@
  function balance(kind,requestId,corrects){const correction=account.state.adjustments.find(x=>x.operationId===corrects),r=account.state.requests.find(r=>r.id===requestId);operation={id:'OP-'+crypto.randomUUID(),kind,expectedBalance:account.state.balance,version:account.version,requestId:requestId||null,corrects:corrects||null,clientId:selected};dialog(kind==='credit'?t('Credit client balance','Пополнение баланса'):t('Debit client balance','Списание с баланса'),`<form id="central-balance" class="central-form"><label>${t('Amount (USD)','Сумма (USD)')}<input name="amount" type="number" inputmode="decimal" min="0.01" max="10000000" step="0.01" required value="${r?.amount||correction?.amount||''}" ${r||correction?'readonly':''}></label><label>${t('Reason / payment reference','Причина / номер платежа')}<input name="reason" required minlength="3" maxlength="250" value="${esc(r?.id||(corrects?t('Correction: ','Корректировка: ')+corrects:''))}"></label><p class="central-readonly">${t('Sample funds only. This does not charge a card or send a transfer.','Модельный баланс. Карта не списывается, перевод не отправляется.')}</p><button type="submit" class="crm-button primary">${t('Review change','Проверить изменение')}</button></form>`);}
  function profile(){profileVersion=account.version;dialog(t('Edit client details','Данные клиента'),`<form id="central-profile" class="central-form"><label>${t('Client name','Имя клиента')}<input name="name" required minlength="2" maxlength="100" value="${esc(account.client.name)}"></label><label>Email<input name="email" type="email" maxlength="160" value="${esc(account.client.email)}"></label><label>${t('Phone','Телефон')}<input name="phone" type="tel" maxlength="40" value="${esc(account.client.phone)}"></label><label>${t('Staff note','Заметка сотрудника')}<textarea name="note" maxlength="2000">${esc(account.state.client.note)}</textarea></label><button type="submit" class="crm-button primary">${t('Save details','Сохранить данные')}</button></form>`);}
 })();
-

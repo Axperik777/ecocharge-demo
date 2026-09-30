@@ -488,3 +488,9 @@ html[data-app=website] .club-reward-preview>span{text-align:center}
 html[data-app=website] .club-questions p{font-size:16px;line-height:1.65;color:var(--ec-muted,#53675e)}
 @media(max-width:800px){html[data-app=website] .club-entry,html[data-app=website] .club-life,html[data-app=website] .club-coin-intro,html[data-app=website] .club-ai-support{grid-template-columns:1fr;gap:28px}html[data-app=website] .club-entry{padding-block:26px}html[data-app=website] .club-intro>p:first-of-type{font-size:18px}html[data-app=website] .club-offer-actions .ec-button{width:100%;font-size:16px}html[data-app=website] .club-offer-actions{margin-top:20px}html[data-app=website] .club-offer-entry h1{margin-bottom:18px}}
 @media(max-width:600px){html[data-app=website] .club-socials nav,html[data-app=website] .club-benefits,html[data-app=website] .club-coin-uses,html[data-app=website] .club-claim-grid{grid-template-columns:1fr}html[data-app=website] .club-channel{padding:20px;gap:14px}html[data-app=website] .club-ai-example{padding:20px}html[data-app=website] .club-ai-request{margin-left:12px}html[data-app=website] .club-ai-result{margin-right:12px}html[data-app=website] .club-example-top{align-items:start}html[data-app=website] .club-example-top>span:last-child{max-width:130px;text-align:right}html[data-app=website] .club-reward-preview{padding:18px}html[data-app=website] .club-reward-row{gap:10px;padding:12px}html[data-app=website] .club-reward-row svg{width:34px;height:34px}}
+
+/* EC102: readable supporting copy for the mobile signup flow. */
+html[data-app=website] .lead-card :is(.lead-consent,.lead-followup-consent .lead-consent){font-size:14px;line-height:1.65}
+html[data-app=website] .lead-card .lead-hint{font-size:14px!important}
+html[data-app=website] .lead-privacy{font-size:14px;margin:16px 0 0}
+html[data-app=website] .lead-privacy a{text-decoration:underline;text-underline-offset:3px;display:inline-block;min-height:44px;padding:10px 0}

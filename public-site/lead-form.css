@@ -5,3 +5,6 @@
 .lead-followup-consent{margin:16px 0;border:1px solid #8d8d90;border-radius:8px;padding:12px}.lead-followup-consent legend{padding:0 6px;font-size:13px}.lead-followup-consent .lead-consent{align-items:flex-start;font-size:12px;line-height:1.6}
 
 .lead-followup-consent select{width:100%;padding:12px;border:1px solid #8d8d90;border-radius:6px;background:transparent;color:inherit;font:inherit}.lead-followup-consent select option{background:#212124;color:#ececef}
+
+.lead-field-error{display:block;color:#a12637;font-size:14px;line-height:1.6;margin:6px 0 12px}.lead-card [aria-invalid="true"]{border-color:#a12637!important}.lead-card input,.lead-card select,.lead-card textarea{scroll-margin-top:110px}
+html[data-theme="dark"] .lead-field-error{color:#ffb5bc}

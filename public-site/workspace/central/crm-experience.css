@@ -191,3 +191,6 @@ html[data-app="crm"][data-crm-theme="dark"]{color-scheme:dark;--crm-bg:#191d20;-
 [data-app="crm"] .central-login label{font-size:13px;color:var(--crm-muted)}
 [data-app="crm"] .central-login input{background:var(--crm-panel);color:var(--crm-text);border-color:var(--crm-border);font-size:16px}
 @media(max-width:600px){[data-app="crm"] .central-login{margin:36px auto;padding:0 14px}[data-app="crm"] .central-login-card{padding:24px}}
+
+/* Keep mobile input text readable and avoid focus zoom on iOS. */
+@media(max-width:800px){[data-app="crm"] input:not([type="checkbox"]):not([type="radio"]),[data-app="crm"] select,[data-app="crm"] textarea{font-size:16px!important;min-height:44px}}
