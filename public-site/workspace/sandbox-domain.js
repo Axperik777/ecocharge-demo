@@ -1,5 +1,42 @@
 /* Pure financial models only; no server, database or authentication. */
-(()=>{const modules={"dist/calendar-yield.js":function(module,exports,require){
+(()=>{const modules={"dist/journey-model.js":function(module,exports,require){
+'use strict';
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoJourney=api;})(typeof window==='object'?window:globalThis,()=>{
+ const version='journey-v1';
+ const topics={energy:['Energy projects','Энергетические проекты'],solar:['Solar & storage','Солнце и накопители'],charge:['EV charging','Зарядные станции'],mining:['Mining & EcoMiner','Майнинг и EcoMiner'],ai:['AI infrastructure','Инфраструктура AI'],ecocoin:['EcoCoin','EcoCoin']};
+ const purposes={participation:['Project participation','Участие в проекте'],equipment:['Equipment for my property','Оборудование для своего объекта'],business:['Business partnership','Деловое партнёрство'],updates:['Explore and follow updates','Изучить и следить за новостями']};
+ const routes={fast:['Consultation','Консультация'],nurture:['Explore first','Знакомство с проектом']};
+ const keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','msclkid','ttclid','landing_id','landing_host','lead_route','aff','partner_id','sub_id','ref'];
+ function attribution(input={}){const v={};for(const k of keys)if(typeof input[k]==='string')v[k]=input[k].slice(0,300);return v;}
+ function normalize(input){if(!input)return null;const route=input.route,topic=input.topic,purpose=input.purpose,country=input.country;if(!Object.hasOwn(routes,route)||!Object.hasOwn(topics,topic)||!Object.hasOwn(purposes,purpose)||!['US','CA'].includes(country))throw Error('Choose a route, topic, purpose and country.');if(route==='nurture'&&purpose!=='updates')throw Error('Choose exploration to follow project updates.');return {route,topic,purpose,country};}
+ function merge(previous,input,source={},at=new Date().toISOString()){
+  const next=normalize(input);if(!next)return previous||null;
+  const first=previous?.entryRoute||next.route;
+  // A newsletter request never cancels an already requested consultation.
+  const route=previous?.route==='fast'?'fast':next.route;
+  const current=route==='fast'&&next.route==='nurture'&&previous?{topic:previous.topic,purpose:previous.purpose}:next;
+  const touch=attribution(source),history=(previous?.history||[]).slice(-19);
+  const event={route:next.route,topic:next.topic,purpose:next.purpose,country:next.country,at,source:touch};
+  if(!history.length||JSON.stringify({...history.at(-1),at:''})!==JSON.stringify({...event,at:''}))history.push(event);
+  return {...previous,...next,...current,route,entryRoute:first,enteredAt:previous?.enteredAt||at,firstSource:previous?.firstSource||touch,lastSource:touch,consultationAt:previous?.consultationAt||(next.route==='fast'?at:null),history};
+ }
+ function requestConversation(state,chosen,language,id,at=new Date().toISOString()){
+  const j=normalize(chosen);if(j.route!=='fast')throw Error('Request a consultation first.');state.tickets??=[];const prior=state.tickets.find(t=>t.journeyTopic===j.topic&&t.status!=='Resolved'&&!t.service?.closed);if(prior)return prior;
+  const ru=language==='ru',name=label(topics,j.topic,language),subject=(ru?'Обсудить проект · ':'Project discussion · ')+name,message=(ru?'Хочу обсудить направление: ':'I would like to discuss: ')+name+'. '+label(purposes,j.purpose,language)+'. '+(j.country==='CA'?(ru?'Канада':'Canada'):(ru?'США':'United States'));
+  const ticket={id,subject,message,reply:'',date:at,status:'Open',journeyTopic:j.topic,messages:[{id,from:'client',text:message,date:at}],service:{closed:false}};state.tickets.push(ticket);return ticket;
+ }
+ function entry(record){return record.context?.journey||record.journey||record.state?.journey||null;}
+ function exploring(record){return entry(record)?.route==='nurture';}
+ function label(group,key,lang='en'){return (group[key]||['—','—'])[lang==='ru'?1:0];}
+ function cohorts(rows,dimension='entryRoute',at=Date.now()){
+  const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='topic'?j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
+  return [...groups.values()].map(g=>({...g,averageAgeDays:g.contacts?g.ageDays/g.contacts:null,averageDaysToPaid:g.paid?g.daysToPaid/g.paid:null,paidRate:g.contacts?g.paid/g.contacts:0}));
+ }
+ return {requestConversation,version,topics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
+});
+
+},
+"dist/calendar-yield.js":function(module,exports,require){
 (function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('./demand-rhythm.js'):root.EcoDemandRhythm);if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoCalendarYield=api;})(typeof window==='undefined'?globalThis:window,function(rhythm){
  'use strict';
  const DAY=86400000,WEEK=7*DAY,BASIS='calendar-month',VERSION='calendar-v1',SCALE=1000000000n;
@@ -392,7 +429,7 @@
  const consentVersion='followup-v1';
  const consentText={sms:'I agree to receive automated follow-up texts from EcoGrid at the number provided about my registration request. Up to 2 messages in the first 24 hours. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is optional and is not a condition of purchase.',email:'I agree to receive follow-up emails from EcoGrid about this registration request. This is optional; I can unsubscribe at any time.'};
  const consentTextRu={sms:'Я согласен получать от EcoGrid автоматические SMS по указанному номеру по моей заявке: до 2 сообщений в первые 24 часа. Оператор может взимать плату за сообщения и трафик. Для отказа — ответ STOP, для помощи — HELP. Согласие необязательно и не является условием покупки.',email:'Я согласен получать от EcoGrid письма по этой заявке. Это необязательно; я могу отказаться от таких писем в любое время.'};
- function sla(record,time=Date.now()){const start=Date.parse(record.created),attempt=Date.parse(record.funnel?.firstAttemptAt),ageMs=Number.isFinite(start)?Math.max(0,(Number.isFinite(attempt)?attempt:time)-start):null,waiting=!Number.isFinite(attempt)&&!['not_qualified','do_not_contact'].includes(record.crm?.status)&&!record.duplicateOf&&!record.needsReview;return {waiting,ageMs,minutes:ageMs===null?null:Math.floor(ageMs/60000),overdue:waiting&&ageMs>=900000,fast:Number.isFinite(attempt)&&ageMs<=300000};}
+ function sla(record,time=Date.now()){const journey=record.context?.journey||record.journey;if(journey?.route==='nurture')return {waiting:false,ageMs:null,minutes:null,overdue:false,fast:false};const start=Date.parse(journey?.consultationAt||record.created),attempt=Date.parse(record.funnel?.firstAttemptAt),ageMs=Number.isFinite(start)?Math.max(0,(Number.isFinite(attempt)?attempt:time)-start):null,waiting=!Number.isFinite(attempt)&&!['not_qualified','do_not_contact'].includes(record.crm?.status)&&!record.duplicateOf&&!record.needsReview;return {waiting,ageMs,minutes:ageMs===null?null:Math.floor(ageMs/60000),overdue:waiting&&ageMs>=900000,fast:Number.isFinite(attempt)&&ageMs<=300000};}
  function queue(rows,time=Date.now()){return rows.map(r=>({...r,sla:sla(r,time)})).filter(r=>r.sla.waiting).sort((a,b)=>(b.sla.ageMs||0)-(a.sla.ageMs||0)||a.id.localeCompare(b.id));}
  function firstWithdrawal(state,time=Date.now()){return (state?.requests||[]).filter(r=>r.type==='withdraw'&&r.status==='Approved'&&r.amount>0&&Number.isFinite(Date.parse(r.reviewedAt))&&Date.parse(r.reviewedAt)<=time).sort((a,b)=>a.reviewedAt.localeCompare(b.reviewedAt)||String(a.id).localeCompare(String(b.id)))[0]||null;}
  const stages=['leads','accounts','connected','qualified','plan_saved','ftd','activated','repeat_deposit','club_invited'];
@@ -521,4 +558,4 @@ function mergeClient(previous,submitted,stationIds,now=new Date().toISOString())
 module.exports={tiers,clean,cents,fail,initial,mergeClient,draft};
 
 
-}},cache={};function load(id){if(id==="node:crypto")return {randomUUID:()=>crypto.randomUUID()};if(cache[id])return cache[id].exports;if(!modules[id])throw Error("Missing domain module "+id);const module={exports:{}};cache[id]=module;modules[id](module,module.exports,name=>{if(name.startsWith("node:"))return load(name);const p=id.split("/");p.pop();for(const s of name.split("/")){if(s==="..")p.pop();else if(s!==".")p.push(s);}return load(p.join("/"));});return module.exports;}window.EcoSandboxDomain={finance:load("dist/account-finance.js"),operations:load("server/finance.cjs"),policy:load("server/account-policy.cjs"),crm:load("dist/crm-store.js"),planDocument:load("dist/central/plan-document.js"),funnel:load("dist/central/funnel-model.js"),journal:load("dist/central/energy-journal-model.js")};})();
+}},cache={};function load(id){if(id==="node:crypto")return {randomUUID:()=>crypto.randomUUID()};if(cache[id])return cache[id].exports;if(!modules[id])throw Error("Missing domain module "+id);const module={exports:{}};cache[id]=module;modules[id](module,module.exports,name=>{if(name.startsWith("node:"))return load(name);const p=id.split("/");p.pop();for(const s of name.split("/")){if(s==="..")p.pop();else if(s!==".")p.push(s);}return load(p.join("/"));});return module.exports;}window.EcoSandboxDomain={journey:load("dist/journey-model.js"),finance:load("dist/account-finance.js"),operations:load("server/finance.cjs"),policy:load("server/account-policy.cjs"),crm:load("dist/crm-store.js"),planDocument:load("dist/central/plan-document.js"),funnel:load("dist/central/funnel-model.js"),journal:load("dist/central/energy-journal-model.js")};})();

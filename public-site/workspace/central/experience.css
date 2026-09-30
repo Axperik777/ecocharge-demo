@@ -367,3 +367,6 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .lightline{stroke:#d2e4d9}
  .eco-shell .eco-header-preferences [data-locale-switch] button{min-width:32px;min-height:38px;padding:0 4px}
  .eco-shell #eco-header-actions .eco-theme-toggle{width:40px;min-width:40px}
 }
+
+/* Profile labels share the current light/dark text token. */
+.eco-shell #eco-workspace #care-profile>label{color:var(--eco-text);font-size:14px;line-height:1.5}

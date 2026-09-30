@@ -8,7 +8,7 @@ const workspaceRoot=path.join(root,'workspace');
 const workspace=fs.existsSync(workspaceRoot)?require('./verify-workspace-preview.cjs')(workspaceRoot):null;
 const files=walk(root).filter(f=>!f.startsWith(previewRoot+path.sep)&&!f.startsWith(workspaceRoot+path.sep)),manifest=JSON.parse(fs.readFileSync(path.join(root,'app-manifest.json'),'utf8'));
 assert.equal(manifest.app,'website');
-assert.equal(manifest.routes.length,11);
+assert.equal(manifest.routes.length,15);for(const r of ['learn','participate/charge','participate/solar','participate/mining'])assert(manifest.routes.includes(r));
 const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),context);
 const config=context.window.ECO_PLATFORM_CONFIG;
 assert.equal(config.websiteOnly,true);
@@ -28,7 +28,7 @@ for(const file of files){
    assert(!/<section\b[^>]*class="[^"]*\b(?:v-workspace-shell|f-study-finish)\b/.test(text),'Orphaned account preview section: '+rel);
    for(const match of text.matchAll(/(?:href|src)="([^"#]+)"/g)){
     const ref=match[1].replaceAll('&amp;','&');
-    if(/^(?:data:|mailto:|tel:)/.test(ref)||ref==='../')continue;
+    if(/^(?:data:|mailto:|tel:)/.test(ref)||/^(?:\.\.\/)+$/.test(ref))continue;
     const url=new URL(ref,base);
     if(url.origin!==base.origin)continue;
     assert(url.pathname.startsWith(base.pathname),'Escaped Pages base: '+ref);

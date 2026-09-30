@@ -45,6 +45,15 @@ module.exports=function verify(root){
  const post=request('staff/community','POST',{titleRu:'Новость',titleEn:'News',bodyRu:'Текст новости',bodyEn:'News text',category:'news',status:'published'});request('client/community/reaction','POST',{postId:post.id,reaction:'useful'});assert.equal(request('staff/community').posts.find(p=>p.id===post.id).reactions.useful,1);
  db=JSON.parse(JSON.stringify(db));assert.equal(request('client/account').state.balance,100);assert.equal(request('client/chat').threads[0].messages.length,2);
  ctx.role='ftd';bad(()=>request('staff/clients/'+a.client.id+'/delete','POST'));ctx.role='admin';request('staff/clients/'+a.client.id+'/delete','POST');assert(!db.accounts[a.client.id]);assert(!db.leads[lead.id].client_id);
+
+ // Long-route interest stays outside the call queue, then promotes in place.
+ ctx.role='admin';const slow={route:'nurture',topic:'solar',purpose:'updates',country:'CA'},fast={...slow,route:'fast',purpose:'participation'},body={name:'Dual Route QA',email:'dual-qa@example.test',consent:true,marketingConsent:true,marketingConsentVersion:'journey-v1',context:{journey:slow},attribution:{utm_source:'creator',partner_id:'creator-one',sub_id:'video-one'}};
+ bad(()=>request('public/leads','POST',{...body,marketingConsent:false}));const interest=request('public/leads','POST',body);assert.equal(db.leads[interest.id].context.journey.route,'nurture');
+ const promoted=request('public/leads','POST',{...body,context:{journey:fast},attribution:{utm_source:'email'}});assert.equal(promoted.id,interest.id);assert.equal(db.leads[interest.id].context.journey.entryRoute,'nurture');assert.equal(db.leads[interest.id].context.journey.firstSource.partner_id,'creator-one');assert.equal(db.leads[interest.id].context.journey.lastSource.utm_source,'email');
+ request('staff/assign','POST',{owner,reason:'Consultation requested',items:[{kind:'lead',id:interest.id,version:db.leads[interest.id].crm.version}]});ctx.role='ftd';assert(request('staff/overview').leads.some(l=>l.id===interest.id));
+ const next=request('staff/clients','POST',{leadId:interest.id,crmVersion:db.leads[interest.id].crm.version,name:body.name,username:'dual-route',email:body.email,comment:'Requested account'});ctx.clientId=next.client.id;let snapshot=request('client/account');assert.equal(snapshot.state.journey.entryRoute,'nurture');
+ request('client/journey','POST',{clientId:ctx.clientId,version:snapshot.version,journey:{...fast,topic:'mining'},marketingConsent:false,consultationRequested:true});assert.equal(db.leads[interest.id].context.journey.topic,'mining');assert.equal(request('client/account').state.subscription.granted,false);ctx.role='admin';
+ assert(request('staff/chats').threads.some(t=>t.clientId===ctx.clientId&&t.awaitingReply&&t.journeyTopic==='mining'));const cohort=request('staff/funnel').journeys.byRoute.find(r=>r.key==='nurture');assert.equal(cohort.contacts,1);assert.equal(cohort.consultations,1);assert.equal(cohort.accounts,1);assert.equal(cohort.paid,0);
  assert.equal(Object.keys(m.initial().accounts).length,1);
  return {ok:true,files:files.length,checks,privateData:false,networkApi:false,localPersistence:true};
 };
