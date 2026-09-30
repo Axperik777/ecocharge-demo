@@ -179,12 +179,12 @@
   },
   "club": {
     "title": [
-      "Project insights for the community",
-      "Понятные результаты работы проектов"
+      "Free AI access for every Club member",
+      "Бесплатный AI для каждого участника Club"
     ],
     "body": [
-      "EcoGrid AI helps turn project operating data into concise updates: where energy was used, how demand changed and what needs the team’s attention. EcoGrid Club brings these insights and explanations together for members.",
-      "EcoGrid AI помогает превращать рабочие данные проектов в понятные обновления: куда направлялась энергия, как менялся спрос и что требует внимания команды. EcoGrid Club объединяет эти материалы и пояснения для участников."
+      "Every EcoGrid Club member can use our EcoGrid AI for free. Use it to understand project data, compare energy-use scenarios and get clear explanations. The team also uses EcoGrid AI to prepare project updates for Club members.",
+      "Каждый участник EcoGrid Club может бесплатно пользоваться нашим EcoGrid AI. Он помогает разбираться в данных проектов, сравнивать сценарии использования энергии и получать понятные объяснения. Команда также использует EcoGrid AI для подготовки обновлений проектов для участников клуба."
     ]
   }
 });
