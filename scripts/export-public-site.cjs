@@ -8,6 +8,7 @@ const arg = name => { const i = process.argv.indexOf(name); return i < 0 ? undef
 const root = path.resolve(arg('--portable') || process.cwd());
 const output = path.resolve(arg('--out') || 'public-site');
 const websiteBase = arg('--url');
+const workspacePreview = process.argv.includes('--workspace-preview');
 if (!websiteBase || new URL(websiteBase).protocol !== 'https:' || !websiteBase.endsWith('/')) throw Error('Pass --url https://.../');
 if (fs.existsSync(output)) throw Error('Output must be a new directory: ' + output);
 const map = JSON.parse(fs.readFileSync(path.join(root, 'project-map.json'), 'utf8'));
@@ -43,6 +44,12 @@ for (const route of manifest.routes) {
     const url = new URL(ref.replaceAll('&amp;', '&'), websiteBase);
     return url.origin === new URL(websiteBase).origin && url.pathname.startsWith(new URL(websiteBase).pathname) && excluded.test(url.pathname.slice(new URL(websiteBase).pathname.length)) ? '' : whole;
   });
+  if (workspacePreview && html.includes('data-lead-form')) {
+    const scripts = ['sandbox-data.js','sandbox-domain.js','sandbox-stations.js','sandbox-model.js','sandbox-bootstrap.js'];
+    const bridge = scripts.map(name => '<script src="workspace/'+name+'" defer></script>').join('');
+    if (!/<script src="lead-form\.js(?:\?[^"]*)?" defer><\/script>/.test(html)) throw Error('Missing lead form runtime: '+route);
+    html = html.replace(/<script src="lead-form\.js(?:\?[^"]*)?" defer><\/script>/, match => bridge+match);
+  }
   html = html.replace('</head>', '<script src="website-only.js" defer></script></head>');
   fs.writeFileSync(file, html.replace(/[ \t]+$/gm, ''));
 }

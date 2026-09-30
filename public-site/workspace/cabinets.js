@@ -85,7 +85,7 @@ function cabStationPreview() {
   const p = cabPlan(), ids = p?.stationIds || explorationState().saved;
   let rows = ids.map(journeyStation).filter(Boolean).slice(0, 2);
   if (!rows.length) rows = [journeyStation(121704) || stations[0]].filter(Boolean);
-  return `<section class="panel cab-stations"><div class="cab-section-heading"><h2>${p ? 'Your selected stations' : 'Explore a real location'}</h2><button class="text-button" data-action="${p ? 'journey-my-plan' : 'explore-map'}">${p ? 'View selection' : 'Open map'} ${icon('arrow')}</button></div>${rows.map(s => {const photo = journeyPhoto(s); return `<button class="cab-location" data-journey-open="${s.id}"><img src="${escapeHtml(photo.path)}" alt="${escapeHtml(photo.alt)}" width="180" height="128" loading="lazy" decoding="async"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.ports} DC ports · ${photo.kind === 'illustration' ? 'Illustration' : 'Location photo'}</small></span>${icon('arrow')}</button>`;}).join('')}<small class="cab-caption">Reference locations · ownership is not established.</small></section>`;
+  return `<section class="panel cab-stations"><div class="cab-section-heading"><h2>${p ? 'Your selected stations' : 'Explore a real location'}</h2><button class="text-button" data-action="${p ? 'journey-my-plan' : 'explore-map'}">${p ? 'View selection' : 'Open map'} ${icon('arrow')}</button></div>${rows.map(s => {const photo = journeyPhoto(s); return `<button class="cab-location" data-journey-open="${s.id}"><img src="${escapeHtml(photo.path)}" alt="${escapeHtml(photo.alt)}" width="180" height="128" loading="lazy" decoding="async"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.ports} DC ports${photo.kind==='illustration'?' · Illustration':''}</small></span>${icon('arrow')}</button>`;}).join('')}<small class="cab-caption">Reference locations · ownership is not established.</small></section>`;
 }
 
 function cabManagerStrip() {
@@ -300,7 +300,7 @@ function cabBeforeValues() {return {balance: demo.balance, capital: demo.plan?.c
 function cabEditRows() {
   const q = (cabEdit?.query || '').toLowerCase().trim();
   const pool = q ? stations.filter(s => `${s.city} ${s.state} ${s.name} ${s.id}`.toLowerCase().includes(q)) : [...new Set([...(cabEdit?.ids || []), ...(window.ECOCHARGE_STATION_VISUALS?.featuredIds || [])])].map(journeyStation).filter(Boolean);
-  return pool.slice(0, 50).map(s => `<label class="cab-pick-row"><input type="checkbox" data-cab-pick="${s.id}" ${cabEdit.ids.includes(s.id) ? 'checked' : ''}><img src="${escapeHtml(journeyPhoto(s).path)}" alt="${escapeHtml(journeyPhoto(s).alt)}" width="84" height="64" loading="lazy"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.country==='CA'?'CA reference':'AFDC'} ${s.id} · ${journeyPhoto(s).kind === 'illustration' ? 'Illustration' : 'Location photo'}</small></span></label>`).join('') || '<p>No matching locations.</p>';
+  return pool.slice(0, 50).map(s => `<label class="cab-pick-row"><input type="checkbox" data-cab-pick="${s.id}" ${cabEdit.ids.includes(s.id) ? 'checked' : ''}><img src="${escapeHtml(journeyPhoto(s).path)}" alt="${escapeHtml(journeyPhoto(s).alt)}" width="84" height="64" loading="lazy"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.country==='CA'?'CA reference':'AFDC'} ${s.id}${journeyPhoto(s).kind==='illustration'?' · Illustration':''}</small></span></label>`).join('') || '<p>No matching locations.</p>';
 }
 
 function cabEditPlanForm() {

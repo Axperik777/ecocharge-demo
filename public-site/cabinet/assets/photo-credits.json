@@ -1,5 +1,5 @@
 {
-  "note": "14 documentary photographs across 10 matched stations. Dates describe the photographs, not current equipment or availability. CSS crops are displayed; Commons-provided thumbnails are used. Photographer, source and license remain linked. CC BY-SA adaptations retain the original license.",
+  "note": "Documentary station images with photographer, source and license attribution. Dates describe the source photographs; edits and display crops are recorded in each entry.",
   "photos": [
     {
       "afdcId": 121746,
@@ -161,6 +161,21 @@
       "license": "Public domain (released by copyright holder)",
       "licenseUrl": "https://commons.wikimedia.org/wiki/File:Clermont_Costco_EV_Charging.jpg#Licensing",
       "caption": "Vehicles charging at Electrify America, Costco Clermont, Florida. Photographed April 2024."
+    },
+    {
+      "afdcId": 121703,
+      "path": "assets/121703-spokane-valley-retouched.webp",
+      "sourcePage": "https://openchargemap.org/poi/details/295552",
+      "originalUrl": "https://media.openchargemap.io/images/US/OCM295552/OCM-295552.orig.2024050912373256.jpg",
+      "credit": "AndyK / Open Charge Map / CC BY 4.0",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "caption": "Electrify America charging equipment at Walmart 2539 (Spokane Valley, WA), 15727 E Broadway Ave. Photo of this location.",
+      "modifications": "AI-assisted retouch removed the overlaid graphic from the pavement area. Resized and converted to WebP. Original photographer and CC BY 4.0 attribution retained.",
+      "imageUrl": "https://media.openchargemap.io/images/US/OCM295552/OCM-295552.orig.2024050912373256.jpg",
+      "photographer": "AndyK",
+      "dateUploaded": "2024-05-09",
+      "locationEvidence": "OCM 295552 names the same site and street address as AFDC 121703. OCM coordinates 47.66565814337062, -117.19014776857122 are 1 m from the AFDC station point."
     }
   ]
 }

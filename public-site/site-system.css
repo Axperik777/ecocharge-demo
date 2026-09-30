@@ -391,3 +391,44 @@ html[data-app=website] :is(.solar-hardware,.solar-charger) .solar-hardware-type{
 
 
 html[data-app=website] .lead-hint{color:var(--muted)!important}
+
+/* Club community funnel */
+html[data-app=website] .club-intro{max-width:var(--ec-wrap,1200px)}
+html[data-app=website] .club-intro h1{max-width:980px;font-size:clamp(32px,4.6vw,64px);line-height:1.12}
+html[data-app=website] .club-intro h1 em{font-style:normal;color:var(--ec-green,#006a4d)}
+html[data-app=website] .club-intro>p:first-of-type{font-size:clamp(19px,2vw,24px);line-height:1.5;max-width:800px}
+html[data-app=website] .club-benefits{column-gap:36px;row-gap:12px}
+html[data-app=website] .club-benefits h3{margin:0 0 12px}
+html[data-app=website] .club-protection{background:var(--ec-surface,#fff);border:1px solid var(--ec-border,#d8e4de);border-radius:22px;padding:32px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+html[data-app=website] .club-protection h2{font-size:clamp(25px,3vw,34px);line-height:1.25;margin:18px 0}
+html[data-app=website] .club-protection p,html[data-app=website] .club-steps p,html[data-app=website] .club-questions p{font-size:16px;line-height:1.65;color:var(--ec-muted,#53675e)}
+html[data-app=website] .club-program-status{display:inline-block;font-size:13px;color:var(--ec-muted,#53675e);border:1px solid var(--ec-border,#d8e4de);border-radius:6px;padding:5px 9px}
+html[data-app=website] .club-protection summary,html[data-app=website] .club-questions summary{cursor:pointer;font-weight:600;font-size:17px;min-height:44px;padding:12px 0}
+html[data-app=website] .club-steps ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px}
+html[data-app=website] .club-steps li>span{display:block;font-size:18px;color:var(--ec-green,#006a4d);border-bottom:1px solid var(--ec-border,#d8e4de);padding-bottom:16px}
+html[data-app=website] .club-steps h3{font-size:21px;line-height:1.4}
+html[data-app=website] .club-questions details{border-top:1px solid var(--ec-border,#d8e4de);padding:8px 0}
+@media(max-width:720px){html[data-app=website] .club-protection{grid-template-columns:1fr;gap:14px;padding:22px}html[data-app=website] .club-steps ol{grid-template-columns:1fr;gap:16px}}
+
+/* Online community and welcome gift */
+html[data-app=website] .club-entry{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,1fr);gap:clamp(28px,5vw,72px);align-items:center;padding-block:42px}
+html[data-app=website] .club-entry .club-intro{padding:0;margin:0;max-width:none}
+html[data-app=website] .club-entry .club-intro h1{font-size:clamp(34px,3.7vw,52px)}
+html[data-app=website] .club-entry .club-entry-note{font-size:14px;margin-top:18px;color:var(--ec-muted,#53675e)}
+html[data-app=website] .club-welcome{background:#e8f2ed;border:1px solid #c3dacf;border-radius:24px;padding:clamp(24px,3vw,40px);color:#102019}
+html[data-app=website] .club-welcome h2{font-size:clamp(44px,5vw,66px);letter-spacing:-.04em;color:#006a4d;margin:20px 0 12px}
+html[data-app=website] .club-welcome p{font-size:17px;line-height:1.6;color:#354e41}
+html[data-app=website] .club-welcome ul{list-style:none;padding:12px 0;margin:18px 0;border-block:1px solid #bfd3c8}
+html[data-app=website] .club-welcome li{padding:9px 0;font-size:15px}
+html[data-app=website] .club-welcome .ec-text-link{color:#006a4d}
+html[data-app=website] .club-online{margin-block:24px;padding:32px;background:var(--ec-surface,#fff);border:1px solid var(--ec-border,#d8e4de);border-radius:24px}
+html[data-app=website] .club-online header{max-width:780px}
+html[data-app=website] .club-online h2{font-size:clamp(26px,3vw,36px);line-height:1.25}
+html[data-app=website] .club-online p{font-size:16px;line-height:1.65;color:var(--ec-muted,#53675e)}
+html[data-app=website] .club-topic-number{color:var(--ec-green,#006a4d);font-size:15px}
+html[data-app=website] #club-gift{scroll-margin-top:100px}
+@media(max-width:800px){html[data-app=website] .club-entry{grid-template-columns:1fr;padding-block:28px;gap:28px}html[data-app=website] .club-online{padding:22px}html[data-app=website] .club-welcome{padding:24px}}
+
+html[data-app=website] .club-socials nav{display:flex;gap:12px;flex-wrap:wrap}html[data-app=website] .club-socials a{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:12px 18px;border:1px solid var(--ec-border,#d8e4de);border-radius:12px;text-decoration:none;background:var(--ec-surface,#fff);color:var(--ec-ink,#102019);font-size:15px}html[data-app=website] .club-socials a:hover{border-color:var(--ec-green,#006a4d);background:#e8f2ed;color:#102019}html[data-app=website] .club-socials svg{width:22px;height:22px;fill:currentColor;flex:none}html[data-app=website] .club-socials a:focus-visible{outline:3px solid var(--ec-green,#006a4d);outline-offset:3px}
+
+html[data-app=website] .club-life{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}html[data-app=website] .club-life h2,html[data-app=website] .club-gifts h2{font-size:clamp(26px,3vw,36px);line-height:1.25}html[data-app=website] .club-life p,html[data-app=website] .club-gifts>p{font-size:17px;line-height:1.7;color:var(--ec-muted,#53675e);max-width:860px}html[data-app=website] .club-format-list details{border-top:1px solid var(--ec-border,#d8e4de);padding-block:8px}html[data-app=website] .club-format-list summary{cursor:pointer;font-size:19px;font-weight:600;padding:14px 0;min-height:44px}html[data-app=website] .club-gift-items{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}html[data-app=website] .club-gift-items span{padding:12px 16px;background:var(--ec-surface,#fff);border:1px solid var(--ec-border,#d8e4de);border-radius:10px;font-size:15px}html[data-app=website] .club-comfort{border-block:1px solid var(--ec-border,#d8e4de);margin-block:16px}@media(max-width:720px){html[data-app=website] .club-life{grid-template-columns:1fr;gap:20px}}

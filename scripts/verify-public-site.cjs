@@ -25,6 +25,14 @@ for(const file of files){
   assert(!/https?:\/\/(?:localhost|127\.0\.0\.1)(?=[:/])/i.test(text),'Local URL: '+rel);
   if(file.endsWith('.html')){
    assert(text.includes('website-only.js'),'Missing public-only boundary: '+rel);
+   if (workspace && text.includes('data-lead-form')) {
+    let previous = -1;
+    for (const ref of ['workspace/sandbox-data.js','workspace/sandbox-domain.js','workspace/sandbox-stations.js','workspace/sandbox-model.js','workspace/sandbox-bootstrap.js','lead-form.js']) {
+     const at = text.indexOf('src="'+ref);
+     assert(at > previous, 'Missing or out-of-order form dependency: '+rel+' => '+ref);
+     previous = at;
+    }
+   }
    assert(!/<section\b[^>]*class="[^"]*\b(?:v-workspace-shell|f-study-finish)\b/.test(text),'Orphaned account preview section: '+rel);
    for(const match of text.matchAll(/(?:href|src)="([^"#]+)"/g)){
     const ref=match[1].replaceAll('&amp;','&');
