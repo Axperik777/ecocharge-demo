@@ -24,6 +24,18 @@ module.exports=function verify(root){
  request('staff/assign','POST',{owner,reason:'Проверка назначения',items:[{kind:'lead',id:lead.id,version:lead.crm.version}]});
  const a=request('staff/clients','POST',{leadId:lead.id,crmVersion:db.leads[lead.id].crm.version,name:'Тест Проверки',username:'check.client',email:'qa@example.com',comment:'Создан для проверки'});ctx.clientId=a.client.id;
  let row=request('client/account');assert.equal(row.state.balance,0);
+ // Profile preferences survive browser persistence and are visible to the manager.
+ const savedProfile={name:'Profile QA',email:'profile@example.test',phone:'',language:'ru',timezone:'America/St_Johns'},beforeProfile=structuredClone(row);
+ row=request('client/profile','POST',{clientId:a.client.id,version:row.version,profile:savedProfile});
+ assert.equal(row.state.ecosystem.timezone,savedProfile.timezone);assert.equal(row.client.owner,beforeProfile.client.owner);assert.equal(row.client.username,beforeProfile.client.username);assert.deepEqual(row.state.requests,beforeProfile.state.requests);assert.equal(row.state.balance,beforeProfile.state.balance);
+ db=JSON.parse(JSON.stringify(db));assert.equal(request('client/account').state.ecosystem.timezone,savedProfile.timezone);assert.equal(request('staff/clients/'+a.client.id).state.ecosystem.timezone,savedProfile.timezone);
+ bad(()=>request('client/profile','POST',{clientId:a.client.id,version:row.version,profile:{...savedProfile,timezone:'Asia/Tbilisi'}}));
+ bad(()=>request('client/profile','POST',{clientId:'wrong-client',version:row.version,profile:savedProfile}));
+ bad(()=>request('client/profile','POST',{clientId:a.client.id,version:beforeProfile.version,profile:savedProfile}));
+ const callback=request('client/support','POST',{id:'timezone-call',clientId:a.client.id,version:row.version,message:'Confirm the call time',subject:'Callback',appointment:{date:'2030-01-15',time:'10:00',timeZone:'America/St_Johns'}});
+ assert.equal(callback.state.tickets.at(-1).appointment.instant,'2030-01-15T13:30:00.000Z');assert.match(callback.state.tickets.at(-1).message,/America\/St_Johns/);
+ row=request('client/account');
+
  request('staff/clients/'+a.client.id+'/balance','POST',{id:'credit-test',version:row.version,kind:'credit',amount:300,expectedBalance:0,reason:'Учебное пополнение'});
  row=request('client/account');assert.equal(row.state.balance,300);
  bad(()=>request('staff/clients/'+a.client.id+'/balance','POST',{id:'credit-test',version:row.version,kind:'credit',amount:300,expectedBalance:300,reason:'Повтор операции'}));
@@ -41,9 +53,9 @@ module.exports=function verify(root){
  row=request('client/account');request('staff/clients/'+a.client.id+'/energy-brief','POST',{id:'weekly-note',version:row.version,kind:'weekly',text:'Обсудили результат недели и следующий шаг.'});
  const brief=request('client/account').state.energyBriefs.at(-1);assert(brief.report);assert(brief.createdAt);assert(brief.authorName);
  request('client/chat','POST',{id:'message-test',text:'Вопрос клиента',clientId:a.client.id});const chat=request('staff/chats').threads.find(t=>t.clientId===a.client.id);assert(chat?.awaitingReply);
- request('staff/clients/'+a.client.id+'/chat','POST',{id:'reply-test',ticketId:chat.id,text:'Ответ менеджера',clientId:a.client.id});assert.equal(request('client/chat').threads[0].messages.at(-1).text,'Ответ менеджера');
+ request('staff/clients/'+a.client.id+'/chat','POST',{id:'reply-test',ticketId:chat.id,text:'Ответ менеджера',clientId:a.client.id});assert.equal(request('client/chat').threads.find(t=>t.id===chat.id).messages.at(-1).text,'Ответ менеджера');
  const post=request('staff/community','POST',{titleRu:'Новость',titleEn:'News',bodyRu:'Текст новости',bodyEn:'News text',category:'news',status:'published'});request('client/community/reaction','POST',{postId:post.id,reaction:'useful'});assert.equal(request('staff/community').posts.find(p=>p.id===post.id).reactions.useful,1);
- db=JSON.parse(JSON.stringify(db));assert.equal(request('client/account').state.balance,100);assert.equal(request('client/chat').threads[0].messages.length,2);
+ db=JSON.parse(JSON.stringify(db));assert.equal(request('client/account').state.balance,100);assert.equal(request('client/chat').threads.find(t=>t.id===chat.id).messages.length,2);
  ctx.role='ftd';bad(()=>request('staff/clients/'+a.client.id+'/delete','POST'));ctx.role='admin';request('staff/clients/'+a.client.id+'/delete','POST');assert(!db.accounts[a.client.id]);assert(!db.leads[lead.id].client_id);
 
  // Long-route interest stays outside the call queue, then promotes in place.
