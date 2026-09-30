@@ -50,10 +50,11 @@ for(const file of files){
 for(const route of manifest.routes)assert(fs.existsSync(path.join(root,route,'index.html')));
 // Public export must retain the paths promised by the homepage and plan cards.
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFileSync(path.join(root,'plans/index.html'),'utf8');
-assert.match(home,/data-workspace-entry[^>]*href="workspace\/client\/\?tab=tariffs"/,'Homepage calculator entry is missing');
+assert.match(home,/href="#project-calculator"/,'Homepage calculator entry is missing');
+assert.match(home,/data-public-plan-form/,'Public calculator is missing');
 assert.match(home,/data-workspace-entry[^>]*class="ec-sign-in"/,'Visible account entry is missing');
-for(const tier of ['single','network','portfolio','scale'])assert(plans.includes('href="./?tier='+tier+'#request-access"'),'Plan inquiry link is missing: '+tier);
-assert.match(plans,/href="workspace\/client\/\?tab=tariffs"/,'Plan calculator entry is missing');
+for(const tier of ['single','network','portfolio','scale'])assert(plans.includes('href="participate/charge/?tier='+tier+'#project-calculator"'),'Plan calculation link is missing: '+tier);
+assert.match(plans,/href="plans\/#project-calculator"/,'Plan calculator entry is missing');
 const stations=JSON.parse(fs.readFileSync(path.join(root,'stations.json'),'utf8')).stations;
 assert.equal(stations.length,3980);assert.equal(stations.filter(s=>s.selectionClosed).length,1910);
 const runtime=fs.readFileSync(path.join(root,'website-only.js'),'utf8');
