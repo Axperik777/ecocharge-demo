@@ -4,6 +4,8 @@ let mapStarting = null, mapTiles = null, mapLoadTimer, mapListLimit = 18;
 let mapMode = new URL(location).searchParams.get('stations') === 'list' ? 'list' : 'map';
 let mapSelectedId = null;
 const mapText = text => window.EcoLocale?.t(text) || text;
+const mapTileUrl = () => 'https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_'+(document.documentElement.dataset.ecoTheme==='dark'?'Dark':'Light')+'_Gray_Base/MapServer/tile/{z}/{y}/{x}';
+new MutationObserver(()=>{if(mapTiles)mapTiles.setUrl(mapTileUrl());}).observe(document.documentElement,{attributes:true,attributeFilter:['data-eco-theme']});
 
 function mapStatus(text, retry = false) {
   const status = $('#r-map-status'); if (!status) return;
@@ -26,7 +28,7 @@ initMap = async function () {
       // Give Leaflet a viewport before adding layers so tiles load independently.
       map.fitBounds([[24.8,-124.7],[49,-66.8]], {paddingTopLeft:[30,55], paddingBottomRight:[30,90], maxZoom:5, animate:false});
       stationLayer = L.layerGroup().addTo(map); portfolioLayer = L.layerGroup().addTo(map);
-      mapTiles = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {maxZoom: 16, attribution: 'Tiles &copy; Esri, HERE, Garmin | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
+      mapTiles = L.tileLayer(mapTileUrl(), {maxZoom: 16, attribution: 'Tiles &copy; Esri, HERE, Garmin | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
       let errors = 0;
       mapTiles.on('loading', () => {errors = 0; mapStatus('Loading the map…'); clearTimeout(mapLoadTimer); mapLoadTimer = setTimeout(() => mapStatus('The map is taking longer to load. The station list is available.', true), 8000);});
       mapTiles.on('tileerror', () => {errors++;});
@@ -54,25 +56,28 @@ function mapChoose(id) {mapSelectedId = id; selectStation(id); mapSelectionPrevi
 
 renderMap = function () {
   const rows = filteredStations();
-  $('#map-count').textContent = `${rows.length.toLocaleString('en-US')} real ${rows.length===1?'location':'locations'}`;
+  const ru=window.EcoLocale?.language==='ru';
+  $('#map-count').setAttribute('translate','no');
+  $('#map-count').textContent = (ru?'В каталоге: ':'In the directory: ')+rows.length.toLocaleString(ru?'ru-RU':'en-US');
   renderMapList(rows); mapSelectionPreview();
   if (!map || role !== 'client' || tab !== 'map' || mapMode !== 'map') return;
   stationLayer.clearLayers(); portfolioLayer.clearLayers();
-  const buckets = new Map(), zoom = map.getZoom();
+  const buckets = new Map(), zoom = map.getZoom(), cellSize = 80;
   for (const s of rows) {
     const pt = map.project([s.lat, s.lng], zoom);
-    const key = zoom >= 13 ? String(s.id) : `${Math.floor(pt.x / 58)}:${Math.floor(pt.y / 58)}`;
+    const key = zoom >= 13 ? String(s.id) : `${Math.floor(pt.x / cellSize)}:${Math.floor(pt.y / cellSize)}`;
     if (!buckets.has(key)) buckets.set(key, []); buckets.get(key).push(s);
   }
   for (const [key, group] of buckets) {
     if (group.length === 1) {
       const s = group[0], chosen = s.id === mapSelectedId;
-      const marker = L.marker([s.lat, s.lng], {icon: L.divIcon({className: 'r-map-pin' + (s.selectionClosed ? ' selection-closed' : '') + (chosen ? ' selected' : '') + (demo.portfolio.includes(s.id) ? ' allocated' : ''), html: s.selectionClosed?'×':icon('zap'), iconSize: [36, 36], iconAnchor: [18, 18]}), title: `${s.city}, ${s.state} · ${mapText(s.selectionClosed?'Enrollment closed':'Open for selection')}`, alt: `${s.city}, ${s.state}`, keyboard: true});
+      const showClosed=zoom>=9&&s.selectionClosed;
+      const marker = L.marker([s.lat, s.lng], {icon: L.divIcon({className: 'r-map-pin' + (showClosed ? ' selection-closed' : '') + (chosen ? ' selected' : '') + (demo.portfolio.includes(s.id) ? ' allocated' : ''), html: showClosed?'−':icon('zap'), iconSize: [36, 36], iconAnchor: [18, 18]}), title: `${s.city}, ${s.state} · ${mapText(s.selectionClosed?'Enrollment closed':'Open for selection')}`, alt: `${s.city}, ${s.state}`, keyboard: true});
       marker.addTo(stationLayer).on('click', () => mapChoose(s.id));
       marker.bindTooltip(escapeHtml(s.name), {className: 'station-point-tip'});
     } else {
-      const [x,y]=key.split(':').map(Number),center=map.unproject([(x+.5)*58,(y+.5)*58],zoom);
-      const marker = L.marker(center, {icon: L.divIcon({className: 'r-map-cluster'+(group.every(s=>s.selectionClosed)?' selection-closed':''), html: `<span>${group.length}</span><small class="r-cluster-closed">× ${group.filter(s=>s.selectionClosed).length}</small>`, iconSize: [44,44],iconAnchor:[22,22]}), title: mapText('Zoom in to explore stations'), alt: mapText('Zoom in to explore stations'), keyboard: true});
+      const [x,y]=key.split(':').map(Number),center=map.unproject([(x+.5)*cellSize,(y+.5)*cellSize],zoom);
+      const marker = L.marker(center, {icon: L.divIcon({className: 'r-map-cluster', html: `<span>${group.length}</span>`, iconSize: [44,44],iconAnchor:[22,22]}), title: mapText('Zoom in to explore stations'), alt: mapText('Zoom in to explore stations'), keyboard: true});
       marker.addTo(stationLayer).on('click', () => map.fitBounds(group.map(s => [s.lat,s.lng]), {padding: [50, 90], maxZoom: Math.min(zoom+3,16), animate: false}));
     }
   }

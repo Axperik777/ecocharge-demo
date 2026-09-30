@@ -12,7 +12,7 @@
     "coinId": "btc",
     "algorithm": "SHA-256",
     "unit": "TH/s",
-    "image": "assets/mining-s21.webp",
+    "image": "assets/ecominer-industrial.webp",
     "cooling": "air",
     "referenceModel": "ANTMINER S21"
   },
@@ -27,7 +27,7 @@
     "coinId": "btc",
     "algorithm": "SHA-256",
     "unit": "TH/s",
-    "image": "assets/mining-s21-pro.webp",
+    "image": "assets/ecominer-industrial.webp",
     "cooling": "air",
     "referenceModel": "ANTMINER S21 Pro"
   },
@@ -42,7 +42,7 @@
     "coinId": "btc",
     "algorithm": "SHA-256",
     "unit": "TH/s",
-    "image": "assets/mining-s21-xp.webp",
+    "image": "assets/ecominer-industrial.webp",
     "cooling": "air",
     "referenceModel": "ANTMINER S21 XP"
   },
@@ -57,7 +57,7 @@
     "powerW": 100,
     "efficiency": 0.25,
     "cooling": "air",
-    "image": "assets/mining-ks0-ultra.webp",
+    "image": "assets/ecominer-compact.webp",
     "source": "https://www.iceriver.io/product/iceriver-kas-ks0-ultra-2/",
     "referenceModel": "ICERIVER KS0 Ultra"
   },
@@ -72,7 +72,7 @@
     "powerW": 3400,
     "efficiency": 283.3333333333333,
     "cooling": "air",
-    "image": "assets/mining-ks5l.webp",
+    "image": "assets/ecominer-industrial.webp",
     "source": "https://www.iceriver.io/product/iceriver-kas-ks5l/",
     "referenceModel": "ICERIVER KS5L"
   },
@@ -87,7 +87,7 @@
     "powerW": 3400,
     "efficiency": 226.66666666666666,
     "cooling": "air",
-    "image": "assets/mining-ks5m.webp",
+    "image": "assets/ecominer-industrial.webp",
     "source": "https://www.iceriver.io/product/iceriver-kas-ks5m/",
     "referenceModel": "ICERIVER KS5M"
   },
@@ -102,7 +102,7 @@
     "powerW": 500,
     "efficiency": 119.04761904761904,
     "cooling": "air",
-    "image": "assets/mining-ks7-lite.webp",
+    "image": "assets/ecominer-desktop.webp",
     "source": "https://www.iceriver.io/product/iceriver-kas-ks7-lite/",
     "referenceModel": "ICERIVER KS7 Lite"
   },
@@ -117,7 +117,7 @@
     "powerW": 3500,
     "efficiency": 116.66666666666667,
     "cooling": "air",
-    "image": "assets/mining-ks7.webp",
+    "image": "assets/ecominer-industrial.webp",
     "source": "https://www.iceriver.io/product/iceriver-kas-ks7/",
     "referenceModel": "ICERIVER KS7"
   },
@@ -132,7 +132,7 @@
     "powerW": 100,
     "efficiency": 0.25,
     "cooling": "air",
-    "image": "assets/mining-al0.webp",
+    "image": "assets/ecominer-compact.webp",
     "source": "https://www.iceriver.io/product/iceriver-alph-al0/",
     "referenceModel": "ICERIVER AL0"
   },
@@ -147,7 +147,7 @@
     "powerW": 500,
     "efficiency": 250,
     "cooling": "air",
-    "image": "assets/mining-al2-lite.webp",
+    "image": "assets/ecominer-desktop.webp",
     "source": "https://www.iceriver.io/product/iceriver-alph-al2-lite/",
     "referenceModel": "ICERIVER AL2 Lite"
   },
@@ -162,7 +162,7 @@
     "powerW": 3500,
     "efficiency": 233.33333333333334,
     "cooling": "air",
-    "image": "assets/mining-al3.webp",
+    "image": "assets/ecominer-industrial.webp",
     "source": "https://www.iceriver.io/product/iceriver-alph-al3/",
     "referenceModel": "ICERIVER AL3"
   },
@@ -177,7 +177,7 @@
     "powerW": 100,
     "efficiency": 1.6666666666666667,
     "cooling": "air",
-    "image": "assets/mining-ae0.webp",
+    "image": "assets/ecominer-compact.webp",
     "source": "https://www.iceriver.io/product/iceriver-aleo-ae0/",
     "referenceModel": "ICERIVER AE0"
   },
@@ -192,7 +192,7 @@
     "powerW": 500,
     "efficiency": 1.6666666666666667,
     "cooling": "air",
-    "image": "assets/mining-ae1-lite.webp",
+    "image": "assets/ecominer-desktop.webp",
     "source": "https://www.iceriver.io/product/iceriver-aleo-ae1-lite/",
     "referenceModel": "ICERIVER AE1 Lite"
   },
@@ -207,7 +207,7 @@
     "powerW": 3400,
     "efficiency": 1700,
     "cooling": "air",
-    "image": "assets/mining-ae3.webp",
+    "image": "assets/ecominer-industrial.webp",
     "source": "https://www.iceriver.io/product/iceriver-aleo-ae3/",
     "referenceModel": "ICERIVER AE3"
   },
@@ -222,7 +222,7 @@
     "powerW": 400,
     "efficiency": 0.5714285714285714,
     "cooling": "air",
-    "image": "assets/mining-mini-doge-iii.webp",
+    "image": "assets/ecominer-desktop.webp",
     "source": "https://www.goldshell.com/product/goldshell-mini-doge-iii/",
     "referenceModel": "Goldshell MINI DOGE III"
   },
@@ -237,7 +237,7 @@
     "powerW": 500,
     "efficiency": 0.6172839506172839,
     "cooling": "air",
-    "image": "assets/mining-mini-doge-iii-plus.webp",
+    "image": "assets/ecominer-desktop.webp",
     "source": "https://www.goldshell.com/product/goldshell-mini-doge-iii-plus/",
     "referenceModel": "Goldshell MINI DOGE III PLUS"
   },
@@ -252,7 +252,7 @@
     "powerW": 100,
     "efficiency": 0.5,
     "cooling": "air",
-    "image": "assets/mining-ks0-pro.webp",
+    "image": "assets/ecominer-compact.webp",
     "source": "https://www.iceriver.io/product/iceriver-ks0-pro/",
     "referenceModel": "ICERIVER KS0 PRO"
   },
@@ -267,7 +267,7 @@
     "powerW": 100,
     "efficiency": 0.38461538461538464,
     "cooling": "air",
-    "image": "assets/mining-rx0.webp",
+    "image": "assets/ecominer-compact.webp",
     "source": "https://www.iceriver.io/product/iceriver-rxd-rx0/",
     "referenceModel": "ICERIVER RX0"
   }

@@ -1,164 +1,47 @@
 [
   {
-    "id": "ks0-ultra",
-    "file": "dist/assets/mining-ks0-ultra.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/ks0u04.png",
-    "bytes": 11450,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
+    "id": "ecominer-industrial",
+    "file": "dist/assets/ecominer-industrial.webp",
+    "bytes": 79844,
+    "credit": "EcoGrid",
+    "kind": "Original AI-generated EcoMiner product concept for the diploma project",
+    "models": [
+      "s21",
+      "s21-pro",
+      "s21-xp",
+      "ks5l",
+      "ks5m",
+      "ks7",
+      "al3",
+      "ae3"
+    ]
   },
   {
-    "id": "ks5l",
-    "file": "dist/assets/mining-ks5l.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/ks5l01.png",
-    "bytes": 13412,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
+    "id": "ecominer-desktop",
+    "file": "dist/assets/ecominer-desktop.webp",
+    "bytes": 55672,
+    "credit": "EcoGrid",
+    "kind": "Original AI-generated EcoMiner product concept for the diploma project",
+    "models": [
+      "ks7-lite",
+      "al2-lite",
+      "ae1-lite",
+      "mini-doge-iii",
+      "mini-doge-iii-plus"
+    ]
   },
   {
-    "id": "ks5m",
-    "file": "dist/assets/mining-ks5m.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/ks5m01.png",
-    "bytes": 13384,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "ks7-lite",
-    "file": "dist/assets/mining-ks7-lite.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2025/03/ks7lite01.png",
-    "bytes": 9662,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "ks7",
-    "file": "dist/assets/mining-ks7.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2025/03/ks7-1.png",
-    "bytes": 10796,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "al0",
-    "file": "dist/assets/mining-al0.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/al04.png",
-    "bytes": 10780,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "al2-lite",
-    "file": "dist/assets/mining-al2-lite.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/al201.png",
-    "bytes": 5816,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "al3",
-    "file": "dist/assets/mining-al3.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/al301.png",
-    "bytes": 20660,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "ae0",
-    "file": "dist/assets/mining-ae0.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2025/03/ae0_2_1.png",
-    "bytes": 10366,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "ae1-lite",
-    "file": "dist/assets/mining-ae1-lite.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2025/04/ae1_lite_2.png",
-    "bytes": 9678,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "ae3",
-    "file": "dist/assets/mining-ae3.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/ks5m01.png",
-    "bytes": 13384,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "mini-doge-iii",
-    "file": "dist/assets/mining-mini-doge-iii.webp",
-    "url": "https://www.goldshell.com/wp-content/uploads/2024/09/MINI-DOGE-III-Main01-1024-554x639.png",
-    "bytes": 10840,
-    "credit": "Goldshell",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "mini-doge-iii-plus",
-    "file": "dist/assets/mining-mini-doge-iii-plus.webp",
-    "url": "https://www.goldshell.com/wp-content/uploads/2024/09/MINI-DOGE-III-PLUS-Main01-1024-554x639.png",
-    "bytes": 9864,
-    "credit": "Goldshell",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "rx0",
-    "file": "dist/assets/mining-rx0.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/rx004.png",
-    "bytes": 11342,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "ks0-pro",
-    "file": "dist/assets/mining-ks0-pro.webp",
-    "url": "https://www.iceriver.io/wp-content/uploads/2018/08/ks0p04.png",
-    "bytes": 11438,
-    "credit": "ICERIVER",
-    "kind": "OEM product image"
-  },
-  {
-    "id": "s21",
-    "file": "dist/assets/mining-s21.webp",
-    "credit": "BITMAIN",
-    "kind": "Product photograph from manufacturer user manual",
-    "source": "https://assets-product.bitmain.com.cn/shop-product-s3/firmware/c17a60d7-51c8-41a3-8365-b7e5d1506caa/2025/04/10/14/S21%20User%20Guide-V1.2.5.pdf"
-  },
-  {
-    "id": "s21-pro",
-    "file": "dist/assets/mining-s21-pro.webp",
-    "credit": "BITMAIN",
-    "kind": "Product photograph from manufacturer user manual",
-    "source": "https://file12.bitmain.com/shop-product-s3/firmware/793d284c-4b4c-4c00-bb6b-30f0a4902c96/2025/03/20/17/S21%20Pro%20User%20Guide-V1.1.9.pdf"
-  },
-  {
-    "id": "s21-xp",
-    "file": "dist/assets/mining-s21-xp.webp",
-    "credit": "BITMAIN",
-    "kind": "Product photograph from manufacturer user manual",
-    "source": "https://support.bitmain.com/hc/en-us/article_attachments/38059219790617"
-  },
-  {
-    "file": "dist/assets/mining-container.webp",
-    "credit": "Bitdeer / Minerbase",
-    "kind": "OEM container image",
-    "url": "https://file.bitdeer.com/bd-public-prod/shop/202505/a4362cc6-e776-4f10-aa38-0bbc644bd3a7.png",
-    "source": "https://www.bitdeer.com/shop/minerbase/air-cooling-container/P241129000001"
-  },
-  {
-    "file": "dist/assets/mining-facility.webp",
-    "credit": "Bitdeer",
-    "kind": "Data center photograph",
-    "url": "https://www.bitdeer.com/images/24515/home/datacenter_bg.png",
-    "source": "https://www.bitdeer.com/datacenter"
-  },
-  {
-    "file": "dist/assets/mining-washington.webp",
-    "credit": "Bitdeer",
-    "kind": "Washington facility photograph",
-    "url": "https://www.bitdeer.com/images/24515/data-center/WashingtonUSA.webp",
-    "source": "https://www.bitdeer.com/datacenter"
+    "id": "ecominer-compact",
+    "file": "dist/assets/ecominer-compact.webp",
+    "bytes": 52260,
+    "credit": "EcoGrid",
+    "kind": "Original AI-generated EcoMiner product concept for the diploma project",
+    "models": [
+      "ks0-ultra",
+      "al0",
+      "ae0",
+      "ks0-pro",
+      "rx0"
+    ]
   }
 ]

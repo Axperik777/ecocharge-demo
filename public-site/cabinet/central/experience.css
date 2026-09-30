@@ -39,8 +39,8 @@ body.eco-shell.pages-client-preview .app-shell>footer{display:none}
 /* EC-78: canonical portfolio workspace. Base modules keep behavior; this layer owns layout and theme. */
 .eco-shell{
  --eg-bg:#f5f8f6;--eg-surface:#fff;--eg-surface-soft:#edf7f2;--eg-surface-raised:#f8fbf9;
- --eg-border:#dbe6e0;--eg-border-strong:#c6d5cd;--eg-text:#102019;--eg-muted:#66766e;
- --eg-brand:#006a4d;--eg-brand-deep:#004b37;--eg-brand-soft:#dff5e9;--eg-brand-hover:#004b37;--eg-on-brand:#fff;--eg-accent:#a9f45b;
+ --eg-border:#dbe6e0;--eg-border-strong:#c6d5cd;--eg-text:#102019;--eg-muted:#52665b;
+ --eg-brand:#006a4d;--eg-brand-deep:#004b37;--eg-brand-soft:#dff5e9;--eg-brand-hover:#004b37;--eg-on-brand:#fff;--eg-accent:#08795a;
  --eg-positive:#008a5a;--eg-danger:#b42318;--eg-shadow:0 8px 28px rgba(12,57,42,.07);
  --eg-radius-sm:10px;--eg-radius:14px;--eg-radius-lg:18px;--eg-sidebar:244px;
  --eco-bg:var(--eg-bg);--eco-card:var(--eg-surface);--eco-raised:var(--eg-surface-soft);
@@ -50,10 +50,10 @@ body.eco-shell.pages-client-preview .app-shell>footer{display:none}
 html[data-eco-theme="light"]{color-scheme:light}
 html[data-eco-theme="dark"]{color-scheme:dark}
 html[data-eco-theme="dark"] .eco-shell{--eg-bg:#191d20;--eg-surface:#242a2e;--eg-surface-soft:#2c3438;--eg-surface-raised:#272f33;--eg-border:#3a454a;--eg-border-strong:#607078;--eg-text:#f0f4f2;--eg-muted:#b0bdb8;--eg-brand:#93d7b6;--eg-brand-deep:#23604c;--eg-brand-soft:#2b443b;--eg-brand-hover:#afe4c9;--eg-on-brand:#0b1b18;--eg-accent:#98d7b8;--eg-positive:#93d7b6;--eg-danger:#f4a29b;--eg-shadow:0 6px 20px rgba(0,0,0,.12);color-scheme:dark}
-.eco-shell .topbar .charge-shell{fill:var(--eg-brand-deep)}
+.eco-shell .topbar .charge-shell{fill:var(--eg-text)}
 .eco-shell .topbar .charge-core{fill:var(--eg-brand)}
 .eco-shell .topbar .charge-wordmark>span{color:var(--eg-brand)!important}
-html[data-eco-theme="dark"] .eco-shell .topbar .charge-shell{fill:#f4f9f7}
+html[data-eco-theme="dark"] .eco-shell .topbar .charge-shell{fill:var(--eg-text)}
 .eco-shell *{box-sizing:border-box}
 .eco-shell button,.eco-shell a,.eco-shell summary{touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,106,77,.16)}
 .eco-shell button{cursor:pointer}
@@ -346,24 +346,230 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .lightline{stroke:#d2e4d9}
 .eco-shell #eco-header-actions .eco-badge{position:absolute;top:0;right:0;display:grid;place-items:center;min-width:16px;height:16px;padding:0 3px;border:2px solid var(--eg-surface);border-radius:10px;background:var(--eg-brand);color:var(--eg-on-brand);font:700 9px/1 Manrope,system-ui,sans-serif}
 .eco-shell #eco-header-actions .eco-badge[hidden]{display:none}
 @media(min-width:981px){
- .eco-shell #eco-header-actions{position:fixed;top:0;left:var(--eg-sidebar);right:0;height:84px;z-index:100;display:flex;align-items:center;justify-content:flex-end;padding:0 28px;background:var(--eg-surface);border-bottom:1px solid var(--eg-border)}
- .eco-shell #eco-header-actions .eco-notifications{position:absolute;left:calc((100% - var(--eg-sidebar)) / 2);transform:translateX(-50%)}
+ .eco-shell #eco-header-actions{position:fixed;top:0;left:var(--eg-sidebar);right:0;height:84px;z-index:100;display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:0 28px;background:var(--eg-surface);border-bottom:1px solid var(--eg-border)}
+ .eco-shell #eco-header-actions .eco-notifications{position:relative;left:auto;transform:none}
  .eco-shell #client-view{padding-top:112px}
  .eco-shell .eg-page-heading,.eco-shell .eg-profile-header{padding-right:0}
  .eco-shell #eco-top{margin-top:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:980px){
- .eco-shell .topbar.panel{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);align-items:center;column-gap:8px}
+ .eco-shell .topbar.panel{display:flex;align-items:center;justify-content:space-between;column-gap:10px}
  .eco-shell .topbar .charge-brand{grid-column:1;grid-row:1;justify-self:start}
  .eco-shell .topbar #eco-top{display:none}
- .eco-shell #eco-header-actions{display:contents}
- .eco-shell #eco-header-actions .eco-notifications{grid-column:2;grid-row:1;justify-self:center}
- .eco-shell .eco-header-preferences{grid-column:3;grid-row:1;justify-self:end}
+ .eco-shell #eco-header-actions{display:flex;align-items:center;gap:8px;margin-left:auto;flex:none}
+ .eco-shell #eco-header-actions .eco-notifications{position:relative;left:auto;transform:none}
+ .eco-shell .eco-header-preferences{flex:none}
 }
 @media(max-width:360px){
  .eco-shell .topbar.panel{padding-inline:12px;column-gap:6px}
- .eco-shell .eco-header-preferences{gap:6px}
+ .eco-shell .eco-header-preferences,.eco-shell #eco-header-actions{gap:6px}
  .eco-shell .eco-header-preferences [data-locale-switch]{padding:2px}
  .eco-shell .eco-header-preferences [data-locale-switch] button{min-width:32px;min-height:38px;padding:0 4px}
  .eco-shell #eco-header-actions .eco-theme-toggle{width:40px;min-width:40px}
 }
+
+/* Profile labels share the current light/dark text token. */
+.eco-shell #eco-workspace #care-profile>label{color:var(--eco-text);font-size:14px;line-height:1.5}
+
+
+/* EC-88: services, reports and invitations share the active account theme. */
+.eco-shell{--eg-art-face:#f7fcf9;--eg-art-shade:#91b7a5;--eg-art-deep:#176b52;--eg-art-dark:#183e32;--eg-art-accent:#7fc8a5;--eg-art-line:#265746;--eg-art-warm:#ca9850}
+html[data-eco-theme="dark"] .eco-shell{--eg-art-face:#e0efe7;--eg-art-shade:#81a996;--eg-art-deep:#3b8269;--eg-art-dark:#173a2f;--eg-art-accent:#98d5b6;--eg-art-line:#315b49;--eg-art-warm:#e0b67a}
+.eco-shell .eg-art .face{fill:var(--eg-art-face)}.eco-shell .eg-art .shade{fill:var(--eg-art-shade)}.eco-shell .eg-art .deep{fill:var(--eg-art-deep)}.eco-shell .eg-art .dark{fill:var(--eg-art-dark)}.eco-shell .eg-art .accent{fill:var(--eg-art-accent)}.eco-shell .eg-art .warm{fill:var(--eg-art-warm)}
+.eco-shell .eg-art .line,.eco-shell .eg-art .fine{fill:none;stroke:var(--eg-art-line);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.eco-shell .eg-art .fine{stroke-width:1.4}.eco-shell .eg-art .lightline{stroke:#e8f6ee;stroke-width:1.7}.eco-shell .eg-art .edge{stroke:var(--eg-art-line);stroke-opacity:.35;stroke-width:1}.eco-shell .eg-art .ground{fill:var(--eg-art-deep);opacity:.12}.eco-shell .eg-art .arch{fill:none;stroke:var(--eg-art-deep);stroke-width:4;stroke-linecap:round}
+html[data-eco-theme="dark"] .eco-shell .eg-art .face{fill:var(--eg-art-face)}html[data-eco-theme="dark"] .eco-shell .eg-art .shade{fill:var(--eg-art-shade)}html[data-eco-theme="dark"] .eco-shell .eg-art .deep{fill:var(--eg-art-deep)}html[data-eco-theme="dark"] .eco-shell .eg-art .dark{fill:var(--eg-art-dark)}html[data-eco-theme="dark"] .eco-shell .eg-art .line{stroke:var(--eg-art-line)}
+.eco-shell .eg-service{min-height:202px;padding:24px;gap:10px;transition:border-color .18s,background-color .18s,box-shadow .18s}
+.eco-shell .eg-service-icon{display:grid;place-items:center;width:68px;height:68px;flex:none;border-radius:20px;border:1px solid color-mix(in srgb,var(--eg-brand) 14%,var(--eg-surface));background:linear-gradient(145deg,var(--eg-surface),var(--eg-brand-soft));box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 3px 8px rgba(25,75,55,.05);margin-bottom:4px}
+.eco-shell .eg-service-icon .eg-art{display:block;width:56px;height:56px;filter:drop-shadow(0 2px 1px rgba(20,55,40,.08))}
+.eco-shell .eg-service strong{font-weight:650;font-size:17px;line-height:1.35;letter-spacing:-.25px}.eco-shell .eg-service small{font-size:14px;line-height:1.55;color:var(--eg-muted)}
+.eco-shell .eg-service-arrow{top:24px;right:24px;display:grid;place-items:center;width:24px;height:24px;font-size:18px;transition:color .18s}
+.eco-shell .eg-service:hover .eg-service-arrow{color:var(--eg-brand)}
+.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab){padding:0;margin:14px 0;border:1px solid var(--eg-border);border-radius:16px;background:var(--eg-surface);overflow:clip}
+.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)>summary{display:flex;align-items:center;gap:14px;list-style:none;padding:18px 22px;min-height:80px;color:var(--eg-text);font-size:15px;font-weight:600;border-radius:15px}
+.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)>summary::-webkit-details-marker{display:none}
+.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)>summary::marker{content:''}
+.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)>summary:hover{background:var(--eg-surface-soft)}
+.eco-shell .eg-disclosure-icon{display:grid;place-items:center;width:42px;height:42px;flex:none;border-radius:12px;background:var(--eg-brand-soft);color:var(--eg-brand)}
+.eco-shell .eg-disclosure-icon svg{width:22px;height:22px}.eco-shell .eg-disclosure-copy{display:grid;gap:3px;min-width:0;flex:1}.eco-shell .eg-disclosure-copy strong{font-size:15px;font-weight:650}.eco-shell .eg-disclosure-copy small{font-size:13px;font-weight:400;color:var(--eg-muted)}
+.eco-shell .eg-disclosure-chevron{display:block;flex:none;width:8px;height:8px;border-right:1.8px solid var(--eg-muted);border-bottom:1.8px solid var(--eg-muted);transform:rotate(45deg);margin:0 4px 4px 12px;transition:transform .18s}
+.eco-shell details[open]>summary>.eg-disclosure-chevron{transform:rotate(225deg);margin-bottom:0}
+.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)[open]>summary{border-bottom:1px solid var(--eg-border);border-radius:15px 15px 0 0}
+.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)>summary:focus-visible{outline:2px solid var(--eg-brand);outline-offset:-4px}
+.eco-shell #eco-workspace .energy-journal{margin:0;padding:24px;border:0;border-radius:0;background:var(--eg-surface);color:var(--eg-text)}
+.eco-shell #eco-workspace .energy-journal :is(h2,h3,summary){color:var(--eg-text)}
+.eco-shell #eco-workspace .energy-journal :is(p,small,.eco-kicker,.energy-yesterday>span,.energy-author,.energy-brief time,.energy-comparison dt){color:var(--eg-muted)}
+.eco-shell #eco-workspace .energy-journal :is(.energy-yesterday>strong,.energy-report>strong,.energy-milestones [data-done=true]){color:var(--eg-text)}
+.eco-shell #eco-workspace .energy-journal .eco-text{color:var(--eg-brand)}
+.eco-shell #eco-workspace .energy-journal :is(.energy-yesterday,.energy-milestones,.energy-brief,.energy-week-report){border-color:var(--eg-border)}
+.eco-shell #eco-workspace .energy-journal .energy-milestones>div{color:var(--eg-muted);font-size:13px;line-height:1.45}.eco-shell #eco-workspace .energy-journal .energy-milestones small{font-size:12px}.eco-shell .energy-milestones [data-done=true] .energy-milestone-mark{color:var(--eg-brand)}
+.eco-shell #eco-workspace .energy-journal :is(.energy-comparison div,.energy-pinned){background:var(--eg-surface-soft);border-color:var(--eg-border)}
+.eco-shell #eco-workspace .energy-week-report{padding:0;border:1px solid var(--eg-border);border-radius:10px;align-self:start;overflow:hidden}
+.eco-shell #eco-workspace .energy-week-report>summary{padding:16px;min-height:52px;font-size:14px}.eco-shell .energy-week-report summary::marker{color:var(--eg-brand)}.eco-shell .energy-report{padding:0 16px 16px}
+.eco-shell .eco-fund-lab>.energy-lab{margin:16px}
+/* Energy Lab is a deliberately dark visualization, so its copy uses local colors. */
+.eco-shell #eco-workspace .energy-lab :is(h2,h3,h4,summary){color:#f0f4f2}.eco-shell #eco-workspace .energy-lab p{color:#bdcbc4}.eco-shell #eco-workspace .energy-lab .eco-kicker{color:#bdcbc4}.eco-shell #eco-workspace .energy-lab .eco-text{color:#9ed6b9}
+.eco-shell #eco-workspace .club{--club-ink:var(--eg-text);--club-muted:var(--eg-muted);--club-line:var(--eg-border);--club-accent:var(--eg-brand);padding-bottom:0;gap:20px}
+.eco-shell #eco-workspace .club :is(h2,h3,h4){color:var(--eg-text)}.eco-shell #eco-workspace .club p{color:var(--eg-muted);margin:0;font-size:14px}
+.eco-shell #eco-workspace .club-pass{background:var(--eg-surface);border-color:var(--eg-border);border-radius:20px}
+.eco-shell #eco-workspace .club-pass-main{background:linear-gradient(135deg,var(--eg-surface),var(--eg-surface-soft));padding:30px}
+.eco-shell #eco-workspace .club-pass h2{font-size:clamp(24px,2.4vw,32px);line-height:1.2;letter-spacing:-.8px;margin:16px 0 14px;max-width:430px}
+.eco-shell .club-eyebrow,.eco-shell .club-offer>span:first-child{color:var(--eg-brand)}.eco-shell .club-rank-dot{background:var(--eg-brand);box-shadow:0 0 0 5px var(--eg-brand-soft)}
+.eco-shell .club-offer{background:var(--eg-surface-soft);border-color:var(--eg-border)}.eco-shell .club-offer>strong{font-size:46px;font-weight:650;color:var(--eg-text)}
+.eco-shell .club-status{background:var(--eg-surface);border-color:var(--eg-border-strong);color:var(--eg-text);line-height:1.5}
+.eco-shell .club-metrics{gap:12px;border:0;background:transparent}.eco-shell .club-metrics>div{background:var(--eg-surface);border:1px solid var(--eg-border);border-radius:14px;padding:20px}.eco-shell .club-metrics strong{color:var(--eg-text);font-weight:650}.eco-shell .club-metrics span{font-size:13px;line-height:1.4}
+.eco-shell #eco-workspace .club-panel{padding:24px;background:var(--eg-surface);border:1px solid var(--eg-border);border-radius:16px}
+.eco-shell .club-season,.eco-shell .club-goal{background:var(--eg-surface-soft);border-color:var(--eg-brand)}.eco-shell .club-season>span{color:var(--eg-brand)}
+.eco-shell .club-share{padding:4px 0}.eco-shell .club-copy{margin-bottom:8px}.eco-shell .club :is(.club-note,small){color:var(--eg-muted);font-size:12px}.eco-shell .club-empty{padding:0;max-width:620px}.eco-shell .club-panel>.eco-text{justify-self:start}
+.eco-shell #eco-workspace .club-panel>summary{font-size:15px;padding:0;min-height:32px}.eco-shell #eco-workspace .club-panel[open]>summary{margin-bottom:16px}
+@media(min-width:981px){.eco-shell #eco-top{grid-template-columns:1fr;gap:8px}.eco-shell #eco-top .eco-wallet{width:100%;justify-content:space-between}.eco-shell #eco-top [data-open-live-chat]{display:none}}
+@media(max-width:760px){.eco-shell .eg-service{min-height:196px;padding:18px 16px;gap:8px}.eco-shell .eg-service-icon{width:60px;height:60px;border-radius:17px}.eco-shell .eg-service-icon .eg-art{width:50px;height:50px}.eco-shell .eg-service strong{font-size:15px}.eco-shell .eg-service small{font-size:13px}.eco-shell .eg-service-arrow{top:17px;right:13px}.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)>summary{padding:16px 14px;gap:10px}.eco-shell .eg-disclosure-copy small{font-size:12px;line-height:1.45}.eco-shell .eg-disclosure-chevron{margin-left:3px}.eco-shell #eco-workspace .energy-journal{padding:20px 16px}.eco-shell .eco-fund-lab>.energy-lab{margin:8px}.eco-shell #eco-workspace .club-pass-main,.eco-shell #eco-workspace .club-offer{padding:22px}.eco-shell .club-metrics{gap:10px}.eco-shell .club-metrics>div{padding:16px}.eco-shell #eco-workspace .club-panel{padding:20px}.eco-shell .club-offer>strong{font-size:36px}.eco-shell .club-copy input{flex-basis:100%}.eco-shell .club-copy button{width:100%}}
+@media(prefers-reduced-motion:reduce){.eco-shell .eg-service,.eco-shell .eg-disclosure-chevron{transition:none}}
+
+/* EC90: one illustration family and readable profile/research surfaces. */
+.eco-shell .eg-project-symbol,.eco-shell .eg-card-icon,.eco-shell .eg-list-icon{border:1px solid color-mix(in srgb,var(--eg-brand) 14%,var(--eg-surface));background:linear-gradient(145deg,var(--eg-surface),var(--eg-brand-soft));box-shadow:inset 0 1px 0 #ffffff30,0 2px 6px #194b370a}
+.eco-shell .eg-project-symbol .eg-art{width:42px;height:42px}.eco-shell .eg-card-icon .eg-art{width:44px;height:44px}
+.eco-shell #eco-workspace :is(.care-profile-grid,.care-settings) label,.eco-shell .care-dialog label{color:var(--eco-text);font-size:14px;line-height:1.5}
+.eco-shell #eco-workspace .care-profile-grid :is(small,.care-hint),.eco-shell .care-dialog small{color:var(--eco-muted);font-size:13px;line-height:1.55}
+.eco-shell :is(#eco-workspace,.care-dialog) .care-field-error{color:#ac3326;font-size:13px;line-height:1.5}
+html[data-eco-theme=dark] .eco-shell :is(#eco-workspace,.care-dialog) .care-field-error{color:#ffb7a9}
+.eco-shell #eco-workspace .eco-kicker{font-size:12px;line-height:1.5;letter-spacing:.055em}
+html[data-portal=client] .eco-shell{--j-bg:var(--eco-bg);--j-panel:var(--eco-card);--j-border:var(--eco-line);--j-ink:var(--eco-text);--j-muted:var(--eco-muted);--j-mint:var(--eco-accent);--j-accent:var(--eco-accent)}
+.eco-shell :is(.j-card,.j-empty,.j-plan-summary,.j-progress,.j-discovery,.j-section,.j-library-header,.j-station-tools){color:var(--eco-text);background:var(--eco-card);border-color:var(--eco-line)}
+.eco-shell :is(.j-card,.j-empty,.j-plan-summary,.j-progress,.j-discovery,.j-section,.j-library-header,.j-station-tools) :is(p,small){color:var(--eco-muted)}
+.eco-shell .j-arrow{width:18px;height:18px;flex:none}
+@media(max-width:760px){.eco-shell .eg-project-symbol .eg-art{width:36px;height:36px}}
+
+/* EC90: modal components share the account theme instead of legacy hard-coded graphite. */
+.eco-shell #modal #modal-content,.eco-shell #modal #modal-content .payment-checkout{--pay-ink:var(--eco-text);--pay-muted:var(--eco-muted);--pay-line:var(--eco-line);--pay-panel:var(--eco-raised);color:var(--eco-text)}
+.eco-shell #modal #modal-content :is(.care-dialog,.withdrawal-checkout,.payment-result,.payment-card-simple,.conversation-summary){color:var(--eco-text)}
+.eco-shell #modal #modal-content :is(label,legend){font-size:14px;line-height:1.5;color:var(--eco-text)}
+.eco-shell #modal #modal-content :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea){background:var(--eco-raised);color:var(--eco-text);border-color:var(--eco-line);font-family:inherit;font-size:16px;border-radius:10px}
+.eco-shell #modal #modal-content :is(input,textarea)::placeholder,.eco-shell #eco-workspace :is(input,textarea)::placeholder{color:var(--eco-muted);opacity:1}
+.eco-shell #modal #modal-content :is(.care-note,.care-context dt,.payment-preview-note,.payment-card-simple p,.payment-links>span,.payment-result>p,.payment-review-note p,.withdrawal-checkout small,.withdrawal-rules p,.withdrawal-funds dt,.withdrawal-funds>span,.withdrawal-preview>span){color:var(--eco-muted);font-size:13px;line-height:1.6}
+.eco-shell #modal #modal-content :is(.care-context,.withdrawal-funds,.payment-switch,.thread-bubble,.payment-review-note){background:var(--eco-raised);border-color:var(--eco-line);border-radius:12px;color:var(--eco-text)}
+.eco-shell #modal #modal-content .care-context{padding:16px;margin:18px 0}
+.eco-shell #modal #modal-content .care-context summary{font-size:14px;line-height:1.5;color:var(--eco-text)}
+.eco-shell #modal #modal-content .care-context :is(dt,dd){font-size:13px;line-height:1.5}
+.eco-shell #modal #modal-content :is(.care-feedback,.care-field-error,.form-error){color:#ac3326;font-size:13px;line-height:1.6}
+.eco-shell #modal #modal-content :is(.care-feedback,.care-field-error,.form-error):empty{display:none}
+html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.care-feedback,.care-field-error,.form-error){color:#ffb7a9}
+.eco-shell #modal #modal-content :is(.care-dialog form>.eco-button,.payment-submit){margin-top:18px}
+.eco-shell #modal #modal-content .payment-submit{background:var(--eco-card);padding-block:10px}
+.eco-shell #modal #modal-content .payment-preview-label{background:var(--eg-brand-soft);color:var(--eco-muted);font-size:11px;white-space:normal;line-height:1.4}
+.eco-shell #modal #modal-content .payment-header{align-items:flex-start;flex-wrap:wrap}
+.eco-shell #modal #modal-content :is(.payment-switch button,.payment-amount-chips button,.withdrawal-input button){color:var(--eco-text);border-color:var(--eco-line)}
+.eco-shell #modal #modal-content :is(.payment-switch button,.payment-amount-chips button)[aria-pressed=true]{background:var(--eg-brand-soft);color:var(--eg-brand);border-color:var(--eg-brand);box-shadow:inset 0 -2px var(--eg-brand)}
+.eco-shell #modal #modal-content :is(.payment-submit>.button,.payment-result>.button,.withdrawal-checkout button[type=submit]){background:var(--eco-accent);color:#fff;border-color:var(--eco-accent);font-size:15px;font-weight:600;min-height:48px}
+html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.button,.payment-result>.button,.withdrawal-checkout button[type=submit]){color:#153123}
+.eco-shell #modal #modal-content :is(.payment-card-simple>.icon,.payment-terms a,.payment-links>button,.withdrawal-window time){color:var(--eg-brand)}
+.eco-shell #modal #modal-content :is(.payment-terms summary,.payment-terms p,.payment-terms a,.payment-links>button,.payment-wallet>small,.payment-result-details,.withdrawal-preview){font-size:13px;line-height:1.6}
+.eco-shell #modal #modal-content #payment-amount{font-size:30px;font-weight:600}
+.eco-shell #modal #modal-content :is(.withdrawal-funds dl,.withdrawal-preview,.withdrawal-input,.withdrawal-rules){border-color:var(--eco-line)}
+.eco-shell #modal #modal-content :is(input,select,textarea,button,summary):focus-visible{outline:2px solid var(--eco-accent);outline-offset:3px}
+.eco-shell #eco-workspace label{color:var(--eco-text);font-size:14px;line-height:1.5}
+.eco-shell .eco-help-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.eco-shell .eco-help-actions .eco-button{margin:0}
+.eco-shell #eco-workspace .care-settings{border-color:var(--eco-line)}
+@media(max-width:440px){.eco-shell #modal #modal-content .payment-links{flex-direction:column;align-items:stretch;gap:4px}.eco-shell #modal #modal-content .payment-links>span{max-width:none;text-align:left}.eco-shell .eco-help-actions>.eco-button{flex:1 1 100%}}
+
+.eco-shell #modal .modal-heading .modal-eyebrow{display:none}.eco-shell #modal .modal-heading{justify-content:flex-end;padding-block:8px;min-height:44px}
+.eco-shell #modal #modal-content .payment-preview-label{font-size:12px}
+.eco-shell #modal #modal-content .withdrawal-checkout>.eco-kicker{display:none}
+
+.eco-shell #modal #modal-content .withdrawal-input{background:var(--eco-raised);border:1px solid var(--eco-line);border-radius:10px;overflow:hidden}
+.eco-shell #modal #modal-content .withdrawal-input:focus-within{border-color:var(--eco-accent);outline:2px solid var(--eco-accent);outline-offset:2px;box-shadow:none}
+.eco-shell #modal #modal-content .withdrawal-input #withdrawal-amount{border:0;border-radius:0;box-shadow:none;outline:none;background:transparent;font-size:22px}
+.eco-shell #modal #modal-content .withdrawal-input button{align-self:stretch;background:var(--eg-brand-soft);color:var(--eg-brand);border:0;border-radius:0;min-width:90px;font-size:13px;font-weight:600}
+.eco-shell #modal #modal-content .withdrawal-rules h3{font-size:15px;line-height:1.5;margin:0 0 12px}.eco-shell #modal #modal-content .withdrawal-rules ul{padding-left:20px;margin:0 0 18px;color:var(--eco-muted);font-size:13px;line-height:1.6}.eco-shell #modal #modal-content .withdrawal-rules li+li{margin-top:9px}
+.eco-shell :is(.cashflow-zone,.withdrawal-window) [data-withdraw-zone]{font:inherit;min-height:44px;white-space:normal;text-align:left;color:var(--eg-brand);padding:0}
+
+.eco-shell .eco-scenario{background:var(--eco-card);border:1px solid var(--eco-line);border-radius:18px;padding:24px;box-shadow:var(--eco-shadow)}
+.eco-shell .eco-scenario strong{font-size:18px}.eco-shell .eco-scenario small{font-size:13px;line-height:1.6;color:var(--eco-muted)}
+.eco-shell .eco-scenario .eco-actions{flex-wrap:wrap;gap:8px 18px;margin-top:12px}.eco-shell .eco-scenario .eco-actions button{min-height:44px}
+.eco-shell .identity-empty{color:var(--eco-muted);border-color:var(--eco-line)}
+
+/* EC-92: account amounts must follow the selected theme. */
+.eco-shell .eco-live-card :is([data-live-capital],[data-live-confirmed]){color:var(--eg-text)}
+
+/* EC96: legacy station dialogs use the same theme as the account. */
+.eco-shell #eco-workspace .eco-conversation{background:var(--eg-surface-soft);border-color:var(--eg-border)}
+.eco-shell .energy-week-ring>span{color:var(--eg-text)}
+.eco-shell :is(.energy-week small,.eco-account-cadence,.station-collections>p){color:var(--eg-muted)}
+.eco-shell .r-station-list{background:var(--eg-surface);border-color:var(--eg-border);color:var(--eg-text)}
+.eco-shell .r-location-row{color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell .r-location-row strong{color:var(--eg-text)}
+.eco-shell .r-location-row :is(small,span>span):not(.station-selection-badge){color:var(--eg-muted)}
+.eco-shell .station-selection-badge{background:var(--eg-brand-soft);border-color:var(--eg-border);color:var(--eg-brand)}
+.eco-shell .station-selection-badge.is-closed{background:var(--eg-surface-soft);color:var(--eg-muted)}
+.eco-shell .eco-mining-portfolio :is(small,p,dt){color:var(--eg-muted)}
+.eco-shell .eco-mining-position-status{color:var(--eg-brand)}
+.eco-shell #eco-workspace .eco-status{color:var(--eg-brand)}
+.eco-shell #eco-workspace label.eco-button{color:var(--eg-on-brand)}
+.eco-shell #eco-workspace label.eco-button.secondary{color:var(--eg-text)}
+.eco-shell .equipment-handoff small{color:var(--eg-muted)}
+.eco-shell :is(.station-scopes,.station-country-tabs button,.r-list-heading,.r-map-toolbar){background:var(--eg-surface);border-color:var(--eg-border);color:var(--eg-text)}
+.eco-shell :is(.station-scopes button,.station-country-tabs small,.r-list-heading span){color:var(--eg-muted)}
+.eco-shell :is(.station-scopes button,.station-country-tabs button)[aria-pressed=true]{background:var(--eg-brand-soft);border-color:var(--eg-brand);color:var(--eg-brand)}
+.eco-shell .station-country-tabs button:hover{background:var(--eg-surface-soft);border-color:var(--eg-brand)}
+.eco-shell :is(.r-map-cluster,.r-map-pin){background:var(--eg-surface);color:var(--eg-brand);border-color:var(--eg-brand);box-shadow:0 2px 8px #0003}
+.eco-shell .r-map-pin.selection-closed{background:var(--eg-surface-soft)!important;border-color:var(--eg-border-strong)!important;color:var(--eg-muted)!important}
+.eco-shell .map-legend{background:var(--eg-surface);border-color:var(--eg-border)}
+.eco-shell .map-legend .station-selection-badge{background:var(--eg-brand-soft);border-color:var(--eg-border);color:var(--eg-brand)}
+.eco-shell .map-legend .station-selection-badge.is-closed{background:var(--eg-surface-soft);color:var(--eg-muted)}
+.eco-shell .r-map-country-control{position:absolute;top:16px;left:16px;z-index:500;display:flex;align-items:center;gap:10px;max-width:calc(100% - 90px);padding:3px 10px;border:1px solid var(--eg-border);border-radius:10px;background:var(--eg-surface);box-shadow:var(--eg-shadow);color:var(--eg-muted);font-size:12px}
+.eco-shell .r-map-country-control select{background:var(--eg-surface);color:var(--eg-text);border:0;min-height:44px;max-width:160px;font:inherit;font-size:14px;padding:6px}
+.eco-shell :is(.cab-station-tools .button,.r-map-modes,.r-filter-toggle,#map-section .filter-panel,.r-map-selection,.map-controls button){background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell #map-section :is(input,select){background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell #map-section input::placeholder{color:var(--eg-muted);opacity:1}
+.eco-shell #map-section :is(label,.filter-panel h2,.r-map-selection strong){color:var(--eg-text)}
+.eco-shell :is(.r-map-modes button,.r-map-selection small){color:var(--eg-muted)}
+.eco-shell .r-map-modes button[aria-pressed=true]{color:var(--eg-brand);background:var(--eg-brand-soft)}
+.eco-shell .r-map-selection .text-button{color:var(--eg-brand)}
+.eco-shell #modal{overscroll-behavior:contain}
+.eco-shell #modal #modal-content :where(p,small,dt){color:var(--eg-muted)}
+.eco-shell #modal :is(.j-station-title,.j-text-button){background:transparent;color:var(--eg-brand)}
+.eco-shell #modal .j-station-title{color:var(--eg-text);min-height:44px}
+.eco-shell #modal .j-compare-grid article{background:var(--eg-surface);border-color:var(--eg-border)}
+.eco-shell #modal .j-compare-grid :is(dd,h3){color:var(--eg-text)}
+.eco-shell #modal .j-compare-grid dl>div{border-color:var(--eg-border)}
+.eco-shell #modal .j-compare-grid dd a{color:var(--eg-brand)}
+.eco-shell #modal .j-compare-grid :is(p,dt){font-size:13px!important}
+.eco-shell #modal .button.primary{background:var(--eg-brand);color:var(--eg-on-brand);border-color:var(--eg-brand)}
+.eco-shell #modal .button.primary:hover{background:var(--eg-brand-hover);border-color:var(--eg-brand-hover)}
+.eco-shell #modal .button.secondary{background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell #modal .button.secondary:hover{background:var(--eg-surface-soft);border-color:var(--eg-brand)}
+.eco-shell #modal #modal-content>p,
+.eco-shell #modal :is(.station-dialog-eyebrow,.station-detail-grid small,.photo-source-details,.photo-source-details p,.photo-source-details summary,.illustration-caption p,.station-invest-box>small,.station-invest-box>div>span,.station-invest-box strong small){color:var(--eg-muted);font-size:13px;line-height:1.6}
+.eco-shell #modal :is(.photo-source-details a,.illustration-caption a,.station-dialog-links a,.station-dialog-links button){color:var(--eg-brand);font-size:13px;line-height:1.6}
+.eco-shell #modal .station-detail-grid strong{color:var(--eg-text);font-size:15px}
+.eco-shell #modal .station-invest-box{background:var(--eg-surface-soft);border-color:var(--eg-border)}
+.eco-shell #modal .station-invest-box strong{color:var(--eg-brand)}
+.eco-shell #modal .j-station-tools{gap:8px;flex-wrap:wrap}
+.eco-shell #modal .j-station-tools button{min-height:44px;padding:10px 14px;background:var(--eg-surface-soft);border:1px solid var(--eg-border);color:var(--eg-text);border-radius:10px;font-size:13px;line-height:1.4}
+.eco-shell #modal .j-station-tools button:is(:hover,[aria-pressed=true]){background:var(--eg-brand-soft);border-color:var(--eg-brand);color:var(--eg-brand)}
+.eco-shell #modal .station-dialog-links{flex-wrap:wrap;gap:8px 16px}
+.eco-shell #modal .station-dialog-links :is(a,button){display:inline-flex;align-items:center;min-height:44px}
+.eco-shell #modal .dialog-actions{background:var(--eg-surface);border-color:var(--eg-border);color:var(--eg-text);padding:16px 0 max(8px,env(safe-area-inset-bottom));gap:10px}
+.eco-shell #modal .dialog-actions .button{min-height:46px;margin:0;font-size:14px;line-height:1.4;border-radius:10px}
+.eco-shell #modal .dialog-actions .button.primary{background:var(--eg-brand);border-color:var(--eg-brand);color:var(--eg-on-brand)}
+.eco-shell #modal .dialog-actions .button.primary:hover{background:var(--eg-brand-hover);border-color:var(--eg-brand-hover)}
+.eco-shell #modal .dialog-actions .button.secondary{background:var(--eg-surface);border-color:var(--eg-border);color:var(--eg-text)}
+.eco-shell #modal .dialog-actions .button.secondary:hover{background:var(--eg-surface-soft);border-color:var(--eg-brand)}
+.eco-shell #modal .station-selection-badge{background:var(--eg-brand-soft);border-color:var(--eg-border);color:var(--eg-brand)}
+.eco-shell #modal .station-selection-badge.is-closed{background:var(--eg-surface-soft);color:var(--eg-muted)}
+@media(max-width:540px){.eco-shell #modal .dialog-actions{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.eco-shell #modal .dialog-actions>div{grid-column:1/-1}.eco-shell #modal .j-station-tools button{flex:1 1 140px}}
+.eco-shell :is(.r-map-search,.search-results,.map-tools .icon-btn,.station-tooltip){background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)!important}
+.eco-shell .r-map-search input{border:0;background:transparent;color:var(--eg-text)}
+.eco-shell :is(.r-map-search>.icon,.station-tooltip small,.search-result small){color:var(--eg-muted)}
+.eco-shell .map-tools .icon-btn:hover{background:var(--eg-surface-soft)}
+.eco-shell .leaflet-tile-pane{filter:none}
+.eco-shell .map-panel:after{box-shadow:none;background:none}
+.eco-shell :is(.ec-chat-launch,.ec-chat-alert,.ec-chat-dialog,.ec-chat-workspace){--chat-bg:var(--eg-surface);--chat-panel:var(--eg-surface-soft);--chat-line:var(--eg-border);--chat-ink:var(--eg-text);--chat-muted:var(--eg-muted);--chat-accent:var(--eg-brand)}
+.eco-shell .ec-chat-launch{background:var(--eg-brand);color:var(--eg-on-brand);border-color:var(--eg-brand);box-shadow:0 5px 20px #10201918}
+.eco-shell .ec-chat-launch:hover{background:var(--eg-brand-hover)}
+.eco-shell .ec-chat-launch:focus-visible{outline:2px solid var(--eg-brand);outline-offset:3px}
+
+.eco-shell #modal :is(.j-station-card,.j-station-body,.j-compare-strip,.j-compare-chips button){background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell #modal :is(.j-compare-strip,.j-compare-chips button){background:var(--eg-surface-soft)}
+.eco-shell #modal .j-station-specs{color:var(--eg-muted);border-color:var(--eg-border)}
+.eco-shell #modal .j-station-actions button{background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell #modal .j-station-actions button[aria-pressed=true]{background:var(--eg-brand-soft);color:var(--eg-brand);border-color:var(--eg-brand)}

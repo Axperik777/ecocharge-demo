@@ -1,7 +1,0 @@
-{
- "mode":"demo",
- "websiteBase":"https://landing.example/",
- "accountBase":"https://workspace.example/",
- "crmBase":"https://workspace.example/",
- "landingId":"stations"
-}

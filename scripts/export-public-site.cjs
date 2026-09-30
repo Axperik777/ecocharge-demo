@@ -36,11 +36,15 @@ for (const route of manifest.routes) {
   html = html.replace(/<footer\b[\s\S]*?<\/footer>/g, footer => footer.replace(/<div><h2>Your (?:workspace|account)<\/h2>(?:<a\b[^>]*>[\s\S]*?<\/a>)*<\/div>/g, ''));
   html = html.replace(/<section class="ec-finish[\s\S]*?<\/section>/g, '');
   html = html.replace(/<a\b[^>]*\bhref="([^"]+)"[^>]*>[\s\S]*?<\/a>/g, (whole, ref) => {
+    if (whole.includes('data-workspace-entry')) {
+      const accountURL = new URL(ref.replaceAll('&amp;', '&'), websiteBase);
+      return whole.replace('href="'+ref+'"', 'href="workspace/client/'+accountURL.search+'"');
+    }
     const url = new URL(ref.replaceAll('&amp;', '&'), websiteBase);
     return url.origin === new URL(websiteBase).origin && url.pathname.startsWith(new URL(websiteBase).pathname) && excluded.test(url.pathname.slice(new URL(websiteBase).pathname.length)) ? '' : whole;
   });
   html = html.replace('</head>', '<script src="website-only.js" defer></script></head>');
-  fs.writeFileSync(file, html);
+  fs.writeFileSync(file, html.replace(/[ \t]+$/gm, ''));
 }
 fs.copyFileSync(path.join(workspace, 'dist/website-only.js'), path.join(output, 'website-only.js'));
 fs.writeFileSync(path.join(output, 'robots.txt'), 'User-agent: *\nDisallow: /\n');

@@ -1,5 +1,5 @@
 /* EcoGrid staff workspace. Scoped to CRM so the client portal keeps its own layout. */
-html[data-app="crm"]{color-scheme:light;--crm-bg:#f4f7f5;--crm-panel:#fff;--crm-soft:#f0f5f2;--crm-border:#dce5df;--crm-muted:#60746b;--crm-text:#19352a;--crm-mint:#087252;--crm-active:#e0f2e9;--crm-warning-bg:#fff4df;--crm-warning:#8a5518;--crm-error-bg:#fbecea;--crm-error:#ac4238;--crm-shadow:0 4px 22px #19352a06}
+html[data-app="crm"]{color-scheme:light;--crm-bg:#f5f8f6;--crm-panel:#fff;--crm-soft:#edf7f2;--crm-border:#dbe6e0;--crm-muted:#52665b;--crm-text:#102019;--crm-mint:#006a4d;--crm-active:#dff5e9;--crm-warning-bg:#fff4df;--crm-warning:#8a5518;--crm-error-bg:#fbecea;--crm-error:#ac4238;--crm-shadow:0 4px 22px #19352a06}
 html[data-app="crm"][data-crm-theme="dark"]{color-scheme:dark;--crm-bg:#191d20;--crm-panel:#242a2e;--crm-soft:#2b3336;--crm-border:#3a454a;--crm-muted:#b0bdb8;--crm-text:#f0f4f2;--crm-mint:#93d7b6;--crm-active:#2b443b;--crm-warning-bg:#3e3324;--crm-warning:#e8c18e;--crm-error-bg:#442d2d;--crm-error:#f4a29b;--crm-shadow:0 4px 22px #0000000c}
 [data-app="crm"] body{background:var(--crm-bg);color:var(--crm-text);font-size:14px;line-height:1.6}
 [data-app="crm"] :is(button,input,select,textarea){font:inherit;letter-spacing:normal}
@@ -7,6 +7,8 @@ html[data-app="crm"][data-crm-theme="dark"]{color-scheme:dark;--crm-bg:#191d20;-
 [data-app="crm"] :is(h1,h2,h3){color:var(--crm-text);font-weight:700;line-height:1.3;letter-spacing:-.035em}
 [data-app="crm"] h1{font-size:30px}[data-app="crm"] h2{font-size:20px}[data-app="crm"] h3{font-size:16px}
 [data-app="crm"] a{color:var(--crm-mint)}
+[data-app="crm"] .crm-skip{background:var(--crm-panel);color:var(--crm-text);border:1px solid var(--crm-border)}
+[data-app="crm"] .club-eyebrow{color:var(--crm-muted)}
 [data-app="crm"] .central-header{max-width:none;min-height:80px;padding:16px 28px;background:var(--crm-panel);border-bottom:1px solid var(--crm-border);gap:24px}
 [data-app="crm"] .charge-brand{gap:10px;flex:none}[data-app="crm"] .charge-wordmark{font-size:25px!important;color:var(--crm-text)!important}[data-app="crm"] .charge-wordmark span{color:var(--crm-mint)!important}
 [data-app="crm"] #central-user{font-size:13px;line-height:1.6;color:var(--crm-muted);padding-left:24px;border-left:1px solid var(--crm-border)}
