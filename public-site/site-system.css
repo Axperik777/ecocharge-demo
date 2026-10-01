@@ -466,7 +466,7 @@ html[data-app=website] .club-discussion-example p{color:#263c31;font-weight:500}
 html[data-app=website] .club-discussion-example>span:last-child{font-size:13px;color:#53675e}
 html[data-app=website] .club-comfort{border-block:1px solid var(--ec-border,#d8e4de)}
 html[data-app=website] .club-coin{scroll-margin-top:100px;border:1px solid var(--ec-border,#d8e4de);border-radius:24px;background:var(--ec-surface,#fff);padding:clamp(22px,4vw,44px);margin-block:32px}
-html[data-app=website] .club-coin-intro{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center}
+html[data-app=website] .club-coin-intro{max-width:780px}
 html[data-app=website] .club-reward-preview{border:1px solid #c6d9d0;border-radius:20px;padding:26px;background:#edf5f1;color:#102019;display:flex;flex-direction:column;align-items:center}
 html[data-app=website] .club-coin-badge{width:68px;height:68px;border:5px double #91b3a3;border-radius:50%;display:grid;place-items:center;font-size:35px;font-weight:700;color:#fff;background:#006a4d;line-height:1}
 html[data-app=website] .club-reward-preview>strong{font-size:25px;margin-top:10px;color:#006a4d}
@@ -503,3 +503,14 @@ html[data-app=website] .lead-privacy a{text-decoration:underline;text-underline-
 @media(max-width:480px){html[data-app=website] .grid-hero-copy h1{font-size:clamp(30px,7.4vw,36px)}html[data-app=website] .grid-hero-actions .ec-button{text-align:center;justify-content:center}}
 .home-club-invitation{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;background:var(--pale);border:1px solid var(--line);border-radius:24px;padding:44px}.home-club-name{color:var(--teal);font-size:22px;font-weight:600;margin:0 0 18px}.home-club-invitation h2{margin:0 0 20px}.home-club-invitation p{line-height:1.7}.home-club-invitation>.home-club-benefits{list-style:none;margin:0;padding:0;display:grid;gap:24px}.home-club-benefits li{display:flex;align-items:flex-start;gap:16px;padding-bottom:24px;border-bottom:1px solid var(--line)}.home-club-benefits li:last-child{border:0;padding-bottom:0}.home-club-benefits li>svg{width:24px;height:24px;flex:0 0 24px;fill:none;stroke:var(--teal);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-top:4px}.home-club-benefits h3{font-size:19px;margin:0 0 8px}.home-club-benefits p{font-size:16px;color:var(--muted);margin:0}.home-club-invitation .ec-button{margin-top:16px;white-space:normal;text-align:center}.home-club-benefits .ec-text-link{margin-top:12px;min-height:44px;font-size:15px}
 @media(max-width:800px){.home-club-invitation{grid-template-columns:minmax(0,1fr);gap:32px;padding:28px}.home-club-invitation h2{font-size:30px}.home-club-invitation .ec-button{width:100%;justify-content:center}}@media(max-width:480px){.home-club-invitation{padding:24px 18px;border-radius:18px}.home-club-benefits li{gap:12px}.home-club-benefits h3{font-size:18px}}
+
+/* EC117: project, community and company navigation have separate groups. */
+html[data-app=website] #site-menu .ec-menu-group{padding:12px 0}
+html[data-app=website] #site-menu .ec-menu-group+.ec-menu-group{border-top:1px solid var(--line)}
+html[data-app=website] #site-menu .ec-menu-group h2{margin:0 12px 8px;font-size:11px;line-height:1.5;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+html[data-app=website] #site-menu .ec-menu-group>a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:48px;padding:10px 12px;border-radius:6px}
+html[data-app=website] #site-menu .ec-menu-group>a[aria-current]{background:var(--soft);color:var(--teal)}
+html[data-app=website] #site-menu .ec-menu-group>a:hover{background:var(--soft)}
+html[data-app=website] .ec-station-photo-sources{border-top:1px solid var(--line);margin-top:24px;padding-top:10px}
+html[data-app=website] .ec-station-photo-sources>summary{cursor:pointer;color:var(--teal);font-size:12px;min-height:44px;align-content:center}
+html[data-app=website] .ec-station-photo-sources .ec-photo-credit{padding:8px 0;background:none;line-height:1.8}
