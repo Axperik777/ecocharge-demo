@@ -2,7 +2,7 @@
 // The same allowlist is used by the server and the sign-in UI. Never accept a return URL.
 (function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('../account-finance.js'):root.EcoFinance);if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoNavigation=api;})(typeof window==='object'?window:globalThis,finance=>{
  const clientTabs=['dashboard','map','assets','documents','tariffs','money','help','profile','identity','notifications','saved','results','invite','arcade','equipment','projects','services','feed','academy','solar-project'];
- const staffTabs=['today','leads','clients','chats','funding','withdrawals','links','knowledge','guide','handoffs','club','calls','funnel','followups','community'];
+ const staffTabs=['registrations','today','leads','clients','chats','funding','withdrawals','links','knowledge','guide','handoffs','club','calls','funnel','followups','community'];
  function context(kind,input,language){
   const p=input instanceof URLSearchParams?input:new URLSearchParams(typeof input==='string'?input:undefined);
   const out=new URLSearchParams(),lang=['en','ru'].includes(language)?language:p.get('lang');
@@ -20,7 +20,7 @@
   }
   return out;
  }
- function destination(kind,input,language,role){const p=context(kind,input,language);if(kind==='staff'&&role!=='admin'&&['links','club'].includes(p.get('tab')))p.set('tab','today');return (kind==='staff'?'/crm/':'/client/')+(p.size?'?'+p:'');}
+ function destination(kind,input,language,role){const p=context(kind,input,language);if(kind==='staff'&&role!=='admin'&&['links','club','registrations'].includes(p.get('tab')))p.set('tab','today');return (kind==='staff'?'/crm/':'/client/')+(p.size?'?'+p:'');}
  function login(kind,input,language){const p=context(kind,input,language);return (kind==='staff'?'/team/':'/login/')+(p.size?'?'+p:'');}
  return {context,destination,login};
 });

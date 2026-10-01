@@ -58,6 +58,9 @@ assert.doesNotMatch(home,/href="[^"]*install=1"/,'Installation belongs inside th
 for(const route of ['login','register']){
  const entry=fs.readFileSync(path.join(workspaceRoot,route,'index.html'),'utf8');
  assert.match(entry,/public-account-entry\.js/,'Missing public entry screen: '+route);
+ assert.match(entry,/data-account-connected="false"/,'Public account entry must not fake a live backend');
+ assert.match(entry,/id="entry-fields"/,'Standard account form container missing');
+ assert.doesNotMatch(entry,/Посмотреть пример кабинета|Explore the account preview/,'Remove preview links from authentication');
  assert.doesNotMatch(entry,/http-equiv="refresh"|location\.replace\(/,'Public entry must not bypass sign-in or redirect to CRM: '+route);
 }
 assert.doesNotMatch(plans,/data-public-plan-form|project-calculator|13%|16%/,'Public plans must be removed');

@@ -59,6 +59,8 @@ const app=require(path.join(work,'server/server.cjs')).createServer({database:pa
  for(const name of ['team']){fs.mkdirSync(path.join(out,name),{recursive:true});fs.writeFileSync(path.join(out,name,'index.html'),'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=../crm/?lang=ru"><a href="../crm/?lang=ru">Открыть CRM</a>');}
  for(const name of ['login','register']){fs.mkdirSync(path.join(out,name),{recursive:true});fs.writeFileSync(path.join(out,name,'index.html'),require('./public-account-entry.cjs')());}
  fs.copyFileSync(path.join(work,'dist/public-account-entry.js'),path.join(out,'public-account-entry.js'));
+ fs.copyFileSync(path.join(work,'dist/account-entry.css'),path.join(out,'account-entry.css'));
+ for(const name of ['login','register']){const file=path.join(out,name,'index.html');const html=fs.readFileSync(file,'utf8').replace(/((?:src|href)=")([^"?#]+\.(?:js|css))(")/g,(all,prefix,ref,suffix)=>{const asset=path.join(out,ref);return fs.existsSync(asset)?prefix+ref+'?v='+crypto.createHash('sha256').update(fs.readFileSync(asset)).digest('hex').slice(0,12)+suffix:all;});fs.writeFileSync(file,html);}
  fs.writeFileSync(path.join(out,'index.html'),'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=crm/?lang=ru"><a href="crm/?lang=ru">Открыть CRM</a>');
  fs.writeFileSync(path.join(out,'preview-manifest.json'),JSON.stringify({kind:'workspace-sandbox',source:'fresh-isolated-fixture',sampleData:true,authentication:false,apiConnected:false,persistence:'browser-localStorage',realPayments:false},null,2));
  console.log('WORKSPACE PREVIEW READY '+out);
