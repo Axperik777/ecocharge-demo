@@ -53,9 +53,16 @@ const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFil
 assert.match(home,/href="#how-ecogrid-works"/,'Homepage presentation entry is missing');
 assert.doesNotMatch(home,/data-public-plan-form|data-lead-form|src="public-plan-ui\.js/,'Homepage must introduce the company without a calculator or lead form');
 assert.match(home,/data-workspace-entry[^>]*class="ec-sign-in"/,'Visible account entry is missing');
+assert.match(home,/href="[^"]*workspace\/login\//,'Public sign-in must lead to the entry page');
+assert.doesNotMatch(home,/href="[^"]*install=1"/,'Installation belongs inside the account');
+for(const route of ['login','register']){
+ const entry=fs.readFileSync(path.join(workspaceRoot,route,'index.html'),'utf8');
+ assert.match(entry,/public-account-entry\.js/,'Missing public entry screen: '+route);
+ assert.doesNotMatch(entry,/http-equiv="refresh"|location\.replace\(/,'Public entry must not bypass sign-in or redirect to CRM: '+route);
+}
 assert.doesNotMatch(plans,/data-public-plan-form|project-calculator|13%|16%/,'Public plans must be removed');
 const stations=JSON.parse(fs.readFileSync(path.join(root,'stations.json'),'utf8')).stations;
 assert.equal(stations.length,3980);assert.equal(stations.filter(s=>s.selectionClosed).length,1910);
 const runtime=fs.readFileSync(path.join(root,'website-only.js'),'utf8');
-assert(workspace && runtime.includes('workspace/client/') && fs.readFileSync(path.join(root,'lead-form.js'),'utf8').includes("EcoSandbox.request('public/leads'"));
+assert(workspace && runtime.includes('workspace/login/') && fs.readFileSync(path.join(root,'lead-form.js'),'utf8').includes("EcoSandbox.request('public/leads'"));
 console.log(JSON.stringify({ok:true,pages:manifest.routes.length,files:files.length,bytes:files.reduce((n,f)=>n+fs.statSync(f).size,0),privateData:false,workspaceRoutes:true,apiConnected:false,clientPreview:preview,workspace}));

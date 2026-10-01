@@ -67,12 +67,12 @@
   },
   "club": {
     "title": [
-      "Free AI access for every Club member",
-      "Бесплатный AI для каждого участника Club"
+      "Project explanations and product guidance",
+      "Разбор проектов и помощь с продуктами"
     ],
     "body": [
-      "Every EcoGrid Club member can use our EcoGrid AI for free. Use it to understand project data, compare energy-use scenarios and get clear explanations. The team also uses EcoGrid AI to prepare project updates for Club members.",
-      "Каждый участник EcoGrid Club может бесплатно пользоваться нашим EcoGrid AI. Он помогает разбираться в данных проектов, сравнивать сценарии использования энергии и получать понятные объяснения. Команда также использует EcoGrid AI для подготовки обновлений проектов для участников клуба."
+      "Club members discuss project data and get help using EcoGrid products. The team uses AI to prepare explanations and updates. Project AI mode is a separate optional service paid in EcoCoin.",
+      "В Клубе участники обсуждают данные проектов и получают помощь с продуктами EcoGrid. Команда использует AI для подготовки объяснений и обновлений. Проектный AI-режим — отдельная дополнительная услуга с оплатой в EcoCoin."
     ]
   }
 });

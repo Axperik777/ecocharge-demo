@@ -39,7 +39,7 @@ for (const route of manifest.routes) {
   html = html.replace(/<a\b[^>]*\bhref="([^"]+)"[^>]*>[\s\S]*?<\/a>/g, (whole, ref) => {
     if (whole.includes('data-workspace-entry')) {
       const accountURL = new URL(ref.replaceAll('&amp;', '&'), websiteBase);
-      return whole.replace('href="'+ref+'"', 'href="workspace/client/'+accountURL.search+'"');
+      return whole.replace('href="'+ref+'"', 'href="workspace/'+(/\/register\//.test(accountURL.pathname)?'register/':'login/')+accountURL.search+'"');
     }
     const url = new URL(ref.replaceAll('&amp;', '&'), websiteBase);
     return url.origin === new URL(websiteBase).origin && url.pathname.startsWith(new URL(websiteBase).pathname) && excluded.test(url.pathname.slice(new URL(websiteBase).pathname.length)) ? '' : whole;
