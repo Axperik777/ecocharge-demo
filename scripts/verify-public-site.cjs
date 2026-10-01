@@ -53,8 +53,7 @@ const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFil
 assert.match(home,/href="#how-ecogrid-works"/,'Homepage presentation entry is missing');
 assert.doesNotMatch(home,/data-public-plan-form|data-lead-form|src="public-plan-ui\.js/,'Homepage must introduce the company without a calculator or lead form');
 assert.match(home,/data-workspace-entry[^>]*class="ec-sign-in"/,'Visible account entry is missing');
-for(const tier of ['single','network','portfolio','scale'])assert(plans.includes('href="participate/charge/?tier='+tier+'#project-calculator"'),'Plan calculation link is missing: '+tier);
-assert.match(plans,/href="plans\/#project-calculator"/,'Plan calculator entry is missing');
+assert.doesNotMatch(plans,/data-public-plan-form|project-calculator|13%|16%/,'Public plans must be removed');
 const stations=JSON.parse(fs.readFileSync(path.join(root,'stations.json'),'utf8')).stations;
 assert.equal(stations.length,3980);assert.equal(stations.filter(s=>s.selectionClosed).length,1910);
 const runtime=fs.readFileSync(path.join(root,'website-only.js'),'utf8');
