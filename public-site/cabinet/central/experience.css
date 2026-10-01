@@ -573,3 +573,7 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 .eco-shell #modal .j-station-specs{color:var(--eg-muted);border-color:var(--eg-border)}
 .eco-shell #modal .j-station-actions button{background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
 .eco-shell #modal .j-station-actions button[aria-pressed=true]{background:var(--eg-brand-soft);color:var(--eg-brand);border-color:var(--eg-brand)}
+
+/* Match the map's loading surface to the selected account theme. */
+.eco-shell #map{background:var(--eco-card)}
+.eco-shell .r-map-status{background:var(--eco-card);color:var(--eco-text);border-color:var(--eco-line)}

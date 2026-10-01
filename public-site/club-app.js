@@ -6,9 +6,9 @@
  const clubEntry=new URLSearchParams(location.search).get('entry')==='club';
  function entryCopy(){if(!clubEntry)return;const panel=document.querySelector('[data-app-panel="academy"]');
   const set=(selector,en,ru)=>{const e=panel.querySelector(selector);if(e)e.textContent=t(en,ru);};
-  set('h1','Join the Club. The Academy will guide you.','Вступайте в Клуб. Академия поможет начать.');
+  set('h1','Start with the Academy. Join the community.','Начните с Академии. Присоединяйтесь к сообществу.');
   set('.app-intro','Get help with registration, join the community and learn to use your account. The Academy explains the 500 EcoCoin welcome gift and shows the projects when you want to explore them.','Поможем зарегистрироваться, присоединиться к сообществу и освоить кабинет. Академия объяснит подарок 500 EcoCoin и покажет проекты, когда захотите с ними познакомиться.');
-  const cta=panel.querySelector('.app-telegram');if(cta){const svg=cta.querySelector('svg');cta.replaceChildren(document.createTextNode(t('Join the Club through Telegram','Вступить в Клуб через Telegram')+' '));if(svg)cta.append(svg);}
+  const cta=panel.querySelector('.app-telegram');if(cta){const svg=cta.querySelector('svg');cta.replaceChildren(document.createTextNode(t('Talk to the Academy on Telegram','Перейти к Академии в Telegram')+' '));if(svg)cta.append(svg);}
   set('.app-next-hint','Registration and community access come first. Investing is a separate decision.','Сначала — регистрация и доступ к сообществу. Инвестиции — отдельное решение.');
   const benefits=[['One EcoGrid account and help signing in.','Один аккаунт EcoGrid и помощь со входом.'],['Community conversations and product guidance.','Общение в сообществе и помощь с продуктами.'],['Wallet setup and the EcoCoin welcome program.','Настройка кошелька и приветственная программа EcoCoin.']];panel.querySelectorAll('.app-benefits li span').forEach((e,i)=>{if(benefits[i])e.textContent=t(...benefits[i]);});
   set('.app-preview h2','From joining to feeling at home.','От регистрации до участия в сообществе.');

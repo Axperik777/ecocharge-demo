@@ -27,7 +27,7 @@
     "coinId": "btc",
     "algorithm": "SHA-256",
     "unit": "TH/s",
-    "image": "assets/ecominer-industrial.webp",
+    "image": "assets/ecominer-one11.webp",
     "cooling": "air",
     "referenceModel": "ANTMINER S21 Pro"
   },
@@ -42,7 +42,7 @@
     "coinId": "btc",
     "algorithm": "SHA-256",
     "unit": "TH/s",
-    "image": "assets/ecominer-industrial.webp",
+    "image": "assets/ecominer-one12.webp",
     "cooling": "air",
     "referenceModel": "ANTMINER S21 XP"
   },

@@ -27,7 +27,11 @@ module.exports=function verify(root){
  const beforeMember=JSON.stringify(row.state);const crm=request('staff/clients/'+a.client.id).crm;
  bad(()=>request('staff/clients/'+a.client.id+'/club-membership','POST',{version:crm.version-1,member:true}));
  request('staff/clients/'+a.client.id+'/club-membership','POST',{version:crm.version,member:true});
- assert.equal(request('staff/leads/'+lead.id).crm.clubMember,true);assert.equal(JSON.stringify(request('client/account').state),beforeMember);
+ assert.equal(request('staff/leads/'+lead.id).crm.clubMember,true);const memberState=request('client/account').state;assert.equal(memberState.academy.clubMember,true);assert.deepEqual({...memberState,academy:undefined},{...JSON.parse(beforeMember),academy:undefined});
+ const progress=request('staff/clients/'+a.client.id).crm;
+ bad(()=>request('staff/clients/'+a.client.id+'/academy-presentation','POST',{version:progress.version-1,presented:true}));
+ request('staff/clients/'+a.client.id+'/academy-presentation','POST',{version:progress.version,presented:true});
+ assert.equal(request('client/account').state.academy.presentationComplete,true);assert.equal(request('staff/leads/'+lead.id).crm.presentationComplete,true);
  db=JSON.parse(JSON.stringify(db));assert.equal(request('staff/clients/'+a.client.id).crm.clubMember,true);
  row=request('client/account');
  // Profile preferences survive browser persistence and are visible to the manager.

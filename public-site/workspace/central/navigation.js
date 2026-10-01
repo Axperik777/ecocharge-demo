@@ -1,7 +1,7 @@
 'use strict';
 // The same allowlist is used by the server and the sign-in UI. Never accept a return URL.
 (function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('../account-finance.js'):root.EcoFinance);if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoNavigation=api;})(typeof window==='object'?window:globalThis,finance=>{
- const clientTabs=['dashboard','map','assets','documents','tariffs','money','help','profile','identity','notifications','saved','results','invite','arcade','equipment','projects','services','feed'];
+ const clientTabs=['dashboard','map','assets','documents','tariffs','money','help','profile','identity','notifications','saved','results','invite','arcade','equipment','projects','services','feed','academy','solar-project'];
  const staffTabs=['today','leads','clients','chats','funding','withdrawals','links','knowledge','guide','handoffs','club','calls','funnel','followups','community'];
  function context(kind,input,language){
   const p=input instanceof URLSearchParams?input:new URLSearchParams(typeof input==='string'?input:undefined);

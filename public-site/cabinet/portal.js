@@ -66,7 +66,7 @@ window.addEventListener('storage',e=>{if(window.ECO_SHARED_CONTEXT)return;if(e.k
 const historyBeforePortal=actions.history;
 actions.history=()=>{historyBeforePortal();$('#modal-content>p').textContent='Available sample balance: '+money(demo.balance)+' · Reserved: '+money(pendingWithdrawals());};
 actions['confirm-reset']=()=>{if(role!=='admin'){toast('Ask the manager to reset the workspace.');return}demo={balance:0,portfolio:[],plan:null,sessions:[],adjustments:[],requests:[],tickets:[],activity:[],tariffs:defaultTiers(),tariffModelVersion:2,weeklyModelVersion:1,client:{name:'Lox',email:'lox@example.com',status:'Active',note:''},manager:managerDefaults()};chosenTier='single';chosenStations=stations.length?[stations[0].id]:[];investmentDraft=250;contactDraft=null;inboxFilter='all';filter='all';$('#state-filter').value='';$('#station-search').value='';$('#modal').close();persist();renderMap();renderAdmin();refreshManager();toast('Account reset. No real account was affected.')};
-if(workspaceRole==='client')document.querySelector('footer [data-action="reset"]')?.remove();
+if(workspaceRole==='client')document.querySelector('.app-shell > footer, .app > footer, body footer')?.remove();
 
 // Carry an explored public example into an unfunded account without changing an existing plan.
 const initBeforePublicExample=init;

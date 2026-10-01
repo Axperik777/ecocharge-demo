@@ -95,13 +95,19 @@
  }
  function entry(record){return record.context?.journey||record.journey||record.state?.journey||null;}
  function communityEntry(state={}){const j=entry(state);return j?.route==='nurture'&&['club','academy','ecocoin'].includes(j.topic)&&!state.plan&&!state.planDraft&&!state.requests?.some(r=>r.type==='topup');}
+ function academyStage(state={}){
+  if(state.plan?.status==='active'||state.miningPositions?.some(p=>p.status!=='closed'&&p.capital>0))return 'active';
+  if(state.academy?.presentationComplete===true||state.planDraft?.savedBy==='manager')return 'proposal';
+  if(state.academy?.clubMember===true)return 'member';
+  return 'new';
+ }
  function exploring(record){return entry(record)?.route==='nurture';}
  function label(group,key,lang='en'){return (group[key]||['—','—'])[lang==='ru'?1:0];}
  function cohorts(rows,dimension='entryRoute',at=Date.now()){
   const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='topic'?j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
   return [...groups.values()].map(g=>({...g,averageAgeDays:g.contacts?g.ageDays/g.contacts:null,averageDaysToPaid:g.paid?g.daysToPaid/g.paid:null,paidRate:g.contacts?g.paid/g.contacts:0}));
  }
- return {communityEntry,requestConversation,version,topics,projectTopics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
+ return {academyStage,communityEntry,requestConversation,version,topics,projectTopics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
 });
 
 },
@@ -195,15 +201,36 @@
   },
   "club": {
     "title": [
-      "Free AI access for every Club member",
-      "Бесплатный AI для каждого участника Club"
+      "Project explanations and product guidance",
+      "Разбор проектов и помощь с продуктами"
     ],
     "body": [
-      "Every EcoGrid Club member can use our EcoGrid AI for free. Use it to understand project data, compare energy-use scenarios and get clear explanations. The team also uses EcoGrid AI to prepare project updates for Club members.",
-      "Каждый участник EcoGrid Club может бесплатно пользоваться нашим EcoGrid AI. Он помогает разбираться в данных проектов, сравнивать сценарии использования энергии и получать понятные объяснения. Команда также использует EcoGrid AI для подготовки обновлений проектов для участников клуба."
+      "Club members discuss project data and get help using EcoGrid products. The team uses AI to prepare explanations and updates. Project AI mode is a separate optional service paid in EcoCoin.",
+      "В Клубе участники обсуждают данные проектов и получают помощь с продуктами EcoGrid. Команда использует AI для подготовки объяснений и обновлений. Проектный AI-режим — отдельная дополнительная услуга с оплатой в EcoCoin."
     ]
   }
 });
+ // Offer configuration only: no token ledger, financial credits or allocation execution.
+ const aiProgram=Object.freeze({gift:500,cost:472,days:30,status:'planned'});
+ const aiProgramTopics=Object.freeze({
+  charge:['Compare charging sites','Сравнение зарядных площадок','The planned mode compares usage, electricity costs and downtime across eligible charging sites to guide allocation within the project.','Планируемый режим сравнивает загрузку, стоимость электричества и простои доступных зарядных площадок для распределения участия внутри проекта.'],
+  solar:['Compare solar sites','Сравнение солнечных объектов','The planned mode compares generation, energy sales and operating costs across eligible solar sites, including storage operation where available.','Планируемый режим сравнивает выработку, продажу энергии и расходы доступных солнечных объектов, включая работу накопителей там, где они предусмотрены.'],
+  mining:['Compare compatible mining equipment','Сравнение совместимого оборудования','The planned mode compares computing output, electricity, cooling and uptime across compatible equipment within the selected project. Hardware and algorithm limits remain in place.','Планируемый режим сравнивает вычислительную мощность, электричество, охлаждение и время работы совместимого оборудования внутри выбранного проекта. Ограничения оборудования и алгоритма сохраняются.'],
+  energy:['AI mode for your selected project','AI-режим для выбранного проекта','Choose Charge, Solar or Mining and review how the proposed AI mode would work within that project.','Выберите Charge, Solar или Mining и изучите, как предлагаемый AI-режим будет работать внутри этого проекта.']
+ });
+ function programCopy(topic='energy',lang='en'){
+  const ru=lang==='ru',c=aiProgramTopics[topic]||aiProgramTopics.energy,p=aiProgram;
+  return {
+   title:c[ru?1:0],body:c[ru?3:2],
+   price:ru?`${p.cost} EcoCoin · ${p.days} дней`:`${p.cost} EcoCoin · ${p.days} days`,
+   gift:ru?`${p.gift} EcoCoin в подарок — хватит на первые ${p.days} дней AI-режима в выбранном проекте. После оплаты останется ${p.gift-p.cost} EcoCoin.`:`Your ${p.gift} EcoCoin welcome gift covers the first ${p.days} days of AI mode in your selected project, leaving ${p.gift-p.cost} EcoCoin.`,
+   rules:ru?'Получение подарка не требует инвестирования. Использование проектного AI-режима предполагает участие в соответствующем проекте. Срок начинается с активации; продление — по подтверждению.':'No investment is required to receive the gift. Project AI mode requires participation in the relevant project. The period starts at activation; renewal requires confirmation.',
+   supplement:ru?'AI-режим подключается отдельно от базового плана. Условия дополнительной надбавки разбираются на презентации проекта.':'AI mode is an optional addition to the base plan. The terms of any additional return are reviewed during the project presentation.',
+   distinction:ru?'Инструменты управления оборудованием использует команда. Дополнительный AI-режим для участника сравнивает доступные варианты размещения его участия внутри выбранного проекта. Это отдельная услуга, а не плата за обычную эксплуатацию.':'The team uses tools to operate equipment. The optional member AI mode compares eligible allocations of your participation within the selected project. This is separate from normal project operation.',
+   renewal:ru?'Планируемые условия: без подтверждения новый период не начинается и монеты не списываются. После 30 дней дополнительный режим заканчивается; базовое участие продолжается по его договору. До подключения команда подтвердит способы получения монет для продления и полный порядок отключения.':'Proposed terms: a new period starts only with your confirmation; no coins are charged automatically. After 30 days the additional mode ends; base participation continues under its agreement. Before activation, the team must confirm how to obtain renewal coins and the full cancellation process.',
+   availability:ru?'AI-режим готовится к запуску. Подключение станет доступно после утверждения условий.':'AI mode is in development. Activation will become available once its terms are finalized.'
+  };
+ }
  function ai(topic='energy',lang='en'){const c=aiContent[topic]||aiContent.energy,i=lang==='ru'?1:0;return {title:c.title[i],body:c.body[i]};}
  const directShare=1-config.gridShare;
  const pct=n=>Math.round(n*100)+'%';
@@ -214,7 +241,7 @@
  function flow(lang='en'){const ru=lang==='ru',l=labels(lang);return `<section class="business-flow" data-business-model="${config.version}" translate="no" aria-label="${ru?'Как движется энергия':'How the energy flows'}"><div class="business-flow-heading"><div><span>${ru?'ЭНЕРГЕТИЧЕСКАЯ МОДЕЛЬ':'ENERGY MODEL'}</span><h2>${ru?'Как движется энергия':'How the energy flows'}</h2></div><small>${ru?'Модель, не телеметрия':'Model, not telemetry'}</small></div><p>${copy(lang)}</p><h3 translate="no">EcoGrid AI</h3><p>${ai('energy',lang).body}</p><div class="business-flow-map"><div class="business-source"><strong>${l.solar}</strong><span>${ru?'Дневная генерация':'Daytime generation'}</span></div><span class="business-flow-arrow" aria-hidden="true">→</span><div class="business-source"><strong>${l.storage}</strong><span>${ru?'Энергия для вечера и ночи':'Energy for evening and night'}</span></div><span class="business-flow-arrow" aria-hidden="true">→</span><div class="business-outlets"><div><span data-business-direct>${pct(directShare)}</span><strong>${l.ev} + ${l.commercial}</strong></div><div><span data-business-grid>${pct(config.gridShare)}</span><strong>${l.grid}</strong></div></div></div><small>${ru?'Доли собственной выработки в модели, не доли рынка и не ставка плана.':'Shares of the model’s own production, not market share or a plan rate.'}</small><h3>${ru?'Кто покупает энергию':'Who buys our energy'}</h3><div class="business-buyers"><article><h4>${ru?'Водители':'Drivers'}</h4><p>${ru?'Оплата зарядки электромобилей.':'Payments for EV charging.'}</p></article><article><h4>${ru?'Коммерческие потребители':'Commercial customers'}</h4><p>${ru?'Долгосрочные договоры с ТЦ, бизнес-парками, отелями и автопарками; цена ниже местного тарифа — условие модели.':'Long-term contracts with shopping centers, business parks, hotels and fleets; pricing below the local tariff is a model assumption.'}</p></article><article><h4>${l.grid}</h4><p>${ru?'Продажа части выработки в общую сеть.':'Sales of a portion of production to the grid.'}</p></article></div></section>`;}
  function dispatch(hour=18,peak=false,budget=config.dispatchLimitKw){hour=Number.isFinite(hour)?Math.max(0,Math.min(24,hour)):18;budget=Math.max(0,Number.isFinite(budget)?budget:config.dispatchLimitKw);const day=Math.max(0,Math.sin((hour-6)/12*Math.PI)),solar=day*config.solarPeakKw,total=budget*(.48+.32*day+(peak?.2:0)),evRatio=Math.min(.8,.42+(peak?.18:0)+.12*Math.cos((hour-19)/12*Math.PI)),grid=total*config.gridShare,ev=(total-grid)*evRatio,commercial=total-grid-ev;const rows=[['ev',ev],['commercial',commercial],['grid',grid]].map(([id,allocated])=>({id,allocated,weight:total?allocated/total:0}));return {hour,peak,solar,storage:solar-total,allocated:total,sites:rows};}
  function session(kwh){const round=n=>Math.round((n+Number.EPSILON)*100)/100,receipts=round(kwh*config.chargingPrice),electricity=round(kwh*config.solarStorageCost);return {energyKwh:kwh,chargingRate:config.chargingPrice,electricityRate:config.solarStorageCost,receipts,electricity,beforeOtherCosts:round(receipts-electricity)};}
- return Object.freeze({ai,aiContent,config,directShare,pct,labels,copy,evidence,cadence,flow,dispatch,session});
+ return Object.freeze({ai,aiContent,aiProgram,programCopy,config,directShare,pct,labels,copy,evidence,cadence,flow,dispatch,session});
 });
 
 },

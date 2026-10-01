@@ -6,7 +6,7 @@ window.createEcoSandbox=function(seed,domain,stations){
  const now=()=>new Date().toISOString(),id=p=>p+'-'+crypto.randomUUID(),fail=(m,status=400)=>{const e=Error(m);e.status=status;throw e;};
  const record=()=>({status:'new',comment:'',nextContact:null,version:1,history:[],funnel:{},consents:[],callData:{}});
  const version=(r,b)=>{if(b.version!==undefined&&Number(b.version)!==r.version)fail('Данные изменились. Обновите карточку и повторите действие.',409);};
- function snapshot(db,uid){const a=db.accounts[uid];if(!a)fail('Клиент удалён. Выберите другого клиента.',404);a.finance=F.summary(a.state);a.nextWeek=O.nextWeek(a.state);const w=a.nextWeek;a.liveAccrual={active:!!w,curve:'demand-v1',capital:w?.capital||0,weeklyRatePercent:w?.rate||0,monthlyRatePercent:w?.ratePeriod==='calendar-month'?w.rate:undefined,ratePeriod:w?.ratePeriod||'week',periodStartedAt:w?.periodStart||null,serverNow:now(),confirmedCredits:a.finance.recorded};a.state.client={...a.state.client,name:a.client.name,email:a.client.email};a.state.acquisition={...a.state.acquisition,phone:a.client.phone};const origin=Object.values(db.leads).find(l=>l.client_id===uid);if(origin?.context?.journey){a.state.journey=clone(origin.context.journey);a.state.subscription=clone(origin.context.subscription||null);}a.state.manager={...a.state.manager,name:db.overview.managers.find(m=>m.id===a.client.owner)?.name||'EcoGrid'};return a;}
+ function snapshot(db,uid){const a=db.accounts[uid];if(!a)fail('Клиент удалён. Выберите другого клиента.',404);a.finance=F.summary(a.state);a.nextWeek=O.nextWeek(a.state);const w=a.nextWeek;a.liveAccrual={active:!!w,curve:'demand-v1',capital:w?.capital||0,weeklyRatePercent:w?.rate||0,monthlyRatePercent:w?.ratePeriod==='calendar-month'?w.rate:undefined,ratePeriod:w?.ratePeriod||'week',periodStartedAt:w?.periodStart||null,serverNow:now(),confirmedCredits:a.finance.recorded};const progress=Object.values(db.leads).find(l=>l.client_id===uid)?.crm||a.crm;a.state.academy={clubMember:progress?.clubMember===true,presentationComplete:progress?.presentationComplete===true};a.state.client={...a.state.client,name:a.client.name,email:a.client.email};a.state.acquisition={...a.state.acquisition,phone:a.client.phone};const origin=Object.values(db.leads).find(l=>l.client_id===uid);if(origin?.context?.journey){a.state.journey=clone(origin.context.journey);a.state.subscription=clone(origin.context.subscription||null);}a.state.manager={...a.state.manager,name:db.overview.managers.find(m=>m.id===a.client.owner)?.name||'EcoGrid'};return a;}
  function history(r,action,details,actor){r.history??=[];r.history.unshift({id:id('AUD'),action,details:clone(details),actor:actor.name,created:now()});r.version++;}
  function membership(r,b,actor,registered){
   if(!['admin','ftd'].includes(actor.role))fail('Team access required.',403);
@@ -16,6 +16,12 @@ window.createEcoSandbox=function(seed,domain,stations){
   const previous=r.clubMember===true;
   if(previous!==b.member){r.clubMember=b.member;history(r,'club_membership_updated',{from:previous,to:b.member},actor);}
   return r;
+ }
+ function presentation(r,b,actor){
+  if(!['admin','ftd'].includes(actor.role))fail('Team access required.',403);
+  if(r.version!==b.version)fail('This record changed. Refresh it before saving.',409);
+  if(typeof b.presented!=='boolean')fail('Choose the presentation status.');
+  if(r.presentationComplete!==b.presented){const previous=r.presentationComplete===true;r.presentationComplete=b.presented;history(r,'academy_presentation_updated',{from:previous,to:b.presented},actor);}return r;
  }
  function overview(db,actor){return {...db.overview,me:actor,managers:db.overview.managers.map(m=>({...m,openLeads:Object.values(db.leads).filter(l=>l.owner===m.id&&!l.client_id).length})),leads:Object.values(db.leads).filter(l=>actor.role==='admin'||l.owner===actor.id).sort((a,b)=>b.created.localeCompare(a.created)).map(l=>({...l,funnel:l.crm.funnel||l.funnel||{}})),clients:Object.values(db.accounts).filter(a=>actor.role==='admin'||a.client.owner===actor.id).map(a=>({...a.client,created:a.created||db.generatedAt,balance:a.state.balance,version:a.version,journey:a.state.journey,crm:a.crm,funnel:a.crm.funnel||{},identityStatus:db.identities[a.client.id]?.status,firstWithdrawal:domain.funnel.firstWithdrawal(a.state)}))};}
  function contact(r,b,actor){version(r,b);if(!b.comment?.trim())fail('Добавьте результат контакта.');if(b.status==='callback'&&!b.nextContact)fail('Укажите время следующего контакта.');Object.assign(r,{status:b.status||r.status,comment:b.comment,nextContact:b.nextContact||null,callData:{...r.callData,...b.callData}});r.funnel??={};if(b.callOutcome&&b.callOutcome!=='note'){r.funnel.firstAttemptAt??=now();if(b.callOutcome==='connected'){r.funnel.connectedAt??=now();r.funnel.firstConnectedAt??=now();}}if(b.closeReason)r.funnel.closeReason=b.closeReason;history(r,'contact_saved',b,actor);return r;}
@@ -77,6 +83,7 @@ window.createEcoSandbox=function(seed,domain,stations){
   const uid=staff&&parts[1]==='clients'?parts[2]:ctx.clientId;
   if(staff&&parts[1]==='leads'){
    const l=db.leads[parts[2]];if(!l)fail('Заявка не найдена.',404);if(actor.role!=='admin'&&l.owner!==actor.id)fail('Заявка другого менеджера.',403);
+   if(parts[3]==='academy-presentation'&&method==='POST'){const result=presentation(l.crm,b,actor);if(l.client_id){db.accounts[l.client_id].crm=clone(result);db.accounts[l.client_id].version++;}return result;}
    if(parts[3]==='club-membership'&&method==='POST'){const result=membership(l.crm,b,actor,!!l.client_id);if(l.client_id)db.accounts[l.client_id].crm=clone(result);return result;}
    if(parts[3]==='contact'){const result=contact(l.crm,b,actor);journeyCorrection(l,b,actor);if(l.client_id){db.accounts[l.client_id].version++;snapshot(db,l.client_id);}return result;}
    if(parts[3]==='profile'){version(l.crm,b);Object.assign(l,{first_name:b.firstName,last_name:b.lastName,name:[b.firstName,b.lastName].join(' '),phone:b.phone,email:b.email});contact(l.crm,b,actor);return l;}
@@ -85,6 +92,7 @@ window.createEcoSandbox=function(seed,domain,stations){
    if(parts[3]==='followup-consent'){l.crm.consents=l.crm.consents.map(c=>c.channel===b.channel?{...c,granted:false}:c);return {ok:true};}return l;
   }
   const a=visible(uid),action=staff?parts.slice(3).join('/'):parts.slice(1).join('/');
+  if(action==='academy-presentation'&&method==='POST'){if(!staff)fail('Team access required.',403);const result=presentation(a.crm,b,actor),origin=Object.values(db.leads).find(l=>l.client_id===uid);if(origin)origin.crm=clone(result);a.version++;return result;}
   if(action==='club-membership'&&method==='POST'){if(!staff)fail('Team access required.',403);const result=membership(a.crm,b,actor,true),origin=Object.values(db.leads).find(l=>l.client_id===uid);if(origin)origin.crm=clone(result);return result;}
   if(action==='chat'||action==='chat/read'){
    if(method==='GET')return chat(db,uid,actor);if(action==='chat/read'){db.chatReads??={};db.chatReads[actor.id+':'+uid+':'+b.ticketId]=b.sequence;return chat(db,uid,actor);}

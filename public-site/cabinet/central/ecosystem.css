@@ -66,3 +66,6 @@
 /* Mobile chat is in the header; account values have no floating overlay. */
 .eco-mobile-chat{display:none}
 @media(max-width:760px){.eco-mobile-chat{display:inline-grid;place-items:center}.eco-shell .ec-chat-launch{display:none!important}.eco-shell .topbar .charge-wordmark{display:none}.eco-shell .topbar .charge-brand{min-width:30px}}
+/* Solar project reading layout: keep full sentences readable on phones. */
+.eco-shell #eco-workspace .eg-service-grid.eg-solar-overview{grid-template-columns:repeat(2,minmax(0,1fr));margin:24px 0}
+@media(max-width:600px){.eco-shell #eco-workspace .eg-service-grid.eg-solar-overview{grid-template-columns:1fr;gap:12px}}
