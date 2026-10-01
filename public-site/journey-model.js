@@ -25,6 +25,11 @@
   const ru=language==='ru',name=label(topics,j.topic,language),subject=(ru?'Обсудить проект · ':'Project discussion · ')+name,message=(ru?'Хочу обсудить направление: ':'I would like to discuss: ')+name+'. '+label(purposes,j.purpose,language)+'. '+(j.country==='CA'?(ru?'Канада':'Canada'):(ru?'США':'United States'));
   const ticket={id,subject,message,reply:'',date:at,status:'Open',journeyTopic:j.topic,messages:[{id,from:'client',text:message,date:at}],service:{closed:false}};state.tickets.push(ticket);return ticket;
  }
+ function clientPreferenceInput(previous,values,language='en'){
+  if(!['updates','participation'].includes(values.purpose)||!Object.hasOwn(projectTopics,values.topic))throw Error('Choose a project and next step.');
+  const consultationRequested=values.purpose==='participation',route=consultationRequested?'fast':previous?.route||'nurture';
+  return {consultationRequested,journey:normalize({route,topic:values.topic,purpose:values.purpose,country:values.country}),marketingConsent:values.marketingConsent==='on',language:language==='ru'?'ru':'en'};
+ }
  function entry(record){return record.context?.journey||record.journey||record.state?.journey||null;}
  function communityEntry(state={}){const j=entry(state);return j?.route==='nurture'&&['club','academy','ecocoin'].includes(j.topic)&&!state.plan&&!state.planDraft&&!state.requests?.some(r=>r.type==='topup');}
  function academyStage(state={}){
@@ -39,5 +44,5 @@
   const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='topic'?j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
   return [...groups.values()].map(g=>({...g,averageAgeDays:g.contacts?g.ageDays/g.contacts:null,averageDaysToPaid:g.paid?g.daysToPaid/g.paid:null,paidRate:g.contacts?g.paid/g.contacts:0}));
  }
- return {academyStage,communityEntry,requestConversation,version,topics,projectTopics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
+ return {clientPreferenceInput,academyStage,communityEntry,requestConversation,version,topics,projectTopics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
 });
