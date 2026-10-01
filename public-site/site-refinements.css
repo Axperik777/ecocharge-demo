@@ -55,3 +55,5 @@
  .ec-header .ec-sign-in{padding-inline:12px;font-size:12px}
 }
 @media(max-width:360px){.ec-header .ec-menu-trigger{right:16px}.ec-header .ec-header-actions>.ec-button{padding-inline:10px;font-size:10px}.ec-header .ec-sign-in{padding-inline:10px}}
+
+.market-context{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,5vw,80px);padding-top:clamp(32px,5vw,64px);padding-bottom:clamp(32px,5vw,64px);border-top:1px solid #cbded5;border-bottom:1px solid #cbded5}.market-context h2{margin:10px 0 0;font-size:clamp(26px,3vw,42px);line-height:1.18;letter-spacing:-.035em}.market-context p{line-height:1.7;margin:0 0 16px}.market-context-sources{font-size:14px;color:#395d50}.market-context-sources summary{cursor:pointer;font-weight:600;padding:10px 0}.market-context-sources a{display:block;margin:8px 0;color:#006c51;text-underline-offset:3px}.market-context-sources a:focus-visible,.market-context-sources summary:focus-visible{outline:2px solid #007b59;outline-offset:4px}@media(max-width:700px){.market-context{grid-template-columns:1fr;gap:18px}.market-context h2{font-size:28px}}
