@@ -2,7 +2,7 @@
 // Local workspace diagnostics only. No network requests, identity, amounts or message bodies.
 (() => {
   const key='ecocharge-funnel-events-v1';
-  const allowed=new Set(['page_view','demo_opened','model_explored','station_viewed','station_saved','plan_reviewed','registration_completed','plan_saved','terms_viewed','question_saved','demo_funding_requested','demo_funding_reviewed','starter_selected','first_deposit_confirmed','solar_quote_requested','mining_inquiry_requested','journey_selected','guide_read','topic_selected','project_interest_saved','consultation_requested','club_cta_clicked','club_request_saved','lead_form_started','lead_validation_failed','lead_request_failed','project_calculation_started','project_calculation_downloaded','project_details_requested','academy_lesson_opened','academy_task_selected','academy_example_copied','academy_lesson_marked','academy_next_clicked','academy_answer_checked','academy_lesson_completed']);
+  const allowed=new Set(['page_view','demo_opened','model_explored','station_viewed','station_saved','plan_reviewed','registration_completed','plan_saved','terms_viewed','question_saved','demo_funding_requested','demo_funding_reviewed','starter_selected','first_deposit_confirmed','solar_quote_requested','mining_inquiry_requested','journey_selected','guide_read','topic_selected','project_interest_saved','consultation_requested','club_cta_clicked','club_request_saved','lead_form_started','lead_validation_failed','lead_request_failed','project_calculation_started','project_calculation_downloaded','project_details_requested','academy_lesson_opened','academy_task_selected','academy_example_copied','academy_lesson_marked','academy_next_clicked','academy_answer_checked','academy_lesson_completed','app_section_viewed','app_entry_clicked','community_outbound_clicked']);
   const routes=new Set(['app','academy','learn','home','solar','mining','inside-a-station','how-it-works','stations','plans','about','resources','terms','club','story','participate/charge','participate/solar','participate/mining','register','client','staff','login','team']);
   let visit;
   try {visit=sessionStorage.getItem('ecocharge-funnel-visit');if(!visit){visit=crypto.randomUUID();sessionStorage.setItem('ecocharge-funnel-visit',visit);}}catch{visit='session-only';}
@@ -24,7 +24,7 @@
     if(typeof details.complete==='boolean')props.complete=details.complete;
     if(typeof details.duplicate==='boolean')props.duplicate=details.duplicate;
     if(['ai','invest','coin','community'].includes(details.lesson))props.lesson=details.lesson;
-    if(['ai','coin','community','gift','join','projects'].includes(details.destination))props.destination=details.destination;
+    if(['ai','academy','club','coin','community','gift','join','projects'].includes(details.destination))props.destination=details.destination;
     const event={name,at:new Date().toISOString(),visit,props,mode:'local-demo'};
     try{localStorage.setItem(key,JSON.stringify([...read(),event].slice(-400)));}catch{}
     window.dispatchEvent(new CustomEvent('ecocharge:funnel-event',{detail:event}));

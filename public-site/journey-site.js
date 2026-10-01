@@ -1,7 +1,7 @@
 'use strict';
 (()=>{
  const M=window.EcoJourney,t=(en,ru)=>window.EcoLocale?.language==='ru'?ru:en,params=new URL(location).searchParams;
- function consultLink(){const f=document.querySelector('[data-journey-form]'),topic=f?.elements.journeyTopic.value||params.get('topic')||'energy',country=f?.elements.journeyCountry.value||'US';document.querySelectorAll('[data-journey-consult]').forEach(a=>{const p=['charge','solar','mining'].includes(topic)?'participate/'+topic+'/':'./';a.href=new URL(p+'?journey=fast&topic='+topic+'&country='+country+'&lang='+(window.EcoLocale?.language||'en')+'#request-access',document.baseURI).href;});}
+ function consultLink(){const f=document.querySelector('[data-journey-form]'),topic=f?.elements.journeyTopic.value||params.get('topic')||'energy';document.querySelectorAll('[data-journey-consult]').forEach(a=>{const project=['charge','solar','mining'].includes(topic),product=['ai','club','ecocoin'].includes(topic);a.href=new URL((project?'participate/'+topic+'/?journey=fast&lang='+(window.EcoLocale?.language||'en')+'#request-access':product?'app/?lang='+(window.EcoLocale?.language||'en')+'#'+(topic==='ai'?'ai':'club'):'./#participation-directions'),document.baseURI).href;if(!project)a.textContent=product?t('Open EcoGrid app →','Открыть приложение EcoGrid →'):t('Choose a project →','Выбрать проект →');});}
  function track(event,details){window.EcoChargeFunnel?.track(event,details);}
  document.querySelectorAll('[data-journey-form]').forEach(form=>{
   const nurture=form.hasAttribute('data-journey-nurture'),fixed=form.hasAttribute('data-journey-fast'),routes=[...form.querySelectorAll('[name=journeyRoute]')],topic=form.elements.journeyTopic;
