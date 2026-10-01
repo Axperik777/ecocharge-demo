@@ -17,6 +17,7 @@
     "participate/charge",
     "participate/solar",
     "participate/mining",
+    "app",
     "inside-a-station",
     "story"
   ],
@@ -30,5 +31,5 @@
     "apiBase": "",
     "landingId": "main"
   },
-  "createdAt": "2026-10-01T07:32:49.180Z"
+  "createdAt": "2026-10-01T08:04:07.643Z"
 }
