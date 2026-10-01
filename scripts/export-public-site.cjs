@@ -27,6 +27,7 @@ if (releases.length !== 1) throw Error('Expected exactly one website export');
 const release = path.join(workspace, 'release', releases[0]);
 fs.cpSync(release, output, {recursive:true});
 const manifest = JSON.parse(fs.readFileSync(path.join(output, 'app-manifest.json'), 'utf8'));
+const publicRuntimeVersion = require('node:crypto').createHash('sha256').update(fs.readFileSync(path.join(workspace,'dist/website-only.js'))).digest('hex').slice(0,12);
 const excluded = /^(?:client|login|register|team|staff|crm)(?:\/|$)/;
 for (const route of manifest.routes) {
   const file = path.join(output, route, 'index.html');
@@ -50,7 +51,7 @@ for (const route of manifest.routes) {
     if (!/<script src="lead-form\.js(?:\?[^"]*)?" defer><\/script>/.test(html)) throw Error('Missing lead form runtime: '+route);
     html = html.replace(/<script src="lead-form\.js(?:\?[^"]*)?" defer><\/script>/, match => bridge+match);
   }
-  html = html.replace('</head>', '<script src="website-only.js" defer></script></head>');
+  html = html.replace('</head>', '<script src="website-only.js?v='+publicRuntimeVersion+'" defer></script></head>');
   fs.writeFileSync(file, html.replace(/[ \t]+$/gm, ''));
 }
 fs.copyFileSync(path.join(workspace, 'dist/website-only.js'), path.join(output, 'website-only.js'));
