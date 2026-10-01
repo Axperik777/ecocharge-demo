@@ -6,4 +6,9 @@
 html[data-app=website] svg.eco-guide-character{height:auto;fill:initial;stroke:none;stroke-width:0;max-width:none}html[data-app=website] .academy-hero-guide>.eco-guide-character{width:145px}html[data-app=website] .academy-guide .eco-guide-character{width:100%}html[data-app=website] .eco-guide-launch .eco-guide-character{width:48px}html[data-app=website] .eco-guide-dialog>.eco-guide-character{width:110px}html[data-app=website] .academy-hero-guide h2{font-size:26px}html[data-app=website] .academy-hero-guide p{font-size:16px}html[data-app=website] .eco-dialog-close{font-size:28px;min-width:44px;min-height:44px}html[data-app=website] .academy-guide .eco-motion-toggle{font-size:11px}html[data-app=website] .academy-stage .academy-close{font-size:28px}
 @media(max-width:800px){html[data-app=website] .academy-hero-guide>.eco-guide-character{width:105px}html[data-app=website] .academy-hero-guide h2{font-size:23px}}
 
-@media(max-width:360px){html[data-app=website] .ec-header-actions .ec-sign-in{display:none!important}}
+/* The guide has its own row, so it never floats over copy or project actions. */
+.eco-guide-dock{display:flex;justify-content:flex-end;max-width:1240px;width:calc(100% - 64px);margin:0 auto;padding:8px 0}
+.eco-guide-dock .eco-guide-launch{position:static;inset:auto;flex:none;width:56px;height:56px;min-height:56px;padding:2px;border-radius:50%;justify-content:center;gap:0;box-shadow:none}
+.eco-guide-dock .eco-guide-launch span{display:none}
+html[data-app=website] .eco-guide-dock .eco-guide-launch .eco-guide-character{width:46px;height:49px}
+@media(max-width:760px){.eco-guide-dock{width:calc(100% - 32px)}}

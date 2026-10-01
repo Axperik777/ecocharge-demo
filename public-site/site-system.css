@@ -33,7 +33,7 @@ html[data-app=website] .ec-header .locale-switch button{min-width:36px;min-heigh
 html[data-app=website] .ec-header .locale-switch button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 4px #123a2414}
 html[data-app=website] .ec-header .ec-menu-trigger{display:inline-flex;order:2;width:44px;height:44px;min-height:44px;padding:10px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px}
 html[data-app=website] .ec-header .ec-menu-trigger svg{stroke:currentColor;width:22px;height:22px}
-html[data-app=website] .ec-header .ec-nav{display:flex;gap:22px;flex:1;justify-content:center;padding:0}
+html[data-app=website] .ec-header .ec-nav{display:none}
 html[data-app=website] .ec-nav a{font-size:14px;color:var(--muted);white-space:nowrap}
 html[data-app=website] .ec-nav a[aria-current],html[data-app=website] .ec-nav a:hover{color:var(--teal)}
 html[data-app=website] .ec-nav a[aria-current]:after{background:var(--teal)}
@@ -514,3 +514,10 @@ html[data-app=website] #site-menu .ec-menu-group>a:hover{background:var(--soft)}
 html[data-app=website] .ec-station-photo-sources{border-top:1px solid var(--line);margin-top:24px;padding-top:10px}
 html[data-app=website] .ec-station-photo-sources>summary{cursor:pointer;color:var(--teal);font-size:12px;min-height:44px;align-content:center}
 html[data-app=website] .ec-station-photo-sources .ec-photo-credit{padding:8px 0;background:none;line-height:1.8}
+
+/* One header layout at every width; legacy navigation must not reorder actions. */
+html[data-app=website] .ec-header .ec-header-inner{justify-content:space-between;flex-wrap:nowrap}
+html[data-app=website] .ec-header .ec-header-actions{flex:0 0 auto;width:auto;margin-left:auto;flex-direction:row;justify-content:flex-end;flex-wrap:nowrap}
+html[data-app=website] .ec-header .ec-header-actions .ec-sign-in{display:inline-flex;order:1}
+html[data-app=website] .ec-header .ec-header-actions .ec-menu-trigger{position:static;order:2;flex-shrink:0;width:46px;height:46px;min-height:46px}
+html[data-app=website] .ec-header .ec-header-actions>.ec-button{display:none}
