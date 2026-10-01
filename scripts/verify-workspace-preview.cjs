@@ -24,6 +24,12 @@ module.exports=function verify(root){
  request('staff/assign','POST',{owner,reason:'Проверка назначения',items:[{kind:'lead',id:lead.id,version:lead.crm.version}]});
  const a=request('staff/clients','POST',{leadId:lead.id,crmVersion:db.leads[lead.id].crm.version,name:'Тест Проверки',username:'check.client',email:'qa@example.com',comment:'Создан для проверки'});ctx.clientId=a.client.id;
  let row=request('client/account');assert.equal(row.state.balance,0);
+ const beforeMember=JSON.stringify(row.state);const crm=request('staff/clients/'+a.client.id).crm;
+ bad(()=>request('staff/clients/'+a.client.id+'/club-membership','POST',{version:crm.version-1,member:true}));
+ request('staff/clients/'+a.client.id+'/club-membership','POST',{version:crm.version,member:true});
+ assert.equal(request('staff/leads/'+lead.id).crm.clubMember,true);assert.equal(JSON.stringify(request('client/account').state),beforeMember);
+ db=JSON.parse(JSON.stringify(db));assert.equal(request('staff/clients/'+a.client.id).crm.clubMember,true);
+ row=request('client/account');
  // Profile preferences survive browser persistence and are visible to the manager.
  const savedProfile={name:'Profile QA',email:'profile@example.test',phone:'',language:'ru',timezone:'America/St_Johns'},beforeProfile=structuredClone(row);
  row=request('client/profile','POST',{clientId:a.client.id,version:row.version,profile:savedProfile});

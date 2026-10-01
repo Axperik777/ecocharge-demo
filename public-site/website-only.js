@@ -6,7 +6,7 @@
  function links(root){
   for(const a of [...(root.matches?.('a[href]')?[root]:[]),...(root.querySelectorAll?.('a[href]')||[])]){
    const u=new URL(a.getAttribute('href'),base);if(u.origin!==base.origin||!u.pathname.startsWith(base.pathname))continue;
-   const rel=u.pathname.slice(base.pathname.length);if(/^(?:client|login|register)(?:\/|$)/.test(rel))a.href=new URL('workspace/client/?lang='+(ru()?'ru':'en'),base).href;
+   const rel=u.pathname.slice(base.pathname.length);if(/^(?:client|login|register)(?:\/|$)/.test(rel)){const next=new URL('workspace/client/'+u.search+u.hash,base);next.searchParams.set('lang',ru()?'ru':'en');a.href=next.href;}
    if(/^(?:team|staff|crm)(?:\/|$)/.test(rel))a.href=new URL('workspace/crm/?role=admin&lang='+(ru()?'ru':'en'),base).href;
   }
  }

@@ -17,7 +17,7 @@
 - [Участие в Solar](https://axperik777.github.io/ecocharge-demo/participate/solar/?lang=en)
 - [Участие в Mining](https://axperik777.github.io/ecocharge-demo/participate/mining/?lang=en)
 
-[Материалы и знакомство с проектом](https://axperik777.github.io/ecocharge-demo/learn/?lang=en) — отдельный маршрут. Сохранённый интерес попадает в очередь знакомства, запрос консультации переводит тот же контакт в работу. Первый источник сохраняется. Генератор в CRM создаёт ссылки на выбранное направление, с UTM, партнёром, Sub ID и страной.
+Второй маршрут: [Club](https://axperik777.github.io/ecocharge-demo/club/?lang=en) → [Academy](https://axperik777.github.io/ecocharge-demo/app/?lang=en#academy) → Telegram, регистрация и обучение. Для рекламы Академии можно вести прямо на её страницу. Telegram-бот, серверная регистрация и выдача EcoCoin пока не подключены. CRM хранит одну отметку членства; инвестиционная консультация запрашивается отдельно. PWA устанавливает только кабинет. Проверка текущего состояния: [EC111](docs/EC111-FUNNEL-AUDIT.html).
 
 Подробности реализации и проверки: [EC87](docs/EC87-DUAL-FUNNEL.md). Темы, сервисные значки и отчёты кабинета: [EC88](docs/EC88-SERVICES-AND-CONTRAST.md).
 

@@ -69,9 +69,9 @@
 'use strict';
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoJourney=api;})(typeof window==='object'?window:globalThis,()=>{
  const version='journey-v1';
- const topics={energy:['Energy projects','Энергетические проекты'],solar:['Solar & storage','Солнце и накопители'],charge:['EV charging','Зарядные станции'],mining:['Mining & EcoMiner','Майнинг и EcoMiner'],ai:['EcoGrid AI technology','Технология EcoGrid AI'],ecocoin:['EcoCoin','EcoCoin'],club:['EcoGrid Club community','Сообщество EcoGrid Club']};
+ const topics={academy:['EcoGrid Academy','EcoGrid Academy'],energy:['Energy projects','Энергетические проекты'],solar:['Solar & storage','Солнце и накопители'],charge:['EV charging','Зарядные станции'],mining:['Mining & EcoMiner','Майнинг и EcoMiner'],ai:['EcoGrid AI technology','Технология EcoGrid AI'],ecocoin:['EcoCoin','EcoCoin'],club:['EcoGrid Club community','Сообщество EcoGrid Club']};
  // Keep old AI records readable; new inquiries select a project or the Club community.
- const projectTopics=Object.fromEntries(Object.entries(topics).filter(([id])=>id!=='ai'));
+ const projectTopics=Object.fromEntries(Object.entries(topics).filter(([id])=>!['ai','ecocoin','club','academy'].includes(id)));
  const purposes={participation:['Project participation','Участие в проекте'],equipment:['Equipment for my property','Оборудование для своего объекта'],business:['Business partnership','Деловое партнёрство'],updates:['Explore and follow updates','Изучить и следить за новостями']};
  const routes={fast:['Consultation','Консультация'],nurture:['Explore first','Знакомство с проектом']};
  const keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','msclkid','ttclid','landing_id','landing_host','lead_route','aff','partner_id','sub_id','ref'];
@@ -94,13 +94,14 @@
   const ticket={id,subject,message,reply:'',date:at,status:'Open',journeyTopic:j.topic,messages:[{id,from:'client',text:message,date:at}],service:{closed:false}};state.tickets.push(ticket);return ticket;
  }
  function entry(record){return record.context?.journey||record.journey||record.state?.journey||null;}
+ function communityEntry(state={}){const j=entry(state);return j?.route==='nurture'&&['club','academy','ecocoin'].includes(j.topic)&&!state.plan&&!state.planDraft&&!state.requests?.some(r=>r.type==='topup');}
  function exploring(record){return entry(record)?.route==='nurture';}
  function label(group,key,lang='en'){return (group[key]||['—','—'])[lang==='ru'?1:0];}
  function cohorts(rows,dimension='entryRoute',at=Date.now()){
   const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='topic'?j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
   return [...groups.values()].map(g=>({...g,averageAgeDays:g.contacts?g.ageDays/g.contacts:null,averageDaysToPaid:g.paid?g.daysToPaid/g.paid:null,paidRate:g.contacts?g.paid/g.contacts:0}));
  }
- return {requestConversation,version,topics,projectTopics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
+ return {communityEntry,requestConversation,version,topics,projectTopics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
 });
 
 },
