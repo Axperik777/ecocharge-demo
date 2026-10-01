@@ -50,8 +50,8 @@ for(const file of files){
 for(const route of manifest.routes)assert(fs.existsSync(path.join(root,route,'index.html')));
 // Public export must retain the paths promised by the homepage and plan cards.
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFileSync(path.join(root,'plans/index.html'),'utf8');
-assert.match(home,/href="#project-calculator"/,'Homepage calculator entry is missing');
-assert.match(home,/data-public-plan-form/,'Public calculator is missing');
+assert.match(home,/href="#how-ecogrid-works"/,'Homepage presentation entry is missing');
+assert.doesNotMatch(home,/data-public-plan-form|data-lead-form|src="public-plan-ui\.js/,'Homepage must introduce the company without a calculator or lead form');
 assert.match(home,/data-workspace-entry[^>]*class="ec-sign-in"/,'Visible account entry is missing');
 for(const tier of ['single','network','portfolio','scale'])assert(plans.includes('href="participate/charge/?tier='+tier+'#project-calculator"'),'Plan calculation link is missing: '+tier);
 assert.match(plans,/href="plans\/#project-calculator"/,'Plan calculator entry is missing');
