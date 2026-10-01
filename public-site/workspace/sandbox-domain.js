@@ -106,13 +106,17 @@
   if(state.academy?.clubMember===true)return 'member';
   return 'new';
  }
+ // Presentation controls the first funding prompt, not access to existing money.
+ function needsAcademy(state={}){
+  return ['new','member'].includes(academyStage(state))&&!(Number(state.balance)>0)&&!state.requests?.some(r=>r.type==='topup'&&['Pending','Approved'].includes(r.status));
+ }
  function exploring(record){return entry(record)?.route==='nurture';}
  function label(group,key,lang='en'){return (group[key]||['—','—'])[lang==='ru'?1:0];}
  function cohorts(rows,dimension='entryRoute',at=Date.now()){
   const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='topic'?j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
   return [...groups.values()].map(g=>({...g,averageAgeDays:g.contacts?g.ageDays/g.contacts:null,averageDaysToPaid:g.paid?g.daysToPaid/g.paid:null,paidRate:g.contacts?g.paid/g.contacts:0}));
  }
- return {clientPreferenceInput,academyStage,communityEntry,requestConversation,version,topics,projectTopics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
+ return {needsAcademy,clientPreferenceInput,academyStage,communityEntry,requestConversation,version,topics,projectTopics,purposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
 });
 
 },

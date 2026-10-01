@@ -9,15 +9,19 @@
 
 ## Что проверить
 
-### Два маршрута привлечения
+### Основной путь клиента — EC118
 
-Быстрые кампании и аффилиаты ведут на тематические страницы:
+**Таргет → посадочная проекта → Академия → Клуб и личный кабинет → депозит.**
 
-- [Участие в Charge](https://axperik777.github.io/ecocharge-demo/participate/charge/?lang=en)
-- [Участие в Solar](https://axperik777.github.io/ecocharge-demo/participate/solar/?lang=en)
-- [Участие в Mining](https://axperik777.github.io/ecocharge-demo/participate/mining/?lang=en)
+- [Charge — основной проект для теста рекламы](https://axperik777.github.io/ecocharge-demo/participate/charge/?lang=en)
+- [Solar](https://axperik777.github.io/ecocharge-demo/participate/solar/?lang=en)
+- [Mining](https://axperik777.github.io/ecocharge-demo/participate/mining/?lang=en)
 
-Второй маршрут: [Club](https://axperik777.github.io/ecocharge-demo/club/?lang=en) → [Academy](https://axperik777.github.io/ecocharge-demo/app/?lang=en#academy) → Telegram, регистрация и обучение. Для рекламы Академии можно вести прямо на её страницу. Telegram-бот, серверная регистрация и выдача EcoCoin пока не подключены. CRM хранит одну отметку членства; инвестиционная консультация запрашивается отдельно. PWA устанавливает только кабинет. Проверка текущего состояния: [EC111](docs/EC111-FUNNEL-AUDIT.html).
+Проектная страница предлагает разбор с Академией. После демонстрации — регистрация, знакомство с сообществом и кабинетом. Затем клиент изучает предложение и документы и решает, участвовать ли. PWA устанавливает только кабинет. AI — планируемая дополнительная услуга.
+
+На GitHub Pages нет серверной доставки заявок, настоящей регистрации, Telegram-интеграции и рекламной аналитики. Публичные заявки сохраняются только в браузере; формы персонального входа/регистрации отключены до размещения backend. Сквозной серверный путь проверен локально на отдельной базе, без реальных платежей.
+
+[Полный аудит, оценки и ограничения запуска EC118](docs/EC118-FULL-FUNNEL-AUDIT.html).
 
 Подробности реализации и проверки: [EC87](docs/EC87-DUAL-FUNNEL.md). Темы, сервисные значки и отчёты кабинета: [EC88](docs/EC88-SERVICES-AND-CONTRAST.md).
 

@@ -1,3 +1,7 @@
+# Current route — EC118
+
+Ads → project landing → Academy → Club and client account → deposit. The current report is [EC118](docs/EC118-FULL-FUNNEL-AUDIT.html). Public registration is disabled until backend hosting is configured. The historical implementation notes below describe earlier iterations and do not override the current route or availability.
+
 # Demo funnel: implementation and activation boundaries
 
 ## Shipped
