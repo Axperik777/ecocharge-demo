@@ -2,7 +2,7 @@
    Loaded after legacy page styles. All rules are scoped to the website. */
 html[data-app=website]{--paper:#f5f8f6;--ink:#102019;--muted:#52665b;--navy:#102019;--teal:#006a4d;--mint:#dff5e9;--pale:#edf7f2;--line:#dbe6e0;--web-card:#fff;--web-radius:20px;color-scheme:light;scroll-padding-top:96px}
 html[data-app=website] body{background:var(--paper);color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-html[data-app=website] .ec-wrap{max-width:1200px;width:calc(100% - 64px);padding-inline:0}
+html[data-app=website] .ec-wrap{max-width:1200px;width:calc(100% - 64px);padding-inline:var(--ec-panel-inset,0)}
 html[data-app=website] :is(h1,h2,h3,h4){color:var(--ink);font-weight:600;letter-spacing:-.03em;text-wrap:balance}
 html[data-app=website] main h1{font-size:clamp(36px,4.5vw,58px);line-height:1.12;letter-spacing:-.045em}
 html[data-app=website] main h2{font-size:clamp(28px,3vw,38px);line-height:1.22}
@@ -521,3 +521,8 @@ html[data-app=website] .ec-header .ec-header-actions{flex:0 0 auto;width:auto;ma
 html[data-app=website] .ec-header .ec-header-actions .ec-sign-in{display:inline-flex;order:1}
 html[data-app=website] .ec-header .ec-header-actions .ec-menu-trigger{position:static;order:2;flex-shrink:0;width:46px;height:46px;min-height:46px}
 html[data-app=website] .ec-header .ec-header-actions>.ec-button{display:none}
+/* EC121: boxed sections own an inset; the shared width wrapper must not erase it. */
+html[data-app=website] .ec-ai-note{--ec-panel-inset:clamp(20px,2.5vw,28px);padding:var(--ec-panel-inset);box-sizing:border-box}
+html[data-app=website] .solar-participation{--ec-panel-inset:clamp(20px,3vw,36px);padding-inline:var(--ec-panel-inset);box-sizing:border-box}
+html[data-app=website] .ec-ai-note>*{min-width:0;overflow-wrap:anywhere}
+html[data-app=website] .ec-ai-note h2{max-width:100%}
