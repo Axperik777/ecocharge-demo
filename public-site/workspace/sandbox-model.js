@@ -33,15 +33,19 @@ window.createEcoSandbox=function(seed,domain,stations){
  function chat(db,uid,actor){const a=snapshot(db,uid),threads=a.state.tickets.map(t=>{const messages=(t.messages?.length?t.messages:[{from:'client',text:t.message,date:t.date}]).map((m,i)=>({...m,id:m.id||t.id+':'+(i+1),sequence:i+1})),cursor=db.chatReads?.[actor.id+':'+uid+':'+t.id]||0,awaitingReply=messages.at(-1)?.from==='client'&&t.status!=='Resolved';return {...t,clientId:uid,messages,unread:messages.filter(m=>m.sequence>cursor&&(actor.role==='client'?m.from!=='client':m.from==='client')).length,awaitingReply,awaitingSince:awaitingReply?messages.findLast(m=>m.from==='client')?.date:null};});return {client:a.client,manager:{id:a.client.owner,name:a.state.manager.name},threads};}
  function report(db,actor,query){const q=new URLSearchParams(query),v=overview(db,actor),rows=v.leads.filter(l=>(!q.get('from')||l.created.slice(0,10)>=q.get('from'))&&(!q.get('to')||l.created.slice(0,10)<=q.get('to'))&&(!q.get('landing')||l.attribution?.landing_id===q.get('landing'))&&(!q.get('caller')||l.owner===q.get('caller'))).map(l=>{const a=db.accounts[l.client_id],payments=a?.state.requests.filter(r=>r.type==='topup'&&r.status==='Approved'&&r.receiptChecked===true&&r.amount>0&&Number.isFinite(Date.parse(r.reviewedAt))).sort((a,b)=>a.reviewedAt.localeCompare(b.reviewedAt))||[];return {journey:l.context?.journey,source:l.attribution,created:l.created,qualified:l.crm.status==='qualified',account:!!a,connected:!!l.crm.funnel?.firstConnectedAt,paidAt:payments[0]?.reviewedAt||null,landing:l.attribution?.landing_id||'main',callerId:l.owner,firstAttemptMs:l.crm.funnel?.firstAttemptAt?Date.parse(l.crm.funnel.firstAttemptAt)-Date.parse(l.context?.journey?.consultationAt||l.created):null,closeReason:l.crm.funnel?.closeReason,ftdCents:Math.round((payments[0]?.amount||0)*100),stages:{leads:true,accounts:!!a,connected:!!l.crm.funnel?.connectedAt,qualified:l.crm.status==='qualified',plan_saved:!!a?.state.planDraft,ftd:!!payments.length,activated:a?.state.plan?.status==='active',repeat_deposit:payments.length>1,club_invited:!!l.crm.funnel?.clubInvitedAt}};});const total=domain.funnel.aggregate(rows.map(r=>({...r,landing:'all'})),'landing')[0]||{leads:0,ftd:0,ftdRate:0,averageFirstCallMinutes:null,reasons:{}};return {journeys:{byRoute:J.cohorts(rows),byTopic:J.cohorts(rows,'topic'),byPartner:J.cohorts(rows,'partner')},total,byLanding:domain.funnel.aggregate(rows,'landing'),byCaller:domain.funnel.aggregate(rows,'caller'),byLandingCaller:domain.funnel.aggregate(rows,'landing_caller'),callers:v.managers};}
  function syncKnowledge(db){
-  const release=seed.knowledgeRelease;if(!release||db.knowledgeRelease?.id===release.id)return;
+  const release=seed.knowledgeRelease;if(!release||db.knowledgeRelease?.id===release.id&&db.knowledgeRelease?.migration===2)return;
   db.knowledge??={};
   for(const [id,next]of Object.entries(seed.knowledge||{})){
-   const current=db.knowledge[id],previous=release.previous?.[id];
-   // Exact original match only. Preserve edits, publication decisions and suggestions.
-   const equal=(a,b)=>a&&b&&Object.keys(b).every(k=>JSON.stringify(a[k])===JSON.stringify(b[k]))&&Object.keys(a).every(k=>Object.hasOwn(b,k));
-   if((!current&&!previous)||equal(current,previous))db.knowledge[id]=clone(next);
+   const previous=release.previous?.[id],matches=Object.values(db.knowledge).filter(a=>a.titleEn===next.titleEn&&(a.journeyStep||'')===(next.journeyStep||''));
+   const current=db.knowledge[id]||(matches.length===1?matches[0]:null);
+   // Old exports assigned new IDs and timestamps to the same built-ins.
+   // Compare the whole editorial payload, revision, publication and suggestions instead.
+   const fields=['titleEn','titleRu','questionEn','questionRu','promptEn','promptRu','answerEn','explanationRu','nextEn','nextRu','sourceTitle','sourceRef','category','screen','scope','dependsOnTerms','journeyStep'];
+   const unchanged=previous&&current&&current.version===1&&current.revision===1&&current.status==='draft'&&!current.publishedVersion&&current.author===previous.author&&!(current.suggestions||[]).length&&fields.every(k=>(current[k]??'')===(previous[k]??''));
+   if(!current&&!previous&&!matches.length)db.knowledge[id]=clone(next);
+   else if(unchanged){const upgraded=clone(next);upgraded.id=current.id;upgraded.history=[next.history[0],...(current.history||[])];upgraded.versionsData={[current.version]:clone(current)};db.knowledge[current.id]=upgraded;}
   }
-  db.knowledgeRelease={id:release.id};
+  db.knowledgeRelease={id:release.id,migration:2};
  }
  function route(db,path,method,b,ctx){
   if(path.startsWith('staff/knowledge'))syncKnowledge(db);
