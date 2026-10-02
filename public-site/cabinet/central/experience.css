@@ -596,3 +596,58 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 /* Match the map's loading surface to the selected account theme. */
 .eco-shell #map{background:var(--eco-card)}
 .eco-shell .r-map-status{background:var(--eco-card);color:var(--eco-text);border-color:var(--eco-line)}
+
+/* EC-122: legacy account components follow the same theme as the shell. */
+.eco-shell .eco-station{color:var(--eg-text)}
+.eco-shell .ec-chat-send{background:var(--eg-brand);color:var(--eg-on-brand)}
+.eco-shell .ec-chat-send:hover:not(:disabled){background:var(--eg-brand-hover)}
+.eco-shell .ec-chat-sendrow .is-error{color:var(--eg-danger)}
+.eco-shell #modal .plan-snapshot-note{color:var(--eg-muted)!important}
+.eco-shell #modal #plan-document-error{color:var(--eg-danger)}
+/* The printable document remains ink on paper in both account themes. */
+.eco-shell #modal #modal-content .plan-paper :is(p,small,footer){color:#5a5a5d}
+
+.eco-shell .r-plan{--r-ink:var(--eg-text);--r-muted:var(--eg-muted);--r-mint:var(--eg-brand);--r-line:var(--eg-border)}
+.eco-shell .r-plan :is(.panel,.r-scenario-details){background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell .r-plan :is(.eyebrow,p,label,small,dt,.section-heading>span,.tier-per,.tier-monthly,.tier-minimum,.ops-picker-caption,.scenario-footnote){color:var(--eg-muted)}
+.eco-shell .r-plan :is(.tier-name,.tier-stations,.tier-rate,.picker-row strong,.picker-row>span:last-child,.r-summary-facts dd,.allocation-math strong){color:var(--eg-text)}
+.eco-shell .r-plan :is(.tariff-card.selected,.ops-picker-selected){background:var(--eg-brand-soft);border-color:var(--eg-brand)!important}
+.eco-shell .r-plan .tariff-card.selected{box-shadow:inset 0 2px var(--eg-brand)}
+.eco-shell .r-plan .tariff-card:hover{background:var(--eg-surface-soft);border-color:var(--eg-brand)}
+.eco-shell .r-plan .tariff-card.selected:hover{background:var(--eg-brand-soft)}
+.eco-shell .r-plan :is(.investment-field,.eco-amount-preview,.formula-box){background:var(--eg-surface-soft);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell .r-plan .investment-field{color:var(--eg-muted)}
+.eco-shell .r-plan :is(#investment-amount,#picker-search){color:var(--eg-text);background:var(--eg-surface-soft);border-color:var(--eg-border)}
+.eco-shell .r-plan #investment-amount{background:transparent}
+.eco-shell .r-plan input::placeholder{color:var(--eg-muted);opacity:1}
+.eco-shell .r-plan .investment-field:focus-within{border-color:var(--eg-brand);box-shadow:0 0 0 1px var(--eg-brand)}
+.eco-shell .r-plan .investment-field:has(input[aria-invalid=true]){border-color:var(--eg-danger);box-shadow:0 0 0 1px var(--eg-danger)}
+.eco-shell .r-plan :is(.eco-amount-preview strong,.allocation-total strong,.green-text,.text-button,.r-model-link){color:var(--eg-brand)}
+.eco-shell .r-plan :is(.eco-amount-preview small,.eco-amount-preview span,.formula-box,.allocation-total>div,.scenario-grid span){color:var(--eg-muted)}
+.eco-shell .r-plan :is(.r-step,.investment-presets button,.table-button,.button.secondary){background:var(--eg-surface-soft);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell .r-plan .investment-presets button[aria-pressed=true]{background:var(--eg-brand-soft);color:var(--eg-brand);border-color:var(--eg-brand)}
+.eco-shell .r-plan .button.primary,.eco-shell .r-plan-dock .button.primary{background:var(--eg-brand);color:var(--eg-on-brand);border-color:var(--eg-brand)}
+.eco-shell .r-plan .button.primary:hover,.eco-shell .r-plan-dock .button.primary:hover{background:var(--eg-brand-hover);border-color:var(--eg-brand-hover)}
+.eco-shell .r-plan :is(.button.secondary,.table-button,.investment-presets button):hover{background:var(--eg-brand-soft);border-color:var(--eg-brand)}
+.eco-shell .r-plan :is(.picker-row,.allocation-math>div,.scenario-grid>div){border-color:var(--eg-border)}
+.eco-shell .r-plan .picker-row:hover{background:var(--eg-surface-soft)}
+.eco-shell .r-plan .picker-row.ops-picker-selected:hover{background:var(--eg-brand-soft)}
+.eco-shell .r-plan .r-selection-status{color:var(--eg-brand)}
+.eco-shell .r-plan :is(.form-error,[role=alert]){color:var(--eg-danger)}
+.eco-shell .r-plan-dock{background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell .r-plan-dock :is(span,small){color:var(--eg-muted)}
+.eco-shell .r-plan :is(button,a,input,select,summary):focus-visible,.eco-shell .r-plan-dock button:focus-visible{outline:2px solid var(--eg-brand);outline-offset:3px}
+
+/* The game canvas stays dark; its surrounding controls and cards use the account theme. */
+.eco-shell #energy-run .arcade-free{color:var(--eg-brand)}
+.eco-shell #energy-run :is(.arcade-route-banner,.arcade-route-steps,.arcade-side small,.arcade-note){color:var(--eg-muted)}
+.eco-shell #energy-run .arcade-route-banner>span:first-child{color:var(--eg-text)}
+.eco-shell #energy-run :is(.arcade-status,.arcade-route-steps [data-reached=true],.arcade-achievement[data-earned=true] b){color:var(--eg-brand)}
+.eco-shell #energy-run :is(.arcade-route-steps span,.arcade-achievement){border-color:var(--eg-border)}
+.eco-shell #energy-run .arcade-route-steps [data-reached=true]{border-color:var(--eg-brand)}
+.eco-shell #energy-run :is(.arcade-controls,.arcade-side .eco-card){background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell #energy-run :is(.arcade-controls .steer,.arcade-track){background:var(--eg-surface-soft);color:var(--eg-text);border-color:var(--eg-border-strong)}
+.eco-shell #energy-run :is(.arcade-controls .steer:active,.arcade-track[aria-pressed=true]){background:var(--eg-brand-soft);color:var(--eg-brand);border-color:var(--eg-brand)}
+.eco-shell #energy-run .arcade-overlay strong{color:#f4f4f7}
+.eco-shell #eco-workspace #energy-run .arcade-overlay p{color:#cdcdd0}
+.eco-shell #energy-run :is(.arcade-controls button,.arcade-track):focus-visible{outline:2px solid var(--eg-brand);outline-offset:3px}
