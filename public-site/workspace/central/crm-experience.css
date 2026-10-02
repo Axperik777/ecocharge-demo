@@ -199,3 +199,5 @@ html[data-app="crm"][data-crm-theme="dark"]{color-scheme:dark;--crm-bg:#191d20;-
 
 /* Keep mobile input text readable and avoid focus zoom on iOS. */
 @media(max-width:800px){[data-app="crm"] input:not([type="checkbox"]):not([type="radio"]),[data-app="crm"] select,[data-app="crm"] textarea{font-size:16px!important;min-height:44px}}
+/* EC-122: destructive actions remain legible on either CRM surface. */
+[data-app="crm"] .crm-button.sandbox-danger{color:var(--crm-error)!important}

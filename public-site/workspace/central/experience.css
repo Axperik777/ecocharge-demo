@@ -606,6 +606,8 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 .eco-shell #modal #plan-document-error{color:var(--eg-danger)}
 /* The printable document remains ink on paper in both account themes. */
 .eco-shell #modal #modal-content .plan-paper :is(p,small,footer){color:#5a5a5d}
+.eco-shell #modal .eco-upgrade-review{background:var(--eg-surface-soft);color:var(--eg-text);border-color:var(--eg-border)}
+.eco-shell #modal .d-review-terms a{color:var(--eg-brand)}
 
 .eco-shell .r-plan{--r-ink:var(--eg-text);--r-muted:var(--eg-muted);--r-mint:var(--eg-brand);--r-line:var(--eg-border)}
 .eco-shell .r-plan :is(.panel,.r-scenario-details){background:var(--eg-surface);color:var(--eg-text);border-color:var(--eg-border)}
@@ -624,6 +626,7 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 .eco-shell .r-plan .investment-field:has(input[aria-invalid=true]){border-color:var(--eg-danger);box-shadow:0 0 0 1px var(--eg-danger)}
 .eco-shell .r-plan :is(.eco-amount-preview strong,.allocation-total strong,.green-text,.text-button,.r-model-link){color:var(--eg-brand)}
 .eco-shell .r-plan :is(.eco-amount-preview small,.eco-amount-preview span,.formula-box,.allocation-total>div,.scenario-grid span){color:var(--eg-muted)}
+.eco-shell .r-plan :is(.investment-field>span,.j-eyebrow,.allocation-math span){color:var(--eg-muted)}
 .eco-shell .r-plan :is(.r-step,.investment-presets button,.table-button,.button.secondary){background:var(--eg-surface-soft);color:var(--eg-text);border-color:var(--eg-border)}
 .eco-shell .r-plan .investment-presets button[aria-pressed=true]{background:var(--eg-brand-soft);color:var(--eg-brand);border-color:var(--eg-brand)}
 .eco-shell .r-plan .button.primary,.eco-shell .r-plan-dock .button.primary{background:var(--eg-brand);color:var(--eg-on-brand);border-color:var(--eg-brand)}
