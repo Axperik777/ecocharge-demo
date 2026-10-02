@@ -599,6 +599,9 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 
 /* EC-122: legacy account components follow the same theme as the shell. */
 .eco-shell .eco-station{color:var(--eg-text)}
+.eco-shell :is(.j-library-header,.j-wide-dialog) .j-eyebrow{color:var(--eg-muted)}
+.eco-shell .leaflet-control-attribution{background:var(--eg-surface);color:var(--eg-muted);font-size:11px}
+.eco-shell .leaflet-control-attribution a{color:var(--eg-brand)}
 .eco-shell .ec-chat-send{background:var(--eg-brand);color:var(--eg-on-brand)}
 .eco-shell .ec-chat-send:hover:not(:disabled){background:var(--eg-brand-hover)}
 .eco-shell .ec-chat-sendrow .is-error{color:var(--eg-danger)}
