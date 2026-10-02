@@ -16,6 +16,8 @@ fs.writeFileSync(seed,JSON.stringify({users:[{username:'preview.admin',password:
 const app=require(path.join(work,'server/server.cjs')).createServer({database:path.join(work,'isolated.sqlite'),seedFile:seed,staticRoot:path.join(work,'dist'),centralBase:base,websiteBase:website,landingOrigins:[]});
 (async()=>{try{
  const s=app.store,admin=s.authenticate('preview.admin',pass,'staff'),manager=s.authenticate('preview.manager',pass,'staff'),client=s.authenticate('lox','lox1','client');
+ // Reviewed EC123 pack; this store contains only the fresh isolated export fixture.
+ require(path.join(work,'server/knowledge-release.cjs')).publishPack(s.knowledge,admin,{apply:true,reviewed:true});
  s.db.prepare('UPDATE users SET username=?,name=?,email=?,phone=?,password=? WHERE id=?').run('alex.morgan','Алексей Морозов','alex@example.com','',crypto.randomBytes(48).toString('hex'),client.id);
  let a=s.snapshot(admin,client.id);const empty=structuredClone(a);a=s.balance(admin,client.id,{id:'opening-balance',version:a.version,kind:'credit',amount:5250,expectedBalance:0,reason:'Учебный портфель'});
  const stations=JSON.parse(fs.readFileSync(path.join(work,'dist/stations.json'))).stations,ids=new Set(stations.map(v=>v.id));ids.closed=new Set(stations.filter(v=>v.selectionClosed).map(v=>v.id));
