@@ -58,7 +58,7 @@ module.exports=function verify(root){
  request('staff/clients/'+a.client.id+'/finance','POST',{id:'review-test',kind:'review',version:row.version,requestId:'topup-test',decision:'approve',receiptChecked:true,reason:'Подтверждение модели'});
  assert.equal(request('client/account').state.balance,350);assert.equal(request('staff/funding-requests').requests.length,0);
  bad(()=>request('client/account','PUT',{clientId:a.client.id,version:stale.version,state:stale.state}));
- row=request('client/account');request('staff/clients/'+a.client.id+'/finance','POST',{id:'plan-test',kind:'plan',version:row.version,plan:{tierId:'single',capital:250,stationIds:[w.ECO_SANDBOX_STATIONS.find(s=>!s.selectionClosed).id]},reason:'Активация тестового плана'});
+ row=request('client/account');request('staff/clients/'+a.client.id+'/finance','POST',{id:'plan-test',kind:'plan',version:row.version,plan:{tierId:'single',capital:250,stationIds:w.ECO_SANDBOX_STATIONS.filter(s=>!s.selectionClosed).slice(0,3).map(s=>s.id)},reason:'Активация тестового плана'});
  assert.equal(request('client/account').state.balance,100);assert.equal(request('client/plan-document').plan.capital,250);
  row=request('client/account');request('staff/clients/'+a.client.id+'/energy-brief','POST',{id:'weekly-note',version:row.version,kind:'weekly',text:'Обсудили результат недели и следующий шаг.'});
  const brief=request('client/account').state.energyBriefs.at(-1);assert(brief.report);assert(brief.createdAt);assert(brief.authorName);

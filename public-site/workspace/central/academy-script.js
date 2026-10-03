@@ -64,6 +64,12 @@
   else if(clubOnly){mapped.get('open').text=ru?'Здравствуйте, [имя]. Вы интересовались сообществом EcoGrid. Помогу с Клубом и доступом в кабинет. Если захотите узнать о Charge, отдельно покажу проект.':'Hi [name], you asked about the EcoGrid community. I can help with Club and account access. If you want to explore Charge, we can arrange a separate walkthrough.';ids=['open','register','groups','account','wallet','gift','close'];}
   else if(presented){mapped.get('open').text=ru?'Здравствуйте, [имя]. Продолжим с обсуждённого предложения Charge. Какой вопрос остался перед решением?':'Hi [name], let’s continue with the Charge proposal we discussed. What question remains before your decision?';ids=['open','account','groups','gift','proposal','objections','funding','activation','close'];}
   else{if(member)mapped.get('open').text=ru?'Вы уже в Клубе и кабинете. Если готовы, разберём Charge и условия первого участия. Что хотите понять сначала?':'You already have Club and account access. If you are ready, let’s review Charge and the terms. What would you like to clarify first?';ids=['open','goal','project','interest',...(!member?['register']:[]),'account','groups','gift','proposal','objections','funding','activation','close'];}
+  const charge=typeof module==='object'&&module.exports?require('../charge-model.js'):globalThis.EcoChargeModel;
+  const text=(...keys)=>keys.map(k=>charge.copy(k,language)).join(' ');
+  mapped.get('project').text=text('who','work','source','split','formula','allocation');
+  mapped.get('proposal').text=text('where','rights','proof');
+  mapped.get('gift').text=text('ai');mapped.get('gift').note=text('aiEvidence','costs');
+  mapped.get('activation').text+=' '+text('allocation','cadence');
   return ids.map(id=>mapped.get(id));
  }
  return {scripts};

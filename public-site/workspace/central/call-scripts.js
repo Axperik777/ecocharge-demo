@@ -78,7 +78,10 @@ section('close','Agree the next step','Согласовать следующий
 
  // The same operational explanation appears on the site and in the account.
  function scripts(kind,language='en',context={}){
-  const rows=baseScripts(kind,language,context),j=context.journey||context.state?.journey;
+
+  const rows=baseScripts(kind,language,context),j=context.journey||context.state?.journey,charge=typeof module==='object'&&module.exports?require('../charge-model.js'):globalThis.EcoChargeModel;
+  if(['ftd','retention'].includes(kind)&&(!j||['charge','energy'].includes(j.topic))){for(const row of rows){if(['economics','compare','details'].includes(row.id))row.text=charge.copy('split',language)+' '+charge.copy('formula',language)+' '+charge.copy('allocation',language);}}
+
   if(['academy','expansion'].includes(kind)||kind==='ftd'&&j&&(j.route==='nurture'||['charge','energy'].includes(j.topic)))return rows;
   const ru=language==='ru',topic=kind==='mining'?'mining':kind==='club'?'club':j?.topic==='ai'?'energy':j?.topic||'energy',c=business.ai(topic,language);
   if(kind==='ftd'&&['energy','solar','charge'].includes(topic)){
@@ -87,7 +90,7 @@ section('close','Agree the next step','Согласовать следующий
   }
   if(['ftd','mining'].includes(kind)&&['energy','charge','solar','mining'].includes(topic)&&(!j?.purpose||j.purpose==='participation')){
    const offer=business.programCopy(topic,language);
-   rows.push({id:'project-ai-program',title:ru?'EcoCoin · 30 дней AI-режима':'EcoCoin · 30 days of project AI mode',text:[offer.distinction,offer.body,offer.price,offer.gift,offer.rules,offer.supplement,offer.renewal,offer.availability].join(' '),note:ru?'В концепции пользователя AI дополняет базовую ставку. Диапазон 3–6 требует определения: процентные пункты или относительная прибавка, период и источник расчёта. Не озвучивать его как измеренный или гарантированный эффект. В Mining сохраняется отдельная переменная экономика; фиксированную ставку к нему не переносить. Реальное распределение, списание монет и начисление надбавки не подключены.':'The concept adds AI to the base terms. The proposed 3–6 range still needs a unit, period and calculation basis. Do not present it as measured or guaranteed performance. Mining retains its separate variable economics; do not apply a fixed plan rate to it. Allocation execution, coin redemption and additional credits are not connected.'});
+   rows.push({id:'project-ai-program',title:ru?'EcoCoin · 30 дней AI-режима':'EcoCoin · 30 days of project AI mode',text:[offer.distinction,offer.body,offer.price,offer.gift,offer.rules,offer.supplement,offer.renewal,offer.availability].join(' '),note:ru?'AI дополняет базовое участие. Ожидаемый эффект обсуждается отдельно: период, допущения и источник расчёта. Не озвучивать прогноз как измеренный или гарантированный результат. В Mining сохраняется отдельная переменная экономика; фиксированную ставку к нему не переносить. Реальное распределение, списание монет и начисление надбавки не подключены.':'AI adds optional optimization to base participation. Review the period, assumptions and calculation basis separately. Do not present a projection as measured or guaranteed performance. Mining retains its separate variable economics; do not apply a fixed plan rate to it. Allocation execution, coin redemption and additional credits are not connected.'});
   }
   const memberBenefit=business.ai('club',language);
   if(kind==='retention')rows.push({id:'club-ai',title:ru?'EcoGrid Club · помощь с продуктами':'EcoGrid Club · product guidance',text:memberBenefit.body,note:''});

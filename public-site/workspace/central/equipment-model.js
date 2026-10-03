@@ -24,6 +24,7 @@
    ...(p?[[t('Panels','Панели'),`${p.brandName||solar.brandName(solar.panel(p.id))} · ${p.panels} × ${p.powerW} W · ${p.arrayKw} kW`]]:[]),
    ...(b?[[t('Storage','Накопитель'),`${b.brandName||solar.brandName(solar.battery(b.id))} · ${b.capacityKWh} kWh`]]:q.battery==='yes'?[[t('Storage','Накопитель'),t('Help me choose','Помогите выбрать')]]:[]),
    ...(c?[[t('Charger','Зарядка'),`${c.brandName||solar.brandName(solar.charger(c.id))} · ${c.maxKW} kW · ${c.connector}`]]:q.requestType==='charging'?[[t('Charger','Зарядка'),t('Help me choose','Помогите выбрать')]]:[]),
+   ...(c?.pricing?[[t('Equipment estimate · USD','Ориентир оборудования · USD'),c.pricing.equipmentPriceUsd.toFixed(2)+' USD · '+t('installation, delivery and taxes separate','монтаж, доставка и налоги отдельно')],[t('Price reference','Основание цены'),c.pricing.referenceModel+' · '+c.pricing.referencePriceUsd.toFixed(2)+' USD × 0.81 · '+c.pricing.checkedAt]]:[]),
    ...(q.vehicle?[[t('Vehicle','Автомобиль'),q.vehicle]]:[]),
    ...(q.billMonthly!==null?[[t('Monthly electricity bill','Счёт за электричество в месяц'),`${q.billMonthly} ${q.billCurrency}`]]:[]),
    ...(q.note?[[t('Your note','Комментарий'),q.note]]:[])

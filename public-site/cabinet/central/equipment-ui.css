@@ -6,3 +6,5 @@
 .eco-shell #equipment-request-form label[hidden]{display:none!important}
 
 .equipment-next{padding-left:20px;color:#c3c3c6;font-size:13px;line-height:1.8}.equipment-next li{margin-bottom:10px}
+
+.equipment-price{margin-block:16px;padding:16px;border:1px solid currentColor;border-radius:12px}.equipment-price strong{font-size:1.45rem;font-variant-numeric:tabular-nums}.equipment-price p{margin:8px 0 0;line-height:1.5}
