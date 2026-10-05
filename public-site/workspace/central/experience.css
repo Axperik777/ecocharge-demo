@@ -126,6 +126,13 @@ html[data-eco-theme="dark"] .eco-shell .topbar .charge-shell{fill:var(--eg-text)
 .eco-shell .eg-service-icon,.eco-shell .eg-shortcut-icon{background:var(--eg-brand-soft);color:var(--eg-brand)}
 .eco-shell .eco-secondary-details{border-color:var(--eg-border)}.eco-shell .eco-secondary-details>summary{color:var(--eg-text)}
 .eco-shell .eco-live-card,.eco-shell .eco-upgrade,.eco-shell .eco-fund-hero{background:var(--eg-surface);border-color:var(--eg-border);color:var(--eg-text);box-shadow:var(--eg-shadow)}
+/* Funding and activation summaries use the same theme as their parent card. */
+.eco-shell .eco-fund-summary{background:var(--eg-surface-soft);border-color:var(--eg-border);color:var(--eg-text)}
+.eco-shell .eco-fund-summary dt{color:var(--eg-muted)}
+.eco-shell .eco-fund-summary dd{color:var(--eg-text)}
+.eco-shell .eco-post-call{background:var(--eg-surface-soft);border-color:var(--eg-border-strong)}
+.eco-shell .eco-activation-note{color:var(--eg-muted)}
+.eco-shell .eg-academy-welcome>.eco-button{margin:0 8px 8px 0}
 .eco-shell .eco-live-card [data-live-accrual],.eco-shell .eco-account-live{color:var(--eg-brand)}
 .eco-shell #eco-workspace input:not([type=checkbox]):not([type=file]),.eco-shell #eco-workspace select,.eco-shell #eco-workspace textarea{background:var(--eg-surface);border-color:var(--eg-border-strong);color:var(--eg-text)}
 .eco-shell #eco-workspace details{border-color:var(--eg-border)}
