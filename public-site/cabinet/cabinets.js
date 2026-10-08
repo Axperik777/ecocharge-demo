@@ -58,7 +58,7 @@ function cabClientStep() {
     if (journeyPendingFunding().length) return {state: 'pending', tag: 'Awaiting manager review', title: 'Your request is being reviewed.', copy: 'Your selection is saved. View the request status or ask your manager a question.', action: 'history', label: 'View request status', step: 1};
     return {state: 'saved', tag: 'Plan saved', title: 'Continue with your saved plan.', copy: 'Your amount and station selection are ready to review. You can still change them.', action: 'journey-my-plan', label: 'Continue my plan', step: 1};
   }
-  if (isActivePlan()) return {state: 'active', tag: 'Active plan', title: 'Your plan, in one place.', copy: 'Check your stations, recorded weekly credits and account activity.', action: 'journey-my-plan', label: 'Open my plan', step: 3};
+  if (isActivePlan()) return {state: 'active', tag: 'Active Charge plan', title: 'Your plan, in one place.', copy: 'Check your stations, recorded 4-day settlements and account activity.', action: 'journey-my-plan', label: 'Open my plan', step: 3};
   return {state: 'new', tag: 'Your first step', title: 'Build your first charging plan.', copy: 'Choose reference stations and an amount. Review the calculation before saving your example.', action: 'journey-resume', label: 'Build my plan', step: 0};
 }
 
@@ -70,7 +70,7 @@ function cabEvents() {
     const latest = threadMessages(t).at(-1);
     rows.push({date: latest?.date || t.date, title: latest?.from === 'manager' ? 'Manager replied' : 'Message saved', detail: t.service?.closed ? 'Closed' : t.status === 'Open' ? 'Awaiting reply' : 'Answered', thread: t.id, glyph: 'chat'});
   }
-  for (const s of demo.sessions.filter(s => s.period === 'week')) rows.push({date: s.date, title: `Weekly model credit · ${money(s.payout)}`, detail: `Period starting ${s.weekStart}`, credit: s.id, glyph: 'zap'});
+  for (const s of demo.sessions.filter(s => ['week','accrual'].includes(s.period))) rows.push({date: s.date, title: `${s.period==='week'?'Archived legacy credit':'4-day accrual'} · ${money(s.payout)}`, detail: `Period starting ${s.periodStart?.slice(0,10)||s.weekStart}`, credit: s.id, glyph: 'zap'});
   for (const a of (demo.adjustments || [])) rows.push({date: a.date, title: 'Account updated by manager', detail: 'Model adjustment recorded', action: 'cab-account-details', glyph: 'filter'});
   return rows.filter(e => Number.isFinite(Date.parse(e.date))).sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 }
@@ -103,7 +103,7 @@ renderJourney = function () {
   cabContactButton();
   cabStationTools();
   if (tab !== 'dashboard') return;
-  const step = cabClientStep(), p = cabPlan(), credits = demo.sessions.filter(s => s.period === 'week').reduce((sum, s) => sum + s.payout, 0);
+  const step = cabClientStep(), p = cabPlan(), credits = demo.sessions.filter(s => ['week','accrual'].includes(s.period)).reduce((sum, s) => sum + s.payout, 0);
   welcome.className = 'panel client-next-step cab-welcome';
   welcome.dataset.state = step.state;
   welcome.innerHTML = `<div class="cab-welcome-top"><span class="j-eyebrow">${isGuest() ? 'YOUR WORKSPACE' : 'YOUR EcoGrid Charge ACCOUNT'}</span>${cabPill(step.tag, step.state === 'pending' ? 'amber' : 'mint')}</div><h1>${step.title}</h1><p>${step.copy}</p><div class="cab-welcome-actions j-hero-actions">${cabButton(step.action, step.label + ' ' + icon('arrow'), true)}<button class="text-button" data-action="manager">Ask my manager ${icon('chat')}</button></div><ol class="cab-progress" aria-label="Plan progress">${['Choose stations', 'Review & fund', 'Active plan'].map((label, i) => `<li class="${i < step.step ? 'complete' : i === step.step ? 'current' : ''}" ${i === step.step ? 'aria-current="step"' : ''}><span>${i < step.step ? '✓' : i + 1}</span>${label}</li>`).join('')}</ol>`;
@@ -153,13 +153,13 @@ renderJourneyPlan = function () {
 actions['journey-discover'] = () => {$('#modal').close(); actions['explore-map']();};
 actions['cab-calculation'] = () => {
   const p = cabPlan();
-  openModal(`<h2>Your weekly calculation</h2>${p ? `<div class="cab-formula"><strong>${money(p.capital)}</strong><span>×</span><strong>${p.rate}%</strong><span>=</span><strong>${money(weeklyCredit(p.capital, p.rate))}</strong></div><p>Plan amount × monthly model rate. No compounding and no extra credit per vehicle.</p><p class="modal-note">This is an illustration. Only entries in the weekly history have been recorded in your model balance.</p>${cabButton('sessions', 'View recorded credits', true)}` : `<p>Choose an amount and station group to see your weekly example.</p>${cabButton('journey-resume', 'Build my plan', true)}`}`);
+  openModal(`<h2>Your 4-day estimate</h2>${p ? `<div class="cab-formula"><strong>${money(p.capital)}</strong><span>·</span><strong>${p.rate}% / month</strong><span>=</span><strong>${money(accrualCredit(p.capital,p.rate,Date.now(),p))}</strong></div><p>Continuous accrual under the calendar-month rate, settled every 4 days.</p><p class="modal-note">Only recorded settlements are included in your available balance.</p>${cabButton('sessions', 'View recorded credits', true)}` : `<p>Choose an amount and station group to see your 4-day estimate.</p>${cabButton('journey-resume', 'Build my plan', true)}`}`);
 };
 actions['cab-account-details'] = () => openModal(`<h2>Current account details</h2><dl class="cab-detail-list"><div><dt>Available balance</dt><dd>${money(demo.balance - pendingWithdrawals())}</dd></div><div><dt>Plan amount</dt><dd>${money(cabPlan()?.capital || 0)}</dd></div><div><dt>Selected stations</dt><dd>${cabPlan()?.stationIds.length || 0}</dd></div></dl>${cabButton('manager', 'Ask about this update')}`);
 const cabRequestHistory = actions.history;
 actions.history = () => {
   if (role === 'admin') {cabRoute('operations'); $('#modal').close(); return;}
-  openModal(`<h2>Account activity</h2><p>Requests, messages and recorded model credits.</p><div class="cab-history-tools">${cabButton('cab-request-history', 'Funding & withdrawals')}${cabButton('sessions', 'Weekly credits')}</div>${cabTimeline(40)}`);
+  openModal(`<h2>Account activity</h2><p>Requests, messages and recorded model credits.</p><div class="cab-history-tools">${cabButton('cab-request-history', 'Funding & withdrawals')}${cabButton('sessions', 'Recorded settlements')}</div>${cabTimeline(40)}`);
   // An event opens its request details rather than recursively opening this same list.
   $$('#modal [data-action="history"]').forEach(b => b.dataset.action = 'cab-request-history');
 };
@@ -233,11 +233,11 @@ function cabProfile() {
 
 function cabPlanPanel() {
   const p = cabPlan();
-  return `<section class="cab-card-section"><div class="cab-section-heading"><div><h2>Plan & stations</h2><p>${demo.planDraft ? 'Saved selection awaiting activation' : isActivePlan() ? 'Active plan' : 'No plan saved yet'}</p></div>${cabButton('cab-edit-plan', p ? 'Change plan' : 'Set up plan', true)}</div>${p ? `<dl class="cab-plan-values"><div><dt>Plan amount</dt><dd>${money(p.capital)}</dd></div><div><dt>Monthly model rate</dt><dd>${p.rate}%</dd></div><div><dt>Weekly illustration</dt><dd>${money(weeklyCredit(p.capital, p.rate))}</dd></div></dl><div class="cab-assigned-stations">${p.stationIds.map(journeyStation).filter(Boolean).map(s => `<button data-cab-station="${s.id}"><img src="${escapeHtml(journeyPhoto(s).path)}" alt="${escapeHtml(journeyPhoto(s).alt)}" loading="lazy" width="96" height="72"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.country==='CA'?'CA reference':'AFDC'} ${s.id} · ${s.ports} DC ports</small></span>${icon('arrow')}</button>`).join('')}</div>` : '<div class="cab-empty"><p>Choose an amount, a plan and reference stations.</p></div>'}<div class="cab-plan-footer">${cabButton('preview-contract', 'View documents')}<button class="text-button" data-action="account-audit">Change history ${icon('arrow')}</button></div></section>`;
+  return `<section class="cab-card-section"><div class="cab-section-heading"><div><h2>Plan & stations</h2><p>${demo.planDraft ? 'Saved selection awaiting activation' : isActivePlan() ? 'Active plan' : 'No plan saved yet'}</p></div>${cabButton('cab-edit-plan', p ? 'Change plan' : 'Set up plan', true)}</div>${p ? `<dl class="cab-plan-values"><div><dt>Plan amount</dt><dd>${money(p.capital)}</dd></div><div><dt>Monthly model rate</dt><dd>${p.rate}%</dd></div><div><dt>4-day estimate</dt><dd>${money(accrualCredit(p.capital, p.rate, Date.now(), p))}</dd></div></dl><div class="cab-assigned-stations">${p.stationIds.map(journeyStation).filter(Boolean).map(s => `<button data-cab-station="${s.id}"><img src="${escapeHtml(journeyPhoto(s).path)}" alt="${escapeHtml(journeyPhoto(s).alt)}" loading="lazy" width="96" height="72"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.country==='CA'?'CA reference':'AFDC'} ${s.id} · ${s.ports} DC ports</small></span>${icon('arrow')}</button>`).join('')}</div>` : '<div class="cab-empty"><p>Choose an amount, a plan and reference stations.</p></div>'}<div class="cab-plan-footer">${cabButton('preview-contract', 'View documents')}<button class="text-button" data-action="account-audit">Change history ${icon('arrow')}</button></div></section>`;
 }
 
 function cabOperationsPanel() {
-  return `<section class="cab-card-section"><div class="cab-section-heading"><div><h2>Account operations</h2><p>Available balance: <strong>${money(demo.balance - pendingWithdrawals())}</strong></p></div>${cabButton('cab-edit-balance', 'Adjust model balance')}</div><div class="cab-operation-actions">${cabButton('simulate-session', 'Record a model week')}${cabButton('sessions', 'Weekly credit history')}</div>${withdrawalNotice()}${requestTable()}</section>`;
+  return `<section class="cab-card-section"><div class="cab-section-heading"><div><h2>Account operations</h2><p>Available balance: <strong>${money(demo.balance - pendingWithdrawals())}</strong></p></div>${cabButton('cab-edit-balance', 'Adjust model balance')}</div><div class="cab-operation-actions">${cabButton('simulate-session', 'Preview 4-day obligation')}${cabButton('sessions', 'Funded settlements')}</div>${withdrawalNotice()}${requestTable()}</section>`;
 }
 
 function cabClientCard() {
@@ -305,12 +305,12 @@ function cabEditRows() {
 
 function cabEditPlanForm() {
   const t = demo.tariffs.find(t => t.id === cabEdit.tierId) || demo.tariffs[0];
-  openModal(`<h2>Change client plan</h2><p>Review the amount, plan and selected stations.</p><form id="cab-plan-form"><div class="cab-form-columns"><div><label for="cab-plan-amount">Plan amount (USD)</label><input id="cab-plan-amount" type="number" inputmode="decimal" min="250" max="10000000" step=".01" value="${cabEdit.capital}" required></div><div><label for="cab-plan-tier">Weekly plan</label><select id="cab-plan-tier">${demo.tariffs.map(t => `<option value="${t.id}" ${t.id === cabEdit.tierId ? 'selected' : ''}>${escapeHtml(t.name)} · ${t.count} ${t.count===1?'station':'stations'} · ${t.rate}%</option>`).join('')}</select></div></div><div class="cab-preview-math" id="cab-plan-math"></div><div class="cab-section-heading"><label for="cab-plan-search">Reference stations</label><span id="cab-selection-count">${cabEdit.ids.length} / ${t.count}</span></div><input id="cab-plan-search" type="search" value="${escapeHtml(cabEdit.query || '')}" placeholder="City, state or station ID"><div class="cab-picker" id="cab-picker">${cabEditRows()}</div><label for="cab-plan-reason">Reason for change</label><input id="cab-plan-reason" maxlength="180" value="${escapeHtml(cabEdit.reason || '')}" required><div id="cab-plan-error" class="form-error" role="alert"></div><p class="form-hint">Direct plan adjustment. Available balance stays unchanged. Saving activates this plan.</p><button class="button primary" type="submit">Review changes</button></form>`);
+  openModal(`<h2>Change client plan</h2><p>Review the amount, plan and selected stations.</p><form id="cab-plan-form"><div class="cab-form-columns"><div><label for="cab-plan-amount">Plan amount (USD)</label><input id="cab-plan-amount" type="number" inputmode="decimal" min="250" max="10000000" step=".01" value="${cabEdit.capital}" required></div><div><label for="cab-plan-tier">Charge plan</label><select id="cab-plan-tier">${demo.tariffs.map(t => `<option value="${t.id}" ${t.id === cabEdit.tierId ? 'selected' : ''}>${escapeHtml(t.name)} · ${t.count} ${t.count===1?'station':'stations'} · ${t.rate}% per calendar month</option>`).join('')}</select></div></div><div class="cab-preview-math" id="cab-plan-math"></div><div class="cab-section-heading"><label for="cab-plan-search">Reference stations</label><span id="cab-selection-count">${cabEdit.ids.length} / ${t.count}</span></div><input id="cab-plan-search" type="search" value="${escapeHtml(cabEdit.query || '')}" placeholder="City, state or station ID"><div class="cab-picker" id="cab-picker">${cabEditRows()}</div><label for="cab-plan-reason">Reason for change</label><input id="cab-plan-reason" maxlength="180" value="${escapeHtml(cabEdit.reason || '')}" required><div id="cab-plan-error" class="form-error" role="alert"></div><p class="form-hint">Direct plan adjustment. Available balance stays unchanged. Saving activates this plan.</p><button class="button primary" type="submit">Review changes</button></form>`);
   cabUpdatePlanMath();
 }
 function cabUpdatePlanMath() {
   const t = demo.tariffs.find(t => t.id === cabEdit?.tierId); if (!t || !$('#cab-plan-math')) return;
-  $('#cab-plan-math').textContent = validDemoInvestment(cabEdit.capital) ? money(cabEdit.capital) + ' × ' + t.rate + '% = ' + money(weeklyCredit(cabEdit.capital, t.rate)) + ' per model week' : 'Enter a valid amount from $250.';
+  $('#cab-plan-math').textContent = validDemoInvestment(cabEdit.capital) ? money(cabEdit.capital) + ' × ' + t.rate + '% per calendar month · ' + money(accrualCredit(cabEdit.capital, t.rate, Date.now(), {ratePeriod: EcoFinance.ratePeriod, settlementDays: EcoFinance.settlementDays})) + ' current 4-day estimate' : 'Enter a valid amount from $250.';
   $('#cab-selection-count').textContent = cabEdit.ids.length + ' / ' + t.count;
 }
 actions['cab-edit-plan'] = () => {
@@ -328,7 +328,7 @@ actions['cab-edit-balance'] = () => {if (role !== 'admin') return; cabEdit = {ki
 function cabReviewChanges(after) {
   const before = cabBeforeValues();
   cabConfirmation = {...cabEdit, before, after};
-  const fields = cabEdit.kind === 'balance' ? [['balance', 'Model balance', money]] : [['capital', 'Plan amount', money], ['tariff', 'Weekly plan', escapeHtml], ['stations', 'Selected stations', String], ['rate', 'Monthly model rate', n => n + '%']];
+  const fields = cabEdit.kind === 'balance' ? [['balance', 'Model balance', money]] : [['capital', 'Plan amount', money], ['tariff', 'Charge plan', escapeHtml], ['stations', 'Selected stations', String], ['rate', 'Monthly model rate', n => n + '%']];
   openModal(`<h2>Review account changes</h2><p translate="no">${escapeHtml(demo.client.name)}</p><div class="cab-review-table"><div class="cab-review-head"><span>Field</span><span>Before</span><span>After</span></div>${fields.map(([key, label, format]) => `<div><strong>${label}</strong><span>${format(before[key])}</span><b>${format(after[key])}</b></div>`).join('')}</div><div class="cab-note"><strong>Reason for change</strong><p translate="no">${escapeHtml(cabEdit.reason)}</p></div><p class="modal-note">Model adjustment only. The change will be recorded in the account history.</p><div id="cab-confirm-error" class="form-error" role="alert"></div><div class="cab-confirm-actions">${cabButton('cab-confirm-change', 'Save changes', true)}${cabButton('cab-back-edit', 'Back to editing')}</div>`);
 }
 actions['cab-back-edit'] = () => {if (role !== 'admin' || !cabEdit) return; cabEdit.kind === 'plan' ? cabEditPlanForm() : cabBalanceForm();};
@@ -340,7 +340,7 @@ actions['cab-confirm-change'] = () => {
   else {
     const tier = demo.tariffs.find(t => t.id === c.tierId);
     EcoWithdrawals.markActivation(demo);
-    demo.plan = {tierId: tier.id, name: tier.name, rate: tier.rate, period: 'week', capital: c.capital, stationIds: c.ids.slice(), status: 'active', appliedAt: new Date().toISOString()};
+    demo.plan = {tierId: tier.id, name: tier.name, rate: tier.rate, ratePeriod: EcoFinance.ratePeriod, period: 'accrual', settlementDays: EcoFinance.settlementDays, capital: c.capital, stationIds: c.ids.slice(), status: 'active', appliedAt: new Date().toISOString()};
     demo.portfolio = c.ids.slice(); delete demo.planDraft;
   }
   demo.adjustments ??= [];

@@ -12,6 +12,13 @@
   account.firstPlanActivatedAt=new Date(start).toISOString();
   return account.firstPlanActivatedAt;
  }
+ function settledProfit(account){
+  const balance=Math.max(0,Number(account.balance)||0),explicit=Number(account.profit?.settled);
+  if(Number.isFinite(explicit))return Math.min(balance,Math.max(0,Math.round(explicit*100)/100));
+  const recorded=(Array.isArray(account.sessions)?account.sessions:[]).reduce((n,r)=>n+(Number(r.payout)||0),0);
+  const withdrawn=(Array.isArray(account.requests)?account.requests:[]).filter(r=>r.type==='withdraw'&&r.status==='Approved').reduce((n,r)=>n+(Number(r.amount)||0),0);
+  return Math.min(balance,Math.max(0,Math.round((recorded-withdrawn)*100)/100));
+ }
  function state(account,now=Date.now()){
   const requests=Array.isArray(account.requests)?account.requests:[];
   const withdrawals=requests.filter(r=>r.type==='withdraw');
@@ -21,10 +28,10 @@
   const eligibleAt=start===null?null:Math.max(start,last??start)+interval;
   const pending=withdrawals.filter(r=>r.status==='Pending');
   const reserved=pending.reduce((n,r)=>n+(Number(r.amount)||0),0);
-  const available=Math.max(0,Math.round(((Number(account.balance)||0)-reserved)*100)/100);
+  const settled=settledProfit(account),available=Math.max(0,Math.round((settled-reserved)*100)/100);
   const timingReady=eligibleAt!==null&&now>=eligibleAt;
-  const reason=start===null?'activate':pending.length?'pending':!timingReady?'waiting':available<1?'balance':'ready';
-  return {days,start,last,eligibleAt,timingReady,pending:pending.length,reserved,available,reason,canRequest:reason==='ready'};
+  const reason=start===null?'activate':pending.length?'pending':!timingReady?'waiting':available<1?'profit':'ready';
+  return {days,start,last,eligibleAt,timingReady,pending:pending.length,reserved,settledProfit:settled,available,totalBalance:Math.max(0,Number(account.balance)||0),reason,canRequest:reason==='ready'};
  }
- return Object.freeze({days,interval,activation,markActivation,state});
+ return Object.freeze({days,interval,activation,markActivation,settledProfit,state});
 });

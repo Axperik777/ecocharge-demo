@@ -17,13 +17,13 @@
   if(ids.length>10||new Set(ids).size!==ids.length||ids.some(id=>!Number.isInteger(id)||!stationIds.has(id)))throw Error('Invalid discussion context.');
   const c={topic,stationIds:ids.slice()};if(Number.isInteger(value.stationId)&&stationIds.has(value.stationId))c.stationId=value.stationId;
   const tier=finance.tiers.find(t=>t.id===value.tierId||t.name===value.plan);
-  if(tier&&finance.valid(value.capital)&&finance.eligible(value.capital,tier.id)&&ids.length<=tier.count)Object.assign(c,{tierId:tier.id,plan:tier.name,capital:value.capital,rate:tier.rate,ratePeriod:finance.ratePeriod,weekly:finance.weekly(value.capital,tier.rate),stationCount:tier.count});
+   if(tier&&finance.valid(value.capital)&&finance.eligible(value.capital,tier.id)&&ids.length<=tier.count)Object.assign(c,{tierId:tier.id,plan:tier.name,capital:value.capital,rate:tier.rate,ratePeriod:finance.ratePeriod,weekly:finance.planSettlement({capital:value.capital,rate:tier.rate,ratePeriod:finance.ratePeriod,tierId:tier.id}),stationCount:tier.count});
   if(value.lesson)c.lesson=session(value.lesson.energyKwh);
   if(value.energy){const e=value.energy;if(!['city','highway','retail','ev','commercial','grid'].includes(e.location)||!Number.isFinite(e.hour)||e.hour<0||e.hour>24||typeof e.peak!=='boolean')throw Error('Invalid model scenario.');c.energy={location:e.location,hour:Math.round(e.hour*100)/100,peak:e.peak,modelVersion:['ev','commercial','grid'].includes(e.location)?business.config.version:'demand-v1'};}
   return c;
  }
  function rows(c,lang='en'){if(!c)return [];const ru=lang==='ru',money=n=>new Intl.NumberFormat(ru?'ru-RU':'en-US',{style:'currency',currency:'USD'}).format(n),r=[];
-  if(c.plan)r.push([ru?'Выбор на момент вопроса':'Selection when sent',c.plan+' · '+money(c.capital)],[ru?'Модель за неделю':'Weekly model',money(c.weekly??finance.weekly(c.capital,c.rate))+' · '+c.rate+'%']);
+   if(c.plan)r.push([ru?'Выбор на момент вопроса':'Selection when sent',c.plan+' · '+money(c.capital)],[ru?'Обязательство за 4 дня':'4-day obligation',money(c.weekly??finance.planSettlement({capital:c.capital,rate:c.rate,ratePeriod:c.ratePeriod||finance.ratePeriod,tierId:c.tierId}))+' · '+c.rate+'%']);
   if(c.energy)r.push([ru?'Сценарий Energy Lab · модель':'Energy Lab scenario · model',({city:ru?'Город':'City',highway:ru?'Трасса':'Highway',retail:ru?'ТЦ (прежняя модель)':'Retail (legacy model)',...business.labels(lang)})[c.energy.location]+' · '+Math.floor(c.energy.hour).toString().padStart(2,'0')+':'+Math.floor((c.energy.hour%1)*60).toString().padStart(2,'0')+' · '+(c.energy.peak?(ru?'пиковый спрос':'peak demand'):(ru?'обычный спрос':'regular demand'))]);
   if(c.stationIds?.length)r.push([ru?'Станции · AFDC':'Stations · AFDC',c.stationIds.join(', ')]);
   if(c.stationCount&&c.stationIds.length!==c.stationCount)r.push([ru?'Станций выбрано':'Stations selected',c.stationIds.length+' / '+c.stationCount]);

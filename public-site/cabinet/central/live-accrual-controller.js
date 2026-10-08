@@ -1,7 +1,7 @@
 (function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('../live-accrual.js'));else root.LiveAccrualController=factory(root.EcoLiveAccrual);})(typeof window==='undefined'?globalThis:window,function(model){
  'use strict';
  return class LiveAccrualController{
-  constructor({document,clock=Date.now,schedule=setInterval,cancel=clearInterval,media,format,labels,dayLabel=(day,active)=>active?`Day ${day} of 7`:"Not active",onPeriodClose=async()=>{},onResume=()=>{},onTick=()=>{}}){
+  constructor({document,clock=Date.now,schedule=setInterval,cancel=clearInterval,media,format,labels,dayLabel=(day,active,total=model.SETTLEMENT_DAYS||4)=>active?`Day ${day} of ${total}`:"Not active",onPeriodClose=async()=>{},onResume=()=>{},onTick=()=>{}}){
    Object.assign(this,{document,clock,media,format,labels,dayLabel,onPeriodClose,onResume,onTick});this.schedule=(...args)=>schedule(...args);this.cancel=(...args)=>cancel(...args);this.timer=null;this.running=false;this.pending=false;this.shown=null;this.retryAt=0;this.offset=0;
    this.visibility=()=>{if(this.document.hidden){this.pause();return;}if(this.running){this.tick(true);this.arm();this.onResume();}};
    this.motion=()=>{this.tick(true);};document.addEventListener('visibilitychange',this.visibility);media?.addEventListener('change',this.motion);
@@ -21,9 +21,9 @@
    for(const el of this.document.querySelectorAll('[data-live-capital]'))el.textContent=this.format(p.active?p.capital:0);
    for(const el of this.document.querySelectorAll('[data-live-status]'))el.textContent=this.labels(!p.active?'inactive':value.progress>=1?'closing':'live');
    this.onTick(p,this.clock()+this.offset);
-   // Ring shows elapsed time; the demand curve only redistributes displayed cents within the week.
-   const percent=Number((value.progress*100).toFixed(2)),day=Math.min(7,Math.floor(value.progress*7)+1),dayText=this.dayLabel(day,p.active);
-   for(const el of this.document.querySelectorAll('[data-live-progress]')){el.style.setProperty('--week-progress',String(value.progress*100));el.setAttribute('aria-valuenow',String(percent));el.setAttribute('aria-valuetext',`${dayText} · ${percent}%`);}
+    // Ring shows elapsed time in the current Charge settlement period.
+    const totalDays=model.SETTLEMENT_DAYS||4,percent=Number((value.progress*100).toFixed(2)),day=Math.min(totalDays,Math.floor(value.progress*totalDays)+1),dayText=this.dayLabel(day,p.active,totalDays);
+    for(const el of this.document.querySelectorAll('[data-live-progress]')){const progress=String(value.progress*100);el.style.setProperty('--settlement-progress',progress);el.style.setProperty('--week-progress',progress);el.setAttribute('aria-valuenow',String(percent));el.setAttribute('aria-valuetext',`${dayText} · ${percent}%`);}
    for(const el of this.document.querySelectorAll('[data-live-day]'))if(el.textContent!==dayText)el.textContent=dayText;
    if(!instant&&!this.media?.matches&&p.active&&previous!==null&&this.shown>previous&&this.clock()>=(this.flashAt||0)){
     this.flashAt=this.clock()+3000;this.flashPhase=!this.flashPhase;

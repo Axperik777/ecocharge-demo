@@ -407,11 +407,11 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .face{fill:var(--eg-art-face)}htm
 .eco-shell #eco-workspace .energy-journal :is(p,small,.eco-kicker,.energy-yesterday>span,.energy-author,.energy-brief time,.energy-comparison dt){color:var(--eg-muted)}
 .eco-shell #eco-workspace .energy-journal :is(.energy-yesterday>strong,.energy-report>strong,.energy-milestones [data-done=true]){color:var(--eg-text)}
 .eco-shell #eco-workspace .energy-journal .eco-text{color:var(--eg-brand)}
-.eco-shell #eco-workspace .energy-journal :is(.energy-yesterday,.energy-milestones,.energy-brief,.energy-week-report){border-color:var(--eg-border)}
+.eco-shell #eco-workspace .energy-journal :is(.energy-yesterday,.energy-milestones,.energy-brief,.energy-settlement-report){border-color:var(--eg-border)}
 .eco-shell #eco-workspace .energy-journal .energy-milestones>div{color:var(--eg-muted);font-size:13px;line-height:1.45}.eco-shell #eco-workspace .energy-journal .energy-milestones small{font-size:12px}.eco-shell .energy-milestones [data-done=true] .energy-milestone-mark{color:var(--eg-brand)}
 .eco-shell #eco-workspace .energy-journal :is(.energy-comparison div,.energy-pinned){background:var(--eg-surface-soft);border-color:var(--eg-border)}
-.eco-shell #eco-workspace .energy-week-report{padding:0;border:1px solid var(--eg-border);border-radius:10px;align-self:start;overflow:hidden}
-.eco-shell #eco-workspace .energy-week-report>summary{padding:16px;min-height:52px;font-size:14px}.eco-shell .energy-week-report summary::marker{color:var(--eg-brand)}.eco-shell .energy-report{padding:0 16px 16px}
+.eco-shell #eco-workspace .energy-settlement-report{padding:0;border:1px solid var(--eg-border);border-radius:10px;align-self:start;overflow:hidden}
+.eco-shell #eco-workspace .energy-settlement-report>summary{padding:16px;min-height:52px;font-size:14px}.eco-shell .energy-settlement-report summary::marker{color:var(--eg-brand)}.eco-shell .energy-report{padding:0 16px 16px}
 .eco-shell .eco-fund-lab>.energy-lab{margin:16px}
 /* Energy Lab is a deliberately dark visualization, so its copy uses local colors. */
 .eco-shell #eco-workspace .energy-lab :is(h2,h3,h4,summary){color:#f0f4f2}.eco-shell #eco-workspace .energy-lab p{color:#bdcbc4}.eco-shell #eco-workspace .energy-lab .eco-kicker{color:#bdcbc4}.eco-shell #eco-workspace .energy-lab .eco-text{color:#9ed6b9}
@@ -664,3 +664,15 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 .eco-shell #energy-run .arcade-overlay strong{color:#f4f4f7}
 .eco-shell #eco-workspace #energy-run .arcade-overlay p{color:#cdcdd0}
 .eco-shell #energy-run :is(.arcade-controls button,.arcade-track):focus-visible{outline:2px solid var(--eg-brand);outline-offset:3px}
+
+/* Charge-first client navigation and follow-on opportunities. */
+.eco-shell .eg-charge-focus{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px;border:1px solid var(--eco-line);border-radius:18px;background:var(--eco-card)}
+.eco-shell .eg-charge-focus>div{min-width:0;max-width:680px}.eco-shell .eg-charge-focus h2{margin:7px 0 9px}.eco-shell .eg-charge-focus p{margin:0;line-height:1.6}.eco-shell .eg-charge-focus>.eco-button{flex:0 0 auto;min-height:46px}
+.eco-shell :is(.eg-upsell-list,.eg-tool-list){display:grid;gap:10px;margin:14px 0 24px}
+.eco-shell :is(.eg-upsell-row,.eg-tool-row){width:100%;min-height:64px;display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:14px;padding:12px 16px;border:1px solid var(--eco-line);border-radius:14px;background:var(--eco-card);color:var(--eco-text);font:inherit;text-align:left}
+.eco-shell button:is(.eg-upsell-row,.eg-tool-row){cursor:pointer}.eco-shell button:is(.eg-upsell-row,.eg-tool-row):hover{border-color:var(--eco-accent);background:var(--eco-raised)}
+.eco-shell :is(.eg-upsell-row,.eg-tool-row)>span:nth-child(2){min-width:0}.eco-shell :is(.eg-upsell-row,.eg-tool-row) strong{display:block;font-size:15px;line-height:1.35}.eco-shell :is(.eg-upsell-row,.eg-tool-row) small{display:block;margin-top:3px;color:var(--eco-muted);font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+.eco-shell :is(.eg-row-arrow,.eg-upsell-lock){display:grid;place-items:center;min-width:44px;min-height:44px;color:var(--eco-muted)}.eco-shell .eg-upsell-lock svg{width:20px;height:20px}
+.eco-shell .eg-upsell-row.is-locked{opacity:.72}.eco-shell .eg-upsell-row.is-locked .eg-service-icon{color:var(--eco-muted)}
+.eco-shell :is(.eg-upsell-row,.eg-tool-row):focus-visible{outline:2px solid var(--eco-accent);outline-offset:3px}
+@media(max-width:760px){.eco-shell .eg-charge-focus{align-items:stretch;flex-direction:column;padding:20px}.eco-shell .eg-charge-focus>.eco-button{width:100%}.eco-shell :is(.eg-upsell-row,.eg-tool-row){grid-template-columns:42px minmax(0,1fr) 44px;padding:11px 12px;gap:10px}.eco-shell :is(.eg-upsell-row,.eg-tool-row) .eg-service-icon{display:grid;place-items:center;width:42px;height:42px}.eco-shell :is(.eg-upsell-row,.eg-tool-row) strong{font-size:14px}}

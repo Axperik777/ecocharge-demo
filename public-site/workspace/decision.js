@@ -58,7 +58,7 @@ function renderDecisionSurfaces(){
     tabs.hidden=false;tabs.innerHTML=decisionTabs();
   }else if(tabs)tabs.hidden=true;
   const heading=$('#tariffs-section .section-heading p');
-  if(heading)heading.textContent='Choose reference locations and inspect a weekly model calculation.';
+  if(heading)heading.textContent='Choose reference locations and inspect the 4-day settlement estimate.';
   const builder=$('#tariffs-section');
   if(builder&&tab==='tariffs'){
     const apply=builder.querySelector('[data-action="apply-plan"]');if(apply)apply.textContent='Review my example →';

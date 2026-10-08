@@ -5,5 +5,10 @@
   "authentication": false,
   "apiConnected": false,
   "persistence": "browser-localStorage",
-  "realPayments": false
+  "realPayments": false,
+  "activeOffer": "charge",
+  "chargeModel": "charge-fixed-obligation-v3",
+  "settlementDays": 4,
+  "completedSettlements": 7,
+  "obligationFunding": "fictional-company-reserve"
 }

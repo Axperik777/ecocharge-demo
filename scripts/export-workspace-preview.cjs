@@ -17,15 +17,14 @@ const app=require(path.join(work,'server/server.cjs')).createServer({database:pa
 (async()=>{try{
  const s=app.store,admin=s.authenticate('preview.admin',pass,'staff'),manager=s.authenticate('preview.manager',pass,'staff'),client=s.authenticate('lox','lox1','client');
  s.db.prepare('UPDATE users SET username=?,name=?,email=?,phone=?,password=? WHERE id=?').run('alex.morgan','Алексей Морозов','alex@example.com','',crypto.randomBytes(48).toString('hex'),client.id);
- let a=s.snapshot(admin,client.id);const empty=structuredClone(a);a=s.balance(admin,client.id,{id:'opening-balance',version:a.version,kind:'credit',amount:5250,expectedBalance:0,reason:'Учебный портфель'});
+ let a=s.snapshot(admin,client.id);const empty=structuredClone(a);a=s.balance(admin,client.id,{id:'opening-balance',version:a.version,kind:'credit',amount:250,expectedBalance:0,reason:'Учебный пример только для Charge'});
  const stations=JSON.parse(fs.readFileSync(path.join(work,'dist/stations.json'))).stations,ids=new Set(stations.map(v=>v.id));ids.closed=new Set(stations.filter(v=>v.selectionClosed).map(v=>v.id));
  const finance=require(path.join(work,'server/finance.cjs')),started=new Date();started.setUTCMonth(started.getUTCMonth()-1);
  // Keep the sample funding earlier than its backdated charging investment.
  for(const adjustment of a.state.adjustments)if(adjustment.operationId==='opening-balance')adjustment.date=started.toISOString();
- finance.activate(a.state,{tierId:'single',capital:250,economyModel:'charge-revenue-v1',stationIds:stations.filter(v=>(v.country||'US')==='US'&&!v.selectionClosed).slice(0,3).map(v=>v.id)},ids,{id:'opening-energy',role:'admin',actor:'presentation',reason:'Учебный проект зарядок'},started.toISOString());
- let w=finance.nextWeek(a.state);while(Date.parse(w.periodEnd)<=Date.now()){finance.creditWeek(a.state,{id:'week-'+w.periodStart.slice(0,10),role:'system',actor:'presentation',reason:'Завершённая модельная неделя',periodStart:w.periodStart},w.periodEnd);w=finance.nextWeek(a.state);}
+ finance.activate(a.state,{tierId:'single',capital:250,economyModel:'charge-fixed-obligation-v3',stationIds:stations.filter(v=>(v.country||'US')==='US'&&!v.selectionClosed).slice(0,3).map(v=>v.id)},ids,{id:'opening-energy',role:'admin',actor:'presentation',reason:'Учебный проект зарядок'},started.toISOString());
+ let settlement=finance.nextAccrual(a.state),settlementCount=0;while(Date.parse(settlement.periodEnd)<=Date.now()){finance.creditAccrual(a.state,{id:'accrual-'+(++settlementCount)+'-'+settlement.periodStart.slice(0,10),role:'admin',actor:'presentation-seed',reason:'Фиктивный preview: обязательство покрыто условным резервом компании, не реальными данными',periodStart:settlement.periodStart,verifiedFunding:{verifiedRevenue:0,participantPool:0,companyReserve:settlement.obligation}},settlement.periodEnd);settlement=finance.nextAccrual(a.state);}
  s.db.prepare('UPDATE accounts SET state=? WHERE user_id=?').run(JSON.stringify(a.state),client.id);
- a=s.addMiningExample(admin,client.id,{presentationOnly:true,id:'opening-mining',version:a.version,minerId:'s21-pro',capital:5000,projectUnits:100,sharePercent:1,country:'CA'});
  for(const [i,name]of ['Мария Белова','Даниил Ким','Елена Соколова','Ирина Петрова'].entries()){
   const l=s.addLead({name,email:'client'+i+'@example.com',phone:'+1 202 555 01'+String(i).padStart(2,'0'),consent:true,context:{tierId:'single',tab:'tariffs'},attribution:{landing_id:'main',utm_source:i%2?'google':'meta'}});
   if(i<3)s.assign(admin,{items:[{kind:'lead',id:l.id,version:1}],owner:manager.id,reason:'Консультация по проекту'});
@@ -35,13 +34,13 @@ const app=require(path.join(work,'server/server.cjs')).createServer({database:pa
  const get=async(route,actor=admin)=>{const response=await fetch(origin+route,{headers:{Cookie:(actor.role==='client'?'eco_client=':'eco_staff=')+s.login(actor)}});if(!response.ok)throw Error(route+' '+response.status);return response;};
  require(path.join(work,'server/knowledge-release.cjs')).publishPack(s.knowledge,admin,{apply:true,reviewed:true});
  const overview=await(await get('/api/staff/overview')).json();
- const fixture={schema:1,reactionBaselines:{welcome:{like:1293,useful:702,interested:2526}},generatedAt:new Date().toISOString(),overview,empty,accounts:{},leads:{},responses:{},identities:{},chats:{},knowledge:{},reactions:{},archive:[]};
+ const fixture={schema:2,activeOffer:'charge',chargeModel:'charge-fixed-obligation-v3',settlementDays:4,reactionBaselines:{welcome:{like:1293,useful:702,interested:2526}},generatedAt:new Date().toISOString(),overview,empty,accounts:{},leads:{},responses:{},identities:{},chats:{},knowledge:{},reactions:{},archive:[]};
  for(const c of overview.clients){fixture.accounts[c.id]=s.snapshot(admin,c.id);fixture.identities[c.id]=s.identity.profile(admin,c.id);fixture.chats[c.id]=s.chat.read(admin,c.id);}
  for(const l of overview.leads)fixture.leads[l.id]=s.lead(admin,l.id);
  for(const route of ['staff/club','staff/knowledge','staff/community','staff/followups','staff/funnel','client/club','client/invitations'])fixture.responses[route]=await(await get('/api/'+route,route.startsWith('client')?client:admin)).json();
  for(const article of fixture.responses['staff/knowledge'].articles)fixture.knowledge[article.id]=s.knowledge.read(admin,article.id);
  const previousFile=process.argv.includes('--previous')?arg('--previous'):null;
- if(previousFile){const vm=require('node:vm'),ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.resolve(previousFile),'utf8'),ctx,{timeout:1000});const old=ctx.window.ECO_SANDBOX_SEED;if(!old||old.schema!==1)throw Error('Expected a previous public sandbox export.');fixture.knowledgeRelease={id:require(path.join(work,'server/knowledge-release.cjs')).release,baselines:[...Object.values(old.knowledge||{}),...Object.values(old.knowledgeRelease?.previous||{}),...(old.knowledgeRelease?.baselines||[])]};}
+ if(previousFile){const vm=require('node:vm'),ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.resolve(previousFile),'utf8'),ctx,{timeout:1000});const old=ctx.window.ECO_SANDBOX_SEED;if(!old||![1,2].includes(old.schema))throw Error('Expected a previous public sandbox export.');fixture.knowledgeRelease={id:require(path.join(work,'server/knowledge-release.cjs')).release,baselines:[...Object.values(old.knowledge||{}),...Object.values(old.knowledgeRelease?.previous||{}),...(old.knowledgeRelease?.baselines||[])]};}
 
  const scrub=value=>{if(!value||typeof value!=='object')return;for(const k of Object.keys(value)){if(/password|token|secret/i.test(k))delete value[k];else if(k==='invite'||k==='inviteUrl')value[k]='';else scrub(value[k]);}};scrub(fixture);
  fs.mkdirSync(out,{recursive:true});
@@ -66,6 +65,6 @@ const app=require(path.join(work,'server/server.cjs')).createServer({database:pa
  fs.copyFileSync(path.join(work,'dist/account-entry.css'),path.join(out,'account-entry.css'));
  for(const name of ['login','register']){const file=path.join(out,name,'index.html');const html=fs.readFileSync(file,'utf8').replace(/((?:src|href)=")([^"?#]+\.(?:js|css))(")/g,(all,prefix,ref,suffix)=>{const asset=path.join(out,ref);return fs.existsSync(asset)?prefix+ref+'?v='+crypto.createHash('sha256').update(fs.readFileSync(asset)).digest('hex').slice(0,12)+suffix:all;});fs.writeFileSync(file,html);}
  fs.writeFileSync(path.join(out,'index.html'),'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=crm/?lang=ru"><a href="crm/?lang=ru">Открыть CRM</a>');
- fs.writeFileSync(path.join(out,'preview-manifest.json'),JSON.stringify({kind:'workspace-sandbox',source:'fresh-isolated-fixture',sampleData:true,authentication:false,apiConnected:false,persistence:'browser-localStorage',realPayments:false},null,2));
+ fs.writeFileSync(path.join(out,'preview-manifest.json'),JSON.stringify({kind:'workspace-sandbox',source:'fresh-isolated-fixture',sampleData:true,authentication:false,apiConnected:false,persistence:'browser-localStorage',realPayments:false,activeOffer:'charge',chargeModel:'charge-fixed-obligation-v3',settlementDays:4,completedSettlements:settlementCount,obligationFunding:'fictional-company-reserve'},null,2));
  console.log('WORKSPACE PREVIEW READY '+out);
 }finally{await app.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

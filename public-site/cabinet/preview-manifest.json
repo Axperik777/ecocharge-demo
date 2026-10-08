@@ -5,8 +5,12 @@
   "apiConnected": false,
   "source": "fresh-isolated-fixture",
   "energyCapital": 250,
-  "miningCapital": 5000,
-  "available": 30.32,
-  "startedAt": "2026-09-03T08:32:33.445Z",
-  "completedWeeks": 4
+  "miningCapital": 0,
+  "activeOffer": "charge",
+  "available": 30.14,
+  "startedAt": "2026-09-08T13:52:38.800Z",
+  "chargeModel": "charge-fixed-obligation-v3",
+  "settlementDays": 4,
+  "completedSettlements": 7,
+  "obligationFunding": "fictional-company-reserve"
 }

@@ -24,7 +24,7 @@ function refineBuilder() {
   const model = $('#decision-model-link'); if (model) model.remove();
   const heading = area.querySelector('.tariff-hero');
   heading.querySelector('.tariff-unit')?.remove();
-  heading.querySelector('p').textContent = 'Set your amount, choose reference stations and review one clear weekly example.';
+  heading.querySelector('p').textContent = 'Set your amount, choose reference stations and review one clear 4-day settlement estimate.';
   const layout = document.createElement('div'); layout.className = 'r-builder';
   const main = document.createElement('div'); main.className = 'r-builder-main';
   const summary = document.createElement('aside'); summary.className = 'panel r-plan-summary'; summary.setAttribute('aria-label', 'Your sample plan summary');

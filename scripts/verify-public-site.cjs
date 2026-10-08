@@ -7,6 +7,9 @@ const preview=fs.existsSync(previewRoot)?require('./verify-client-preview.cjs')(
 const workspaceRoot=path.join(root,'workspace');
 const workspace=fs.existsSync(workspaceRoot)?require('./verify-workspace-preview.cjs')(workspaceRoot):null;
 const files=walk(root).filter(f=>!f.startsWith(previewRoot+path.sep)&&!f.startsWith(workspaceRoot+path.sep)),manifest=JSON.parse(fs.readFileSync(path.join(root,'app-manifest.json'),'utf8'));
+// Template bodies can become active UI after interaction, so scan them too.
+const visibleText=html=>html.replace(/<!--[^]*?-->/g,' ').replace(/<(?:script|style)\b[^>]*>[^]*?<\/(?:script|style)>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&(?:nbsp|amp|quot|#39);/g,' ').replace(/\s+/g,' ');
+const staleCurrentCadence=/\bweekly\b|\b7[- ]day\b|\bday\s+\d+\s+of\s+7\b|недельн|7\s*(?:дней|дня)|день\s+\d+\s+из\s+7/i;
 assert.equal(manifest.app,'website');
 assert.equal(manifest.routes.length,18);for(const r of ['app','academy','learn','club','participate/charge','participate/solar','participate/mining'])assert(manifest.routes.includes(r));
 const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),context);
@@ -48,9 +51,12 @@ for(const file of files){
  }
 }
 for(const route of manifest.routes)assert(fs.existsSync(path.join(root,route,'index.html')));
-// Public export must retain the paths promised by the homepage and plan cards.
+for(const route of ['', 'participate/charge','plans','resources','how-it-works']){const file=path.join(root,route,'index.html');assert.doesNotMatch(visibleText(fs.readFileSync(file,'utf8')),staleCurrentCadence,'Current route exposes the retired weekly cadence: /'+route);}
+for(const asset of ['site.js','trust.js','trust-content.js','funnel.js'])assert.doesNotMatch(fs.readFileSync(path.join(root,asset),'utf8'),staleCurrentCadence,'Active public UI script exposes the retired weekly cadence: '+asset);
+// Public export must retain the Charge-first conversion path and evidence routes.
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFileSync(path.join(root,'plans/index.html'),'utf8');
-assert.match(home,/href="#how-ecogrid-works"/,'Homepage presentation entry is missing');
+assert.match(home,/href="participate\/charge\/"/,'Homepage Charge entry is missing');
+assert.match(home,/href="app\/#academy"/,'Homepage Academy evidence entry is missing');
 assert.doesNotMatch(home,/data-public-plan-form|data-lead-form|src="public-plan-ui\.js/,'Homepage must introduce the company without a calculator or lead form');
 assert.match(home,/data-workspace-entry[^>]*class="ec-sign-in"/,'Visible account entry is missing');
 assert.match(home,/href="[^"]*workspace\/login\//,'Public sign-in must lead to the entry page');
@@ -63,7 +69,13 @@ for(const route of ['login','register']){
  assert.doesNotMatch(entry,/Посмотреть пример кабинета|Explore the account preview/,'Remove preview links from authentication');
  assert.doesNotMatch(entry,/http-equiv="refresh"|location\.replace\(/,'Public entry must not bypass sign-in or redirect to CRM: '+route);
 }
-assert.doesNotMatch(plans,/data-public-plan-form|project-calculator|13%|16%/,'Public plans must be removed');
+assert.doesNotMatch(plans,/data-public-plan-form|project-calculator/,'Public plans must stay informational and must not activate a browser calculator');
+assert.match(plans,/13(?:%|–16%)|16%/,'Public plans must explain the current calendar-month Charge range');
+assert.match(plans,/4[- ]day(?:s)?|four[- ]day(?:s)?/i,'Public plans must explain the 4-day settlement cadence');
+assert.match(plans,/participate\/charge\//,'Public plans must lead to the active Charge offer');
+const charge=fs.readFileSync(path.join(root,'participate/charge/index.html'),'utf8');
+assert.match(charge,/data-lead-form/,'Charge must remain the only active public participation lead route');
+for(const route of ['solar','mining']){const page=fs.readFileSync(path.join(root,'participate',route,'index.html'),'utf8');assert.doesNotMatch(page,/data-lead-form|id="request-access"|href="#request-access"/,'Secondary evidence route must not expose a participation form: '+route);assert.match(page,/participate\/charge\//,'Secondary evidence route must return to the active Charge offer: '+route);}
 const stations=JSON.parse(fs.readFileSync(path.join(root,'stations.json'),'utf8')).stations;
 assert.equal(stations.length,3980);assert.equal(stations.filter(s=>s.selectionClosed).length,1910);
 const runtime=fs.readFileSync(path.join(root,'website-only.js'),'utf8');

@@ -29,19 +29,18 @@ const app=createServer({database:path.join(work,'isolated-preview.sqlite'),seedF
   store.db.prepare('UPDATE users SET username=?,name=?,email=?,phone=?,password=? WHERE id=?').run('public-preview','Alex Morgan','','',crypto.randomBytes(48).toString('hex'),client.id);
   const person=store.safeUser(store.db.prepare('SELECT * FROM users WHERE id=?').get(client.id));
   let row=store.snapshot(admin,client.id);
-  row=store.balance(admin,client.id,{id:'preview-opening',version:row.version,kind:'credit',amount:5250,expectedBalance:0,reason:'Static presentation example'});
+  row=store.balance(admin,client.id,{id:'preview-opening',version:row.version,kind:'credit',amount:250,expectedBalance:0,reason:'Static Charge-only presentation example'});
   const directory=JSON.parse(fs.readFileSync(path.join(work,'dist/stations.json'),'utf8')).stations;
   const selected=directory.filter(s=>(s.country||'US')==='US'&&!s.selectionClosed).slice(0,3).map(s=>s.id);
   const now=new Date(),started=new Date(now);started.setUTCDate(1);started.setUTCMonth(started.getUTCMonth()-1);started.setUTCDate(Math.min(now.getUTCDate(),new Date(Date.UTC(started.getUTCFullYear(),started.getUTCMonth()+1,0)).getUTCDate()));
   const finance=require(path.join(work,'server/finance.cjs'));
   for(const adjustment of row.state.adjustments)adjustment.date=started.toISOString();
-  finance.activate(row.state,{tierId:'single',economyModel:'charge-revenue-v1',capital:250,stationIds:selected},new Set(directory.map(s=>s.id)),{id:'preview-energy',role:'admin',actor:'presentation',reason:'Static example: activated one calendar month ago'},started.toISOString());
-  let weeks=0;
-  for(let week=finance.nextWeek(row.state);Date.parse(week.periodEnd)<=now.getTime();week=finance.nextWeek(row.state)){
-   finance.creditWeek(row.state,{id:'preview-week-'+(++weeks),role:'system',actor:'presentation',reason:'Completed sample week',periodStart:week.periodStart},week.periodEnd);
+  finance.activate(row.state,{tierId:'single',economyModel:'charge-fixed-obligation-v3',capital:250,stationIds:selected},new Set(directory.map(s=>s.id)),{id:'preview-energy',role:'admin',actor:'presentation',reason:'Static example: activated one calendar month ago'},started.toISOString());
+  let settlements=0;
+  for(let period=finance.nextAccrual(row.state);Date.parse(period.periodEnd)<=now.getTime();period=finance.nextAccrual(row.state)){
+   finance.creditAccrual(row.state,{id:'preview-accrual-'+(++settlements),role:'admin',actor:'presentation-seed',reason:'Fictional preview: obligation funded from a sample company reserve, not live evidence',periodStart:period.periodStart,verifiedFunding:{verifiedRevenue:0,participantPool:0,companyReserve:period.obligation}},period.periodEnd);
   }
   store.db.prepare('UPDATE accounts SET state=? WHERE user_id=?').run(JSON.stringify(row.state),client.id);
-  row=store.addMiningExample(admin,client.id,{presentationOnly:true,id:'preview-asic',version:row.version,minerId:'s21-pro',capital:5000,projectUnits:100,sharePercent:1,country:'CA'});
   await new Promise(resolve=>app.server.listen(0,'127.0.0.1',resolve));
   const origin='http://127.0.0.1:'+app.server.address().port,headers={Cookie:'eco_client='+store.login(person)};
   const get=async route=>{const r=await fetch(origin+route,{headers});if(!r.ok)throw Error(route+': '+r.status);return r;};
@@ -70,7 +69,7 @@ const app=createServer({database:path.join(work,'isolated-preview.sqlite'),seedF
   if(code.includes("const saved=JSON.parse(localStorage.getItem('ecocharge-demo-v1'))"))throw Error('Sample state isolation failed');
   fs.writeFileSync(appPath,code);
   fs.writeFileSync(path.join(output,'pages-client-data.js'),'window.ECO_PAGES_FIXTURE='+JSON.stringify(fixture).replaceAll('<','\\u003c')+';\n');
-  fs.writeFileSync(path.join(output,'preview-manifest.json'),JSON.stringify({kind:'client-preview',sampleData:true,authentication:false,apiConnected:false,source:'fresh-isolated-fixture',energyCapital:250,miningCapital:5000,available:snapshot.state.balance,startedAt:started.toISOString(),completedWeeks:weeks},null,2));
+  fs.writeFileSync(path.join(output,'preview-manifest.json'),JSON.stringify({kind:'client-preview',sampleData:true,authentication:false,apiConnected:false,source:'fresh-isolated-fixture',energyCapital:250,miningCapital:0,activeOffer:'charge',available:snapshot.state.balance,startedAt:started.toISOString(),chargeModel:'charge-fixed-obligation-v3',settlementDays:4,completedSettlements:settlements,obligationFunding:'fictional-company-reserve'},null,2));
   // Content-address local scripts and styles so published UI fixes bypass stale browser caches.
   html=html.replace(/((?:src|href)=")([^"?#]+\.(?:js|css))(?:[?#][^"]*)?(")/g,(all,prefix,ref,suffix)=>{if(ref.includes(':'))return all;const target=path.join(output,ref);if(!fs.existsSync(target))return all;return prefix+ref+'?v='+crypto.createHash('sha256').update(fs.readFileSync(target)).digest('hex').slice(0,12)+suffix;});
   html=html.replace(/\r\n?/g,'\n').replace(/[ \t]+(?=\n)/g,'');

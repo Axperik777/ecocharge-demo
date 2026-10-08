@@ -2,24 +2,27 @@
 (()=>{const modules={"dist/charge-model.js":function(module,exports,require){
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoChargeModel=api;})(typeof window==='object'?window:globalThis,()=>{
  'use strict';
- const policy=Object.freeze({version:'charge-revenue-v1',participantShare:.58,companyShare:.42,minimumStations:3,minimumAmount:250,currency:'USD',baseAllocationIncluded:true,aiCost:472,aiDays:30,welcomeCoins:500,executionStatus:'not-connected'});
+  const policy=Object.freeze({version:'charge-fixed-obligation-v3',legacyVersion:'charge-revenue-v2',legacyVersions:['charge-revenue-v2','charge-revenue-v1'],termsVersion:3,participantShare:.42,companyShare:.58,minimumStations:3,minimumAmount:250,currency:'USD',baseAllocationIncluded:true,aiCost:472,aiDays:30,aiRateBonus:1,settlementDays:4,welcomeCoins:500,executionStatus:'not-connected',settlementModel:'fixed-company-obligation'});
  const pairs={
   who:['EcoGrid is an energy and technology project. Charge focuses on EV charging infrastructure. The agreement must identify the full legal name and registration number of the contracting entity.','EcoGrid — проект в сфере энергетики и технологий. Charge связан с зарядной инфраструктурой для электромобилей. В договоре должны быть указаны полное юридическое название и регистрационный номер стороны договора.'],
   where:['Charge targets the United States. Before participation, review the company jurisdiction and address, each site address, its operator and evidence of the right to receive its revenue. These documents are not yet supplied here.','Целевой рынок Charge — США. До участия нужно проверить юрисдикцию и адрес компании, адрес каждого объекта, оператора и документы на право получать его выручку. Эти документы пока не предоставлены.'],
   work:['The proposed model covers financing and operation: site selection, equipment, connection, maintenance and driver payments. The proposal must specify the responsibilities of EcoGrid, the operator and contractors.','Предлагаемая модель объединяет финансирование и эксплуатацию: выбор площадки, оборудование, подключение, обслуживание и оплату водителями. Предложение должно определять обязанности EcoGrid, оператора и подрядчиков.'],
-  source:['Drivers pay for EV charging. Received charging revenue funds participant distributions. A calculation or a station photograph does not confirm that revenue.','Водители оплачивают зарядку электромобилей. Источник выплат участникам — полученная выручка зарядок. Расчёт или фотография станции не подтверждают эту выручку.'],
-  rights:['Your contractual right, share, reporting, payment schedule and exit conditions must be defined before funding. The site and complete funding budget must be known. Choosing a directory location does not create ownership or a right to revenue.','До внесения денег договор должен определить ваше право, долю, отчётность, порядок выплат и выход. Объект и полный бюджет финансирования должны быть известны. Выбор локации в справочнике не создаёт собственность или право на выручку.'],
-  split:['Participants receive 58% of gross charging revenue in proportion to their agreed shares. The company receives 42% and pays ALL electricity, rent, maintenance, staff, acquisition and other operating costs from its portion. Its profit is the remainder after these costs.','Участникам распределяются 58% всей выручки зарядок пропорционально согласованным долям. Компания получает 42% и из них оплачивает ВСЕ расходы: электричество, аренду, обслуживание, персонал, привлечение клиентов и остальные операционные затраты. Прибыль компании — остаток после этих расходов.'],
-  formula:['For each station: received revenue × 58% × your contractual share. Add the results across your stations. This is a revenue share, not a fixed monthly interest rate or a promise to return the original capital.','По каждой зарядке: полученная выручка × 58% × ваша договорная доля. Результаты по выбранным зарядкам складываются. Это доля выручки, а не фиксированный месячный процент или обещание возврата вложенного капитала.'],
+  source:['Drivers pay for EV charging. Forty-two percent of verified Charge revenue is the primary funding pool for participant payment obligations; the company reserve covers an eligible shortfall. A calculation or station photograph does not confirm revenue or reserve funding.','Водители оплачивают зарядку электромобилей. 42% подтверждённой выручки Charge — основной источник покрытия обязательств по выплатам участникам; допустимый дефицит покрывает резерв компании. Расчёт или фотография станции не подтверждают выручку и наличие резерва.'],
+  rights:['After activation, the signed agreement must define the company payment obligation, reporting, four-day settlement schedule and exit conditions. The site and complete funding budget must be known. Choosing a directory location does not create ownership or a direct right to station revenue.','После активации подписанный договор должен определять обязательство компании по выплате, отчётность, расчёт каждые 4 дня и условия выхода. Объект и полный бюджет финансирования должны быть известны. Выбор локации в справочнике не создаёт собственность или прямое право на выручку станции.'],
+  split:['42% of verified Charge revenue is earmarked first to fund participant payment obligations. The company receives 58% for electricity, rent, maintenance, staff, acquisition and its reserve. If the 42% pool is insufficient, the company reserve covers the shortfall; any uncovered amount remains a recorded company payable and is never silently written off.','42% подтверждённой выручки Charge в первую очередь направляются на покрытие обязательств по выплатам участникам. 58% остаются компании на электричество, аренду, обслуживание, персонал, привлечение клиентов и резерв. Если 42% недостаточно, разницу покрывает резерв компании; непокрытая сумма остаётся зафиксированной задолженностью компании и не списывается скрыто.'],
+  formula:['After agreement activation, the selected Charge plan creates a fixed company payment obligation of 13–16% per UTC calendar month, accrued continuously by time. The obligation is not reduced by weak station revenue, but its fulfilment depends on the company and its reserve; it is not a guarantee of capital repayment.','После активации договора выбранный план Charge создаёт фиксированное обязательство компании по выплате 13–16% за календарный месяц UTC с непрерывным начислением пропорционально времени. Слабая выручка станции не уменьшает обязательство, но его исполнение зависит от компании и её резерва; это не гарантия возврата капитала.'],
   allocation:['Choose at least three eligible chargers. Basic allocation across them is included. Changes apply to future periods under the agreement; completed distributions are never moved between clients. More chargers diversify demand exposure but cannot guarantee a payout.','Выберите минимум три доступные для участия зарядки. Базовое распределение между ними включено. Изменения применяются к будущим периодам по договору; завершённые выплаты между клиентами не перераспределяются. Несколько зарядок распределяют риск загрузки, но не гарантируют выплату.'],
-  ai:['Paid AI is an optional optimization service intended to increase income by improving future allocation among eligible chargers using demand and project constraints. Price: 472 EcoCoin for 30 days. A 500-coin gift covers one period and leaves 28. Basic allocation continues without this service.','Платный AI — дополнительная оптимизация для повышения дохода: улучшает планируемое распределение участия между доступными зарядками с учётом спроса и ограничений проекта. Цена — 472 EcoCoin за 30 дней. Подарка 500 хватит на один период, останется 28. Без услуги базовое распределение продолжается.'],
-  aiEvidence:['The service is not connected to live allocation yet. Any income uplift is a projection until supported by measured results. AI cannot create a missing revenue balance or guarantee the projected payout.','Услуга пока не подключена к реальному распределению. Прибавка к доходу остаётся прогнозом до подтверждения измеренными результатами. AI не создаёт недостающую выручку и не гарантирует прогнозную выплату.'],
-  costs:['Operating savings within the company’s 42% improve the company result. They do not automatically increase the participant’s 58% revenue share. The participant benefits only when eligible revenue or the contractual allocation improves.','Экономия расходов внутри 42% улучшает результат компании. Она не повышает автоматически выплату участнику из 58% выручки. Для участника важны рост учитываемой выручки или улучшение договорного распределения.'],
-  proof:['Before activation: verified contracting entity, site and operator rights, total funding budget, your shares, revenue reporting, payout dates and exit terms. Until these are available, save a selection and discuss the documents with the Academy.','До активации: подтверждённая сторона договора, права на объекты и оператор, полный бюджет, ваши доли, отчётность по выручке, даты выплат и выход. Пока данных нет, сохраните подборку и обсудите документы с Академией.'],
-  cadence:['Distributions follow verified revenue and contractual periods. The account separates a weekly planning estimate from verified revenue.','Выплаты зависят от подтверждённой выручки и периодов договора. Кабинет разделяет недельный расчётный ориентир и подтверждённую выручку.']
+  ai:['Charge AI is an optional service. While a server-confirmed 30-day connection is active, it adds exactly +1 percentage point to the selected Charge monthly rate. Price: 472 EcoCoin for 30 days. A 500-coin gift covers one period and leaves 28. Base Charge terms continue without AI.','AI для Charge — дополнительная услуга. Пока действует подтверждённое сервером подключение на 30 дней, оно добавляет ровно +1 процентный пункт к месячной ставке выбранного плана Charge. Цена — 472 EcoCoin за 30 дней. Подарка 500 хватит на один период, останется 28. Без AI продолжают действовать базовые условия Charge.'],
+  aiEvidence:['The +1 percentage point applies only inside a server-recorded active Charge AI interval and increases the company payment obligation for that interval. A client-side flag cannot activate it. AI does not create missing revenue or remove company liability.','Надбавка +1 процентный пункт действует только внутри зафиксированного сервером активного периода AI для Charge и увеличивает обязательство компании за этот интервал. Клиентская отметка не может её включить. AI не создаёт отсутствующую выручку и не снимает ответственность компании.'],
+  costs:['Operating costs and the company reserve are funded from the company’s 58% share. Savings inside that share do not automatically change the selected Charge plan rate or erase an unpaid company obligation.','Операционные расходы и резерв финансируются из 58% компании. Экономия внутри этой части не меняет автоматически ставку выбранного плана Charge и не списывает невыполненное обязательство компании.'],
+  proof:['Before activation: verified contracting entity, site and operator rights, total funding budget, payment-obligation terms, revenue and reserve reporting, settlement dates and exit terms. Until these are available, save a selection and discuss the documents with the Academy.','До активации нужны: подтверждённая сторона договора, права на объекты и оператор, полный бюджет, условия обязательства по выплате, отчётность по выручке и резерву, даты расчётов и выход. Пока данных нет, сохраните подборку и обсудите документы с Академией.'],
+  cadence:['The company obligation accrues continuously at the UTC calendar-month rate. Every 4 days the due amount is settled: funded profit becomes withdrawable, while an uncovered shortfall remains a company payable until funded.','Обязательство компании начисляется непрерывно по ставке за календарный месяц UTC. Каждые 4 дня сумма подлежит расчёту: профинансированная прибыль становится доступной к выводу, а непокрытая разница остаётся задолженностью компании до погашения.']
  };
- const weeklyReference=Object.freeze({capital:250,days:7,base:Object.freeze([7,8,9]),ai:Object.freeze([10,11,12]),kind:'user-provided-projection'});
- function weeklyOffer(capital=250){cents(capital);if(capital<250||capital>1e7)throw Error('Enter at least $250.');const factor=capital/weeklyReference.capital,scale=values=>values.map(v=>Math.round(v*factor*100)/100);return {capital,days:7,base:scale(weeklyReference.base),ai:scale(weeklyReference.ai),kind:weeklyReference.kind};}
+ const settlementReference=Object.freeze({capital:250,days:policy.settlementDays,rate:13,aiRate:14,kind:'calendar-month-model'});
+ const calendarAmount=(capital,rate,from,to)=>{let cursor=typeof from==='number'?from:Date.parse(from),end=typeof to==='number'?to:Date.parse(to),total=0;if(!Number.isFinite(cursor)||!Number.isFinite(end)||end<=cursor)return 0;while(cursor<end){const d=new Date(cursor),monthStart=Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),1),monthEnd=Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1),stop=Math.min(end,monthEnd),monthCents=Math.round(capital*100*rate/100),part=t=>Math.round(monthCents*(t-monthStart)/(monthEnd-monthStart));total+=part(stop)-part(cursor);cursor=stop;}return total/100;};
+ function periodOffer(capital=250,rate=13,start=Date.now()){cents(capital);if(capital<policy.minimumAmount||capital>1e7)throw Error('Enter at least $250.');if(!Number.isFinite(rate)||rate<0||rate>100)throw Error('Enter a valid monthly rate.');const from=typeof start==='number'?start:Date.parse(start),to=from+policy.settlementDays*86400000,baseAmount=calendarAmount(capital,rate,from,to),aiAmount=calendarAmount(capital,rate+policy.aiRateBonus,from,to);return {capital,days:policy.settlementDays,rate,aiRate:rate+policy.aiRateBonus,baseAmount,aiAmount,base:[baseAmount],ai:[aiAmount],kind:settlementReference.kind};}
+ // Legacy name retained for integrations; it now returns the current 4-day model period.
+ const weeklyReference=settlementReference,weeklyOffer=periodOffer;
  const questions=[['who','Who are you?','Кто вы?'],['where','Where are the company and chargers?','Где компания и зарядки?'],['work','What does EcoGrid do?','Что делает EcoGrid?'],['source','Where does my income come from?','Откуда мой заработок?'],['rights','What do I receive for my money?','Что я получаю за свои деньги?'],['split','How is revenue distributed?','Как распределяется выручка?'],['formula','How is my payment calculated?','Как рассчитывается моя выплата?'],['allocation','Why at least three chargers?','Зачем минимум три зарядки?'],['ai','What does paid AI add?','Что даёт платный AI?']];
  const copy=(key,lang='en')=>(pairs[key]||['',''])[lang==='ru'?1:0];
  const faq=(lang='en')=>questions.map(([id,en,ru])=>({id,question:lang==='ru'?ru:en,answer:copy(id,lang)+(id==='ai'?' '+copy('aiEvidence',lang):'')}));
@@ -28,29 +31,30 @@
   const capital=Number(input?.capital),ids=input?.stationIds;
   cents(capital);if(capital<policy.minimumAmount||capital>1e7)throw Error('Enter at least $250.');
   if(!Array.isArray(ids)||ids.length<policy.minimumStations||ids.length>100||new Set(ids).size!==ids.length||ids.some(id=>!Number.isSafeInteger(id)||allowed&&!allowed.has(id)))throw Error('Select at least three different eligible chargers.');
-  return {economyModel:policy.version,tierId:['single','network','portfolio','scale'].includes(input.tierId)?input.tierId:'single',name:'Charge',capital,stationIds:ids.slice(),rate:13,ratePeriod:'calendar-month',period:'week',settlementBasis:'projection',baseAllocationIncluded:true};
+  return {economyModel:policy.version,tierId:['single','network','portfolio','scale'].includes(input.tierId)?input.tierId:'single',name:'Charge',capital,stationIds:ids.slice(),rate:13,ratePeriod:'calendar-month',period:'accrual',settlementDays:policy.settlementDays,settlementBasis:policy.settlementModel,baseAllocationIncluded:true};
  }
  // A deterministic basic allocation proposal, never a claim of live AI execution.
  function allocate(capital,stationIds){selection({capital,stationIds});const total=cents(capital),base=Math.floor(total/stationIds.length),rest=total%stationIds.length;return stationIds.map((id,i)=>({id,capital:(base+(i<rest?1:0))/100}));}
- function settlement({revenue,share}){
-  const gross=cents(revenue);if(!Number.isFinite(share)||share<0||share>1)throw Error('Invalid contractual share.');
-  const pool=Math.floor(gross*58/100),company=gross-pool,payout=Math.floor(pool*share);
-  return {revenue:gross/100,participantPool:pool/100,companyRevenue:company/100,payout:payout/100};
+ function coverage({obligation,revenue=0,companyReserve=0}){
+  const due=cents(obligation),gross=cents(revenue),reserve=cents(companyReserve),pool=Math.floor(gross*42/100),company=gross-pool;
+  const revenueApplied=Math.min(due,pool),reserveApplied=Math.min(due-revenueApplied,reserve),funded=revenueApplied+reserveApplied,payable=due-funded;
+  return {obligation:due/100,revenue:gross/100,participantPool:pool/100,companyRevenue:company/100,revenueApplied:revenueApplied/100,reserveApplied:reserveApplied/100,funded:funded/100,companyPayable:payable/100,status:payable===0?'funded':funded?'partially-funded':'payable'};
  }
+ const settlement=coverage;
  function portfolio(rows){
   if(!Array.isArray(rows)||rows.length<policy.minimumStations||new Set(rows.map(r=>r.id)).size!==rows.length)throw Error('At least three different chargers are required.');
-  const detail=rows.map(row=>({id:row.id,...settlement(row)}));return {stations:detail,payout:detail.reduce((n,r)=>n+Math.round(r.payout*100),0)/100};
+  const detail=rows.map(row=>({id:row.id,...coverage(row)}));return {stations:detail,obligation:detail.reduce((n,r)=>n+Math.round(r.obligation*100),0)/100,funded:detail.reduce((n,r)=>n+Math.round(r.funded*100),0)/100,companyPayable:detail.reduce((n,r)=>n+Math.round(r.companyPayable*100),0)/100};
  }
  // Illustrative hardware/installation assumptions, not actual object financials.
  const assumptions=Object.freeze({chargerCount:3,referenceHardware:36181,hardwareDiscount:.19,installationPerCharger:40000,pricePerKwh:.45,powerCost:.12,efficiency:.95,processingShare:.03,fixedMonthlyPerCharger:750,replacementMonths:120,kwhPerSession:30,days:30,source:'https://www.mbusassep.com/equipment/product/18149'});
  function scenarios(capital=250,count=3){
   const ids=Array.from({length:count},(_,i)=>i+1),allocations=allocate(capital,ids),a=assumptions,hardware=Math.round(a.referenceHardware*(1-a.hardwareDiscount)*100)/100,budget=hardware+a.installationPerCharger;
   if(capital>budget*count)throw Error('Amount exceeds the illustrative funding budget.');
-  return {capital,count,budget:Math.round(budget*count*100)/100,assumptions:a,rows:[5,10,20].map((sessions,i)=>{const revenue=sessions*a.kwhPerSession*a.days*a.pricePerKwh;return {id:['conservative','base','strong'][i],sessionsPerDay:sessions,revenue:Math.round(revenue*count*100)/100,...portfolio(allocations.map(r=>({id:r.id,revenue:Math.round(revenue*100)/100,share:r.capital/budget})))}})};
+  return {capital,count,budget:Math.round(budget*count*100)/100,assumptions:a,rows:[5,10,20].map((sessions,i)=>{const revenue=sessions*a.kwhPerSession*a.days*a.pricePerKwh;return {id:['conservative','base','strong'][i],sessionsPerDay:sessions,revenue:Math.round(revenue*count*100)/100,...portfolio(allocations.map(r=>({id:r.id,revenue:Math.round(revenue*100)/100,obligation:periodOffer(r.capital,13).baseAmount,companyReserve:0})))}})};
  }
  const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- function html(lang='en',{compact=false}={}){const ru=lang==='ru';return `<section class="charge-policy" data-charge-policy="${policy.version}" translate="no"><p class="charge-policy-label">EcoGrid Charge · ${ru?'МОДЕЛЬ УЧАСТИЯ':'PARTICIPATION MODEL'}</p><h2>${ru?'Минимум 3 зарядки. Доля фактической выручки.':'At least 3 chargers. A share of actual revenue.'}</h2><div class="charge-policy-split"><div><strong>58%</strong><span>${ru?'участникам по долям':'to participants by share'}</span></div><div><strong>42%</strong><span>${ru?'компании на все расходы':'to the company for all costs'}</span></div></div><p>${escape(copy('formula',lang))}</p><p>${escape(copy('allocation',lang))}</p>${compact?'':`<details><summary>${ru?'Ответы перед решением':'Answers before you decide'}</summary>${faq(lang).map(r=>`<h3>${escape(r.question)}</h3><p>${escape(r.answer)}</p>`).join('')}<p>${escape(copy('proof',lang))}</p></details>`}</section>`;}
- return Object.freeze({policy,weeklyReference,weeklyOffer,copy,faq,selection,allocate,settlement,portfolio,scenarios,assumptions,html});
+ function html(lang='en',{compact=false}={}){const ru=lang==='ru';return `<section class="charge-policy" data-charge-policy="${policy.version}" translate="no"><p class="charge-policy-label">EcoGrid Charge · ${ru?'МОДЕЛЬ УЧАСТИЯ':'PARTICIPATION MODEL'}</p><h2>${ru?'Фиксированное обязательство компании. Расчёт каждые 4 дня.':'Fixed company obligation. Settlement every 4 days.'}</h2><div class="charge-policy-split"><div><strong>42%</strong><span>${ru?'выручки — в фонд выплат':'of revenue funds payments'}</span></div><div><strong>58%</strong><span>${ru?'расходы и резерв компании':'company costs and reserve'}</span></div></div><p>${escape(copy('formula',lang))}</p><p>${escape(copy('allocation',lang))}</p>${compact?'':`<details><summary>${ru?'Ответы перед решением':'Answers before you decide'}</summary>${faq(lang).map(r=>`<h3>${escape(r.question)}</h3><p>${escape(r.answer)}</p>`).join('')}<p>${escape(copy('proof',lang))}</p></details>`}</section>`;}
+ return Object.freeze({policy,settlementReference,periodOffer,weeklyReference,weeklyOffer,copy,faq,selection,allocate,coverage,settlement,portfolio,scenarios,assumptions,html});
 });
 
 },
@@ -62,9 +66,9 @@
   if(!tier)throw Error('Choose a participation plan.');
   if(!finance.eligible(capital,tier.id))throw Error('Enter an amount within the limits for this plan.');
   if(!/^20\d{2}-\d{2}-\d{2}$/.test(start)||!Number.isFinite(Date.parse(start+'T00:00:00Z'))||new Date(start+'T00:00:00Z').toISOString().slice(0,10)!==start)throw Error('Choose a valid calculation start date.');
-  return {version:'public-plan-v1',tierId:tier.id,capital,start};
+  return {version:'public-plan-v2',tierId:tier.id,capital,start};
  }
- function calculate(value){const input=normalize(value),tier=finance.tiers.find(t=>t.id===input.tierId),at=Date.parse(input.start+'T00:00:00Z');return {...input,name:tier.name,rate:tier.rate,minimum:tier.minimum,weekly:finance.weekly(input.capital,tier.rate,at),monthly:finance.monthly(input.capital,tier.rate),end:new Date(at+finance.calendar.WEEK).toISOString().slice(0,10)};}
+ function calculate(value){const input=normalize(value),tier=finance.tiers.find(t=>t.id===input.tierId),at=Date.parse(input.start+'T00:00:00Z'),end=at+finance.settlementPeriodMs,period=finance.planAccrual({capital:input.capital,rate:tier.rate,ratePeriod:finance.ratePeriod},at,end);return {...input,name:tier.name,rate:tier.rate,minimum:tier.minimum,period,periodDays:finance.settlementDays,weekly:period,monthly:finance.monthly(input.capital,tier.rate),end:new Date(end).toISOString().slice(0,10)};}
  return Object.freeze({normalize,calculate});
 });
 
@@ -284,14 +288,15 @@
  });
  function programCopy(topic='energy',lang='en'){
   const ru=lang==='ru',c=aiProgramTopics[topic]||aiProgramTopics.energy,p=aiProgram,charge=typeof module==='object'&&module.exports?require('./charge-model.js'):globalThis.EcoChargeModel;
-  return {
+   const chargeProgram=topic==='charge';
+   return {
    title:c[ru?1:0],body:topic==='charge'?charge.copy('ai',lang):c[ru?3:2],
    price:ru?`${p.cost} EcoCoin · ${p.days} дней`:`${p.cost} EcoCoin · ${p.days} days`,
-   gift:ru?`${p.gift} EcoCoin в подарок — хватит на первые ${p.days} дней AI-режима в выбранном проекте. После оплаты останется ${p.gift-p.cost} EcoCoin.`:`Your ${p.gift} EcoCoin welcome gift covers the first ${p.days} days of AI mode in your selected project, leaving ${p.gift-p.cost} EcoCoin.`,
+    gift:ru?`${p.gift} EcoCoin в подарок — хватит на первые ${p.days} дней AI-режима в выбранном проекте. После активации останется ${p.gift-p.cost} EcoCoin.`:`Your ${p.gift} EcoCoin welcome gift covers the first ${p.days} days of AI mode in your selected project, leaving ${p.gift-p.cost} EcoCoin after activation.`,
    rules:ru?'Получение подарка не требует инвестирования. Использование проектного AI-режима предполагает участие в соответствующем проекте. Срок начинается с активации; продление — по подтверждению.':'No investment is required to receive the gift. Project AI mode requires participation in the relevant project. The period starts at activation; renewal requires confirmation.',
-   supplement:topic==='charge'?charge.copy('allocation',lang):ru?'AI-режим подключается отдельно от базового плана. Условия дополнительной надбавки разбираются на презентации проекта.':'AI mode is an optional addition to the base plan. The terms of any additional return are reviewed during the project presentation.',
+    supplement:chargeProgram?(ru?`Для Charge активный AI-режим добавляет ровно +${charge.policy.aiRateBonus} процентный пункт к фиксированному обязательству компании на ${p.days} дней. Надбавка действует только после серверной активации и увеличивает сумму, которую должна профинансировать компания.`:`For Charge, an active AI period adds exactly +${charge.policy.aiRateBonus} percentage point to the fixed company obligation for ${p.days} days. The uplift applies only after server activation and increases the amount the company must fund.`):ru?'AI-режим подключается отдельно от базового плана. Условия дополнительной надбавки разбираются на презентации проекта.':'AI mode is an optional addition to the base plan. The terms of any additional return are reviewed during the project presentation.',
    distinction:ru?'Инструменты управления оборудованием использует команда. Дополнительный AI-режим для участника сравнивает доступные варианты размещения его участия внутри выбранного проекта. Это отдельная услуга, а не плата за обычную эксплуатацию.':'The team uses tools to operate equipment. The optional member AI mode compares eligible allocations of your participation within the selected project. This is separate from normal project operation.',
-   renewal:ru?'Планируемые условия: без подтверждения новый период не начинается и монеты не списываются. После 30 дней дополнительный режим заканчивается; базовое участие продолжается по его договору. До подключения команда подтвердит способы получения монет для продления и полный порядок отключения.':'Proposed terms: a new period starts only with your confirmation; no coins are charged automatically. After 30 days the additional mode ends; base participation continues under its agreement. Before activation, the team must confirm how to obtain renewal coins and the full cancellation process.',
+    renewal:chargeProgram?(ru?'Новый 30-дневный период начинается только после подтверждённой активации; автоматического продления и списания нет. После окончания периода ставка возвращается к базовой. В публичной версии реальное подключение и списание пока не выполняются.':'A new 30-day period starts only after confirmed activation; there is no automatic renewal or charge. When it ends, the rate returns to the base rate. The public version does not yet execute a real activation or coin charge.'):ru?'Планируемые условия: без подтверждения новый период не начинается и монеты не списываются. После 30 дней дополнительный режим заканчивается; базовое участие продолжается по его договору. До подключения команда подтвердит способы получения монет для продления и полный порядок отключения.':'Proposed terms: a new period starts only with your confirmation; no coins are charged automatically. After 30 days the additional mode ends; base participation continues under its agreement. Before activation, the team must confirm how to obtain renewal coins and the full cancellation process.',
    availability:topic==='charge'?charge.copy('aiEvidence',lang):ru?'AI-режим готовится к запуску. Подключение станет доступно после утверждения условий.':'AI mode is in development. Activation will become available once its terms are finalized.'
   };
  }
@@ -302,7 +307,7 @@
  function copy(lang='en'){return lang==='ru'?`Модель EcoGrid объединяет солнечную генерацию в США и Канаде, накопители и три направления: зарядки электромобилей, продажу энергии торговым центрам и бизнесу по долгосрочным договорам дешевле тарифа местной энергокомпании и продажу около ${pct(config.gridShare)} выработки в общую сеть. Оставшиеся ${pct(directShare)} направляются на зарядки и коммерческих клиентов. Накопители переносят дневную выработку на вечер и ночь.`:`The EcoGrid model combines solar generation in the U.S. and Canada and battery storage with three revenue streams: EV charging, energy supplied to shopping centers and businesses under long-term contracts below their local utility tariff, and sales of about ${pct(config.gridShare)} of production to the grid. The remaining ${pct(directShare)} serves chargers and commercial clients. Battery storage shifts daytime generation into the evening and night.`;}
  function evidence(lang='en'){return lang==='ru'?'Документы по солнечным объектам, накопителям, правам на активы, коммерческим договорам и продаже в общую сеть ещё не загружены в проект. Справочник станций не подтверждает владение или партнёрство.':'Documents for solar sites, battery storage, asset rights, commercial contracts and grid sales have not yet been added to this project. The station directory does not establish ownership or a partnership.';}
  function cadence(lang='en'){return (typeof module==='object'&&module.exports?require('./charge-model.js'):globalThis.EcoChargeModel).copy('cadence',lang);}
- function legacyCadence(lang='en'){return lang==='ru'?'Ставка за календарный месяц · начисления раз в неделю · модель, не гарантия':'Rate per calendar month · credited weekly · model, not a guarantee';}
+ function legacyCadence(lang='en'){return cadence(lang);}
  function flow(lang='en'){const ru=lang==='ru',l=labels(lang);return `<section class="business-flow" data-business-model="${config.version}" translate="no" aria-label="${ru?'Как движется энергия':'How the energy flows'}"><div class="business-flow-heading"><div><span>${ru?'ЭНЕРГЕТИЧЕСКАЯ МОДЕЛЬ':'ENERGY MODEL'}</span><h2>${ru?'Как движется энергия':'How the energy flows'}</h2></div><small>${ru?'Модель, не телеметрия':'Model, not telemetry'}</small></div><p>${copy(lang)}</p><h3 translate="no">EcoGrid AI</h3><p>${ai('energy',lang).body}</p><div class="business-flow-map"><div class="business-source"><strong>${l.solar}</strong><span>${ru?'Дневная генерация':'Daytime generation'}</span></div><span class="business-flow-arrow" aria-hidden="true">→</span><div class="business-source"><strong>${l.storage}</strong><span>${ru?'Энергия для вечера и ночи':'Energy for evening and night'}</span></div><span class="business-flow-arrow" aria-hidden="true">→</span><div class="business-outlets"><div><span data-business-direct>${pct(directShare)}</span><strong>${l.ev} + ${l.commercial}</strong></div><div><span data-business-grid>${pct(config.gridShare)}</span><strong>${l.grid}</strong></div></div></div><small>${ru?'Доли собственной выработки в модели, не доли рынка и не ставка плана.':'Shares of the model’s own production, not market share or a plan rate.'}</small><h3>${ru?'Кто покупает энергию':'Who buys our energy'}</h3><div class="business-buyers"><article><h4>${ru?'Водители':'Drivers'}</h4><p>${ru?'Оплата зарядки электромобилей.':'Payments for EV charging.'}</p></article><article><h4>${ru?'Коммерческие потребители':'Commercial customers'}</h4><p>${ru?'Долгосрочные договоры с ТЦ, бизнес-парками, отелями и автопарками; цена ниже местного тарифа — условие модели.':'Long-term contracts with shopping centers, business parks, hotels and fleets; pricing below the local tariff is a model assumption.'}</p></article><article><h4>${l.grid}</h4><p>${ru?'Продажа части выработки в общую сеть.':'Sales of a portion of production to the grid.'}</p></article></div></section>`;}
  function dispatch(hour=18,peak=false,budget=config.dispatchLimitKw){hour=Number.isFinite(hour)?Math.max(0,Math.min(24,hour)):18;budget=Math.max(0,Number.isFinite(budget)?budget:config.dispatchLimitKw);const day=Math.max(0,Math.sin((hour-6)/12*Math.PI)),solar=day*config.solarPeakKw,total=budget*(.48+.32*day+(peak?.2:0)),evRatio=Math.min(.8,.42+(peak?.18:0)+.12*Math.cos((hour-19)/12*Math.PI)),grid=total*config.gridShare,ev=(total-grid)*evRatio,commercial=total-grid-ev;const rows=[['ev',ev],['commercial',commercial],['grid',grid]].map(([id,allocated])=>({id,allocated,weight:total?allocated/total:0}));return {hour,peak,solar,storage:solar-total,allocated:total,sites:rows};}
  function session(kwh){const round=n=>Math.round((n+Number.EPSILON)*100)/100,receipts=round(kwh*config.chargingPrice),electricity=round(kwh*config.solarStorageCost);return {energyKwh:kwh,chargingRate:config.chargingPrice,electricityRate:config.solarStorageCost,receipts,electricity,beforeOtherCosts:round(receipts-electricity)};}
@@ -342,13 +347,21 @@
  'use strict';
  const tiers=Object.freeze([{id:'single',name:'Single',count:3,rate:13,minimum:250},{id:'network',name:'Network',count:3,rate:14,minimum:500},{id:'portfolio',name:'Portfolio',count:5,rate:15,minimum:800},{id:'scale',name:'Custom',count:10,rate:16,minimum:1000}].map(Object.freeze));
  const presets=Object.freeze([250,500,800]),minimum=250,maximum=10000000,paymentMaximum=100000,paymentMinimum=1,companyFee=0;
+ const settlementDays=4,settlementPeriodMs=settlementDays*calendar.DAY,aiRateBonus=1,aiDays=30,aiPeriodMs=aiDays*calendar.DAY;
  const round=n=>Math.round(n*100)/100;
  const monthly=(capital,rate)=>calendar.monthCents(capital,rate)/100;
  const weekly=(capital,rate,start=Date.now(),basis=calendar.BASIS)=>basis==='week'?Math.round(capital*rate)/100:calendar.centsBetween(capital,rate,typeof start==='number'?start:Date.parse(start),(typeof start==='number'?start:Date.parse(start))+calendar.WEEK)/100;
  const eligible=(capital,tierId)=>{const tier=tiers.find(t=>t.id===tierId);return !!tier&&valid(capital)&&capital>=tier.minimum;};
  const periodTerms=(plan,start)=>plan?.rateTransition&&(typeof start==='number'?start:Date.parse(start))<Date.parse(plan.rateTransition.at)?{rate:plan.rateTransition.rate,ratePeriod:'week'}:{rate:plan?.rate||0,ratePeriod:plan?.ratePeriod||'week'};
- const planWeekly=(plan,start=Date.now())=>{const terms=periodTerms(plan,start);return plan?weekly(plan.capital,terms.rate,start,terms.ratePeriod):0;};
- function nextPeriodStart(a){let from=Date.parse(a.plan?.appliedAt);if(!Number.isFinite(from))return NaN;while((a.sessions||[]).some(s=>{if(s.period!=='week')return false;const begin=Date.parse(s.periodStart||s.weekStart+'T00:00:00.000Z'),end=Date.parse(s.periodEnd)||begin+calendar.WEEK;return Number.isFinite(begin)&&from<end&&from+calendar.WEEK>begin;}))from+=calendar.WEEK;return from;}
+ function aiWindow(plan){const start=Date.parse(plan?.ai?.activatedAt),requestedEnd=Date.parse(plan?.ai?.expiresAt),limit=start+aiPeriodMs;if(plan?.ai?.status!=='active'||!Number.isFinite(start))return null;const end=Number.isFinite(requestedEnd)?Math.min(requestedEnd,limit):limit;return end>start?{start,end}:null;}
+ function aiActive(plan,at=Date.now()){const time=typeof at==='number'?at:Date.parse(at),window=aiWindow(plan);return !!window&&Number.isFinite(time)&&time>=window.start&&time<window.end;}
+ function effectiveRate(plan,at=Date.now()){const terms=periodTerms(plan,at);return terms.rate+(aiActive(plan,at)?aiRateBonus:0);}
+ function planAccrual(plan,from,to){let start=typeof from==='number'?from:Date.parse(from),end=typeof to==='number'?to:Date.parse(to);if(!plan||!Number.isFinite(start)||!Number.isFinite(end)||end<=start||!valid(plan.capital))return 0;const ai=aiWindow(plan),cuts=[start,end];if(ai){if(ai.start>start&&ai.start<end)cuts.push(ai.start);if(ai.end>start&&ai.end<end)cuts.push(ai.end);}cuts.sort((a,b)=>a-b);let total=0;for(let i=0;i<cuts.length-1;i++){const a=cuts[i],b=cuts[i+1],terms=periodTerms(plan,a);if(terms.ratePeriod===calendar.BASIS)total+=calendar.centsBetween(plan.capital,terms.rate+(aiActive(plan,a)?aiRateBonus:0),a,b);else total+=Math.round(weekly(plan.capital,terms.rate,a,'week')*100*(b-a)/calendar.WEEK);}return total/100;}
+ const planSettlement=(plan,start=Date.now())=>planAccrual(plan,start,(typeof start==='number'?start:Date.parse(start))+settlementPeriodMs);
+ // Kept for older callers; the current model settles a continuously accrued 4-day period.
+ const planWeekly=planSettlement;
+ function sessionBounds(s){if(!s||!['week','accrual'].includes(s.period))return null;const begin=Date.parse(s.periodStart||(s.weekStart?s.weekStart+'T00:00:00.000Z':s.date)),fallback=s.period==='week'?calendar.WEEK:(Number(s.settlementDays)||settlementDays)*calendar.DAY,end=Date.parse(s.periodEnd);return Number.isFinite(begin)?{begin,end:Number.isFinite(end)?end:begin+fallback}:null;}
+ function nextPeriodStart(a){let from=Date.parse(a.plan?.appliedAt);if(!Number.isFinite(from))return NaN;for(let guard=0;guard<10000;guard++){const ends=(a.sessions||[]).map(sessionBounds).filter(Boolean).filter(p=>p.begin<=from&&p.end>from).map(p=>p.end);if(!ends.length)return from;from=Math.max(...ends);}throw Error('Too many overlapping accrual records.');}
  const valid=n=>Number.isFinite(n)&&n>=0&&n<=maximum&&Math.abs(n*100-Math.round(n*100))<.00001;
  // Accept unambiguous US or Russian amounts; reject mixed/invalid groupings.
  function parseAmount(value){
@@ -361,19 +374,29 @@
   else return NaN;
   const n=Number(s);return valid(n)?n:NaN;
  }
+ function profitState(a){
+  const balance=round(Number(a.balance)||0),requests=Array.isArray(a.requests)?a.requests:[],sessions=Array.isArray(a.sessions)?a.sessions:[];
+  const reserved=round(requests.filter(r=>r.type==='withdraw'&&r.status==='Pending').reduce((s,r)=>s+(Number(r.amount)||0),0));
+  const approved=round(requests.filter(r=>r.type==='withdraw'&&r.status==='Approved').reduce((s,r)=>s+(Number(r.amount)||0),0));
+  const recorded=round(sessions.reduce((s,r)=>s+(Number(r.payout)||0),0));
+  const explicit=Number(a.profit?.settled),settled=Math.min(balance,Math.max(0,round(Number.isFinite(explicit)?explicit:recorded-approved)));
+  const companyPayable=Math.max(0,round(Number(a.profit?.companyPayable)||0));
+  return {settled,reserved,available:Math.max(0,round(settled-reserved)),freeBalance:Math.max(0,round(balance-settled)),recorded,companyPayable};
+ }
  function summary(a){
   const active=a.plan?.status==='active'?a.plan:null,draft=a.planDraft||null;
-  const balance=round(Number(a.balance)||0),capital=active?.capital||0;
-  const reserved=round((a.requests||[]).filter(r=>r.type==='withdraw'&&r.status==='Pending').reduce((s,r)=>s+r.amount,0));
+  const balance=round(Number(a.balance)||0),capital=active?.capital||0,profit=profitState(a);
+  const reserved=profit.reserved;
   const available=Math.max(0,round(balance-reserved));
-  const recorded=round((a.sessions||[]).reduce((s,r)=>s+(Number(r.payout)||0),0));
+  const recorded=profit.recorded;
   const pending=(a.requests||[]).filter(r=>r.type==='topup'&&r.status==='Pending');
   const gap=draft?Math.max(0,round(draft.capital-capital-available)):null;
   const stage=active?'active':pending.length?'pending':draft&&gap===0?'ready':draft?'draft':available>0?'funded':'new';
-  return {balance,capital,reserved,available,recorded,total:round(balance+capital),active,draft,pending,gap,stage,weekly:planWeekly(active,Number.isFinite(nextPeriodStart(a))?nextPeriodStart(a):Date.now()),monthly:active&&active.ratePeriod===calendar.BASIS?monthly(active.capital,active.rate):null};
+  const next=Number.isFinite(nextPeriodStart(a))?nextPeriodStart(a):Date.now(),accrual=planSettlement(active,next);
+  return {balance,capital,reserved,available,withdrawable:profit.available,settledProfit:profit.settled,freeBalance:profit.freeBalance,companyPayable:profit.companyPayable,recorded,total:round(balance+capital),active,draft,pending,gap,stage,accrual,settlement:accrual,weekly:accrual,monthly:active&&active.ratePeriod===calendar.BASIS?monthly(active.capital,effectiveRate(active,next)):null};
  }
  const stationSelectable=(station,plan)=>!!station&&(!station.selectionClosed||(plan?.status==='active'&&plan.stationIds?.includes(station.id)));
- return Object.freeze({stationSelectable,version:3,period:"week",ratePeriod:calendar.BASIS,calendar,monthly,eligible,periodTerms,planWeekly,nextPeriodStart,tiers,presets,minimum,maximum,paymentMinimum,paymentMaximum,companyFee,round,weekly,valid,parseAmount,summary});
+ return Object.freeze({stationSelectable,version:5,settlementModel:'fixed-company-obligation',period:'accrual',ratePeriod:calendar.BASIS,calendar,settlementDays,settlementPeriodMs,aiRateBonus,aiDays,aiPeriodMs,monthly,eligible,periodTerms,aiWindow,aiActive,effectiveRate,planAccrual,planSettlement,planWeekly,nextPeriodStart,tiers,presets,minimum,maximum,paymentMinimum,paymentMaximum,companyFee,round,weekly,valid,parseAmount,profitState,summary});
 });
 
 },
@@ -438,6 +461,13 @@
   account.firstPlanActivatedAt=new Date(start).toISOString();
   return account.firstPlanActivatedAt;
  }
+ function settledProfit(account){
+  const balance=Math.max(0,Number(account.balance)||0),explicit=Number(account.profit?.settled);
+  if(Number.isFinite(explicit))return Math.min(balance,Math.max(0,Math.round(explicit*100)/100));
+  const recorded=(Array.isArray(account.sessions)?account.sessions:[]).reduce((n,r)=>n+(Number(r.payout)||0),0);
+  const withdrawn=(Array.isArray(account.requests)?account.requests:[]).filter(r=>r.type==='withdraw'&&r.status==='Approved').reduce((n,r)=>n+(Number(r.amount)||0),0);
+  return Math.min(balance,Math.max(0,Math.round((recorded-withdrawn)*100)/100));
+ }
  function state(account,now=Date.now()){
   const requests=Array.isArray(account.requests)?account.requests:[];
   const withdrawals=requests.filter(r=>r.type==='withdraw');
@@ -447,19 +477,19 @@
   const eligibleAt=start===null?null:Math.max(start,last??start)+interval;
   const pending=withdrawals.filter(r=>r.status==='Pending');
   const reserved=pending.reduce((n,r)=>n+(Number(r.amount)||0),0);
-  const available=Math.max(0,Math.round(((Number(account.balance)||0)-reserved)*100)/100);
+  const settled=settledProfit(account),available=Math.max(0,Math.round((settled-reserved)*100)/100);
   const timingReady=eligibleAt!==null&&now>=eligibleAt;
-  const reason=start===null?'activate':pending.length?'pending':!timingReady?'waiting':available<1?'balance':'ready';
-  return {days,start,last,eligibleAt,timingReady,pending:pending.length,reserved,available,reason,canRequest:reason==='ready'};
+  const reason=start===null?'activate':pending.length?'pending':!timingReady?'waiting':available<1?'profit':'ready';
+  return {days,start,last,eligibleAt,timingReady,pending:pending.length,reserved,settledProfit:settled,available,totalBalance:Math.max(0,Number(account.balance)||0),reason,canRequest:reason==='ready'};
  }
- return Object.freeze({days,interval,activation,markActivation,state});
+ return Object.freeze({days,interval,activation,markActivation,settledProfit,state});
 });
 
 },
 "dist/live-accrual.js":function(module,exports,require){
 (function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./demand-rhythm.js'),require('./calendar-yield.js'));else root.EcoLiveAccrual=factory(root.EcoDemandRhythm,root.EcoCalendarYield);})(typeof window==='undefined'?globalThis:window,function(rhythm,calendar){
  'use strict';
- const PERIOD_MS=7*24*60*60*1000;
+ const SETTLEMENT_DAYS=4,PERIOD_MS=SETTLEMENT_DAYS*24*60*60*1000;
  const cents=value=>Math.round(value*100);
  // Plan rates have at most two decimal places. Integer numerator, half-up USD rounding.
  function weeklyCents(capital,rate){
@@ -470,15 +500,17 @@
   return Number.isSafeInteger(result)?result:0;
  }
  const timestamp=value=>typeof value==='number'?value:Date.parse(value);
- function liveAccrual({capital=0,weeklyRatePercent=0,periodStartedAt,now=Date.now(),active=true,curve,ratePeriod='week',monthlyRatePercent}={}){
-  const start=timestamp(periodStartedAt),time=timestamp(now),monthly=ratePeriod===calendar.BASIS,rate=monthly?(monthlyRatePercent??weeklyRatePercent):weeklyRatePercent,earnedCents=monthly?calendar.centsBetween(capital,rate,start,start+PERIOD_MS,curve):weeklyCents(capital,rate);
-  if(!active||!earnedCents||!Number.isFinite(start)||!Number.isFinite(time))return {weeklyEarn:0,liveEarned:0,progress:0,msRemaining:0};
-  const elapsed=Math.max(0,Math.min(PERIOD_MS,time-start)),progress=elapsed/PERIOD_MS;
+ function liveAccrual({capital=0,weeklyRatePercent=0,periodStartedAt,periodEndsAt,now=Date.now(),active=true,curve,period,ratePeriod,monthlyRatePercent,aiRateBonus=0,aiActiveFrom,aiActiveUntil}={}){
+  const start=timestamp(periodStartedAt),requestedEnd=timestamp(periodEndsAt),basis=ratePeriod||'week',legacyWeek=period==='week'||ratePeriod===undefined,end=Number.isFinite(requestedEnd)&&requestedEnd>start?requestedEnd:start+(legacyWeek?calendar.WEEK:PERIOD_MS),time=timestamp(now),monthly=basis===calendar.BASIS,rate=monthly?(monthlyRatePercent??weeklyRatePercent):weeklyRatePercent;
+  const aiStart=timestamp(aiActiveFrom),aiEnd=timestamp(aiActiveUntil),amountTo=to=>{if(!monthly)return Math.round(weeklyCents(capital,rate)*(to-start)/calendar.WEEK);const cuts=[start,to];if(Number.isFinite(aiStart)&&aiStart>start&&aiStart<to)cuts.push(aiStart);if(Number.isFinite(aiEnd)&&aiEnd>start&&aiEnd<to)cuts.push(aiEnd);cuts.sort((a,b)=>a-b);let cents=0;for(let i=0;i<cuts.length-1;i++){const from=cuts[i],until=cuts[i+1],boost=Number.isFinite(aiStart)&&Number.isFinite(aiEnd)&&from>=aiStart&&from<aiEnd?aiRateBonus:0;cents+=calendar.centsBetween(capital,rate+boost,from,until,curve);}return cents;};
+  const earnedCents=amountTo(end);
+  if(!active||!earnedCents||!Number.isFinite(start)||!Number.isFinite(end)||!Number.isFinite(time))return {periodEarn:0,weeklyEarn:0,liveEarned:0,progress:0,msRemaining:0};
+  const duration=end-start,elapsed=Math.max(0,Math.min(duration,time-start)),progress=elapsed/duration;
   const earnedFraction=curve===rhythm?.VERSION?Math.min(1,rhythm.fraction(start,start+elapsed)/7):progress;
-  const liveCents=Math.min(earnedCents,Math.max(0,monthly?calendar.centsBetween(capital,rate,start,start+elapsed,curve):Math.round(earnedCents*earnedFraction)));
-  return {weeklyEarn:earnedCents/100,liveEarned:liveCents/100,progress,msRemaining:PERIOD_MS-elapsed};
+  const liveCents=Math.min(earnedCents,Math.max(0,monthly?amountTo(start+elapsed):Math.round(earnedCents*earnedFraction)));
+  return {periodEarn:earnedCents/100,weeklyEarn:earnedCents/100,liveEarned:liveCents/100,progress,msRemaining:duration-elapsed};
  }
- return Object.freeze({PERIOD_MS,cents,weeklyCents,liveAccrual});
+ return Object.freeze({SETTLEMENT_DAYS,PERIOD_MS,cents,weeklyCents,liveAccrual});
 });
 
 },
@@ -533,13 +565,13 @@
   if(ids.length>10||new Set(ids).size!==ids.length||ids.some(id=>!Number.isInteger(id)||!stationIds.has(id)))throw Error('Invalid discussion context.');
   const c={topic,stationIds:ids.slice()};if(Number.isInteger(value.stationId)&&stationIds.has(value.stationId))c.stationId=value.stationId;
   const tier=finance.tiers.find(t=>t.id===value.tierId||t.name===value.plan);
-  if(tier&&finance.valid(value.capital)&&finance.eligible(value.capital,tier.id)&&ids.length<=tier.count)Object.assign(c,{tierId:tier.id,plan:tier.name,capital:value.capital,rate:tier.rate,ratePeriod:finance.ratePeriod,weekly:finance.weekly(value.capital,tier.rate),stationCount:tier.count});
+   if(tier&&finance.valid(value.capital)&&finance.eligible(value.capital,tier.id)&&ids.length<=tier.count)Object.assign(c,{tierId:tier.id,plan:tier.name,capital:value.capital,rate:tier.rate,ratePeriod:finance.ratePeriod,weekly:finance.planSettlement({capital:value.capital,rate:tier.rate,ratePeriod:finance.ratePeriod,tierId:tier.id}),stationCount:tier.count});
   if(value.lesson)c.lesson=session(value.lesson.energyKwh);
   if(value.energy){const e=value.energy;if(!['city','highway','retail','ev','commercial','grid'].includes(e.location)||!Number.isFinite(e.hour)||e.hour<0||e.hour>24||typeof e.peak!=='boolean')throw Error('Invalid model scenario.');c.energy={location:e.location,hour:Math.round(e.hour*100)/100,peak:e.peak,modelVersion:['ev','commercial','grid'].includes(e.location)?business.config.version:'demand-v1'};}
   return c;
  }
  function rows(c,lang='en'){if(!c)return [];const ru=lang==='ru',money=n=>new Intl.NumberFormat(ru?'ru-RU':'en-US',{style:'currency',currency:'USD'}).format(n),r=[];
-  if(c.plan)r.push([ru?'Выбор на момент вопроса':'Selection when sent',c.plan+' · '+money(c.capital)],[ru?'Модель за неделю':'Weekly model',money(c.weekly??finance.weekly(c.capital,c.rate))+' · '+c.rate+'%']);
+   if(c.plan)r.push([ru?'Выбор на момент вопроса':'Selection when sent',c.plan+' · '+money(c.capital)],[ru?'Обязательство за 4 дня':'4-day obligation',money(c.weekly??finance.planSettlement({capital:c.capital,rate:c.rate,ratePeriod:c.ratePeriod||finance.ratePeriod,tierId:c.tierId}))+' · '+c.rate+'%']);
   if(c.energy)r.push([ru?'Сценарий Energy Lab · модель':'Energy Lab scenario · model',({city:ru?'Город':'City',highway:ru?'Трасса':'Highway',retail:ru?'ТЦ (прежняя модель)':'Retail (legacy model)',...business.labels(lang)})[c.energy.location]+' · '+Math.floor(c.energy.hour).toString().padStart(2,'0')+':'+Math.floor((c.energy.hour%1)*60).toString().padStart(2,'0')+' · '+(c.energy.peak?(ru?'пиковый спрос':'peak demand'):(ru?'обычный спрос':'regular demand'))]);
   if(c.stationIds?.length)r.push([ru?'Станции · AFDC':'Stations · AFDC',c.stationIds.join(', ')]);
   if(c.stationCount&&c.stationIds.length!==c.stationCount)r.push([ru?'Станций выбрано':'Stations selected',c.stationIds.length+' / '+c.stationCount]);
@@ -585,19 +617,18 @@
   const todayCents=active?between(payload,dayStart,now):0,targetCents=active?between(payload,dayStart,dayEnd):0,sample=business.dispatch(hour??((now-dayStart)/3600000),peak),parts=split(todayCents,sample.sites.map(s=>s.allocated));
   return {...v,active,todayCents,targetCents,periodCents:Math.round(v.liveEarned*100),dayStart,dayEnd,pace:active?rhythm.pace(now):0,chain:chain(todayCents),sites:sample.sites.map((s,i)=>({id:s.id,cents:parts[i],weight:sample.allocated?s.allocated/sample.allocated:0})),startedToday:active&&start>dayStart};
  }
- function windows(account,payload){const closed=(account.sessions||[]).filter(s=>s.period==='week').map(s=>({active:true,capital:s.capital,weeklyRatePercent:s.rate,monthlyRatePercent:s.ratePeriod==='calendar-month'?s.rate:undefined,ratePeriod:s.ratePeriod||'week',periodStartedAt:s.periodStart,curve:rhythm.VERSION}));return [...closed,...(payload?.active?[payload]:[])];}
+function windows(account,payload){const closed=(account.sessions||[]).filter(s=>['week','accrual'].includes(s.period)).map(s=>({active:true,capital:s.capital,weeklyRatePercent:s.rate,monthlyRatePercent:s.ratePeriod==='calendar-month'?s.rate:undefined,ratePeriod:s.ratePeriod||'week',period:s.period,periodStartedAt:s.periodStart,periodEndsAt:s.periodEnd,curve:rhythm.VERSION}));return [...closed,...(payload?.active?[payload]:[])];}
  function daily(account,payload,date){const from=Math.floor(date/DAY)*DAY,to=from+DAY;let cents=0;for(const p of windows(account,payload))cents+=between(p,from,to);const weights=ids.map(id=>{let sum=0;for(let h=.25;h<24;h+=.5)sum+=business.dispatch(h).sites.find(s=>s.id===id).allocated;return sum;});const parts=split(cents,weights);return {from,to,cents,sites:ids.map((id,i)=>({id,cents:parts[i]})),illustrative:true};}
- function monday(time){const d=new Date(time),day=Math.floor(time/DAY)*DAY;return day-((d.getUTCDay()+6)%7)*DAY;}
- function report(account,now=Date.now()){const end=monday(now),start=end-7*DAY,credits=(account.sessions||[]).filter(s=>s.period==='week'&&Date.parse(s.periodEnd)>=start&&Date.parse(s.periodEnd)<end&&Date.parse(s.date)<=now);return {id:'WEEK-'+new Date(end).toISOString().slice(0,10),start,end,credits:credits.map(s=>s.id),cents:credits.reduce((n,s)=>n+Math.round(s.payout*100),0)};}
+ function report(account,now=Date.now()){const settled=(account.sessions||[]).filter(s=>s.period==='accrual'&&Date.parse(s.periodEnd)<=now&&Date.parse(s.date||s.periodEnd)<=now).sort((a,b)=>Date.parse(a.periodEnd)-Date.parse(b.periodEnd)),latest=settled.at(-1);const end=latest?Date.parse(latest.periodEnd):Math.floor(now/DAY)*DAY,start=latest?Date.parse(latest.periodStart):end-4*DAY,credits=settled.filter(s=>Date.parse(s.periodEnd)>start&&Date.parse(s.periodEnd)<=end);return {id:'SETTLEMENT-'+new Date(end).toISOString().slice(0,10),start,end,credits:credits.map(s=>s.id),cents:credits.reduce((n,s)=>n+Math.round(s.payout*100),0),settlementDays:4};}
  function milestones(account,payload,now=Date.now()){const credits=(account.sessions||[]).reduce((n,s)=>n+Math.round((s.payout||0)*100),0),p=live.liveAccrual({...payload,now}),first=(account.planHistory||[]).map(h=>Date.parse(h.plan?.appliedAt||h.date)).filter(Number.isFinite).sort((a,b)=>a-b)[0]??Date.parse(account.plan?.appliedAt);return [
   {id:'dollar',done:credits+Math.round(p.liveEarned*100)>=100},
-  {id:'week',done:(account.sessions||[]).some(s=>s.period==='week')},
+  {id:'settlement',done:(account.sessions||[]).some(s=>s.period==='accrual')},
   {id:'withdrawal',done:(account.requests||[]).some(r=>r.type==='withdraw'&&r.status==='Approved')},
   {id:'month',done:Number.isFinite(first)&&now-first>=30*DAY}
  ];}
  function scenario(value){if(!value||![...ids,...legacyIds].includes(value.location)||!Number.isFinite(value.hour)||value.hour<0||value.hour>24||typeof value.peak!=='boolean')throw Error('Choose a valid model scenario.');return {location:value.location,hour:Math.round(value.hour*100)/100,peak:value.peak,modelVersion:ids.includes(value.location)?business.config.version:rhythm.VERSION};}
  function recommendation(payload,location,percent){if(![...ids,...legacyIds].includes(location)||!Number.isInteger(percent)||percent<10||percent>80)throw Error('Choose a model share between 10 and 80%.');const weeklyCents=Math.round(live.liveAccrual({...payload,now:Date.parse(payload?.periodStartedAt)+live.PERIOD_MS}).weeklyEarn*100),before=(legacyIds.includes(location)?energy.sample(18):business.dispatch(18)).sites,weights=before.map(s=>s.allocated),total=weights.reduce((a,b)=>a+b,0),index=before.findIndex(s=>s.id===location),newWeights=weights.map((w,i)=>i===index?percent:(100-percent)*w/(total-weights[index])),old=split(weeklyCents,weights),next=split(weeklyCents,newWeights);return {location,percent,weeklyCents,beforeCents:old[index],afterCents:next[index],deltaCents:next[index]-old[index],totalDeltaCents:0};}
- return Object.freeze({assumptions,split,chain,view,between,daily,monday,report,milestones,scenario,recommendation});
+ return Object.freeze({assumptions,split,chain,view,between,daily,report,milestones,scenario,recommendation});
 });
 
 },
@@ -614,22 +645,23 @@
   const kind=plan===active&&active?'active':plan?'draft':'none';
   let timezone=state.ecosystem?.timezone||'UTC';try{new Intl.DateTimeFormat('en-US',{timeZone:timezone});}catch{timezone='UTC';}
   // Deliberately exclude identity uploads, document numbers, internal notes and balances.
+  const next=kind==='active'?(account.nextAccrual||account.nextWeek):null,estimate=plan?(Number.isFinite(next?.payout)?next.payout:finance.planSettlement(plan,Date.parse(now))):null;
   return {schema:1,id:'EC-PLAN-'+account.client.id.replace(/[^a-zA-Z0-9-]/g,'').slice(-12)+'-v'+account.version+'-'+kind,version:account.version,clientId:account.client.id,kind,generatedAt:now,timezone,
    client:{name:account.client.name,email:account.client.email||'',phone:account.client.phone||''},
-   plan:plan?{name:plan.name,tierId:plan.tierId,capital:plan.capital,rate:plan.rate,ratePeriod:plan.ratePeriod||'week',rateTransition:plan.rateTransition||null,monthly:plan.ratePeriod===finance.ratePeriod?finance.monthly(plan.capital,plan.rate):null,weekly:kind==='active'&&Number.isFinite(account.nextWeek?.payout)?account.nextWeek.payout:finance.planWeekly(plan,Date.parse(now)),date:kind==='active'?plan.appliedAt:plan.savedAt||null,
+   plan:plan?{name:plan.name,tierId:plan.tierId,capital:plan.capital,rate:plan.rate,ratePeriod:plan.ratePeriod||'week',rateTransition:plan.rateTransition||null,monthly:plan.ratePeriod===finance.ratePeriod?finance.monthly(plan.capital,plan.rate):null,settlement:estimate,weekly:estimate,date:kind==='active'?plan.appliedAt:plan.savedAt||null,
     stations:plan.stationIds.map(id=>{const s=directory.find(s=>s.id===id);return {id,name:s?.name||'AFDC '+id,location:s?[s.city,s.state].filter(Boolean).join(', '):''};})}:null,
-   period:kind==='active'&&account.nextWeek?{start:account.nextWeek.periodStart,end:account.nextWeek.periodEnd}:null};
+   period:next?{type:next.period||'accrual',settlementDays:next.settlementDays||finance.settlementDays,start:next.periodStart,end:next.periodEnd}:null};
  }
  function content(d,language='en'){
   const ru=language==='ru',t=(en,ruText)=>ru?ruText:en,locale=ru?'ru-RU':'en-US';
   const money=v=>new Intl.NumberFormat(locale,{style:'currency',currency:'USD'}).format(v);
   const date=v=>v&&Number.isFinite(Date.parse(v))?new Intl.DateTimeFormat(locale,{dateStyle:'medium',timeStyle:'short',timeZone:d.timezone}).format(new Date(v)):'—';
   const status=d.kind==='active'?t('Active plan','Активный план'):d.kind==='draft'?t('Saved selection · not activated','Сохранённый выбор · не активирован'):t('No plan selected','План не выбран');
-  const p=d.plan,sections=[{title:t('Energy business model','Модель энергетического бизнеса'),body:business.copy(language)+' '+business.evidence(language)},{title:t('Account details','Данные аккаунта'),rows:[[t('Client','Клиент'),d.client.name],[t('Email','Почта'),d.client.email||'—'],[t('Phone','Телефон'),d.client.phone||'—'],[t('Document reference','Номер образца'),d.id],[t('Prepared','Сформирован'),date(d.generatedAt)+' · '+d.timezone]]},
-   {title:t('Your plan terms','Условия вашего плана'),rows:[[t('Status','Статус'),status],[t('Station group','Группа станций'),p?.name||'—'],[t('Plan amount','Сумма плана'),p?money(p.capital):'—'],[p?.ratePeriod===finance.ratePeriod?t('Calendar-month model rate','Ставка модели за календарный месяц'):t('Weekly model rate','Недельная ставка модели'),p?new Intl.NumberFormat(locale).format(p.rate)+'%':'—'],[d.period?t('Model amount for the current period','Расчёт за текущий период'):t('Model amount for the next 7 days','Расчёт на следующие 7 дней'),p?money(p.weekly):'—'],[d.kind==='active'?t('Current terms effective from','Текущие условия действуют с'):t('Selection saved','Выбор сохранён'),date(p?.date)],...(p?.rateTransition?[[t('Monthly rate starts','Месячная ставка действует с'),date(p.rateTransition.at)]]:[]),...(d.period?[[t('Current period starts','Начало текущего периода'),date(d.period.start)],[t('Current period ends','Конец текущего периода'),date(d.period.end)]]:[])],body:p?p.ratePeriod===finance.ratePeriod?t('Calculation: capital × monthly rate, prorated by UTC calendar days in each month (28–31). Full calendar months reach the stated rate exactly. Weekly credits and the 4-day withdrawal schedule remain separate. Any preserved open week keeps its original terms until the transition date.','Расчёт: капитал × месячная ставка, пропорционально календарным дням UTC в каждом месяце (28–31). За полный календарный месяц получается ровно указанная ставка. Недельные начисления и вывод раз в 4 дня остаются отдельными процессами. Открытая неделя сохраняет прежние условия до даты перехода.'):t('Calculation: plan amount × weekly model rate. No compounding or extra credit per vehicle.','Расчёт: сумма плана × недельная ставка модели. Без капитализации и дополнительных начислений за автомобили.'):t('Choose and save a plan to include its amount and weekly calculation.','Выберите и сохраните план, чтобы включить сумму и недельный расчёт.')},
+  const p=d.plan,legacy=d.period?.type==='week',sections=[{title:t('Energy business model','Модель энергетического бизнеса'),body:business.copy(language)+' '+business.evidence(language)},{title:t('Account details','Данные аккаунта'),rows:[[t('Client','Клиент'),d.client.name],[t('Email','Почта'),d.client.email||'—'],[t('Phone','Телефон'),d.client.phone||'—'],[t('Document reference','Номер образца'),d.id],[t('Prepared','Сформирован'),date(d.generatedAt)+' · '+d.timezone]]},
+   {title:t('Your plan terms','Условия вашего плана'),rows:[[t('Status','Статус'),status],[t('Station group','Группа станций'),p?.name||'—'],[t('Plan amount','Сумма плана'),p?money(p.capital):'—'],[p?.ratePeriod===finance.ratePeriod?t('Calendar-month model rate','Ставка модели за календарный месяц'):t('Preserved earlier model rate','Сохранённая ставка по прежним условиям'),p?new Intl.NumberFormat(locale).format(p.rate)+'%':'—'],[d.period?legacy?t('Model amount for the preserved earlier period','Расчёт за сохранённый прежний период'):t('Model amount for the current 4-day period','Расчёт за текущий период 4 дня'):t('Model amount for the next 4 days','Расчёт на следующие 4 дня'),p?money(p.settlement):'—'],[d.kind==='active'?t('Current terms effective from','Текущие условия действуют с'):t('Selection saved','Выбор сохранён'),date(p?.date)],...(p?.rateTransition?[[t('Monthly rate starts','Месячная ставка действует с'),date(p.rateTransition.at)]]:[]),...(d.period?[[t('Current period starts','Начало текущего периода'),date(d.period.start)],[t('Current period ends','Конец текущего периода'),date(d.period.end)]]:[])],body:p?p.ratePeriod===finance.ratePeriod?t('Calculation: capital × monthly rate, prorated by UTC calendar days in each month (28–31). Full calendar months reach the stated rate exactly. Accrual is continuous; available profit is fixed every 4 days. Any preserved open earlier period keeps its original terms until the transition date.','Расчёт: капитал × месячная ставка, пропорционально календарным дням UTC в каждом месяце (28–31). За полный календарный месяц получается ровно указанная ставка. Начисление идёт непрерывно; открытый прежний период сохраняет исходные условия до даты перехода, а доступная прибыль по текущей модели фиксируется раз в 4 дня.'):t('Calculation: plan amount × the preserved earlier model rate. No compounding or extra credit per vehicle.','Расчёт: сумма плана × сохранённая ставка по прежним условиям. Без капитализации и дополнительных начислений за автомобили.'):t('Choose and save a plan to include its amount and 4-day calculation.','Выберите и сохраните план, чтобы включить сумму и расчёт за 4 дня.')},
    {title:t('Reference stations','Справочные станции'),rows:p?p.stations.map(s=>['AFDC '+s.id,s.name+(s.location?' · '+s.location:'')]):[],body:t('Source: US Department of Energy / AFDC public directory. A listing or selection does not establish EcoGrid ownership, affiliation or your legal rights to a station.','Источник: публичный каталог Минэнерго США / AFDC. Запись или выбор станции не подтверждают владение EcoGrid, партнёрство или ваши юридические права на станцию.')},
-   {title:t('How the model account works','Как работает модельный счёт'),body:t('Funding and plan activation are separate steps. Activation moves the selected amount from available funds into the plan. A complete 7-day period creates one recorded model credit. The open-period counter is illustrative and cannot be withdrawn before it is recorded. Changing the plan starts a new period: completed weeks are credited first; an unfinished period is not credited.','Пополнение и активация плана — отдельные шаги. При активации выбранная сумма переводится из свободного остатка в план. За полный период в 7 суток записывается одно модельное начисление. Счётчик незавершённого периода является иллюстрацией и недоступен для вывода до записи начисления. Смена плана начинает новый период: завершённые недели зачисляются, незавершённый период не зачисляется.')},
-   {title:t('Withdrawal schedule','Порядок заявки на вывод'),body:t('A first request becomes eligible 4 × 24 hours after the first plan activation. Approval starts the next 4-day interval; rejection releases the reservation without a new interval. Requests use available funds, excluding active plan capital, pending withdrawal reservations and the open period. The request range is $1–$100,000, subject to available funds. A weekly credit date is not a payout date. No real transfer is performed in this build.','Первая заявка доступна через 4 × 24 часа после первой активации плана. Подтверждение начинает следующие 4 суток; отказ снимает резерв без нового ожидания. Используется свободный остаток: капитал активного плана, резервы заявок и незавершённый период в него не входят. Диапазон заявки — от 1 до 100 000 USD в пределах свободного остатка. Дата недельного начисления не является датой выплаты. Реальных переводов в этой сборке нет.')},
+   {title:t('How the model account works','Как работает модельный счёт'),body:legacy?t('Funding and plan activation are separate steps. This preserved earlier period keeps its original terms until the transition date. The open-period counter is illustrative and cannot be withdrawn before the period is recorded. New periods use the current 4-day settlement model.','Пополнение и активация плана — отдельные шаги. Сохранённый прежний период действует по исходным условиям до даты перехода. Счётчик незавершённого периода является иллюстрацией и недоступен для вывода до записи периода. Новые периоды работают по текущей 4-дневной модели.'):t('Funding and plan activation are separate steps. Activation moves the selected amount from available funds into the plan. Accrual is continuous, and each complete 4-day period fixes available profit as a recorded model credit. The open-period counter is illustrative and cannot be withdrawn before it is recorded. Changing the plan starts a new 4-day period: completed periods are credited first; an unfinished period is not credited.','Пополнение и активация плана — отдельные шаги. При активации выбранная сумма переводится из свободного остатка в план. Начисление идёт непрерывно, а каждый полный период в 4 дня фиксирует доступную прибыль как модельное начисление. Счётчик незавершённого периода является иллюстрацией и недоступен для вывода до записи начисления. Смена плана начинает новый период на 4 дня: завершённые периоды зачисляются, незавершённый период не зачисляется.')},
+   {title:t('Withdrawal schedule','Порядок заявки на вывод'),body:t('A first request becomes eligible 4 × 24 hours after the first plan activation. Approval starts the next 4-day interval; rejection releases the reservation without a new interval. Requests use available funds, excluding active plan capital, pending withdrawal reservations and the open period. The request range is $1–$100,000, subject to available funds. A settlement date is not a payout date. No real transfer is performed in this build.','Первая заявка доступна через 4 × 24 часа после первой активации плана. Подтверждение начинает следующие 4 суток; отказ снимает резерв без нового ожидания. Используется свободный остаток: капитал активного плана, резервы заявок и незавершённый период в него не входят. Диапазон заявки — от 1 до 100 000 USD в пределах свободного остатка. Дата фиксации начисления не является датой выплаты. Реальных переводов в этой сборке нет.')},
    {title:t('Document status','Статус документа'),body:t('This is a personalized sample of the saved account terms, not an executed agreement or an investment offer. It does not verify identity, promise returns or create ownership, payment or withdrawal rights. Contracting entity, jurisdiction, asset rights, costs, loss risk and exit terms require verified documents and legal review before any real agreement. No signature or seal is included.','Это персональный образец сохранённых условий счёта, а не заключённый договор или инвестиционное предложение. Он не подтверждает личность, не обещает доходность и не создаёт права собственности, выплаты или вывода. Юридическое лицо, юрисдикция, права на активы, расходы, риск потерь и условия выхода требуют подтверждённых документов и юридической проверки до реального договора. Подписей и печатей нет.')}
   ];
   const charge=typeof module==='object'&&module.exports?require('../charge-model.js'):globalThis.EcoChargeModel;sections.push({title:t('Charge · proposed revenue distribution','Charge · предлагаемое распределение выручки'),body:charge.copy('split',language)+' '+charge.copy('formula',language)+' '+charge.copy('allocation',language)+' '+charge.copy('rights',language)});
@@ -676,17 +708,28 @@
 
 },
 "server/finance.cjs":function(module,exports,require){
-const finance=require('../dist/account-finance.js'),withdrawals=require('../dist/withdrawal-policy.js');
+const finance=require('../dist/account-finance.js'),withdrawals=require('../dist/withdrawal-policy.js'),charge=require('../dist/charge-model.js');
 const live=require('../dist/live-accrual.js');
 const fail=message=>{const e=Error(message);e.status=400;throw e;};
 const day=86400000;
 function checkedPlan(value,stationIds,now=new Date().toISOString()){
- if(value?.economyModel==='charge-revenue-v1'){if(!finance.eligible(value.capital,value.tierId))fail('Choose a valid plan amount and station group.');try{return {...require('../dist/charge-model.js').selection(value,stationIds),tierId:value.tierId,name:finance.tiers.find(t=>t.id===value.tierId)?.name||'Charge',rate:finance.tiers.find(t=>t.id===value.tierId)?.rate||13,allocations:require('../dist/charge-model.js').allocate(value.capital,value.stationIds),appliedAt:now};}catch(e){fail(e.message);}}
+ const chargeVersions=new Set([charge.policy.version,charge.policy.legacyVersion,...(charge.policy.legacyVersions||[])]);
+ if(chargeVersions.has(value?.economyModel)){if(!finance.eligible(value.capital,value.tierId))fail('Choose a valid plan amount and station group.');try{return {...charge.selection(value,stationIds),tierId:value.tierId,name:finance.tiers.find(t=>t.id===value.tierId)?.name||'Charge',rate:finance.tiers.find(t=>t.id===value.tierId)?.rate||13,allocations:charge.allocate(value.capital,value.stationIds),appliedAt:now};}catch(e){fail(e.message);}}
  const tier=finance.tiers.find(t=>t.id===value?.tierId);
  if(!tier||!finance.valid(value.capital)||!finance.eligible(value.capital,tier.id)||!Array.isArray(value.stationIds)||value.stationIds.length!==tier.count&&!(tier.id==='single'&&value.stationIds.length===1)||new Set(value.stationIds).size!==value.stationIds.length||value.stationIds.some(id=>!stationIds.has(id)))fail('Choose a valid plan amount and station group.');
- return {tierId:tier.id,name:tier.name,rate:tier.rate,ratePeriod:finance.ratePeriod,calculationVersion:finance.calendar.VERSION,period:'week',capital:value.capital,stationIds:value.stationIds.slice(),appliedAt:now};
+ return {tierId:tier.id,name:tier.name,rate:tier.rate,ratePeriod:finance.ratePeriod,calculationVersion:finance.calendar.VERSION,period:'accrual',settlementDays:finance.settlementDays,capital:value.capital,stationIds:value.stationIds.slice(),appliedAt:now};
 }
-function values(a){const s=finance.summary(a);return {balance:s.balance,available:s.available,reserved:s.reserved,capital:s.capital,stations:s.active?.stationIds.length||0,tariff:s.active?.name||'None',rate:s.active?.rate||0};}
+function ensureProfit(a,now=new Date().toISOString()){const state=finance.profitState(a);if(!a.profit||!Number.isFinite(Number(a.profit.settled))){a.profit={settled:state.settled,companyPayable:state.companyPayable,migratedAt:now};}else{a.profit.settled=Math.min(Math.max(0,finance.round(Number(a.profit.settled)||0)),Math.max(0,finance.round(Number(a.balance)||0)));a.profit.companyPayable=Math.max(0,finance.round(Number(a.profit.companyPayable)||0));}return a.profit;}
+function values(a){const s=finance.summary(a);return {balance:s.balance,freeBalance:s.freeBalance,settledProfit:s.settledProfit,withdrawable:s.withdrawable,companyPayable:s.companyPayable,available:s.available,reserved:s.reserved,capital:s.capital,stations:s.active?.stationIds.length||0,tariff:s.active?.name||'None',rate:s.active?.rate||0};}
+function fundingCents(value){if(!Number.isFinite(value)||value<0||value>1e10||Math.abs(value*100-Math.round(value*100))>1e-4)fail('Verified funding contains an invalid USD amount.');return Math.round(value*100);}
+function verifiedCoverage(obligation,op){
+ const funding=op.verifiedFunding;
+ if(!funding){if(['verifiedRevenue','companyReserve'].some(key=>op[key]!==undefined&&Number(op[key])!==0))fail('Allocate verified funding through the shared funding ledger.');return charge.coverage({obligation});}
+ const due=fundingCents(obligation),pool=fundingCents(Number(funding.participantPool)||0),poolTotal=fundingCents(Number(funding.participantPoolTotal??funding.participantPool)||0),reserve=fundingCents(Number(funding.companyReserve)||0),gross=fundingCents(Number(funding.verifiedRevenue)||0);
+ if(pool>poolTotal||poolTotal>gross)fail('The verified revenue pool is inconsistent with its source.');
+ const revenueApplied=Math.min(due,pool),reserveApplied=Math.min(due-revenueApplied,reserve),funded=revenueApplied+reserveApplied,payable=due-funded;
+ return {obligation:due/100,revenue:gross/100,participantPool:pool/100,companyRevenue:(gross-poolTotal)/100,revenueApplied:revenueApplied/100,reserveApplied:reserveApplied/100,funded:funded/100,companyPayable:payable/100,status:payable===0?'funded':funded?'partially-funded':'payable'};
+}
 function record(a,op,before,now,extra={}){
  const entry={operationId:op.id,kind:op.kind,date:now,actor:op.actor,reason:op.reason,before,after:values(a),...extra};
  a.adjustments.unshift(entry);return entry;
@@ -702,37 +745,46 @@ function assertSelectable(value,stationIds,previous){
 }
 function activate(a,value,stationIds,op,now=new Date().toISOString()){
  assertSelectable(value,stationIds,a.plan);
- validateOperation(a,op);const p=checkedPlan(value,stationIds,now),before=values(a),s=finance.summary(a);
+ validateOperation(a,op);const p=checkedPlan(value,stationIds,now),before=values(a),s=finance.summary(a),profit=ensureProfit(a,now);
  const balance=finance.round(s.balance+s.capital-p.capital);
  if(balance<s.reserved)fail('The plan needs additional available funds.');
  if(balance>finance.maximum)fail('The balance exceeds the allowed range.');
- const previous=a.plan?structuredClone(a.plan):null;
+ const previous=a.plan?structuredClone(a.plan):null,additionalCapital=Math.max(0,finance.round(p.capital-s.capital)),profitSpent=Math.min(s.withdrawable,Math.max(0,finance.round(additionalCapital-s.freeBalance)));
+ profit.settled=finance.round(profit.settled-profitSpent);
  a.balance=balance;withdrawals.markActivation(a,Date.parse(now));a.plan={...p,status:'active'};a.portfolio=p.stationIds.slice();delete a.planDraft;
  a.planHistory??=[];a.planHistory.push({date:now,actor:op.actor,reason:op.reason,previous,plan:structuredClone(a.plan)});
  return record(a,{...op,kind:'plan'},before,now);
 }
-function nextWeek(a){
+function nextAccrual(a){
  const start=Date.parse(a.plan?.appliedAt);if(a.plan?.status!=='active'||!Number.isFinite(start)||a.plan.capital<=0)return null;
- // Shared period selection preserves legacy overlap protection in server and UI.
+ // Historical weekly records remain immutable and advance the first new period.
  const from=finance.nextPeriodStart(a);
- const terms=finance.periodTerms(a.plan,from),payout=finance.weekly(a.plan.capital,terms.rate,from,terms.ratePeriod);return {periodStart:new Date(from).toISOString(),periodEnd:new Date(from+7*day).toISOString(),capital:a.plan.capital,...terms,payout};
+ const terms=finance.periodTerms(a.plan,from),legacyWeek=terms.ratePeriod==='week',transition=Date.parse(a.plan.rateTransition?.at),end=legacyWeek?Math.min(from+finance.calendar.WEEK,Number.isFinite(transition)&&transition>from?transition:from+finance.calendar.WEEK):from+finance.settlementPeriodMs,baseRate=terms.rate,obligation=legacyWeek?finance.round(finance.weekly(a.plan.capital,baseRate,from,'week')*(end-from)/finance.calendar.WEEK):finance.planAccrual(a.plan,from,end),window=finance.aiWindow(a.plan),aiApplied=!legacyWeek&&!!window&&window.start<end&&window.end>from;return {period:legacyWeek?'week':'accrual',settlementDays:legacyWeek?7:finance.settlementDays,periodStart:new Date(from).toISOString(),periodEnd:new Date(end).toISOString(),capital:a.plan.capital,rate:legacyWeek?baseRate:finance.effectiveRate(a.plan,from),baseRate,aiRateBonus:aiApplied?finance.aiRateBonus:0,aiApplied,ratePeriod:terms.ratePeriod,obligation,payout:obligation};
 }
-function creditWeek(a,op,now=new Date().toISOString()){
+function creditAccrual(a,op,now=new Date().toISOString()){
  validateOperation(a,op);if(op.role==='client')fail('Team access required.');
- const w=nextWeek(a);if(!w||Date.parse(w.periodEnd)>Date.parse(now))fail('A complete uncredited week is required.');
- if(op.periodStart!==w.periodStart)fail('The weekly period changed. Review it again.');
- const nextCents=live.cents(a.balance)+Math.round(w.payout*100);
+ const w=nextAccrual(a);if(!w||Date.parse(w.periodEnd)>Date.parse(now))fail(w?.period==='week'?'The preserved legacy week is not complete yet.':'A complete uncredited 4-day accrual period is required.');
+ if(op.periodStart!==w.periodStart)fail('The accrual period changed. Review it again.');
+ const obligation=w.obligation??w.payout,covered=verifiedCoverage(obligation,op),nextCents=live.cents(a.balance)+Math.round(covered.funded*100);
  if(nextCents>live.cents(finance.maximum))fail('The balance exceeds the allowed range.');
- const before=values(a);a.sessions.push({id:op.id,period:'week',weekStart:w.periodStart.slice(0,10),...w,stationIds:a.plan.stationIds.slice(),planName:a.plan.name,date:now,actor:op.actor,source:op.role==='system'?'automatic_demo':'manual_demo'});
- a.balance=nextCents/100;return record(a,{...op,kind:'weekly'},before,now,{amount:w.payout,periodStart:w.periodStart,periodEnd:w.periodEnd});
+ const before=values(a),profit=ensureProfit(a,now),session={id:op.id,...w,payout:covered.funded,obligation:covered.obligation,funded:covered.funded,companyPayable:covered.companyPayable,participantPool:covered.revenueApplied,revenueApplied:covered.revenueApplied,reserveApplied:covered.reserveApplied,settlementStatus:covered.status,stationIds:a.plan.stationIds.slice(),planName:a.plan.name,date:now,actor:op.actor,source:op.role==='system'?'automatic_obligation':'manual_verified_settlement'};a.sessions.push(session);
+ a.balance=nextCents/100;profit.settled=finance.round(profit.settled+covered.funded);profit.companyPayable=finance.round(profit.companyPayable+covered.companyPayable);return record(a,{...op,kind:w.period==='week'?'weekly':'accrual'},before,now,{amount:covered.funded,obligation:covered.obligation,funded:covered.funded,companyPayable:covered.companyPayable,revenueApplied:covered.revenueApplied,reserveApplied:covered.reserveApplied,periodStart:w.periodStart,periodEnd:w.periodEnd});
+}
+function fundPayable(a,op,now=new Date().toISOString()){
+ validateOperation(a,op);if(op.role==='client'||op.role==='system')fail('Verified team access required.');
+ const session=a.sessions.find(s=>s.id===op.sessionId),outstanding=Number(session?.companyPayable)||0;if(!session||outstanding<=0)fail('Choose an unpaid obligation.');
+ const covered=verifiedCoverage(outstanding,op);if(covered.funded<=0)fail('Add verified revenue or company reserve funding.');
+ const nextCents=live.cents(a.balance)+Math.round(covered.funded*100);if(nextCents>live.cents(finance.maximum))fail('The balance exceeds the allowed range.');
+ const before=values(a),profit=ensureProfit(a,now);session.funded=finance.round((Number(session.funded)||0)+covered.funded);session.payout=session.funded;session.companyPayable=finance.round(outstanding-covered.funded);session.participantPool=finance.round((Number(session.participantPool)||0)+covered.revenueApplied);session.revenueApplied=finance.round((Number(session.revenueApplied)||0)+covered.revenueApplied);session.reserveApplied=finance.round((Number(session.reserveApplied)||0)+covered.reserveApplied);session.settlementStatus=session.companyPayable===0?'funded':'partially-funded';session.fundingEntries??=[];session.fundingEntries.push({operationId:op.id,date:now,verifiedRevenue:covered.revenue,participantPoolAvailable:covered.participantPool,revenueApplied:covered.revenueApplied,reserveApplied:covered.reserveApplied,funded:covered.funded});
+ a.balance=nextCents/100;profit.settled=finance.round(profit.settled+covered.funded);profit.companyPayable=Math.max(0,finance.round(profit.companyPayable-covered.funded));return record(a,{...op,kind:'obligation_funding'},before,now,{amount:covered.funded,sessionId:session.id,companyPayable:session.companyPayable,revenueApplied:covered.revenueApplied,reserveApplied:covered.reserveApplied});
 }
 function review(a,op,now=new Date().toISOString()){
  validateOperation(a,op);if(op.role==='client')fail('Team access required.');
  const r=a.requests.find(r=>r.id===op.requestId);if(!r||r.status!=='Pending'||!['approve','reject'].includes(op.decision))fail('This request was already reviewed or is unavailable.');
  if(r.type==='topup'&&r.payment?.reportedByClient&&op.decision==='approve'&&op.receiptChecked!==true)fail('Confirm receipt verification before crediting this request.');
- const before=values(a);let balance=a.balance;
+ const before=values(a),profit=ensureProfit(a,now);let balance=a.balance;
  if(op.decision==='approve'){
-  if(r.type==='withdraw'){if(r.amount>a.balance)fail('Insufficient available funds.');balance=finance.round(a.balance-r.amount);}
+  if(r.type==='withdraw'){const state=withdrawals.state(a,Date.parse(now));if(r.amount>state.settledProfit||r.amount>a.balance)fail('Only settled profit can be withdrawn.');balance=finance.round(a.balance-r.amount);profit.settled=finance.round(profit.settled-r.amount);}
   else if(r.type==='topup')balance=finance.round(a.balance+r.amount);
   else fail('Invalid payment request.');
   if(!finance.valid(balance))fail('The balance exceeds the allowed range.');
@@ -741,7 +793,8 @@ function review(a,op,now=new Date().toISOString()){
  if(r.type==='topup'){r.payment={...r.payment,mode:'preview'};if(op.decision==='approve'&&op.receiptChecked===true)r.receiptChecked=true;}
  return record(a,{...op,kind:r.type+'_'+op.decision},before,now,{amount:r.amount,requestId:r.id,source:'manual_demo'});
 }
-module.exports={assertSelectable,checkedPlan,values,activate,nextWeek,creditWeek,review};
+const nextWeek=nextAccrual,creditWeek=creditAccrual;
+module.exports={assertSelectable,checkedPlan,ensureProfit,values,activate,nextAccrual,creditAccrual,fundPayable,nextWeek,creditWeek,review};
 
 },
 "server/account-policy.cjs":function(module,exports,require){
@@ -751,7 +804,7 @@ const workspace=require('../dist/central/workspace-model.js');
 const clean=(v,max=200)=>typeof v==='string'?v.trim().slice(0,max):'';
 const cents=n=>Number.isFinite(n)&&n>=0&&n<=1e7&&Math.abs(n*100-Math.round(n*100))<.00001;
 const fail=(message,status=400)=>{const e=Error(message);e.status=status;throw e;};
-function initial(client,manager){return {balance:0,portfolio:[],plan:null,requests:[],tickets:[],sessions:[],activity:[],adjustments:[],client:{name:client.name,email:client.email,status:'Active',note:''},manager:{name:manager.name,title:'Account Manager',email:'',whatsapp:'',telegram:'',photo:''},tariffs:tiers,tariffModelVersion:3,monthlyTermsVersion:1,weeklyModelVersion:1};}
+function initial(client,manager){return {balance:0,profit:{settled:0,companyPayable:0},portfolio:[],plan:null,requests:[],tickets:[],sessions:[],activity:[],adjustments:[],client:{name:client.name,email:client.email,status:'Active',note:''},manager:{name:manager.name,title:'Account Manager',email:'',whatsapp:'',telegram:'',photo:''},tariffs:tiers,tariffModelVersion:5,monthlyTermsVersion:1,legacyWeeklyModelVersion:1,accrualModelVersion:3,settlementModel:'fixed-company-obligation',chargePolicy:'charge-fixed-obligation-v3'};}
 function plan(value,stationIds){if(!value)return null;return {...finance.checkedPlan(value,stationIds),...(funding.offer(value.starterId)?{starterId:value.starterId}:{})};}
 function draft(value,previous,stationIds,source='client',activePlan=null){
  if(!value)fail('Choose a valid plan amount and station group.');
@@ -767,6 +820,7 @@ function mergeClient(previous,submitted,stationIds,now=new Date().toISOString())
  const oldPlan=a.plan?.status==='active'?a.plan:null;
  const nextPlan=submitted.plan?.status==='active'?submitted.plan:null;
  const changedPlan=JSON.stringify(nextPlan&&[nextPlan.tierId,nextPlan.capital,nextPlan.stationIds])!==JSON.stringify(oldPlan&&[oldPlan.tierId,oldPlan.capital,oldPlan.stationIds]);
+ if(!changedPlan&&oldPlan&&JSON.stringify(nextPlan?.ai||null)!==JSON.stringify(oldPlan.ai||null))fail('Charge AI activation is controlled by the server.',403);
  if(changedPlan){if(!nextPlan)fail('An active plan cannot be removed through the client form.');
   finance.activate(a,nextPlan,stationIds,{id:'PLAN-'+require('node:crypto').randomUUID(),actor:'client',role:'client',reason:'Client confirmed plan'},now);
  }else if(submitted.balance!==previous.balance)fail('Only your manager can change the available balance.',403);
@@ -777,7 +831,7 @@ function mergeClient(previous,submitted,stationIds,now=new Date().toISOString())
  if(additions.length>1)fail('Send one payment request at a time.');
  for(const r of additions){if(!['topup','withdraw'].includes(r.type)||!cents(r.amount)||r.amount<model.paymentMinimum||r.amount>model.paymentMaximum||r.status!=='Pending'||!/^[-\w]{3,100}$/.test(r.id))fail('Invalid payment request.');
   if(a.requests.some(old=>old.type===r.type&&old.status==='Pending'))fail('A request is already awaiting review.');
-  if(r.type==='withdraw'){const w=withdrawals.state(a,Date.parse(now));if(!w.canRequest||r.amount>w.available)fail('The withdrawal window or available balance does not allow this request.');}
+  if(r.type==='withdraw'){const w=withdrawals.state(a,Date.parse(now));if(!w.canRequest||r.amount>w.available)fail('The withdrawal window or settled profit does not allow this request.');}
   let payment;if(r.payment){const p=r.payment;payment={mode:'preview',method:p.method==='crypto'?'crypto':'card',currency:'USD'};if(p.method==='crypto'){const nets={'usdt-trc20':['USDT','TRC20'],'usdt-erc20':['USDT','ERC20'],'usdc-base':['USDC','Base'],btc:['BTC','Bitcoin']};const net=nets[p.networkId];if(!net)fail('Invalid payment network.');Object.assign(payment,{networkId:p.networkId,asset:net[0],network:net[1]});}const offer=funding.offer(p.starterId);if(offer){if(offer.capital!==r.amount)fail('Starting amount does not match the plan.');Object.assign(payment,{starterId:offer.id,companyFeeUSD:0,totalUSD:offer.total,creditedUSD:offer.capital});}}
   if(r.type==='topup')payment={...payment,mode:'preview',reportedByClient:true};
   a.requests.push({id:r.id,type:r.type,amount:r.amount,status:'Pending',date:now,...(payment?{payment}:{})});
@@ -793,6 +847,5 @@ function mergeClient(previous,submitted,stationIds,now=new Date().toISOString())
  return a;
 }
 module.exports={tiers,clean,cents,fail,initial,mergeClient,draft};
-
 
 }},cache={};function load(id){if(id==="node:crypto")return {randomUUID:()=>crypto.randomUUID()};if(cache[id])return cache[id].exports;if(!modules[id])throw Error("Missing domain module "+id);const module={exports:{}};cache[id]=module;modules[id](module,module.exports,name=>{if(name.startsWith("node:"))return load(name);const p=id.split("/");p.pop();for(const s of name.split("/")){if(s==="..")p.pop();else if(s!==".")p.push(s);}return load(p.join("/"));});return module.exports;}window.EcoSandboxDomain={publicPlan:load("dist/public-plan.js"),profile:load("dist/central/profile-model.js"),journey:load("dist/journey-model.js"),finance:load("dist/account-finance.js"),operations:load("server/finance.cjs"),policy:load("server/account-policy.cjs"),crm:load("dist/crm-store.js"),planDocument:load("dist/central/plan-document.js"),funnel:load("dist/central/funnel-model.js"),journal:load("dist/central/energy-journal-model.js")};})();
