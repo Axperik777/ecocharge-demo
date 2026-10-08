@@ -12,3 +12,4 @@ html[data-app=website] svg.eco-guide-character{height:auto;fill:initial;stroke:n
 .eco-guide-dock .eco-guide-launch span{display:none}
 html[data-app=website] .eco-guide-dock .eco-guide-launch .eco-guide-character{width:46px;height:49px}
 @media(max-width:760px){.eco-guide-dock{width:calc(100% - 32px)}}
+@media(max-width:680px){.eco-mission a{display:inline-flex;align-items:center;min-height:44px;white-space:normal}}

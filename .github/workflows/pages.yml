@@ -23,6 +23,8 @@ jobs:
           node-version: '24'
       - name: Verify public website and publication boundary
         run: node scripts/verify-public-site.cjs public-site
+      - name: Verify returning-browser knowledge migration
+        run: node scripts/verify-knowledge-release.cjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

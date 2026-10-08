@@ -8,3 +8,5 @@
 
 .lead-field-error{display:block;color:#a12637;font-size:14px;line-height:1.6;margin:6px 0 12px}.lead-card [aria-invalid="true"]{border-color:#a12637!important}.lead-card input,.lead-card select,.lead-card textarea{scroll-margin-top:110px}
 html[data-theme="dark"] .lead-field-error{color:#ffb5bc}
+
+@media(max-width:680px){.lead-consent{min-height:44px;align-items:center;padding-block:8px}.lead-consent input{margin-top:0}}
