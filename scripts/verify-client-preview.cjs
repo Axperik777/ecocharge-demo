@@ -26,7 +26,10 @@ function verify(root){
  assert(boot.includes("method==='GET'?fixture.responses[key]:undefined"));assert(adapter.includes('requestWithdrawal:blocked'));assert(ready.includes('event.stopImmediatePropagation()'));
  const currentUi=['weekly.js','tariffs.js','portal.js','cabinets.js','central/ecosystem.js','central/client-finance.js'].map(file=>fs.readFileSync(path.join(root,file),'utf8')).join('\n');
  assert.doesNotMatch(currentUi,/Record a 4-day accrual|Weekly report available|First closed week|Compare the weekly model|Starting option \/ week|Alternative \/ week|Модель за неделю|Сравнить недельную модель|Недельный отч[её]т|Первая закрытая неделя|Day \d+ of 7|День \d+ из 7|7-day period|Период 7 дней|Unlocked after the Charge journey|Available after confirmed Charge participation/i,'Client preview contains retired current-state copy');
- assert.match(currentUi,/Preview 4-day obligation/);assert.match(currentUi,/Company payable · not withdrawable/);assert.match(currentUi,/Not active yet · future company release/);
+ assert.match(currentUi,/Preview 4-day obligation/);assert.match(currentUi,/Company payable · not withdrawable/);
+ assert.match(currentUi,/data-expansion-stage="open"/);
+ assert.match(currentUi,/EcoGrid Solar/);assert.match(currentUi,/EcoGrid Mining/);
+ assert.doesNotMatch(currentUi,/Not active yet · future company release|future-release/);
  return {files:files.length,capital:state.plan.capital,rate:state.plan.rate,settlements:state.sessions.length,balance:state.balance,privateData:false,serverOperations:false};
 }
 if(require.main===module)console.log(JSON.stringify(verify(path.resolve(process.argv[2]||'public-site/cabinet'))));

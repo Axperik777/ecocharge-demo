@@ -53,9 +53,9 @@ for(const file of files){
 for(const route of manifest.routes)assert(fs.existsSync(path.join(root,route,'index.html')));
 for(const route of ['', 'participate/charge','plans','resources','how-it-works']){const file=path.join(root,route,'index.html');assert.doesNotMatch(visibleText(fs.readFileSync(file,'utf8')),staleCurrentCadence,'Current route exposes the retired weekly cadence: /'+route);}
 for(const asset of ['site.js','trust.js','trust-content.js','funnel.js'])assert.doesNotMatch(fs.readFileSync(path.join(root,asset),'utf8'),staleCurrentCadence,'Active public UI script exposes the retired weekly cadence: '+asset);
-// Public export must retain the Charge-first conversion path and evidence routes.
+// Public export must keep the ecosystem neutral while every project retains its own request path.
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFileSync(path.join(root,'plans/index.html'),'utf8');
-assert.match(home,/href="participate\/charge\/"/,'Homepage Charge entry is missing');
+for(const route of ['charge','solar','mining'])assert.match(home,new RegExp('href="participate\\/'+route+'\\/"'),'Homepage project entry is missing: '+route);
 assert.match(home,/href="app\/#academy"/,'Homepage Academy evidence entry is missing');
 assert.doesNotMatch(home,/data-public-plan-form|data-lead-form|src="public-plan-ui\.js/,'Homepage must introduce the company without a calculator or lead form');
 assert.match(home,/data-workspace-entry[^>]*class="ec-sign-in"/,'Visible account entry is missing');
@@ -72,10 +72,14 @@ for(const route of ['login','register']){
 assert.doesNotMatch(plans,/data-public-plan-form|project-calculator/,'Public plans must stay informational and must not activate a browser calculator');
 assert.match(plans,/13(?:%|–16%)|16%/,'Public plans must explain the current calendar-month Charge range');
 assert.match(plans,/4[- ]day(?:s)?|four[- ]day(?:s)?/i,'Public plans must explain the 4-day settlement cadence');
-assert.match(plans,/participate\/charge\//,'Public plans must lead to the active Charge offer');
-const charge=fs.readFileSync(path.join(root,'participate/charge/index.html'),'utf8');
-assert.match(charge,/data-lead-form/,'Charge must remain the only active public participation lead route');
-for(const route of ['solar','mining']){const page=fs.readFileSync(path.join(root,'participate',route,'index.html'),'utf8');assert.doesNotMatch(page,/data-lead-form|id="request-access"|href="#request-access"/,'Secondary evidence route must not expose a participation form: '+route);assert.match(page,/participate\/charge\//,'Secondary evidence route must return to the active Charge offer: '+route);}
+for(const route of ['charge','solar','mining']){
+ const page=fs.readFileSync(path.join(root,'participate',route,'index.html'),'utf8');
+ assert.match(page,/data-lead-form/,'Project must expose its own request form: '+route);
+ assert.match(page,new RegExp('name="journeyTopic" value="'+route+'"'),'Project request must preserve its topic: '+route);
+}
+assert.match(plans,/participate\/charge\//,'Public plans must retain the Charge project link');
+assert.match(plans,/participate\/solar\//,'Public plans must retain the Solar project link');
+assert.match(plans,/participate\/mining\//,'Public plans must retain the Mining project link');
 const stations=JSON.parse(fs.readFileSync(path.join(root,'stations.json'),'utf8')).stations;
 assert.equal(stations.length,3980);assert.equal(stations.filter(s=>s.selectionClosed).length,1910);
 const runtime=fs.readFileSync(path.join(root,'website-only.js'),'utf8');

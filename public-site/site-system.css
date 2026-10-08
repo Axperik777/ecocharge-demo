@@ -391,14 +391,12 @@ html[data-app=website] #site-menu .ec-menu-top{position:sticky;top:-24px;backgro
 .journey-guide .ec-ai-note h2{font-size:20px}
 @media(max-width:800px){.grid-direction-cards,.ec-ai-note{grid-template-columns:1fr}.ec-ai-note{gap:16px;padding:22px}.ec-ai-note.ec-wrap{width:calc(100% - 32px)}}
 
-html[data-app=website] .grid-direction-cards>a.is-primary{grid-column:span 2;background:linear-gradient(145deg,#063e31,#087454);border-color:#0d7f5f;color:#fff;box-shadow:0 18px 42px rgba(6,62,49,.14)}
-html[data-app=website] .grid-direction-cards>a.is-primary h3,html[data-app=website] .grid-direction-cards>a.is-primary .grid-direction-description{color:#fff}
-html[data-app=website] .grid-direction-cards>a.is-primary p,html[data-app=website] .grid-direction-cards>a.is-primary small{color:#dff4e9}
-html[data-app=website] .grid-direction-cards>a.is-primary b{color:#b7ff67}
-html[data-app=website] .grid-direction-cards>a.is-follow-on{background:#f6f8f7;box-shadow:none}
-html[data-app=website] .grid-direction-stage{display:inline-flex;align-items:center;align-self:flex-start;min-height:28px;padding:5px 9px;border:1px solid currentColor;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--teal)}
-html[data-app=website] .is-primary .grid-direction-stage{color:#b7ff67}
-@media(max-width:800px){html[data-app=website] .grid-direction-cards>a.is-primary{grid-column:auto}}
+html[data-app=website] .grid-direction-cards>a{background:linear-gradient(145deg,#063e31,#087454);border-color:#0d7f5f;color:#fff;box-shadow:0 18px 42px rgba(6,62,49,.14)}
+html[data-app=website] .grid-direction-cards>a:hover{border-color:#b7ff67;box-shadow:0 22px 48px rgba(6,62,49,.2)}
+html[data-app=website] .grid-direction-cards>a h3,html[data-app=website] .grid-direction-cards>a .grid-direction-description{color:#fff}
+html[data-app=website] .grid-direction-cards>a p,html[data-app=website] .grid-direction-cards>a small{color:#dff4e9}
+html[data-app=website] .grid-direction-cards>a b{color:#b7ff67}
+html[data-app=website] .grid-direction-stage{display:inline-flex;align-items:center;align-self:flex-start;min-height:28px;padding:5px 9px;border:1px solid currentColor;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.08em;color:#b7ff67}
 
 /* Equipment category labels use one treatment on photos and cutouts. */
 html[data-app=website] :is(.solar-hardware,.solar-charger) .solar-hardware-type{color:#fff;background:#102019;padding:5px 9px;border-radius:4px;left:17px;top:13px;font-size:12px;font-weight:600;line-height:1.5;letter-spacing:0}
