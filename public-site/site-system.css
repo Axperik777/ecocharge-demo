@@ -270,6 +270,7 @@ html[data-app=website] .v-workspace-top>strong,html[data-app=website] .v-workspa
  html[data-app=website] .ec-header .locale-switch{padding:2px;gap:0}
  html[data-app=website] .ec-header .locale-switch button{min-width:31px;padding:6px;min-height:36px}
  html[data-app=website] .ec-header .ec-menu-trigger{width:40px;min-height:40px;height:40px;padding:9px}
+ html[data-app=website] .ec-breadcrumb a{display:inline-flex;align-items:center;min-height:44px}
  html[data-app=website] main h1{font-size:clamp(34px,7vw,46px);line-height:1.15;letter-spacing:-.04em}
  html[data-app=website] main h2{font-size:28px;line-height:1.25;letter-spacing:-.03em}
  html[data-app=website] main h3{font-size:20px}
@@ -310,6 +311,7 @@ html[data-app=website] .v-workspace-top>strong,html[data-app=website] .v-workspa
  html[data-app=website] .ec-faq summary{font-size:16px;padding-block:20px}
  html[data-app=website] .ec-footer{padding-top:34px}
  html[data-app=website] .ec-footer-main{gap:28px 22px}
+ html[data-app=website] .ec-footer-main>div>a{display:flex;align-items:center;min-height:44px}
 }
 @media(max-width:370px){
  html[data-app=website] .ec-wrap{width:calc(100% - 32px)}

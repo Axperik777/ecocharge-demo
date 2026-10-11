@@ -11,7 +11,7 @@ const files=walk(root).filter(f=>!f.startsWith(previewRoot+path.sep)&&!f.startsW
 const visibleText=html=>html.replace(/<!--[^]*?-->/g,' ').replace(/<(?:script|style)\b[^>]*>[^]*?<\/(?:script|style)>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&(?:nbsp|amp|quot|#39);/g,' ').replace(/\s+/g,' ');
 const staleCurrentCadence=/\bweekly\b|\b7[- ]day\b|\bday\s+\d+\s+of\s+7\b|недельн|7\s*(?:дней|дня)|день\s+\d+\s+из\s+7/i;
 assert.equal(manifest.app,'website');
-assert.equal(manifest.routes.length,18);for(const r of ['app','academy','learn','club','participate/charge','participate/solar','participate/mining'])assert(manifest.routes.includes(r));
+assert.equal(manifest.routes.length,33);for(const r of ['app','academy','learn','club','participate/charge','participate/solar','participate/mining','guides','guides/responsible-energy-is-not-impact-free','guides/tax-policy-and-household-budget','guides/digital-assets-need-real-infrastructure'])assert(manifest.routes.includes(r));
 const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),context);
 const config=context.window.ECO_PLATFORM_CONFIG;
 assert.equal(config.websiteOnly,true);

@@ -134,6 +134,8 @@
  const purposes={participation:['Project participation','Участие в проекте'],equipment:['Equipment for my property','Оборудование для своего объекта'],capacity:['EcoGrid farm computing-cell rental','Аренда вычислительной ячейки на ферме EcoGrid'],business:['Business partnership','Деловое партнёрство'],updates:['Explore and follow updates','Изучить и следить за новостями']};
  const projectPurposes={energy:['participation','equipment','business'],charge:['participation'],solar:['participation','equipment','business'],mining:['capacity']};
  const routes={fast:['Consultation','Консультация'],nurture:['Explore first','Знакомство с проектом']};
+ const acquisitionPaths={direct_project:['Direct project campaign','Прямая реклама проекта'],community_interest:['Community by shared interest','Сообщество по интересам'],academy_education:['Academy education','Обучение в Академии']};
+ const communityArticleIds=new Set(['policy-household-budget','digital-assets-infrastructure','responsible-energy']);
  const keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','msclkid','ttclid','landing_id','landing_host','lead_route','aff','partner_id','sub_id','ref'];
  function attribution(input={}){const v={};for(const k of keys)if(typeof input[k]==='string')v[k]=input[k].slice(0,300);return v;}
  function normalize(input){if(!input)return null;const route=input.route,topic=input.topic,purpose=input.purpose,country=input.country;if(!Object.hasOwn(routes,route)||!Object.hasOwn(topics,topic)||!Object.hasOwn(purposes,purpose)||!['US','CA'].includes(country))throw Error('Choose a route, topic, purpose and country.');if(route==='nurture'&&purpose!=='updates')throw Error('Choose exploration to follow project updates.');if(route==='fast'&&projectPurposes[topic]&&!projectPurposes[topic].includes(purpose))throw Error('Choose an objective available for this project.');return {route,topic,purpose,country};}
@@ -161,6 +163,14 @@
   return {consultationRequested,journey:normalize({route,topic:values.topic,purpose,country:values.country}),marketingConsent:values.marketingConsent==='on',language:language==='ru'?'ru':'en'};
  }
  function entry(record){return record.context?.journey||record.journey||record.state?.journey||null;}
+ function acquisition(record={}){
+  const state=record.state||record,content=record.context?.content||state.content||{},j=entry(record)||{};
+  const entryArticle=typeof content.entryId==='string'&&/^[a-z0-9][a-z0-9-]{0,79}$/.test(content.entryId)?content.entryId:'';
+  const inferred=entryArticle?(communityArticleIds.has(entryArticle)?'community_interest':'academy_education'):j.entryRoute==='fast'?'direct_project':j.topic==='academy'?'academy_education':'community_interest';
+  const path=Object.hasOwn(acquisitionPaths,content.acquisitionPath)?content.acquisitionPath:inferred;
+  const project=Object.hasOwn(projectTopics,j.topic)&&j.topic!=='energy'?j.topic:null;
+  return {path,articleAssist:content.articleAssist===true,entryArticle,project,purpose:j.purpose||null};
+ }
  function communityEntry(state={}){const j=entry(state);return j?.route==='nurture'&&['club','academy','ecocoin'].includes(j.topic)&&!state.plan&&!state.planDraft&&!state.requests?.some(r=>r.type==='topup');}
  function academyStage(state={}){
   if(state.plan?.status==='active'||state.miningPositions?.some(p=>p.status!=='closed'&&p.capital>0))return 'active';
@@ -175,10 +185,10 @@
  function exploring(record){return entry(record)?.route==='nurture';}
  function label(group,key,lang='en'){return (group[key]||['—','—'])[lang==='ru'?1:0];}
  function cohorts(rows,dimension='entryRoute',at=Date.now()){
-  const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='topic'?j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
+  const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='acquisitionPath'?acquisition(r).path:dimension==='topic'?r.requestedProject||j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
   return [...groups.values()].map(g=>({...g,averageAgeDays:g.contacts?g.ageDays/g.contacts:null,averageDaysToPaid:g.paid?g.daysToPaid/g.paid:null,paidRate:g.contacts?g.paid/g.contacts:0}));
  }
- return {needsAcademy,clientPreferenceInput,academyStage,communityEntry,requestConversation,version,topics,projectTopics,purposes,projectPurposes,routes,keys,attribution,normalize,merge,entry,exploring,label,cohorts};
+ return {needsAcademy,clientPreferenceInput,academyStage,communityEntry,requestConversation,version,topics,projectTopics,purposes,projectPurposes,routes,acquisitionPaths,keys,attribution,normalize,merge,entry,acquisition,exploring,label,cohorts};
 });
 
 },

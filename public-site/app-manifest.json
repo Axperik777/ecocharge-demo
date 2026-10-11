@@ -12,6 +12,21 @@
     "solar",
     "mining",
     "learn",
+    "guides",
+    "guides/energy-journey",
+    "guides/why-address-matters-for-solar",
+    "guides/solar-during-an-outage",
+    "guides/what-a-complete-solar-quote-includes",
+    "guides/solar-equipment-or-project-participation",
+    "guides/why-charge-economics-start-with-location",
+    "guides/what-happens-after-an-ev-plugs-in",
+    "guides/how-to-read-the-charge-terms",
+    "guides/why-ecogrid-rents-computing-cells",
+    "guides/what-changes-a-mining-result",
+    "guides/how-to-review-an-energy-project",
+    "guides/tax-policy-and-household-budget",
+    "guides/digital-assets-need-real-infrastructure",
+    "guides/responsible-energy-is-not-impact-free",
     "club",
     "academy",
     "participate/charge",
@@ -31,5 +46,5 @@
     "apiBase": "",
     "landingId": "main"
   },
-  "createdAt": "2026-10-11T10:35:27.090Z"
+  "createdAt": "2026-10-11T11:51:22.778Z"
 }
