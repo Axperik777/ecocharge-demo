@@ -11,7 +11,8 @@ html[data-app=website][data-page=home][data-landing=main] .grid-hero-visual{posi
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-visual figure{height:100%;margin:0}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-visual figure img{height:100%;width:100%;min-height:0;object-fit:cover;object-position:center 57%}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;max-width:1100px;margin:0 auto}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{font-size:clamp(44px,4.6vw,68px);font-weight:500;line-height:1.1;letter-spacing:-.045em;color:#fff;max-width:980px;margin:auto 0 24px;text-wrap:balance}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-principle{margin:auto 0 18px;color:#d7f3b7}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{font-size:clamp(40px,4.25vw,62px);font-weight:500;line-height:1.1;letter-spacing:-.045em;color:#fff;max-width:1040px;margin:0 0 24px;text-wrap:balance}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero h1 em{color:#cde8ae;font-style:normal}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{font-size:20px!important;line-height:1.55;color:#f5f8f6;max-width:670px;margin:0 auto 40px;text-wrap:balance}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(100%,720px);margin:auto 0 0}

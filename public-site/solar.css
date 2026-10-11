@@ -170,6 +170,11 @@
 .solar-ai ul{display:grid;gap:0;margin:22px 0 0;padding:0;list-style:none}
 .solar-ai li{min-height:44px;display:flex;align-items:center;padding:10px 0;border-top:1px solid rgba(255,255,255,.18);color:#fff;font-size:13px;line-height:1.5}
 .solar-ai li:before{content:"↗";margin-right:11px;color:#8be0bd;font-weight:800}
+html[data-app=website] .solar-page .solar-ai{padding-inline:clamp(22px,4vw,48px)}
+html[data-app=website] .solar-page .solar-ai h2{color:#fff}
+html[data-app=website] .solar-page .solar-ai .solar-eyebrow{color:#8be0bd}
+html[data-app=website] .solar-page .solar-ai p{color:#d6e3dc}
+html[data-app=website] .solar-page .solar-ai li{color:#fff}
 .solar-reference{display:grid;grid-template-columns:minmax(260px,.7fr) minmax(0,1.3fr);gap:clamp(28px,5vw,70px);align-items:start}
 .solar-reference>div:first-child{position:sticky;top:100px}
 .solar-reference>div:first-child p:not(.solar-eyebrow){color:var(--solar-muted);font-size:14px;line-height:1.75}
@@ -181,7 +186,7 @@
 .solar-reference figcaption span{color:var(--solar-muted);font-size:12px;line-height:1.5}
 .solar-page .solar-participation{display:grid;grid-template-columns:1.1fr .9fr;gap:38px;align-items:center;margin-block:48px 72px;padding:clamp(26px,4vw,45px);border-radius:20px;background:var(--solar-green);color:#fff}
 .solar-page .solar-participation h2,.solar-page .solar-participation p,.solar-page .solar-participation small{color:#fff}
-.solar-page .solar-participation .solar-eyebrow{color:#bdebd7}
+.solar-page .solar-participation .solar-eyebrow{color:#0b684f}
 .solar-page .solar-participation>div:last-child{display:grid;gap:12px}
 .solar-page .solar-participation .ec-button{background:#fff;border-color:#fff;color:var(--solar-deep)}
 .solar-page .solar-participation .ec-button:hover{background:var(--solar-soft);border-color:var(--solar-soft);color:var(--solar-deep)}

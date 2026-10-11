@@ -1,7 +1,7 @@
 'use strict';
 (function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('../solar-catalog.js'):root.EcoSolar);if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoEquipment=api;})(typeof window==='object'?window:globalThis,solar=>{
  const mining=typeof module==='object'&&module.exports?require('../mining-model.js'):globalThis.EcoMining;
- const names={mining:['Mining','Майнинг'],solar:['Solar panels','Солнечные панели'],storage:['Energy storage','Накопители'],charging:['EV charging','Зарядки EV'],consultation:['Specialist help','Помощь специалиста']};
+ const names={mining:['Mining cell rental','Аренда ячеек Mining'],solar:['Solar panels','Солнечные панели'],storage:['Energy storage','Накопители'],charging:['EV charging','Зарядки EV'],consultation:['Specialist help','Помощь специалиста']};
  const title=(kind,lang='en')=>(names[kind]||names.consultation)[lang==='ru'?1:0];
  function request(input={}){
   if(!input||typeof input!=='object'||Array.isArray(input))throw Error('Choose an inquiry type.');

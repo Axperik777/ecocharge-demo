@@ -9,5 +9,16 @@ html[data-app=website] .academy-promo-links a{display:flex;align-items:center;ga
 html[data-app=website] .academy-promo-links a:hover{border-color:var(--teal)}
 html[data-app=website] .academy-promo-links a>svg:first-child{color:var(--teal)}
 html[data-app=website] .academy-promo-links a>svg:last-child{margin-left:auto}
+html[data-app=website] .club-community-symbol{width:76px;height:76px;flex:none;display:grid;place-items:center;border-radius:22px;background:#d8ece0;color:#006a4d}
+html[data-app=website] .club-community-symbol svg{width:48px;height:48px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+html[data-app=website] .academy-ecocoin{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:clamp(28px,5vw,64px);align-items:center;padding-block:48px 72px;scroll-margin-top:96px}
+html[data-app=website] .academy-ecocoin-copy h2{font-size:clamp(30px,3.7vw,48px);line-height:1.12;letter-spacing:-.04em;margin:12px 0 20px}
+html[data-app=website] .academy-ecocoin-copy>p:not(.ec-kicker){font-size:17px;line-height:1.7;color:var(--muted)}
+html[data-app=website] .academy-ecocoin-copy ul{list-style:none;padding:0;margin:24px 0;display:grid;gap:14px}
+html[data-app=website] .academy-ecocoin-copy li{position:relative;padding-left:28px;font-size:16px;line-height:1.55}
+html[data-app=website] .academy-ecocoin-copy li:before{content:'✓';position:absolute;left:0;top:0;color:var(--teal);font-weight:800}
+html[data-app=website] .academy-ecocoin-copy .academy-ecocoin-note{font-size:14px;border-left:2px solid var(--teal);padding:4px 0 4px 16px;margin:24px 0}
+html[data-app=website] .academy-coin-card{align-self:stretch;display:flex;flex-direction:column;justify-content:center}
 
-@media(max-width:800px){.academy-hero{grid-template-columns:1fr;padding-block:24px 36px;gap:24px}.academy-brand{font-size:22px}html[data-app=website] .academy-promo{grid-template-columns:1fr;gap:22px}}
+@media(max-width:800px){.academy-hero{grid-template-columns:1fr;padding-block:24px 36px;gap:24px}.academy-brand{font-size:22px}html[data-app=website] .academy-promo{grid-template-columns:1fr;gap:22px}html[data-app=website] .academy-ecocoin{grid-template-columns:1fr;padding-block:36px 52px}html[data-app=website] .academy-ecocoin-copy .ec-button{width:100%;justify-content:center}}
+@media(max-width:420px){html[data-app=website] .club-community-symbol{width:64px;height:64px;border-radius:18px}html[data-app=website] .club-community-symbol svg{width:40px;height:40px}html[data-app=website] .academy-ecocoin{gap:24px}html[data-app=website] .academy-coin-card{padding:22px 18px}html[data-app=website] .academy-coin-card .club-welcome-token{gap:14px}html[data-app=website] .academy-coin-card .club-welcome-token .club-coin-badge{width:68px;height:68px}html[data-app=website] .academy-coin-card .club-welcome-token>strong{font-size:34px}}

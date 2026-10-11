@@ -131,8 +131,8 @@
  const topics={academy:['EcoGrid Academy','EcoGrid Academy'],energy:['Energy projects','Энергетические проекты'],solar:['Solar & storage','Солнце и накопители'],charge:['EV charging','Зарядные станции'],mining:['Mining & EcoMiner','Майнинг и EcoMiner'],ai:['EcoGrid AI technology','Технология EcoGrid AI'],ecocoin:['EcoCoin','EcoCoin'],club:['EcoGrid Club community','Сообщество EcoGrid Club']};
  // Keep old AI records readable; new inquiries select a project or the Club community.
  const projectTopics=Object.fromEntries(Object.entries(topics).filter(([id])=>!['ai','ecocoin','club','academy'].includes(id)));
- const purposes={participation:['Project participation','Участие в проекте'],equipment:['Equipment for my property','Оборудование для своего объекта'],capacity:['Managed mining capacity','Аренда майнинговых мощностей'],business:['Business partnership','Деловое партнёрство'],updates:['Explore and follow updates','Изучить и следить за новостями']};
- const projectPurposes={energy:['participation','equipment','business'],charge:['participation'],solar:['participation','equipment','business'],mining:['participation','capacity','equipment','business']};
+ const purposes={participation:['Project participation','Участие в проекте'],equipment:['Equipment for my property','Оборудование для своего объекта'],capacity:['EcoGrid farm computing-cell rental','Аренда вычислительной ячейки на ферме EcoGrid'],business:['Business partnership','Деловое партнёрство'],updates:['Explore and follow updates','Изучить и следить за новостями']};
+ const projectPurposes={energy:['participation','equipment','business'],charge:['participation'],solar:['participation','equipment','business'],mining:['capacity']};
  const routes={fast:['Consultation','Консультация'],nurture:['Explore first','Знакомство с проектом']};
  const keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','msclkid','ttclid','landing_id','landing_host','lead_route','aff','partner_id','sub_id','ref'];
  function attribution(input={}){const v={};for(const k of keys)if(typeof input[k]==='string')v[k]=input[k].slice(0,300);return v;}
@@ -154,9 +154,11 @@
   const ticket={id,subject,message,reply:'',date:at,status:'Open',journeyTopic:j.topic,messages:[{id,from:'client',text:message,date:at}],service:{closed:false}};state.tickets.push(ticket);return ticket;
  }
  function clientPreferenceInput(previous,values,language='en'){
-  if(!['updates','participation'].includes(values.purpose)||!Object.hasOwn(projectTopics,values.topic))throw Error('Choose a project and next step.');
-   const consultationRequested=values.purpose==='participation',route=consultationRequested?'fast':'nurture';
-  return {consultationRequested,journey:normalize({route,topic:values.topic,purpose:values.purpose,country:values.country}),marketingConsent:values.marketingConsent==='on',language:language==='ru'?'ru':'en'};
+  if(!['updates','participation','capacity'].includes(values.purpose)||!Object.hasOwn(projectTopics,values.topic))throw Error('Choose a project and next step.');
+  const purpose=values.topic==='mining'&&values.purpose==='participation'?'capacity':values.purpose;
+  if(purpose==='capacity'&&values.topic!=='mining')throw Error('Choose a project and next step.');
+  const consultationRequested=purpose!=='updates',route=consultationRequested?'fast':'nurture';
+  return {consultationRequested,journey:normalize({route,topic:values.topic,purpose,country:values.country}),marketingConsent:values.marketingConsent==='on',language:language==='ru'?'ru':'en'};
  }
  function entry(record){return record.context?.journey||record.journey||record.state?.journey||null;}
  function communityEntry(state={}){const j=entry(state);return j?.route==='nurture'&&['club','academy','ecocoin'].includes(j.topic)&&!state.plan&&!state.planDraft&&!state.requests?.some(r=>r.type==='topup');}
