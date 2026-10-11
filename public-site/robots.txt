@@ -1,2 +1,5 @@
 User-agent: *
-Disallow: /
+Allow: /ecocharge-demo/
+Disallow: /ecocharge-demo/workspace/
+Disallow: /ecocharge-demo/cabinet/
+Sitemap: https://axperik777.github.io/ecocharge-demo/sitemap.xml

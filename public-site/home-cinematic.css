@@ -20,6 +20,7 @@ html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button:hover{background:#2d5043;border-color:#fff;color:#fff;transform:none}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button-outline{background:#cde8ae;color:#12382a;border-color:#cde8ae;backdrop-filter:none}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button-outline:hover{background:#e0f1cd;color:#12382a;border-color:#e0f1cd}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions>.ec-text-link{grid-column:1/-1;justify-self:center;min-height:44px;color:#fff;font-size:14px;text-decoration-color:#ffffff99}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero :focus-visible{outline:3px solid #fff;outline-offset:4px}
 html[data-app=website][data-page=home][data-landing=main] .eco-home-mission{font-size:14px;line-height:1.7;margin:20px auto 0;text-align:center;max-width:850px;padding:0 24px;color:#52665b}
 html[data-app=website][data-page=home][data-landing=main] .grid-directions{border-top:0}
@@ -51,4 +52,35 @@ html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{min-he
 @media(max-width:600px){
  html[data-app=website][data-page=home][data-landing=main] .grid-hero{min-height:max(710px,calc(100svh - 16px));padding-top:158px}
  html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{min-height:max(520px,calc(100svh - 198px))}
+}
+
+/* EC130: compact, independent Academy/Club paths and a single partner plaque. */
+html[data-app=website][data-page=home] .ec-anchor-alias{display:block;position:relative;top:-96px;visibility:hidden}
+html[data-app=website][data-page=home] .home-club-section{padding-block:clamp(44px,6vw,72px)}
+html[data-app=website][data-page=home] .home-club-compact{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:clamp(32px,6vw,72px);align-items:center;padding:clamp(28px,4.5vw,52px);border:1px solid var(--line,#d8e4de);border-radius:var(--ec-radius-feature,24px);background:var(--pale,#edf7f2)}
+html[data-app=website][data-page=home] .home-club-copy h2{max-width:15ch;margin:0 0 18px;font-size:clamp(30px,3.5vw,44px);line-height:1.14;letter-spacing:-.04em}
+html[data-app=website][data-page=home] .home-club-copy>p:not(.product-name){max-width:62ch;margin:0;color:var(--muted,#53675e);font-size:16px;line-height:1.68}
+html[data-app=website][data-page=home] .home-club-copy .ec-button{margin-top:24px}
+html[data-app=website][data-page=home] .home-club-topics{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+html[data-app=website][data-page=home] .home-club-topics li{padding:18px 20px;border:1px solid #c7dbd1;border-radius:var(--ec-radius-control,12px);background:#fff}
+html[data-app=website][data-page=home] .home-club-topics span{display:block;margin-bottom:6px;color:var(--teal,#006a4d);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+html[data-app=website][data-page=home] .home-club-topics strong{font-size:16px;line-height:1.45}
+html[data-app=website][data-page=home] .home-partner-strip{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.4fr);gap:24px 48px;margin-block:clamp(44px,7vw,80px);padding:clamp(28px,4vw,44px);border:1px solid var(--line,#d8e4de);border-radius:var(--ec-radius-feature,24px);background:#fff}
+html[data-app=website][data-page=home] .home-partner-copy h2{max-width:18ch;margin:0 0 14px;font-size:clamp(28px,3vw,38px);line-height:1.18;letter-spacing:-.04em}
+html[data-app=website][data-page=home] .home-partner-copy>p:last-child{max-width:58ch;margin:0;color:var(--muted,#53675e);font-size:15px;line-height:1.65}
+html[data-app=website][data-page=home] .home-partner-names{display:flex;flex-wrap:wrap;align-content:start;gap:8px;margin:0;padding:0;list-style:none}
+html[data-app=website][data-page=home] .home-partner-names li{padding:8px 11px;border:1px solid var(--line,#d8e4de);border-radius:999px;background:var(--pale,#edf7f2);font-size:12px;font-weight:600;line-height:1.35}
+html[data-app=website][data-page=home] .home-partner-footer{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-top:20px;border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website][data-page=home] .home-partner-footer>p{max-width:72ch;margin:0;color:var(--muted,#53675e);font-size:12px;line-height:1.6}
+@media(max-width:800px){
+ html[data-app=website][data-page=home] .home-club-compact,html[data-app=website][data-page=home] .home-partner-strip{grid-template-columns:1fr;gap:28px}
+ html[data-app=website][data-page=home] .home-club-copy .ec-button{width:100%;justify-content:center}
+ html[data-app=website][data-page=home] .home-partner-footer{grid-column:auto;display:grid;gap:12px}
+}
+@media(max-width:600px){
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions>.ec-text-link{grid-column:auto}
+ html[data-app=website][data-page=home] .home-club-compact,html[data-app=website][data-page=home] .home-partner-strip{padding:24px 18px;border-radius:18px}
+ html[data-app=website][data-page=home] .home-club-copy h2{font-size:30px}
+ html[data-app=website][data-page=home] .home-partner-names{gap:6px}
+ html[data-app=website][data-page=home] .home-partner-names li{padding:7px 9px;font-size:11px}
 }

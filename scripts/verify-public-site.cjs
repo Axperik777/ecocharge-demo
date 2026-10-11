@@ -7,11 +7,19 @@ const preview=fs.existsSync(previewRoot)?require('./verify-client-preview.cjs')(
 const workspaceRoot=path.join(root,'workspace');
 const workspace=fs.existsSync(workspaceRoot)?require('./verify-workspace-preview.cjs')(workspaceRoot):null;
 const files=walk(root).filter(f=>!f.startsWith(previewRoot+path.sep)&&!f.startsWith(workspaceRoot+path.sep)),manifest=JSON.parse(fs.readFileSync(path.join(root,'app-manifest.json'),'utf8'));
+const websiteBase='https://axperik777.github.io/ecocharge-demo/';
+const publishedPath=new URL(websiteBase).pathname.replace(/\/?$/,'/');
+const robots=fs.readFileSync(path.join(root,'robots.txt'),'utf8'),sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
+assert.doesNotMatch(robots,/^\s*Disallow:\s*\/\s*$/im,'Public website must not be blocked from search');
+assert(robots.includes('Allow: '+publishedPath));assert(robots.includes('Disallow: '+publishedPath+'workspace/'));assert(robots.includes('Disallow: '+publishedPath+'cabinet/'));assert.match(robots,new RegExp('Sitemap:\\s*'+websiteBase.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'sitemap\\.xml','i'));
 // Template bodies can become active UI after interaction, so scan them too.
 const visibleText=html=>html.replace(/<!--[^]*?-->/g,' ').replace(/<(?:script|style)\b[^>]*>[^]*?<\/(?:script|style)>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&(?:nbsp|amp|quot|#39);/g,' ').replace(/\s+/g,' ');
 const staleCurrentCadence=/\bweekly\b|\b7[- ]day\b|\bday\s+\d+\s+of\s+7\b|недельн|7\s*(?:дней|дня)|день\s+\d+\s+из\s+7/i;
 assert.equal(manifest.app,'website');
-assert.equal(manifest.routes.length,33);for(const r of ['app','academy','learn','club','participate/charge','participate/solar','participate/mining','guides','guides/responsible-energy-is-not-impact-free','guides/tax-policy-and-household-budget','guides/digital-assets-need-real-infrastructure'])assert(manifest.routes.includes(r));
+assert.equal(manifest.routes.length,33);
+for(const r of ['app','academy','learn','guides','club','participate/charge','participate/solar','participate/mining'])assert(manifest.routes.includes(r));
+const guideRoutes=manifest.routes.filter(route=>route.startsWith('guides/'));
+assert.equal(guideRoutes.length,14,'Expected 14 standalone guide articles');
 const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),context);
 const config=context.window.ECO_PLATFORM_CONFIG;
 assert.equal(config.websiteOnly,true);
@@ -27,6 +35,16 @@ for(const file of files){
   const text=fs.readFileSync(file,'utf8');
   assert(!/https?:\/\/(?:localhost|127\.0\.0\.1)(?=[:/])/i.test(text),'Local URL: '+rel);
   if(file.endsWith('.html')){
+   const russian=rel.startsWith('ru/'),routeRel=russian?rel.slice(3):rel,route=routeRel==='index.html'?'':routeRel.replace(/\/index\.html$/,'').replace(/\/$/,'');
+   const englishCanonical=new URL(route?route+'/':'',websiteBase).href,russianCanonical=new URL('ru/'+(route?route+'/':''),websiteBase).href,canonical=russian?russianCanonical:englishCanonical;
+   assert.match(text,/<meta name="robots" content="index,follow,max-image-preview:large">/,'Public page is not indexable: '+rel);
+   assert.doesNotMatch(text,/noindex|nofollow/i,'Public page still blocks search: '+rel);
+   assert(text.includes('<link rel="canonical" href="'+canonical+'">'),'Wrong canonical URL: '+rel);
+   assert(text.includes('<link rel="alternate" hreflang="en" href="'+englishCanonical+'">'),'Missing English alternate: '+rel);
+   assert(text.includes('<link rel="alternate" hreflang="ru" href="'+russianCanonical+'">'),'Missing Russian alternate: '+rel);
+   assert(text.includes('<link rel="alternate" hreflang="x-default" href="'+englishCanonical+'">'),'Missing default alternate: '+rel);
+   assert(text.includes('id="eco-path-locale"'),'Missing canonical language bootstrap: '+rel);
+   if(russian){assert.match(text,/<html\b[^>]*\blang="ru"/,'Russian route must declare Russian: '+rel);assert(text.includes('<base href="'+websiteBase+'">'),'Russian route must keep root assets: '+rel);}
    assert(text.includes('website-only.js'),'Missing public-only boundary: '+rel);
    if (workspace && text.includes('data-lead-form')) {
     let previous = -1;
@@ -37,10 +55,11 @@ for(const file of files){
     }
    }
    assert(!/<section\b[^>]*class="[^"]*\b(?:v-workspace-shell|f-study-finish)\b/.test(text),'Orphaned account preview section: '+rel);
+   const documentBase=new URL(text.match(/<base href="([^"]+)"/)?.[1]||canonical,canonical);
    for(const match of text.matchAll(/(?:href|src)="([^"#]+)"/g)){
     const ref=match[1].replaceAll('&amp;','&');
     if(/^(?:data:|mailto:|tel:)/.test(ref)||/^(?:\.\.\/)+$/.test(ref))continue;
-    const url=new URL(ref,base);
+    const url=new URL(ref,documentBase);
     if(url.origin!==base.origin)continue;
     assert(url.pathname.startsWith(base.pathname),'Escaped Pages base: '+ref);
     const local=decodeURIComponent(url.pathname.slice(base.pathname.length));
@@ -50,8 +69,9 @@ for(const file of files){
   }
  }
 }
-for(const route of manifest.routes)assert(fs.existsSync(path.join(root,route,'index.html')));
-for(const route of ['', 'participate/charge','plans','resources','how-it-works']){const file=path.join(root,route,'index.html');assert.doesNotMatch(visibleText(fs.readFileSync(file,'utf8')),staleCurrentCadence,'Current route exposes the retired weekly cadence: /'+route);}
+for(const route of manifest.routes){assert(fs.existsSync(path.join(root,route,'index.html')));assert(fs.existsSync(path.join(root,'ru',route,'index.html')),'Missing Russian route: '+route);}
+for(const route of manifest.routes){const canonical=new URL(route?route+'/':'',websiteBase).href,ru=new URL('ru/'+(route?route+'/':''),websiteBase).href;for(const url of [canonical,ru])assert(sitemap.includes('<loc>'+url.replaceAll('&','&amp;')+'</loc>'),'Sitemap URL missing: '+url);}
+for(const route of ['', 'participate/charge','plans','resources','how-it-works','guides',...guideRoutes]){const file=path.join(root,route,'index.html');assert.doesNotMatch(visibleText(fs.readFileSync(file,'utf8')),staleCurrentCadence,'Current route exposes the retired weekly cadence: /'+route);}
 for(const asset of ['site.js','trust.js','trust-content.js','funnel.js'])assert.doesNotMatch(fs.readFileSync(path.join(root,asset),'utf8'),staleCurrentCadence,'Active public UI script exposes the retired weekly cadence: '+asset);
 // Public export must keep the ecosystem neutral while every project retains its own request path.
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFileSync(path.join(root,'plans/index.html'),'utf8');

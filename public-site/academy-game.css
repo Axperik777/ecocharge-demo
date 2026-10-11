@@ -77,3 +77,60 @@ html[data-app=website] .eco-mission .eco-mission-balance strong{color:#fff}
 html[data-app=website] .eco-mission .eco-mission-lead{color:#e1eee8}
 html[data-app=website] .eco-mission .eco-mission-disclosure{color:#bfd2c8}
 html[data-app=website] .eco-mission .eco-mission-copy .ec-text-link{color:#cde8ae}
+
+/* Shared position cards use .ec-wrap for their outer width and their own
+   inset for content. Keep the component geometry and type scale above the
+   late website foundation rules on every public route. */
+html[data-app=website] .eco-mission.ec-wrap{--ec-panel-inset:36px;padding-inline:var(--ec-panel-inset);box-sizing:border-box;border-color:#2d735f}
+html[data-app=website] .ec-wrap :is(.eco-mission.ec-wrap,.eco-environment.ec-wrap){width:100%;max-width:none}
+html[data-app=website] .eco-mission .eco-mission-kicker{margin:0 0 12px;max-width:none;color:#cde8ae;font-size:11px;line-height:1.5;font-weight:800;letter-spacing:.13em}
+html[data-app=website] .eco-mission .eco-mission-copy h2{max-width:900px;margin:0;color:#fff;font-size:clamp(27px,3vw,42px);line-height:1.12;letter-spacing:-.04em}
+html[data-app=website] .eco-mission .eco-mission-lead{max-width:900px;margin:18px 0 0;color:#e1eee8;font-size:16px;line-height:1.75}
+html[data-app=website] .eco-mission .eco-mission-disclosure{max-width:900px;margin:0 0 15px;color:#bfd2c8;font-size:12px;line-height:1.65}
+html[data-app=website] .eco-mission .eco-mission-copy .ec-text-link{color:#cde8ae;font-size:13px;font-weight:800;line-height:1.5}
+html[data-app=website] .eco-mission .eco-mission-balance>div{border-color:rgba(205,232,174,.5)}
+
+html[data-app=website] .eco-environment.ec-wrap{--ec-panel-inset:44px;padding-inline:var(--ec-panel-inset);box-sizing:border-box}
+html[data-app=website] .eco-environment .eco-mission-kicker{margin:0 0 12px;color:#087454;font-size:11px;line-height:1.5;font-weight:800;letter-spacing:.13em}
+html[data-app=website] .eco-environment>h2{max-width:900px;margin:0;font-size:clamp(31px,4vw,52px);line-height:1.1;letter-spacing:-.04em}
+html[data-app=website] .eco-environment .eco-environment-intro{max-width:850px;margin:20px 0 0;color:#415c4f;font-size:17px;line-height:1.72}
+html[data-app=website] .eco-environment .eco-value-pair h3{font-size:23px;line-height:1.25;letter-spacing:-.025em}
+html[data-app=website] .eco-environment .eco-value-pair p,
+html[data-app=website] .eco-environment .eco-environment-grid p,
+html[data-app=website] .eco-environment details p{font-size:14px;line-height:1.7}
+html[data-app=website] .eco-environment .eco-environment-grid h3{font-size:21px;line-height:1.25}
+
+/* Eco is a transparent navigation helper: each row names the task and the
+   destination instead of presenting unexplained links. */
+.eco-guide-dialog{box-sizing:border-box;width:min(460px,calc(100% - 24px));max-width:460px;max-height:calc(100dvh - 24px);padding:24px;overflow:auto;overscroll-behavior:contain}
+.eco-guide-dialog .eco-dialog-close{position:sticky;z-index:2;float:right;top:0;margin:-12px -12px -44px 0;border-radius:50%;background:#f5f8f6}
+.eco-guide-heading{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:16px;padding-right:38px}
+.eco-guide-heading .eco-guide-character{width:72px;height:auto;margin:0}
+.eco-guide-dialog .eco-guide-heading h2{margin:0;font-size:23px;line-height:1.2;letter-spacing:-.025em}
+.eco-guide-dialog .eco-guide-intro{margin:7px 0 0;color:#52665b;font-size:13px;line-height:1.55}
+.eco-guide-nav{display:grid;gap:8px;margin-top:20px}
+.eco-guide-dialog .eco-guide-nav .eco-guide-option{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;min-height:64px;box-sizing:border-box;padding:11px 14px;border:1px solid #c4d6cc;border-radius:12px;background:#fff;color:#075d45;font:inherit;text-align:left;text-decoration:none;cursor:pointer}
+.eco-guide-dialog .eco-guide-nav .eco-guide-option:hover{border-color:#6fa98c;background:#f7fbf8}
+.eco-guide-option-copy{min-width:0}
+.eco-guide-option-copy strong,.eco-guide-option-copy small{display:block}
+.eco-guide-option-copy strong{font-size:14px;line-height:1.35;font-weight:750}
+.eco-guide-option-copy small{margin-top:4px;color:#52665b;font-size:11px;line-height:1.45;font-weight:500}
+.eco-guide-option-arrow{color:#087454;font-size:20px;line-height:1}
+.eco-guide-dialog :is(.eco-dialog-close,.eco-guide-option):focus-visible{outline:3px solid #388b69;outline-offset:3px}
+
+@media(max-width:760px){
+ html[data-app=website] .eco-mission.ec-wrap{--ec-panel-inset:24px;padding-inline:var(--ec-panel-inset)}
+ html[data-app=website] .eco-mission .eco-mission-copy h2{font-size:clamp(25px,7vw,32px);line-height:1.12;letter-spacing:-.035em}
+ html[data-app=website] .eco-mission .eco-mission-lead{font-size:15px;line-height:1.65}
+ html[data-app=website] .eco-environment.ec-wrap{--ec-panel-inset:22px;padding-inline:var(--ec-panel-inset)}
+ html[data-app=website] .eco-environment>h2{font-size:clamp(29px,8vw,39px);line-height:1.12;letter-spacing:-.035em}
+ html[data-app=website] .eco-environment .eco-environment-intro{font-size:15px;line-height:1.65}
+}
+@media(max-width:380px){
+ .eco-guide-dialog{width:calc(100% - 16px);padding:20px 16px}
+ .eco-guide-dialog .eco-dialog-close{margin:-8px -8px -44px 0}
+ .eco-guide-heading{grid-template-columns:60px minmax(0,1fr);gap:12px;padding-right:34px}
+ .eco-guide-heading .eco-guide-character{width:60px}
+ .eco-guide-dialog .eco-guide-heading h2{font-size:21px}
+ .eco-guide-dialog .eco-guide-nav .eco-guide-option{min-height:62px;padding:10px 12px}
+}

@@ -218,4 +218,12 @@ html[data-app=website] .solar-page .solar-ai li{color:#fff}
  .solar-reference-grid{grid-template-columns:1fr}.solar-reference figure img{height:230px}.solar-page .solar-participation{grid-template-columns:1fr;gap:22px}.solar-page .solar-participation .ec-button{width:100%}
  .solar-home-entry{grid-template-columns:70px minmax(0,1fr);gap:18px}.solar-home-price{grid-column:1/-1;border-top:1px solid var(--solar-line);padding-top:15px}.solar-home-entry .ec-button{width:100%;white-space:normal}
 }
+/* These two Solar panels are also outer .ec-wrap containers. Preserve their
+   component inset after the shared website width rule is applied. */
+html[data-app=website] .solar-page .solar-range-nav.ec-wrap{--ec-panel-inset:14px;padding-inline:var(--ec-panel-inset);box-sizing:border-box}
+html[data-app=website] .solar-page .solar-quote.ec-wrap{--ec-panel-inset:clamp(28px,4vw,54px);padding-inline:var(--ec-panel-inset);box-sizing:border-box}
+@media(max-width:680px){
+ html[data-app=website] .solar-page .solar-range-nav.ec-wrap{--ec-panel-inset:8px;padding-inline:var(--ec-panel-inset)}
+ html[data-app=website] .solar-page .solar-quote.ec-wrap{--ec-panel-inset:20px;padding-inline:var(--ec-panel-inset);margin-inline:auto}
+}
 @media(prefers-reduced-motion:reduce){.solar-catalog-disclosure>summary>span:last-child{transition:none}}

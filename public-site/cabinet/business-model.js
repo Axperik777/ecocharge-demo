@@ -67,12 +67,12 @@
   },
   "club": {
     "title": [
-      "Project explanations and product guidance",
-      "Разбор проектов и помощь с продуктами"
+      "AI-assisted community learning",
+      "AI в обучении и обсуждениях сообщества"
     ],
     "body": [
-      "Club members discuss project data and get help using EcoGrid products. The team uses AI to prepare explanations and updates. Project AI mode is a separate optional service paid in EcoCoin.",
-      "В Клубе участники обсуждают данные проектов и получают помощь с продуктами EcoGrid. Команда использует AI для подготовки объяснений и обновлений. Проектный AI-режим — отдельная дополнительная услуга с оплатой в EcoCoin."
+      "Club members exchange ideas about responsible energy, technology and practical skills. The team may use AI to structure explanations and discussion materials; it does not make decisions for members or promise project outcomes.",
+      "В Клубе участники обмениваются идеями об ответственной энергетике, технологиях и практических навыках. Команда может использовать AI, чтобы структурировать объяснения и материалы для обсуждения; он не принимает решения за участников и не обещает результат проектов."
     ]
   }
 });
@@ -94,7 +94,7 @@
    rules:ru?'Получение подарка не требует инвестирования. Использование проектного AI-режима предполагает участие в соответствующем проекте. Срок начинается с активации; продление — по подтверждению.':'No investment is required to receive the gift. Project AI mode requires participation in the relevant project. The period starts at activation; renewal requires confirmation.',
     supplement:chargeProgram?(ru?`Для Charge активный AI-режим добавляет ровно +${charge.policy.aiRateBonus} процентный пункт к фиксированному обязательству компании на ${p.days} дней. Надбавка действует только после серверной активации и увеличивает сумму, которую должна профинансировать компания.`:`For Charge, an active AI period adds exactly +${charge.policy.aiRateBonus} percentage point to the fixed company obligation for ${p.days} days. The uplift applies only after server activation and increases the amount the company must fund.`):ru?'AI-режим подключается отдельно от базового плана. Условия дополнительной надбавки разбираются на презентации проекта.':'AI mode is an optional addition to the base plan. The terms of any additional return are reviewed during the project presentation.',
    distinction:ru?'Инструменты управления оборудованием использует команда. Дополнительный AI-режим для участника сравнивает доступные варианты размещения его участия внутри выбранного проекта. Это отдельная услуга, а не плата за обычную эксплуатацию.':'The team uses tools to operate equipment. The optional member AI mode compares eligible allocations of your participation within the selected project. This is separate from normal project operation.',
-    renewal:chargeProgram?(ru?'Новый 30-дневный период начинается только после подтверждённой активации; автоматического продления и списания нет. После окончания периода ставка возвращается к базовой. В публичной версии реальное подключение и списание пока не выполняются.':'A new 30-day period starts only after confirmed activation; there is no automatic renewal or charge. When it ends, the rate returns to the base rate. The public version does not yet execute a real activation or coin charge.'):ru?'Планируемые условия: без подтверждения новый период не начинается и монеты не списываются. После 30 дней дополнительный режим заканчивается; базовое участие продолжается по его договору. До подключения команда подтвердит способы получения монет для продления и полный порядок отключения.':'Proposed terms: a new period starts only with your confirmation; no coins are charged automatically. After 30 days the additional mode ends; base participation continues under its agreement. Before activation, the team must confirm how to obtain renewal coins and the full cancellation process.',
+    renewal:chargeProgram?(ru?'Новый 30-дневный период начинается только после индивидуального подтверждения условий AI и связанного платежа либо зачисления EcoCoin. Автоматического продления и списания нет. После окончания периода ставка возвращается к базовой.':'A new 30-day period starts only after individual confirmation of the AI terms and the related payment or EcoCoin credit. There is no automatic renewal or charge. When the period ends, the rate returns to the base rate.'):ru?'Условия для Solar или Mining определяются только отдельным предложением и договором выбранного проекта; подтверждение не запускает автоматическое продление или списание.':'Terms for Solar or Mining are defined only in the selected project’s separate proposal and agreement; confirmation never starts an automatic renewal or charge.',
    availability:topic==='charge'?charge.copy('aiEvidence',lang):ru?'AI-режим готовится к запуску. Подключение станет доступно после утверждения условий.':'AI mode is in development. Activation will become available once its terms are finalized.'
   };
  }

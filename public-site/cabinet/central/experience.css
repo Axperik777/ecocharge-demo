@@ -344,7 +344,7 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .lightline{stroke:#d2e4d9}
 .eco-shell #eco-header-actions{color:var(--eg-text)}
 .eco-shell .eco-header-preferences{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-width:0}
 .eco-shell .eco-header-preferences [data-locale-switch]{display:inline-flex;align-items:center;justify-content:center;flex:none;order:0;width:auto;margin:0!important;padding:3px;gap:0;border:1px solid var(--eg-border);border-radius:11px;background:var(--eg-surface-soft)}
-.eco-shell .eco-header-preferences [data-locale-switch] button{display:grid;place-items:center;min-width:36px;min-height:38px;padding:0 6px;border:0;border-radius:8px;color:var(--eg-muted);background:transparent;font:600 12px/1 Manrope,system-ui,sans-serif;letter-spacing:0}
+.eco-shell .eco-header-preferences [data-locale-switch] button{display:grid;place-items:center;min-width:44px;min-height:44px;padding:0 6px;border:0;border-radius:8px;color:var(--eg-muted);background:transparent;font:600 12px/1 Manrope,system-ui,sans-serif;letter-spacing:0}
 .eco-shell .eco-header-preferences [data-locale-switch] button[aria-pressed="true"]{background:var(--eg-surface);color:var(--eg-text);box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .eco-shell #eco-header-actions .eco-icon{display:grid;place-items:center;position:relative;flex:none;width:44px;min-width:44px;height:44px;min-height:44px;padding:0;margin:0;border:1px solid var(--eg-border);border-radius:11px;background:var(--eg-surface);color:var(--eg-text);line-height:1}
 .eco-shell #eco-header-actions .eco-icon:hover{background:var(--eg-surface-soft);border-color:var(--eg-brand)}
@@ -361,7 +361,7 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .lightline{stroke:#d2e4d9}
 }
 @media(max-width:980px){
  .eco-shell .topbar.panel{display:flex;align-items:center;justify-content:space-between;column-gap:10px}
- .eco-shell .topbar .charge-brand{grid-column:1;grid-row:1;justify-self:start}
+ .eco-shell .topbar .charge-brand{grid-column:1;grid-row:1;justify-self:start;justify-content:center;min-width:44px}
  .eco-shell .topbar #eco-top{display:none}
  .eco-shell #eco-header-actions{display:flex;align-items:center;gap:8px;margin-left:auto;flex:none}
  .eco-shell #eco-header-actions .eco-notifications{position:relative;left:auto;transform:none}
@@ -371,8 +371,8 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .lightline{stroke:#d2e4d9}
  .eco-shell .topbar.panel{padding-inline:12px;column-gap:6px}
  .eco-shell .eco-header-preferences,.eco-shell #eco-header-actions{gap:6px}
  .eco-shell .eco-header-preferences [data-locale-switch]{padding:2px}
- .eco-shell .eco-header-preferences [data-locale-switch] button{min-width:32px;min-height:38px;padding:0 4px}
- .eco-shell #eco-header-actions .eco-theme-toggle{width:40px;min-width:40px}
+ .eco-shell .eco-header-preferences [data-locale-switch] button{min-width:44px;min-height:44px;padding:0 4px}
+ .eco-shell #eco-header-actions .eco-theme-toggle{width:44px;min-width:44px;height:44px;min-height:44px}
 }
 
 /* Profile labels share the current light/dark text token. */
@@ -427,7 +427,7 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .face{fill:var(--eg-art-face)}htm
 .eco-shell #eco-workspace .club-panel{padding:24px;background:var(--eg-surface);border:1px solid var(--eg-border);border-radius:16px}
 .eco-shell .club-season,.eco-shell .club-goal{background:var(--eg-surface-soft);border-color:var(--eg-brand)}.eco-shell .club-season>span{color:var(--eg-brand)}
 .eco-shell .club-share{padding:4px 0}.eco-shell .club-copy{margin-bottom:8px}.eco-shell .club :is(.club-note,small){color:var(--eg-muted);font-size:12px}.eco-shell .club-empty{padding:0;max-width:620px}.eco-shell .club-panel>.eco-text{justify-self:start}
-.eco-shell #eco-workspace .club-panel>summary{font-size:15px;padding:0;min-height:32px}.eco-shell #eco-workspace .club-panel[open]>summary{margin-bottom:16px}
+.eco-shell #eco-workspace .club-panel>summary{display:flex;align-items:center;font-size:15px;padding:0;min-height:44px}.eco-shell #eco-workspace .club-panel[open]>summary{margin-bottom:16px}
 @media(min-width:981px){.eco-shell #eco-top{grid-template-columns:1fr;gap:8px}.eco-shell #eco-top .eco-wallet{width:100%;justify-content:space-between}.eco-shell #eco-top [data-open-live-chat]{display:none}}
 @media(max-width:760px){.eco-shell .eg-service{min-height:196px;padding:18px 16px;gap:8px}.eco-shell .eg-service-icon{width:60px;height:60px;border-radius:17px}.eco-shell .eg-service-icon .eg-art{width:50px;height:50px}.eco-shell .eg-service strong{font-size:15px}.eco-shell .eg-service small{font-size:13px}.eco-shell .eg-service-arrow{top:17px;right:13px}.eco-shell #eco-workspace :is(.eco-secondary-details,.eco-fund-lab)>summary{padding:16px 14px;gap:10px}.eco-shell .eg-disclosure-copy small{font-size:12px;line-height:1.45}.eco-shell .eg-disclosure-chevron{margin-left:3px}.eco-shell #eco-workspace .energy-journal{padding:20px 16px}.eco-shell .eco-fund-lab>.energy-lab{margin:8px}.eco-shell #eco-workspace .club-pass-main,.eco-shell #eco-workspace .club-offer{padding:22px}.eco-shell .club-metrics{gap:10px}.eco-shell .club-metrics>div{padding:16px}.eco-shell #eco-workspace .club-panel{padding:20px}.eco-shell .club-offer>strong{font-size:36px}.eco-shell .club-copy input{flex-basis:100%}.eco-shell .club-copy button{width:100%}}
 @media(prefers-reduced-motion:reduce){.eco-shell .eg-service,.eco-shell .eg-disclosure-chevron{transition:none}}

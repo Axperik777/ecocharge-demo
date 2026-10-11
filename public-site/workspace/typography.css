@@ -39,7 +39,7 @@ p{overflow-wrap:break-word}
 .eg-guide button>b{font-size:13px;font-weight:600;color:var(--eco-accent);border:1px solid var(--eco-line);border-radius:50%;width:30px;height:30px;display:grid;place-items:center;flex:none}
 .eg-guide button strong,.eg-guide button small{display:block}.eg-guide button strong{font-size:15px;font-weight:600}.eg-guide button small{color:var(--eco-muted);font-size:13px;margin-top:5px}
 html[data-app="website"] .ec-nav a,html[data-app="website"] .ec-button{font-size:14px;font-weight:600}
-html[data-app="website"] main p:not(.grid-eyebrow):not(.ec-eyebrow):not(.ec-kicker){font-size:15px;line-height:1.65}
+:where(html[data-app="website"] main) p:not(:where(.grid-eyebrow,.ec-eyebrow,.ec-kicker,.solar-eyebrow,.web86-eyebrow)){font-size:15px;line-height:1.65}
 html[data-app="website"] footer a{font-size:13px;line-height:1.55}
 html[data-app="website"] footer p{font-size:12px;line-height:1.65}
 .mining-hero>*,.mining-actions{min-width:0}.mining-actions>.ec-button{max-width:100%;overflow-wrap:break-word}

@@ -35,16 +35,17 @@ window.createEcoSandbox=function(seed,domain,stations){
  function syncKnowledge(db){
   const release=seed.knowledgeRelease;if(!release||db.knowledgeRelease?.id===release.id&&db.knowledgeRelease?.migration===2)return;
   db.knowledge??={};
+  const baselines=release.baselines||Object.values(release.previous||{}),fields=['titleEn','titleRu','questionEn','questionRu','promptEn','promptRu','answerEn','explanationRu','nextEn','nextRu','sourceTitle','sourceRef','category','screen','scope','dependsOnTerms','journeyStep'],identity=a=>(a.titleEn||'')+'\u0000'+(a.journeyStep||''),kept=new Set(),isUntouched=a=>a&&!a.hasDraft&&!(a.suggestions||[]).length&&baselines.some(old=>a.status===old.status&&fields.every(k=>(a[k]??'')===(old[k]??'')));
   for(const [id,next]of Object.entries(seed.knowledge||{})){
-   const baselines=release.baselines||Object.values(release.previous||{}),previous=baselines.find(a=>a.titleEn===next.titleEn&&(a.journeyStep||'')===(next.journeyStep||'')),matches=Object.values(db.knowledge).filter(a=>a.titleEn===next.titleEn&&(a.journeyStep||'')===(next.journeyStep||''));
-   const current=db.knowledge[id]||(matches.length===1?matches[0]:null);
+   const matches=Object.entries(db.knowledge).filter(([,a])=>identity(a)===identity(next)),picked=db.knowledge[id]?[id,db.knowledge[id]]:(matches.length===1?matches[0]:matches.find(([,a])=>isUntouched(a))),current=picked?.[1],currentId=picked?.[0];
    // Old exports assigned new IDs and timestamps to the same built-ins.
    // Compare the whole editorial payload, revision, publication and suggestions instead.
-   const fields=['titleEn','titleRu','questionEn','questionRu','promptEn','promptRu','answerEn','explanationRu','nextEn','nextRu','sourceTitle','sourceRef','category','screen','scope','dependsOnTerms','journeyStep'];
-   const unchanged=current&&!current.hasDraft&&!(current.suggestions||[]).length&&baselines.some(old=>current.status===old.status&&fields.every(k=>(current[k]??'')===(old[k]??'')));
-   if(!current&&!previous&&!matches.length)db.knowledge[id]=clone(next);
-   else if(unchanged){const upgraded=clone(next);upgraded.id=current.id;upgraded.version=Math.max(next.version,current.version+1);upgraded.publishedVersion=upgraded.version;upgraded.revision=current.revision+1;if(upgraded.publishedContent)upgraded.publishedContent={...upgraded.publishedContent,id:current.id,version:upgraded.version,publishedVersion:upgraded.version};upgraded.history=[next.history[0],...(current.history||[])];upgraded.versionsData={[current.version]:clone(current)};db.knowledge[current.id]=upgraded;}
+   if(!current){db.knowledge[id]=clone(next);kept.add(id);}
+   else{kept.add(currentId);if(isUntouched(current)){const upgraded=clone(next);upgraded.id=current.id;upgraded.version=Math.max(next.version,current.version+1);upgraded.publishedVersion=upgraded.version;upgraded.revision=current.revision+1;if(upgraded.publishedContent)upgraded.publishedContent={...upgraded.publishedContent,id:current.id,version:upgraded.version,publishedVersion:upgraded.version};upgraded.history=[next.history[0],...(current.history||[])];upgraded.versionsData={[current.version]:clone(current)};db.knowledge[currentId]=upgraded;}}
   }
+  // Remove only untouched built-ins that no longer exist in the release. Drafts,
+  // suggestions, withdrawals and administrator edits remain exactly as saved.
+  for(const [id,article]of Object.entries(db.knowledge))if(!kept.has(id)&&isUntouched(article))delete db.knowledge[id];
   db.knowledgeRelease={id:release.id,migration:2};
  }
  function route(db,path,method,b,ctx){
