@@ -84,3 +84,19 @@ html[data-app=website][data-page=home] .home-partner-footer>p{max-width:72ch;mar
  html[data-app=website][data-page=home] .home-partner-names{gap:6px}
  html[data-app=website][data-page=home] .home-partner-names li{padding:7px 9px;font-size:11px}
 }
+
+/* The first screen explains EcoGrid and offers three neutral entry points. */
+html[data-app=website][data-page=home][data-landing=main] .grid-hero{height:auto;min-height:max(710px,calc(100svh - 24px));max-height:none;padding-top:160px;padding-bottom:clamp(42px,6vw,68px)}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{min-height:max(500px,calc(100svh - 234px));height:auto;justify-content:center}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-principle{margin:0 0 14px}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{max-width:980px;margin-bottom:22px}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{max-width:760px;margin-bottom:18px}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{margin:12px 0 0}
+@media(max-width:600px){
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero{min-height:max(680px,calc(100svh - 16px));padding:142px 18px 30px}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{min-height:max(508px,calc(100svh - 188px))}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{font-size:clamp(32px,9vw,40px);margin-bottom:14px}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{margin-bottom:14px;max-width:35ch}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{margin-top:10px}
+ html[data-app=website][data-page=home][data-landing=main] .eco-guide-dock{position:absolute;top:88px;right:20px;bottom:auto;width:auto;margin:0;padding:0;z-index:39}
+}

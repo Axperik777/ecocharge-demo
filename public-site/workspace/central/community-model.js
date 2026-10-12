@@ -495,6 +495,11 @@
   const rows=posts.filter(p=>(category==='all'||p.category===category)&&terms.every(q=>normal([p.titleRu,p.titleEn,p.bodyRu,p.bodyEn,p.sourceName].join(' ')).includes(q))).sort(order);
   const count=Math.max(1,Math.min(1000,Number(limit)||12));return {rows:rows.slice(0,count),total:rows.length,hasMore:rows.length>count};
  }
+ function clubLevel(state={},posts=[]){
+  const member=state.academy?.clubMember===true,reactionCount=(Array.isArray(posts)?posts:[]).filter(p=>reactions.includes(p?.myReaction)).length;
+  const id=member?'member':reactionCount>=3?'participant':'explorer',index={explorer:1,participant:2,member:3}[id];
+  return {id,index,total:3,member,reactionCount,next:id==='explorer'?'participant':id==='participant'?'member':null};
+ }
  function releaseSeed(post,at=new Date().toISOString()){
   if(!post||post.id!=='mining-guide'||!Object.entries(legacyMiningGuide).every(([key,value])=>post[key]===value))return post;
   const current=seeds.find(seed=>seed.id==='mining-guide');return {...post,...current,status:post.status||'published',version:Math.max(1,Number(post.version)||1)+1,createdAt:post.createdAt||at,updatedAt:at,reactions:post.reactions,myReaction:post.myReaction};
@@ -502,5 +507,5 @@
  function mergeSeeds(posts,at=new Date().toISOString()){
   const released=posts.map(p=>releaseSeed(p,at)),ids=new Set(released.map(p=>p.id));return [...released,...seeds.filter(p=>!ids.has(p.id)).map(p=>({...p,status:'published',version:1,createdAt:p.createdAt||at,updatedAt:p.updatedAt||p.createdAt||at,reactions:{like:0,useful:0,interested:0},myReaction:''}))];
  }
- return {categories,reactions,routes,seeds,kinds,sourceTypes,safeSourceUrl,metadata,order,select,mergeSeeds,releaseSeed,seedRelease};
+ return {categories,reactions,routes,seeds,kinds,sourceTypes,safeSourceUrl,metadata,order,select,clubLevel,mergeSeeds,releaseSeed,seedRelease};
 });

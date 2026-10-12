@@ -134,3 +134,9 @@ html[data-app=website] .eco-environment .eco-environment-grid h3{font-size:21px;
  .eco-guide-dialog .eco-guide-heading h2{font-size:21px}
  .eco-guide-dialog .eco-guide-nav .eco-guide-option{min-height:62px;padding:10px 12px}
 }
+
+/* EC-131: on phones the assistant participates in layout instead of covering content. */
+@media(max-width:760px){
+ .eco-guide-dock{position:static;inset:auto;width:calc(100% - 24px);margin:12px auto 0;padding:0;justify-content:flex-end}
+ .eco-guide-dock .eco-guide-launch{width:56px;height:56px;min-width:56px;min-height:56px}
+}

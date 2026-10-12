@@ -229,7 +229,7 @@ html[data-eco-theme="dark"] .eco-shell .topbar .charge-shell{fill:var(--eg-text)
 .eco-shell .eg-next-event .eco-kicker{font-size:10px;letter-spacing:.55px;line-height:1.5}
 .eco-shell .eg-next-event h2{font-size:21px!important;margin:3px 0!important}
 .eco-shell .eg-next-event small{font-size:12px}
-.eco-shell .eg-next-event>.eco-text{grid-column:2;min-height:36px;padding:3px 0}
+.eco-shell .eg-next-event>.eco-text{grid-column:2;min-height:44px;padding:7px 0}
 .eco-shell .eg-recent-operations{margin:0}
 .eco-shell .eg-project-copy strong{font-size:14px}
 .eco-shell .eg-project-copy small,.eco-shell .eg-project-amount small{font-size:12px;line-height:1.45}
@@ -676,3 +676,53 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 .eco-shell .eg-upsell-row.is-locked{opacity:.72}.eco-shell .eg-upsell-row.is-locked .eg-service-icon{color:var(--eco-muted)}
 .eco-shell :is(.eg-upsell-row,.eg-tool-row):focus-visible{outline:2px solid var(--eco-accent);outline-offset:3px}
 @media(max-width:760px){.eco-shell .eg-charge-focus{align-items:stretch;flex-direction:column;padding:20px}.eco-shell .eg-charge-focus>.eco-button{width:100%}.eco-shell :is(.eg-upsell-row,.eg-tool-row){grid-template-columns:42px minmax(0,1fr) 44px;padding:11px 12px;gap:10px}.eco-shell :is(.eg-upsell-row,.eg-tool-row) .eg-service-icon{display:grid;place-items:center;width:42px;height:42px}.eco-shell :is(.eg-upsell-row,.eg-tool-row) strong{font-size:14px}}
+
+/* Academy and Club retention hub inside the client account. */
+.eco-shell .eg-engagement{margin:24px 0}
+.eco-shell .eg-engagement-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.eco-shell .eg-engagement-grid.is-single{grid-template-columns:minmax(0,1fr)}
+.eco-shell .eg-engagement-grid.is-single>[data-community-compact]{max-width:none}
+.eco-shell [data-community-compact]{min-width:0}
+.eco-shell :is(.eg-learning-card,.eg-club-compact,.eg-club-profile){position:relative;overflow:hidden}
+.eco-shell :is(.eg-learning-card,.eg-club-compact){display:flex;flex-direction:column;align-items:flex-start;min-height:280px}
+.eco-shell :is(.eg-learning-card-head,.eg-club-compact-head,.eg-club-level-head){display:flex;align-items:center;gap:14px;width:100%}
+.eco-shell :is(.eg-learning-card-head,.eg-club-compact-head) .eg-card-icon{position:static;flex:none}
+.eco-shell :is(.eg-learning-card,.eg-club-compact) h2{margin:2px 0 0!important}
+.eco-shell .eg-learning-card h3{font-size:18px;margin:22px 0 8px}
+.eco-shell :is(.eg-learning-card,.eg-club-compact,.eg-club-profile) p{color:var(--eco-muted);font-size:14px;line-height:1.6}
+.eco-shell :is(.eg-learning-card,.eg-club-compact)>.eco-button{margin-top:auto}
+.eco-shell :is(.eg-club-compact,.eg-club-profile)>small{display:block;margin-top:14px;color:var(--eco-muted);font-size:12px;line-height:1.5}
+.eco-shell .eg-club-level-line{display:flex;justify-content:space-between;gap:14px;width:100%;margin-top:20px}
+.eco-shell .eg-club-level-line span{color:var(--eco-muted)}
+.eco-shell .eg-club-level-progress{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;width:100%;margin:10px 0 4px}
+.eco-shell .eg-club-level-progress span{height:6px;border-radius:999px;background:var(--eco-line)}
+.eco-shell .eg-club-level-progress span.is-reached{background:var(--eco-accent)}
+.eco-shell .eg-club-level-head{justify-content:space-between;align-items:flex-start}
+.eco-shell .eg-club-level-head>strong{display:grid;place-items:center;min-width:54px;min-height:44px;border-radius:999px;background:var(--eco-raised);color:var(--eco-accent)}
+.eco-shell .eg-club-profile{margin-bottom:24px}
+.eco-shell .eg-club-profile .eg-club-level-progress{max-width:540px;margin:18px 0}
+.eco-shell .eg-club-profile .eco-actions{margin-top:20px}
+.eco-shell .eg-club-feed-section{scroll-margin-top:24px}
+.eco-shell .eg-company-intro{border-color:color-mix(in srgb,var(--eco-accent) 34%,var(--eco-line));background:linear-gradient(135deg,var(--eco-card),var(--eco-raised))}
+.eco-shell .eg-company-intro>p{max-width:760px;line-height:1.65}.eco-shell .eg-company-intro>.eco-actions{margin:22px 0 12px}.eco-shell .eg-company-intro>small{display:block;color:var(--eco-muted);line-height:1.5}
+.eco-shell .eg-academy-choice{margin-top:16px}.eco-shell .eg-academy-choice>p{max-width:760px;color:var(--eco-muted);line-height:1.6}
+.eco-shell .eg-academy-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px}
+.eco-shell .eg-academy-choice-row{display:grid;grid-template-columns:46px minmax(0,1fr) 44px;align-items:center;gap:12px;min-height:96px;padding:15px;border:1px solid var(--eco-line);border-radius:15px;background:var(--eco-raised);color:var(--eco-text);font:inherit;text-align:left;cursor:pointer}
+.eco-shell .eg-academy-choice-row:hover{border-color:var(--eco-accent)}.eco-shell .eg-academy-choice-row:focus-visible{outline:2px solid var(--eco-accent);outline-offset:3px}.eco-shell .eg-academy-choice-row:disabled{cursor:wait;opacity:.66}
+.eco-shell .eg-academy-choice-row>span:nth-child(2){min-width:0}.eco-shell .eg-academy-choice-row strong{display:block;font-size:15px;line-height:1.35}.eco-shell .eg-academy-choice-row small{display:block;margin-top:4px;color:var(--eco-muted);font-size:12px;line-height:1.45}
+.eco-shell .eg-academy-route{margin-bottom:16px}.eco-shell .eg-academy-route>p{max-width:760px;color:var(--eco-muted);line-height:1.6}.eco-shell .eg-academy-route>.eco-actions{margin-top:22px}
+.eco-shell .eg-academy-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0 0;padding:0;list-style:none;counter-reset:none}
+.eco-shell .eg-academy-route-grid li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;align-items:start;padding:15px;border:1px solid var(--eco-line);border-radius:14px;background:var(--eco-raised)}
+.eco-shell .eg-academy-route-grid li>b{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--eco-soft);color:var(--eco-accent);font-size:13px}.eco-shell .eg-academy-route-grid strong{display:block;font-size:14px;line-height:1.35}.eco-shell .eg-academy-route-grid small{display:block;margin-top:5px;color:var(--eco-muted);font-size:12px;line-height:1.5}
+.eco-shell .eg-learning-progress h3{margin:2px 0 10px;font-size:18px}.eco-shell .eg-learning-progress p{color:var(--eco-muted);line-height:1.6}.eco-shell .eg-learning-progress>small{display:block;color:var(--eco-muted);line-height:1.5}
+.eco-shell :is(.eg-academy-club-note,.eg-other-projects){margin-top:16px}
+@media(max-width:760px){
+ .eco-shell .main-nav .nav-item{font-size:10px}
+ .eco-shell .eg-engagement-grid{grid-template-columns:1fr;gap:12px}
+ .eco-shell :is(.eg-learning-card,.eg-club-compact){min-height:0}
+ .eco-shell :is(.eg-learning-card,.eg-club-compact)>.eco-button{width:100%;margin-top:18px}
+ .eco-shell .eg-club-level-head{gap:10px}
+ .eco-shell .eg-company-intro>.eco-actions,.eco-shell .eg-academy-route>.eco-actions{display:grid;grid-template-columns:1fr;gap:8px}.eco-shell .eg-company-intro>.eco-actions .eco-button,.eco-shell .eg-academy-route>.eco-actions .eco-button{width:100%;margin:0}
+ .eco-shell .eg-academy-choice-grid,.eco-shell .eg-academy-route-grid{grid-template-columns:1fr}
+ .eco-shell .eg-academy-choice-row{min-height:88px;padding:12px;grid-template-columns:42px minmax(0,1fr) 44px}
+}

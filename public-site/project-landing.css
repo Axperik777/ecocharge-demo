@@ -118,3 +118,33 @@ html[data-app=website] .charge-impact-note p{margin:0}
  html[data-app=website] .project-tools-grid>article{display:block}
  html[data-app=website] .project-tools-grid img,html[data-app=website] .project-ai-mark{margin-bottom:16px}
 }
+
+/* EC-131: the first two screens follow one decision sequence on every project. */
+html[data-app=website] .project-decision{padding-block:clamp(38px,5vw,64px);border-block:1px solid var(--line,#d8e4de);scroll-margin-top:88px}
+html[data-app=website] .project-decision>ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
+html[data-app=website] .project-decision li{min-width:0;padding:20px;border:1px solid var(--line,#d8e4de);border-radius:var(--ec-radius-card,18px);background:#fff}
+html[data-app=website] .project-decision li[data-decision-step=risk]{background:#fffaf0;border-color:#e7d8ad}
+html[data-app=website] .project-decision li[data-decision-step=next]{background:var(--pale,#edf7f2);border-color:#bdd7ca}
+html[data-app=website] .project-decision li>span{display:block;margin-bottom:22px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.1em}
+html[data-app=website] .project-decision h3{margin:0 0 10px;font-size:18px;line-height:1.35;letter-spacing:-.02em}
+html[data-app=website] .project-decision p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.62}
+html[data-app=website] .charge-example{display:grid;grid-template-columns:minmax(220px,.65fr) minmax(0,1.35fr);gap:24px 38px;margin-bottom:16px;padding:26px;border:1px solid #b9d6c8;border-radius:var(--ec-radius-card,18px);background:var(--pale,#edf7f2)}
+html[data-app=website] .charge-example .ec-kicker{margin:0 0 10px;color:var(--teal,#006a4d)}
+html[data-app=website] .charge-example h3{margin:0;font-size:clamp(21px,2.2vw,29px);line-height:1.3;letter-spacing:-.03em}
+html[data-app=website] .charge-example dl{display:grid;gap:10px;margin:0}
+html[data-app=website] .charge-example dl>div{display:grid;grid-template-columns:minmax(150px,.7fr) minmax(0,1.3fr);gap:12px;padding-bottom:10px;border-bottom:1px solid #c7dbd1}
+html[data-app=website] .charge-example dt{color:var(--muted,#53675e);font-size:13px;line-height:1.5}
+html[data-app=website] .charge-example dd{margin:0;font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums}
+html[data-app=website] .charge-example>p{grid-column:1/-1;margin:0;padding-top:18px;border-top:1px solid #c7dbd1;color:var(--muted,#53675e);font-size:13px;line-height:1.65}
+@media(max-width:900px){
+ html[data-app=website] .project-decision>ol{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:680px){
+ html[data-app=website] .project-decision{padding-block:38px}
+ html[data-app=website] .project-decision>ol{grid-template-columns:1fr}
+ html[data-app=website] .project-decision li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:0 12px;padding:17px}
+ html[data-app=website] .project-decision li>span{grid-row:1/3;margin:3px 0 0}
+ html[data-app=website] .project-decision h3{font-size:17px}
+ html[data-app=website] .charge-example{grid-template-columns:1fr;gap:18px;padding:20px}
+ html[data-app=website] .charge-example dl>div{grid-template-columns:1fr;gap:4px}
+}

@@ -79,6 +79,10 @@ html[data-app=website] .guide-check li{position:relative;padding:16px 0 16px 34p
 html[data-app=website] .guide-check li::before{content:"✓";position:absolute;left:3px;top:16px;color:var(--teal);font-weight:800}
 html[data-app=website] .guide-boundary{background:#fffdf5!important;border-color:#e5dcc2!important}
 html[data-app=website] .guide-boundary .ec-kicker{color:#8a6c18}
+html[data-app=website] .guide-academy-route{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 42px;align-items:center;background:var(--pale)!important;border-color:#bfd8cc!important}
+html[data-app=website] .guide-academy-route h2{font-size:clamp(25px,3vw,34px)}
+html[data-app=website] .guide-academy-route p:not(.ec-kicker){max-width:660px;color:var(--muted)}
+html[data-app=website] .guide-academy-route .ec-button{min-height:54px;max-width:420px;white-space:normal;line-height:1.4}
 html[data-app=website] .guide-primary-action{grid-column:1/-1;display:flex;align-items:center;justify-content:center;padding:clamp(28px,5vw,56px)!important;background:transparent!important;border-style:dashed!important}
 html[data-app=website] .guide-primary-action .ec-button{width:min(100%,620px);min-height:64px;padding:19px 24px;font-size:16px;justify-content:space-between}
 html[data-app=website] .guide-related{grid-column:1/-1}
@@ -118,7 +122,9 @@ html[data-app=website] .guide-related a:hover{border-color:var(--teal)}
  html[data-app=website] .guide-editorial-figure figcaption{display:grid;padding:12px 14px}
  html[data-app=website] .guide-editorial-figure figcaption a{display:inline-flex;align-items:center;min-height:44px}
  html[data-app=website] .guide-evidence-grid a{align-items:center;min-height:44px}
- html[data-app=website] .guide-evidence,html[data-app=website] .guide-process,html[data-app=website] .guide-primary-action,html[data-app=website] .guide-related{grid-column:1}
+ html[data-app=website] .guide-evidence,html[data-app=website] .guide-process,html[data-app=website] .guide-academy-route,html[data-app=website] .guide-primary-action,html[data-app=website] .guide-related{grid-column:1}
+ html[data-app=website] .guide-academy-route{grid-template-columns:1fr}
+ html[data-app=website] .guide-academy-route .ec-button{width:100%;max-width:none;justify-content:center}
 }
 @media(max-width:480px){
  html[data-app=website] .guide-hub-hero h1,html[data-app=website] .guide-article-hero h1{font-size:clamp(32px,9vw,40px);line-height:1.1;letter-spacing:-.04em}
