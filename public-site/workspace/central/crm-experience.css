@@ -168,7 +168,7 @@ html[data-app="crm"][data-crm-theme="dark"]{color-scheme:dark;--crm-bg:#191d20;-
 [data-app="crm"] .funnel-age.is-overdue{color:var(--crm-warning)}
 [data-app="crm"] .wf-reply-head{flex-wrap:wrap;gap:12px}
 [data-app="crm"] .wf-reply-head h2 b{background:var(--crm-soft);color:var(--crm-muted);font-size:12px}
-[data-app="crm"] .wf-reply-head select{background:var(--crm-panel);color:var(--crm-text);border-color:var(--crm-border)}
+[data-app="crm"] .wf-reply-head select{min-height:44px;background:var(--crm-panel);color:var(--crm-text);border-color:var(--crm-border)}
 [data-app="crm"] .wf-reply-queue,[data-app="crm"] .funnel-first{border:1px solid var(--crm-border)}
 [data-app="crm"] :is(.wf-reply-row,.wf-reply-queue){border-color:var(--crm-border)}
 [data-app="crm"] :is(.wf-reply-person strong,.wf-reply-message p){color:var(--crm-text)}

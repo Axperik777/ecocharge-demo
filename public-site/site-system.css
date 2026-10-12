@@ -51,6 +51,7 @@ html[data-app=website] #site-menu nav>a[aria-current]{background:var(--pale);col
 html[data-app=website] :is(#close-site-menu,#close-site-dialog){min-width:44px;min-height:44px;color:var(--ink);border:1px solid var(--line);border-radius:10px}
 html[data-app=website] .ec-breadcrumb{display:flex;align-items:center;gap:0 10px;flex-wrap:wrap;font-size:13px;font-weight:500;line-height:1.5;color:var(--muted);padding-top:24px}
 html[data-app=website] .ec-breadcrumb>*{display:inline-flex;align-items:center;min-height:44px;min-width:0}
+html[data-app=website] .ec-breadcrumb a{padding-inline:4px;margin-inline:-4px}
 html[data-app=website] .ec-breadcrumb>*+*::before{content:"/";flex:none;margin-right:10px;color:#8a9b92;font-weight:400}
 html[data-app=website] .ec-breadcrumb>[aria-current=page]{overflow-wrap:anywhere}
 html[data-app=website] .ec-mobile-action{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:0 -4px 22px #18392a08}
