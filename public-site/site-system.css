@@ -212,6 +212,16 @@ html[data-app=website] .ec-footer-legal{border-color:var(--line)}
 html[data-app=website] .ec-footer-legal a{display:inline-flex;align-items:center;min-height:var(--ec-control-compact);padding-block:10px}
 html[data-app=website] .ec-footer .charge-wordmark{color:var(--ink)}
 html[data-app=website] .ec-footer .charge-wordmark>span{color:var(--teal)}
+/* Public export removes the account column, so it receives its own balanced three-column footer. */
+html[data-app=website] .ec-footer--public{padding-top:0}
+html[data-app=website] .ec-footer-main--public{max-width:1040px;grid-template-columns:minmax(190px,.85fr) minmax(180px,.8fr) minmax(320px,1.35fr);gap:clamp(36px,5vw,72px);align-items:start;padding-block:40px 36px}
+html[data-app=website] .ec-footer-main--public>div{min-width:0}
+html[data-app=website] .ec-footer-main--public>div:not(:first-child){gap:6px}
+html[data-app=website] .ec-footer-main--public>div>a:not(.charge-brand){padding-block:4px;line-height:1.5}
+html[data-app=website] .ec-footer--public .ec-footer-legal{max-width:1040px;align-items:center;padding-block:16px 20px}
+html[data-app=website] .ec-footer--public .ec-footer-legal nav{display:flex;align-items:center;flex-wrap:wrap;gap:0 28px}
+html[data-app=website] .ec-footer--public .ec-footer-legal a{font-size:13px;color:var(--muted);text-decoration:none}
+html[data-app=website] .ec-footer--public .ec-footer-legal a:hover{color:var(--teal);text-decoration:underline}
 html[data-app=website] .ec-breadcrumb a{color:var(--muted)}
 html[data-app=website] .energy-commerce-copy h1>span{color:var(--teal)}
 html[data-app=website] .energy-commerce-paths>a>span{color:var(--muted);font-size:13px}
@@ -258,6 +268,13 @@ html[data-app=website] .v-workspace-preview :is(small,span){color:var(--muted)}
 html[data-app=website] .v-workspace-top>strong,html[data-app=website] .v-workspace-preview .ec-icon{color:var(--teal)}
 @media(max-width:480px){html[data-app=website] .solar-hardware-metrics{flex-wrap:wrap}}
 @media(max-width:1100px){html[data-app=website] .ec-header .ec-nav{display:none}html[data-app=website] .grid-hero{gap:36px}html[data-app=website] .web86-account{gap:40px}}
+@media(max-width:900px){
+ html[data-app=website] .ec-footer-main--public{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 34px;padding-block:34px 30px}
+ html[data-app=website] .ec-footer-main--public>div:first-child{grid-column:1/-1}
+ html[data-app=website] .ec-footer-main--public>div:not(:first-child){gap:0}
+ html[data-app=website] .ec-footer-main--public>div>a:not(.charge-brand){display:flex;align-items:center;min-height:44px;padding-block:8px}
+ html[data-app=website] .ec-footer--public .ec-footer-legal{gap:18px;padding-block:14px 18px}
+}
 @media(max-width:760px){
  html[data-app=website]{--ec-page-gutter:20px;--ec-size-h1:clamp(34px,7vw,46px);--ec-leading-h1:1.15;--ec-size-h2:28px;--ec-leading-h2:1.25;--ec-size-h3:20px;--ec-section-y:44px;scroll-padding-top:20px}
  html[data-app=website] .ec-header .ec-header-inner{min-height:70px;gap:12px;padding-block:12px!important;width:calc(100% - (var(--ec-page-gutter) * 2))}
@@ -306,8 +323,15 @@ html[data-app=website] .v-workspace-top>strong,html[data-app=website] .v-workspa
  html[data-app=website] .lead-card{padding:22px}
  html[data-app=website] .ec-faq summary{font-size:16px;padding-block:20px}
  html[data-app=website] .ec-footer{padding-top:34px}
+ html[data-app=website] .ec-footer--public{padding-top:0}
  html[data-app=website] .ec-footer-main{gap:28px 22px}
+ html[data-app=website] .ec-footer-main--public{gap:24px 20px;padding-block:30px 26px}
  html[data-app=website] .ec-footer-main>div>a{display:flex;align-items:center;min-height:44px}
+}
+@media(max-width:650px){
+ html[data-app=website] .ec-footer--public .ec-footer-legal{display:block;padding-block:14px calc(92px + env(safe-area-inset-bottom))}
+ html[data-app=website] .ec-footer--public .ec-footer-legal nav{gap:0 18px}
+ html[data-app=website] .ec-footer--public .ec-footer-legal>span{display:block;margin-top:8px}
 }
 @media(max-width:370px){
  html[data-app=website]{--ec-page-gutter:16px}
