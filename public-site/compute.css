@@ -1,17 +1,18 @@
-html[data-app=website] .compute-page{--compute-night:#0b241c;--compute-deep:#12382b;--compute-line:#3b6556;--compute-accent:#c8ee95;--compute-cyan:#9edbd0;background:#f5f8f6;color:var(--ink,#102019)}
+html[data-app=website] .compute-page,html[data-app=website][data-page="participate/compute"]{--compute-night:#0b241c;--compute-deep:#12382b;--compute-line:#3b6556;--compute-accent:#c8ee95;--compute-cyan:#9edbd0}
+html[data-app=website] .compute-page{background:#f5f8f6;color:var(--ink,#102019)}
 html[data-app=website] .compute-kicker{margin:0 0 14px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;line-height:1.45;letter-spacing:.12em;text-transform:uppercase}
 html[data-app=website] .compute-hero{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(380px,.98fr);gap:clamp(28px,5vw,72px);align-items:center;padding-block:clamp(42px,6vw,78px)}
-html[data-app=website] .compute-hero h1{max-width:15ch;margin:0;font-size:clamp(40px,5vw,70px);font-weight:580;line-height:1.02;letter-spacing:-.06em}
+html[data-app=website] .compute-hero h1{max-width:17ch;margin:0;font-size:clamp(40px,4.5vw,64px);font-weight:580;line-height:1.04;letter-spacing:-.055em}
 html[data-app=website] .compute-lead{max-width:64ch;margin:24px 0 0;color:var(--muted,#53675e);font-size:18px;line-height:1.68}
 html[data-app=website] .compute-actions{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:28px}
 html[data-app=website] .compute-actions .ec-button{min-height:54px;white-space:normal;line-height:1.35}
 html[data-app=website] .compute-caption{max-width:74ch;margin:18px 0 0;color:var(--muted,#53675e);font-size:13px;line-height:1.65}
 html[data-app=website] .compute-visual{position:relative;min-width:0;margin:0;overflow:hidden;border-radius:26px;background:var(--compute-night);box-shadow:0 26px 72px rgba(13,46,36,.18)}
 html[data-app=website] .compute-visual::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,27,20,.05),rgba(6,27,20,.66))}
-html[data-app=website] .compute-visual img{display:block;width:100%;aspect-ratio:1.16/1;object-fit:cover}
+html[data-app=website] .compute-visual img{display:block;width:100%;height:auto!important;aspect-ratio:3/2;object-fit:cover}
 html[data-app=website] .compute-visual-label{position:absolute;z-index:2;top:16px;right:16px;left:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 html[data-app=website] .compute-visual-label span{padding:8px 4px;border:1px solid rgba(200,238,149,.42);border-radius:999px;background:rgba(7,34,25,.72);color:#e5ffc3;font-size:9px;font-weight:800;letter-spacing:.09em;text-align:center}
-html[data-app=website] .compute-visual figcaption{position:absolute;z-index:2;right:16px;bottom:16px;left:16px;padding:11px 13px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(7,30,23,.88);color:#e8f3ee;font-size:11px;line-height:1.55}
+html[data-app=website] .compute-visual figcaption{position:absolute;z-index:2;right:16px;bottom:16px;left:16px;padding:11px 13px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(7,30,23,.88);color:#e8f3ee;font-size:13px;line-height:1.5}
 html[data-app=website] .compute-section{padding-block:clamp(54px,7vw,92px)}
 html[data-app=website] .compute-section-head{max-width:820px;margin-bottom:32px}
 html[data-app=website] .compute-section-head h2{max-width:18ch;margin:0;font-size:clamp(32px,4vw,52px);font-weight:580;line-height:1.08;letter-spacing:-.05em}
@@ -62,7 +63,7 @@ html[data-app=website] .compute-risk-grid{display:grid;grid-template-columns:rep
 html[data-app=website] .compute-risk-grid article{padding:20px;border:1px solid var(--line,#d8e4de);border-radius:16px;background:#fff}
 html[data-app=website] .compute-risk-grid h3{margin:0 0 9px;font-size:17px;line-height:1.35}
 html[data-app=website] .compute-risk-grid p{margin:0;color:var(--muted,#53675e);font-size:13px;line-height:1.62}
-html[data-app=website] .compute-next,html[data-app=website] .compute-entry{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:36px;align-items:end;margin-block:clamp(40px,7vw,82px);padding:clamp(26px,5vw,48px);border-radius:24px;background:var(--compute-deep);color:#fff}
+html[data-app=website] .compute-next,html[data-app=website] .compute-entry{--ec-panel-inset:clamp(26px,5vw,48px);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:36px;align-items:end;margin-block:clamp(40px,7vw,82px);padding:var(--ec-panel-inset);border-radius:24px;background:var(--compute-deep);color:#fff}
 html[data-app=website] .compute-next h2,html[data-app=website] .compute-entry h2{max-width:19ch;margin:0;color:#fff;font-size:clamp(30px,4vw,48px);line-height:1.1;letter-spacing:-.045em}
 html[data-app=website] .compute-next p:not(.compute-kicker),html[data-app=website] .compute-entry p:not(.compute-kicker){max-width:65ch;margin:15px 0 0;color:#c9dcd3;font-size:15px;line-height:1.68}
 html[data-app=website] .compute-next .compute-kicker,html[data-app=website] .compute-entry .compute-kicker{color:var(--compute-accent)}
@@ -86,18 +87,54 @@ html[data-app=website] .compute-brief label:last-child{grid-column:1/-1}
 html[data-app=website] .compute-purpose-fields{display:grid;grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 html[data-app=website] .compute-purpose-fields[hidden]{display:none}
 html[data-app=website] .compute-brief .compute-note{grid-column:1/-1}
+html[data-app=website] .compute-brief .compute-shared{grid-column:1/-1}
 html[data-app=website] .compute-brief textarea{min-height:116px;resize:vertical}
+
+html[data-app=website][data-page="participate/compute"] .compute-participate-hero{align-items:center;padding-top:clamp(34px,5vw,64px)}
+html[data-app=website][data-page="participate/compute"] .compute-participate-hero .participate-copy{max-width:690px}
+html[data-app=website][data-page="participate/compute"] .compute-participate-hero h1{max-width:16ch;font-size:clamp(40px,5.1vw,68px);line-height:1.03;letter-spacing:-.055em}
+html[data-app=website][data-page="participate/compute"] .compute-participate-hero .participate-project-photo{align-self:center;min-height:0;aspect-ratio:3/2}
+html[data-app=website][data-page="participate/compute"] .compute-hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+html[data-app=website][data-page="participate/compute"] .compute-hero-actions .ec-button{min-height:56px;justify-content:space-between;white-space:normal;line-height:1.35}
+html[data-app=website][data-page="participate/compute"] .compute-hero-actions .ec-button-outline{background:transparent;color:var(--teal,#006a4d)}
+html[data-app=website][data-page="participate/compute"] .compute-hero-actions .ec-text-link{grid-column:1/-1}
+html[data-app=website][data-page="participate/compute"] .compute-hero-boundary{max-width:66ch;margin:18px 0 0;padding-top:16px;border-top:1px solid var(--line,#d8e4de);color:var(--muted,#53675e);font-size:13px;line-height:1.6}
+html[data-app=website][data-page="participate/compute"] .participate-project-photo img{display:block;width:100%;height:auto!important;aspect-ratio:3/2;object-fit:cover}
+html[data-app=website][data-page="participate/compute"] .participate-project-photo figcaption{font-size:13px;line-height:1.5}
+html[data-app=website][data-page="participate/compute"] .compute-decision ol{gap:14px}
+html[data-app=website][data-page="participate/compute"] .compute-decision ol>li{align-items:start}
+html[data-app=website][data-page="participate/compute"] .compute-decision-step{min-width:0}
+html[data-app=website][data-page="participate/compute"] .compute-decision-step>h3{margin-bottom:18px}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes article{padding:18px;border:1px solid var(--line,#d8e4de);border-radius:14px;background:#fff}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes article:first-child{border-color:var(--compute-line);background:var(--compute-deep);color:#fff}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes small{display:block;margin-bottom:10px;color:var(--teal,#006a4d);font-size:10px;font-weight:800;letter-spacing:.1em}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes article:first-child small{color:var(--compute-accent)}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes strong{display:block;margin-bottom:8px;font-size:16px;line-height:1.4}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.62}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes article:first-child p{color:#c9dbd3}
+html[data-app=website][data-page="participate/compute"] .compute-review-card{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);overflow:hidden;border:1px solid var(--line,#d8e4de);border-radius:22px;background:#fff}
+html[data-app=website][data-page="participate/compute"] .compute-review-card figure{position:relative;min-width:0;margin:0;background:var(--compute-night)}
+html[data-app=website][data-page="participate/compute"] .compute-review-card img{display:block;width:100%;height:100%;min-height:360px;object-fit:cover;mix-blend-mode:normal}
+html[data-app=website][data-page="participate/compute"] .compute-review-card figcaption{position:absolute;right:14px;bottom:14px;left:14px;padding:9px 11px;border:1px solid #ffffff38;border-radius:10px;background:#071f18db;color:#fff;font-size:12px;line-height:1.5}
+html[data-app=website][data-page="participate/compute"] .compute-review-card>div{padding:clamp(24px,4vw,40px)}
+html[data-app=website][data-page="participate/compute"] .compute-review-card>div>p{margin:0;color:var(--muted,#53675e);font-size:15px;line-height:1.7}
+html[data-app=website][data-page="participate/compute"] .compute-review-card ul{display:grid;gap:10px;margin:22px 0;padding:20px 0 0;border-top:1px solid var(--line,#d8e4de);list-style:none}
+html[data-app=website][data-page="participate/compute"] .compute-review-card li{position:relative;padding-left:20px;font-size:14px;line-height:1.55}
+html[data-app=website][data-page="participate/compute"] .compute-review-card li::before{content:"↗";position:absolute;left:0;color:var(--teal,#006a4d);font-weight:800}
+html[data-app=website][data-page="participate/compute"] .compute-review-card .compute-review-note{padding:15px;border-radius:12px;background:var(--pale,#edf7f2);color:var(--ink,#102019);font-size:13px}
+html[data-app=website][data-page="participate/compute"] .project-system-link.ec-wrap{--ec-panel-inset:clamp(24px,4vw,42px)}
 
 @media(max-width:980px){
  html[data-app=website] .compute-hero{grid-template-columns:1fr;gap:30px;padding-block:36px 52px}
  html[data-app=website] .compute-hero h1{max-width:18ch}
- html[data-app=website] .compute-visual img{aspect-ratio:16/9}
+  html[data-app=website] .compute-visual img{aspect-ratio:16/10}
  html[data-app=website] .compute-spine{grid-template-columns:repeat(2,minmax(0,1fr))}
  html[data-app=website] .compute-spine li:nth-child(2){border-right:1px solid var(--compute-line)}
  html[data-app=website] .compute-spine li:nth-child(2)::after{display:none}
  html[data-app=website] .compute-risk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  html[data-app=website] .compute-equation{grid-template-columns:1fr}
- html[data-app=website] .compute-equation b{justify-self:center;transform:rotate(90deg)}
+  html[data-app=website] .compute-equation b{justify-self:center;transform:none}
  html[data-app=website] .compute-equation span,html[data-app=website] .compute-equation strong{min-height:72px}
 }
 @media(max-width:720px){
@@ -117,11 +154,14 @@ html[data-app=website] .compute-brief textarea{min-height:116px;resize:vertical}
  html[data-app=website] .compute-brief,html[data-app=website] .compute-purpose-fields{grid-template-columns:1fr;padding:16px}
  html[data-app=website] .compute-purpose-fields{padding:0}
  html[data-app=website] .compute-brief legend,html[data-app=website] .compute-brief label:last-child{grid-column:auto}
+ html[data-app=website][data-page="participate/compute"] .compute-hero-actions,html[data-app=website][data-page="participate/compute"] .compute-decision-lanes,html[data-app=website][data-page="participate/compute"] .compute-review-card{grid-template-columns:1fr}
+ html[data-app=website][data-page="participate/compute"] .compute-hero-actions .ec-text-link{grid-column:auto}
+ html[data-app=website][data-page="participate/compute"] .compute-review-card img{min-height:240px;aspect-ratio:16/10}
 }
 @media(max-width:420px){
  html[data-app=website] .compute-hero{padding-top:26px}
  html[data-app=website] .compute-visual-label{grid-template-columns:repeat(2,1fr)}
- html[data-app=website] .compute-visual img{aspect-ratio:4/5}
+ html[data-app=website] .compute-visual img{aspect-ratio:4/3}
  html[data-app=website] .compute-section{padding-block:46px}
  html[data-app=website] .compute-path,html[data-app=website] .compute-market-grid article{padding:20px}
 }

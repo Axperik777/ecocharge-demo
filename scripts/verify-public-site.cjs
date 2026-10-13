@@ -128,7 +128,7 @@ assert.match(compute,/<option value="capacity">[^<]+<\/option>/,'Compute must ex
 assert.match(compute,/<option value="participation">[^<]+<\/option>/,'Compute must expose the infrastructure-participation intent');
 assert.match(compute,/name="computeRequestedCapacity"/,'Compute capacity request must collect requested capacity');
 assert.doesNotMatch(computeText,/13\s*\/\s*14\s*\/\s*15\s*\/\s*16|42%|Every 4 days|Каждые 4 дня|\+1 percentage point|\+1 процентн/i,'Compute must not inherit Charge economics');
-assert.match(computeText,/Solar (?:does not mean|не означает)|Solar[^.]{0,120}24\/7/i,'Compute must explain that shared infrastructure is not a solar-only 24/7 claim');
+assert.match(computeText,/Solar and storage[^.]{0,240}do not mean continuous operation from sunlight alone/i,'Compute must explain that shared infrastructure is not a solar-only 24/7 claim');
 assert.match(plans,/participate\/charge\//,'Public plans must retain the Charge project link');
 assert.match(plans,/participate\/solar\//,'Public plans must retain the Solar project link');
 assert.match(plans,/participate\/compute\//,'Public plans must retain the Compute project link');
