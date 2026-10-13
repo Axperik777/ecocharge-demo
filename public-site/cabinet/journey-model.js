@@ -56,7 +56,7 @@
  function acquisition(record={}){
   const state=record.state||record,content=record.context?.content||state.content||{},j=entry(record)||{};
   const entryArticle=typeof content.entryId==='string'&&/^[a-z0-9][a-z0-9-]{0,79}$/.test(content.entryId)?content.entryId:'';
-  const inferred=entryArticle?(communityArticleIds.has(entryArticle)?'community_interest':'academy_education'):['fast','consult'].includes(j.entryRoute)?'direct_project':j.topic==='academy'?'academy_education':'community_interest';
+  const inferred=entryArticle?(communityArticleIds.has(entryArticle)?'community_interest':'academy_education'):['fast','consult'].includes(j.entryRoute)?'direct_project':['academy','ai','ecocoin'].includes(j.topic)?'academy_education':'community_interest';
   const path=Object.hasOwn(acquisitionPaths,content.acquisitionPath)?content.acquisitionPath:inferred;
   const projects=projectContext(record),project=projects.requestedProject||projects.currentProject;
   return {path,articleAssist:content.articleAssist===true,entryArticle,project,...projects,purpose:j.purpose||null};
