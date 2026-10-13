@@ -1,142 +1,141 @@
-/* EcoGrid's photo-led homepage. Existing Manrope and brand colors stay shared. */
+/* Corporate homepage: company story first, project sales stay on project pages. */
 html[data-app=website][data-page=home][data-landing=main] .ec-header{position:absolute!important;inset:20px 28px auto;top:20px!important;width:auto;background:transparent;border:0;z-index:40}
-html[data-app=website][data-page=home][data-landing=main] .ec-header-inner{max-width:none;width:100%;padding:0 14px;min-height:56px}
+html[data-app=website][data-page=home][data-landing=main] .ec-header-inner{max-width:none;width:100%;min-height:56px;padding:0 14px}
 html[data-app=website][data-page=home][data-landing=main] .ec-header .charge-brand{--brand-ink:#fff;--brand-accent:#cde8ae;--brand-caption:#fff}
 html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-nav a,html[data-app=website][data-page=home][data-landing=main] .ec-header .eco-install-link{color:#fff}
-html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-sign-in{color:#fff;border-color:#ffffff80;background:#10261f45}
-html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-menu-trigger{border:0;border-radius:50%;width:46px;height:46px;min-height:46px;color:#004f3d}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero{position:relative;isolation:isolate;display:block;width:calc(100% - 24px);max-width:none;margin:12px;height:calc(100svh - 24px);min-height:650px;max-height:960px;padding:120px 60px 30px;border-radius:28px;overflow:hidden;background:#10261f;color:#fff}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(9,31,25,.6),rgba(9,31,25,.37) 30%,rgba(9,31,25,.65) 65%,rgba(9,31,25,.83))}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-visual{position:absolute;inset:0;z-index:-2;display:block;border:0;border-radius:0;box-shadow:none;background:#10261f}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-visual figure{height:100%;margin:0}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-visual figure img{height:100%;width:100%;min-height:0;object-fit:cover;object-position:center 57%}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;text-align:center;max-width:1100px;margin:0 auto}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-principle{margin:auto 0 18px;color:#d7f3b7}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{font-size:clamp(40px,4.25vw,62px);font-weight:500;line-height:1.1;letter-spacing:-.045em;color:#fff;max-width:1040px;margin:0 0 24px;text-wrap:balance}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero h1 em{color:#cde8ae;font-style:normal}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{font-size:20px!important;line-height:1.55;color:#f5f8f6;max-width:670px;margin:0 auto 40px;text-wrap:balance}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:min(100%,720px);margin:auto 0 0}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button{padding:18px 22px;min-height:60px;justify-content:center;white-space:normal;border-radius:16px;font-size:16px;line-height:1.4;font-weight:700;border:1px solid #ffffff80;background:#203e35;color:#fff;backdrop-filter:none;gap:18px;transform:none;transition:background-color .15s,border-color .15s}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button:hover{background:#2d5043;border-color:#fff;color:#fff;transform:none}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button-outline{background:#cde8ae;color:#12382a;border-color:#cde8ae;backdrop-filter:none}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button-outline:hover{background:#e0f1cd;color:#12382a;border-color:#e0f1cd}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions>.ec-text-link{grid-column:1/-1;justify-self:center;min-height:44px;color:#fff;font-size:14px;text-decoration-color:#ffffff99}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-story-link{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:10px;color:#fff;font-size:13px;font-weight:700;text-decoration-color:#ffffff80}
+html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-sign-in{color:#fff;border-color:#ffffff80;background:#183a2f}
+html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-menu-trigger{width:46px;height:46px;min-height:46px;border:0;border-radius:50%;color:#004f3d}
+
+html[data-app=website][data-page=home][data-landing=main] .grid-hero{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:clamp(44px,6vw,92px);align-items:center;width:calc(100% - 24px);max-width:none;min-height:max(700px,calc(100svh - 24px));margin:12px;padding:150px clamp(42px,6vw,96px) 72px;border-radius:28px;overflow:hidden;background:#102b22;color:#fff}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.22;background-image:linear-gradient(#b9d7c41a 1px,transparent 1px),linear-gradient(90deg,#b9d7c41a 1px,transparent 1px);background-size:72px 72px}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero::after{content:"";position:absolute;inset:auto -8% -34% auto;z-index:-1;width:min(48vw,680px);aspect-ratio:1;border:1px solid #cde8ae33;border-radius:50%}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{position:relative;z-index:2;max-width:820px}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-principle{margin:0 0 18px;color:#cde8ae;font-size:11px;font-weight:800;line-height:1.5;letter-spacing:.12em}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{max-width:900px;margin:0 0 24px;color:#fff;font-size:clamp(42px,5vw,70px);font-weight:600;line-height:1.04;letter-spacing:-.055em;text-wrap:balance}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{max-width:710px;margin:0;color:#eef5f1;font-size:clamp(17px,1.45vw,20px)!important;line-height:1.65;text-wrap:pretty}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;margin-top:32px}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button{min-height:56px;padding:15px 22px;border:1px solid #cde8ae;border-radius:14px;background:#cde8ae;color:#12382a;font-size:15px;font-weight:700;transform:none}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button:hover{border-color:#e4f3d4;background:#e4f3d4;color:#12382a;transform:none}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-text-link{min-height:44px;color:#fff;text-decoration-color:#ffffff80}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero :focus-visible{outline:3px solid #fff;outline-offset:4px}
-html[data-app=website][data-page=home][data-landing=main] .eco-home-mission{font-size:14px;line-height:1.7;margin:20px auto 0;text-align:center;max-width:850px;padding:0 24px;color:#52665b}
-html[data-app=website][data-page=home][data-landing=main] .grid-directions{border-top:0}
+
+html[data-app=website][data-page=home] .grid-hero-visual{position:relative;display:grid;gap:18px;padding:26px;border:1px solid #b9d7c44d;border-radius:24px;background:#183a2f;color:#fff;box-shadow:0 28px 80px #071a1438}
+html[data-app=website][data-page=home] .company-hero-core{padding:4px 2px 22px;border-bottom:1px solid #b9d7c44d}
+html[data-app=website][data-page=home] .company-hero-core>span{display:block;font-size:clamp(28px,3vw,42px);font-weight:600;letter-spacing:-.045em}
+html[data-app=website][data-page=home] .company-hero-core small{display:block;margin-top:8px;color:#cde8ae;font-size:10px;font-weight:800;letter-spacing:.12em}
+html[data-app=website][data-page=home] .grid-hero-visual ol{display:grid;gap:0;margin:0;padding:0;list-style:none}
+html[data-app=website][data-page=home] .grid-hero-visual li{display:flex;align-items:center;gap:16px;min-height:48px;border-bottom:1px solid #b9d7c426;font-size:14px;font-weight:600}
+html[data-app=website][data-page=home] .grid-hero-visual li:last-child{border-bottom:0}
+html[data-app=website][data-page=home] .grid-hero-visual li span{color:#cde8ae;font-size:10px;font-weight:800;letter-spacing:.1em}
+
+html[data-app=website][data-page=home] .ec-anchor-alias{display:block;position:relative;top:-96px;visibility:hidden}
+html[data-app=website][data-page=home] .company-system-kicker{margin:0 0 14px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;line-height:1.5;letter-spacing:.11em}
+
+html[data-app=website][data-page=home] .company-system{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:clamp(44px,7vw,96px);align-items:start;padding-block:clamp(72px,10vw,126px);scroll-margin-top:84px}
+html[data-app=website][data-page=home] .company-story-copy h2{max-width:16ch;margin:0 0 22px;font-size:clamp(38px,4.6vw,62px);font-weight:600;line-height:1.04;letter-spacing:-.055em;text-wrap:balance}
+html[data-app=website][data-page=home] .company-story-copy>p:not(.company-system-kicker){max-width:66ch;margin:0;color:var(--muted,#53675e);font-size:17px;line-height:1.78}
+html[data-app=website][data-page=home] .company-story-copy .ec-text-link{margin-top:22px;color:var(--teal,#006a4d)}
+html[data-app=website][data-page=home] .company-workline{display:grid;margin:32px 0 0;padding:0;list-style:none;border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website][data-page=home] .company-workline li{display:grid;grid-template-columns:42px 1fr;gap:14px;align-items:center;min-height:72px;border-bottom:1px solid var(--line,#d8e4de);font-size:17px;font-weight:600}
+html[data-app=website][data-page=home] .company-workline span{color:var(--teal,#006a4d);font-size:10px;font-weight:800;letter-spacing:.09em}
+
+html[data-app=website][data-page=home] .company-directions{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:24px clamp(48px,7vw,96px);margin-bottom:clamp(72px,9vw,112px);padding:clamp(34px,5vw,60px);border-radius:26px;background:#edf7f2}
+html[data-app=website][data-page=home] .company-directions header h2{max-width:15ch;margin:0 0 18px;font-size:clamp(34px,4vw,52px);font-weight:600;line-height:1.08;letter-spacing:-.05em;text-wrap:balance}
+html[data-app=website][data-page=home] .company-directions header>p:last-child{max-width:58ch;margin:0;color:var(--muted,#53675e);font-size:16px;line-height:1.72}
+html[data-app=website][data-page=home] .company-direction-list{margin:0;padding:0;list-style:none;border-top:1px solid #bfd4c9}
+html[data-app=website][data-page=home] .company-direction-list li{border-bottom:1px solid #bfd4c9}
+html[data-app=website][data-page=home] .company-direction-list a{display:grid;grid-template-columns:minmax(130px,.72fr) minmax(0,1.28fr) 24px;gap:20px;align-items:center;min-height:86px;color:var(--ink,#102019);text-decoration:none}
+html[data-app=website][data-page=home] .company-direction-list a:hover strong{color:var(--teal,#006a4d)}
+html[data-app=website][data-page=home] .company-direction-list strong{font-size:18px;line-height:1.35}
+html[data-app=website][data-page=home] .company-direction-list a>span:not(.company-direction-arrow){color:var(--muted,#53675e);font-size:14px;line-height:1.55}
+html[data-app=website][data-page=home] .company-direction-arrow{color:var(--teal,#006a4d);font-weight:800;text-align:right}
+html[data-app=website][data-page=home] .company-direction-note{grid-column:1/-1;margin:8px 0 0;padding-top:20px;border-top:1px solid #bfd4c9;color:var(--muted,#53675e);font-size:13px;line-height:1.65}
+
+html[data-app=website][data-page=home] .company-standard{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(44px,7vw,96px);align-items:start;margin-block:clamp(70px,9vw,112px);padding:clamp(38px,5.5vw,68px);border-radius:26px;background:#102b22;color:#fff}
+html[data-app=website][data-page=home] .company-standard .company-system-kicker{color:#cde8ae}
+html[data-app=website][data-page=home] .company-standard-copy h2{max-width:14ch;margin:0 0 20px;color:#fff;font-size:clamp(36px,4vw,54px);font-weight:600;line-height:1.08;letter-spacing:-.05em}
+html[data-app=website][data-page=home] .company-standard-copy>p:not(.company-system-kicker){max-width:54ch;margin:0;color:#c9dcd4;font-size:16px;line-height:1.72}
+html[data-app=website][data-page=home] .company-standard-copy .ec-text-link{margin-top:22px;color:#fff;text-decoration-color:#ffffff70}
+html[data-app=website][data-page=home] .ec-text-link svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+html[data-app=website][data-page=home] .company-standard-list{display:grid;margin:0;padding:0;list-style:none;border-top:1px solid #b9d7c447}
+html[data-app=website][data-page=home] .company-standard-list li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:start;padding:19px 0;border-bottom:1px solid #b9d7c447}
+html[data-app=website][data-page=home] .company-standard-list span{padding-top:3px;color:#cde8ae;font-size:10px;font-weight:800;letter-spacing:.09em}
+html[data-app=website][data-page=home] .company-standard-list strong{color:#fff;font-size:16px;font-weight:600;line-height:1.55}
+
+html[data-app=website][data-page=home] .ec-faith-service.ec-faith-service--home{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(40px,7vw,92px);align-items:start;margin-block:clamp(70px,9vw,112px);padding:0;border:0;border-radius:0;background:transparent}
+html[data-app=website][data-page=home] .ec-faith-service--home .ec-faith-kicker{margin:0 0 14px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.11em}
+html[data-app=website][data-page=home] .ec-faith-service--home .ec-faith-service-copy h2{max-width:13ch;margin:0;font-size:clamp(36px,4vw,54px);font-weight:600;line-height:1.08;letter-spacing:-.05em;text-wrap:balance}
+html[data-app=website][data-page=home] .ec-faith-service--home .ec-faith-service-points{display:block;border-top:1px solid var(--line,#d8e4de);padding-top:22px}
+html[data-app=website][data-page=home] .ec-faith-service--home .ec-faith-service-points>p{max-width:68ch;margin:0;color:var(--muted,#53675e);font-size:16px;line-height:1.78}
+html[data-app=website][data-page=home] .ec-faith-service--home .ec-faith-service-points>.ec-text-link{margin-top:20px;color:var(--teal,#006a4d)}
+
+html[data-app=website][data-page=home] .company-next{padding-block:clamp(68px,9vw,108px);border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website][data-page=home] .company-next>header{display:flex;justify-content:space-between;gap:32px;align-items:end;margin-bottom:34px}
+html[data-app=website][data-page=home] .company-next>header h2{max-width:17ch;margin:0;font-size:clamp(36px,4.2vw,56px);font-weight:600;line-height:1.08;letter-spacing:-.05em;text-wrap:balance}
+html[data-app=website][data-page=home] .company-next-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line,#d8e4de);border-radius:22px;overflow:hidden;background:#fff}
+html[data-app=website][data-page=home] .company-next-grid>a{display:flex;flex-direction:column;min-width:0;min-height:238px;padding:32px 28px 28px;border-left:1px solid var(--line,#d8e4de);color:var(--ink,#102019);text-decoration:none}
+html[data-app=website][data-page=home] .company-next-grid>a:first-child{border-left:0}
+html[data-app=website][data-page=home] .company-next-grid>a:hover{background:#f4f9f6}
+html[data-app=website][data-page=home] .company-next-grid strong{font-size:21px;line-height:1.35}
+html[data-app=website][data-page=home] .company-next-grid p{margin:12px 0 26px;color:var(--muted,#53675e);font-size:14px;line-height:1.65}
+html[data-app=website][data-page=home] .company-next-link{display:flex;align-items:center;gap:8px;min-height:44px;margin-top:auto;color:var(--teal,#006a4d);font-size:14px;font-weight:700}
+html[data-app=website][data-page=home] .company-next-link svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+html[data-app=website][data-page=home] .home-partner-strip{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.62fr);gap:28px 52px;align-items:center;margin-block:clamp(48px,7vw,82px);padding:clamp(26px,4vw,42px);border:1px solid var(--line,#d8e4de);border-radius:22px;background:#edf7f2}
+html[data-app=website][data-page=home] .home-partner-copy h2{max-width:16ch;margin:0 0 12px;font-size:clamp(27px,3vw,38px);font-weight:600;line-height:1.15;letter-spacing:-.04em}
+html[data-app=website][data-page=home] .home-partner-copy>p{max-width:58ch;margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.65}
+html[data-app=website][data-page=home] .home-partner-footer{display:flex;justify-content:flex-end;align-items:center;min-height:100%;padding-left:34px;border-left:1px solid #c4d8cd}
+
 html[data-app=website][data-page=home][data-landing=main] .eco-guide-dock{position:fixed;top:auto;right:24px;bottom:24px;width:auto;margin:0;padding:0;z-index:70}
 html[data-app=website][data-page=home][data-landing=main] .eco-guide-dock .eco-guide-launch{position:static;background:#f5f8f6}
-@media(max-width:1000px){
+
+@media(max-width:960px){
  html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-nav{display:none}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero{padding:130px 38px 26px}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{font-size:clamp(38px,5.6vw,56px)}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero{grid-template-columns:1fr minmax(260px,.52fr);gap:36px;padding-inline:38px}
+ html[data-app=website][data-page=home] .company-system,html[data-app=website][data-page=home] .company-directions,html[data-app=website][data-page=home] .company-standard,html[data-app=website][data-page=home] .ec-faith-service.ec-faith-service--home{grid-template-columns:1fr;gap:34px}
+ html[data-app=website][data-page=home] .company-direction-note{grid-column:auto}
 }
+
+@media(max-width:720px){
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero{grid-template-columns:1fr;min-height:max(660px,calc(100svh - 16px));padding:144px 24px 34px}
+ html[data-app=website][data-page=home] .grid-hero-visual{display:none}
+ html[data-app=website][data-page=home] .company-next>header{display:block}
+ html[data-app=website][data-page=home] .company-next-grid{grid-template-columns:1fr}
+ html[data-app=website][data-page=home] .company-next-grid>a{min-height:0;border-top:1px solid var(--line,#d8e4de);border-left:0}
+ html[data-app=website][data-page=home] .company-next-grid>a:first-child{border-top:0}
+ html[data-app=website][data-page=home] .home-partner-strip{grid-template-columns:1fr;gap:24px}
+ html[data-app=website][data-page=home] .home-partner-footer{justify-content:flex-start;min-height:0;padding:18px 0 0;border-top:1px solid #c4d8cd;border-left:0}
+}
+
 @media(max-width:600px){
  html[data-app=website][data-page=home][data-landing=main] .ec-header{inset:20px 20px auto}
- html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-header-inner{padding:0!important;min-height:46px;gap:12px;width:100%}
+ html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-header-inner{width:100%;min-height:46px;padding:0!important;gap:12px}
  html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-header-actions{flex:0 0 auto;width:auto;gap:8px}
  html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-menu-trigger{position:static}
  html[data-app=website][data-page=home][data-landing=main] .ec-header .eco-install-link{display:none}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero{margin:8px;width:calc(100% - 16px);height:calc(100svh - 16px);min-height:710px;max-height:none;border-radius:22px;padding:130px 22px 24px}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{font-size:clamp(30px,8vw,40px);line-height:1.13;margin-bottom:24px;max-width:100%;letter-spacing:-.04em}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{font-size:16px!important;line-height:1.6;margin-bottom:30px;max-width:32ch}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{grid-template-columns:1fr;gap:10px}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button{min-height:54px;padding:14px 16px;font-size:15px;width:100%}
- html[data-app=website][data-page=home][data-landing=main] .eco-guide-dock{top:auto;right:16px;bottom:calc(88px + env(safe-area-inset-bottom,0px))}
- html[data-app=website][data-page=home][data-landing=main] .eco-guide-launch span{display:none}
- html[data-app=website][data-page=home][data-landing=main] .eco-home-mission{font-size:14px;text-align:left;margin-top:18px}
-}
-
-/* The homepage tells one company story before presenting three project paths. */
-html[data-app=website][data-page=home] .company-system{padding-block:clamp(62px,9vw,112px);scroll-margin-top:84px}
-html[data-app=website][data-page=home] .company-system>header{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:18px 54px;align-items:start;margin-bottom:36px}
-html[data-app=website][data-page=home] .company-system-kicker{grid-column:1/-1;margin:0;color:var(--teal,#006a4d);font-size:11px;font-weight:800;line-height:1.5;letter-spacing:.11em}
-html[data-app=website][data-page=home] .company-system>header h2{max-width:19ch;margin:0;font-size:clamp(34px,4.4vw,58px);font-weight:560;line-height:1.06;letter-spacing:-.055em}
-html[data-app=website][data-page=home] .company-system>header>p:last-child{max-width:65ch;margin:4px 0 0;color:var(--muted,#53675e);font-size:17px;line-height:1.72}
-html[data-app=website][data-page=home] .company-system-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:0;list-style:none;border:1px solid var(--line,#d8e4de);border-radius:22px;overflow:hidden;background:#fff}
-html[data-app=website][data-page=home] .company-system-steps li{position:relative;min-width:0;padding:24px;border-left:1px solid var(--line,#d8e4de)}
-html[data-app=website][data-page=home] .company-system-steps li:first-child{border-left:0}
-html[data-app=website][data-page=home] .company-system-steps li::after{content:"→";position:absolute;z-index:2;top:22px;right:-12px;display:grid;width:24px;height:24px;place-items:center;border-radius:50%;background:#cde8ae;color:#12382a;font-size:12px;font-weight:800}
-html[data-app=website][data-page=home] .company-system-steps li:last-child::after{display:none}
-html[data-app=website][data-page=home] .company-system-steps li>span{display:block;margin-bottom:42px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.1em}
-html[data-app=website][data-page=home] .company-system-steps h3{margin:0 0 10px;font-size:20px;line-height:1.3;letter-spacing:-.025em}
-html[data-app=website][data-page=home] .company-system-steps p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.65}
-html[data-app=website][data-page=home] .company-system-value{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
-html[data-app=website][data-page=home] .company-system-value>div{padding:24px;border-radius:18px;background:#102b22;color:#fff}
-html[data-app=website][data-page=home] .company-system-value>div:last-child{background:#edf7f2;color:var(--ink,#102019)}
-html[data-app=website][data-page=home] .company-system-value strong{display:block;margin-bottom:9px;font-size:17px;line-height:1.4}
-html[data-app=website][data-page=home] .company-system-value p{margin:0;color:#c9dcd4;font-size:14px;line-height:1.66}
-html[data-app=website][data-page=home] .company-system-value>div:last-child p{color:var(--muted,#53675e)}
-@media(max-width:900px){
- html[data-app=website][data-page=home] .company-system>header{grid-template-columns:1fr;gap:16px}
- html[data-app=website][data-page=home] .company-system-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
- html[data-app=website][data-page=home] .company-system-steps li:nth-child(3){border-left:0;border-top:1px solid var(--line,#d8e4de)}
- html[data-app=website][data-page=home] .company-system-steps li:nth-child(4){border-top:1px solid var(--line,#d8e4de)}
- html[data-app=website][data-page=home] .company-system-steps li:nth-child(2)::after{display:none}
-}
-@media(max-width:620px){
- html[data-app=website][data-page=home] .company-system{padding-block:52px}
- html[data-app=website][data-page=home] .company-system>header h2{font-size:clamp(32px,9vw,42px)}
- html[data-app=website][data-page=home] .company-system>header>p:last-child{font-size:15px}
- html[data-app=website][data-page=home] .company-system-steps{grid-template-columns:1fr}
- html[data-app=website][data-page=home] .company-system-steps li,html[data-app=website][data-page=home] .company-system-steps li:nth-child(3),html[data-app=website][data-page=home] .company-system-steps li:nth-child(4){display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 12px;padding:18px;border-top:1px solid var(--line,#d8e4de);border-left:0}
- html[data-app=website][data-page=home] .company-system-steps li:first-child{border-top:0}
- html[data-app=website][data-page=home] .company-system-steps li::after,html[data-app=website][data-page=home] .company-system-steps li:nth-child(2)::after{display:none}
- html[data-app=website][data-page=home] .company-system-steps li>span{grid-row:1/3;margin:4px 0 0}
- html[data-app=website][data-page=home] .company-system-value{grid-template-columns:1fr}
-}
-/* Reserve the guide's row even on short screens and with long translated copy. */
-html[data-app=website][data-page=home][data-landing=main] .grid-hero{padding-top:170px;height:auto;min-height:max(710px,calc(100svh - 24px));max-height:none}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{min-height:max(510px,calc(100svh - 224px))}
-@media(max-width:600px){
- html[data-app=website][data-page=home][data-landing=main] .grid-hero{min-height:max(710px,calc(100svh - 16px));padding-top:158px}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{min-height:max(520px,calc(100svh - 198px))}
-}
-
-/* EC130: compact, independent Academy/Club paths and a single partner plaque. */
-html[data-app=website][data-page=home] .ec-anchor-alias{display:block;position:relative;top:-96px;visibility:hidden}
-html[data-app=website][data-page=home] .home-club-section{padding-block:clamp(44px,6vw,72px)}
-html[data-app=website][data-page=home] .home-club-compact{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:clamp(32px,6vw,72px);align-items:center;padding:clamp(28px,4.5vw,52px);border:1px solid var(--line,#d8e4de);border-radius:var(--ec-radius-feature,24px);background:var(--pale,#edf7f2)}
-html[data-app=website][data-page=home] .home-club-copy h2{max-width:15ch;margin:0 0 18px;font-size:clamp(30px,3.5vw,44px);line-height:1.14;letter-spacing:-.04em}
-html[data-app=website][data-page=home] .home-club-copy>p:not(.product-name){max-width:62ch;margin:0;color:var(--muted,#53675e);font-size:16px;line-height:1.68}
-html[data-app=website][data-page=home] .home-club-copy .ec-button{margin-top:24px}
-html[data-app=website][data-page=home] .home-club-topics{display:grid;gap:10px;margin:0;padding:0;list-style:none}
-html[data-app=website][data-page=home] .home-club-topics li{padding:18px 20px;border:1px solid #c7dbd1;border-radius:var(--ec-radius-control,12px);background:#fff}
-html[data-app=website][data-page=home] .home-club-topics span{display:block;margin-bottom:6px;color:var(--teal,#006a4d);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-html[data-app=website][data-page=home] .home-club-topics strong{font-size:16px;line-height:1.45}
-html[data-app=website][data-page=home] .home-partner-strip{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.4fr);gap:24px 48px;margin-block:clamp(44px,7vw,80px);padding:clamp(28px,4vw,44px);border:1px solid var(--line,#d8e4de);border-radius:var(--ec-radius-feature,24px);background:#fff}
-html[data-app=website][data-page=home] .home-partner-copy h2{max-width:18ch;margin:0 0 14px;font-size:clamp(28px,3vw,38px);line-height:1.18;letter-spacing:-.04em}
-html[data-app=website][data-page=home] .home-partner-copy>p:last-child{max-width:58ch;margin:0;color:var(--muted,#53675e);font-size:15px;line-height:1.65}
-html[data-app=website][data-page=home] .home-partner-names{display:flex;flex-wrap:wrap;align-content:start;gap:8px;margin:0;padding:0;list-style:none}
-html[data-app=website][data-page=home] .home-partner-names li{padding:8px 11px;border:1px solid var(--line,#d8e4de);border-radius:999px;background:var(--pale,#edf7f2);font-size:12px;font-weight:600;line-height:1.35}
-html[data-app=website][data-page=home] .home-partner-footer{grid-column:1/-1;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-top:20px;border-top:1px solid var(--line,#d8e4de)}
-html[data-app=website][data-page=home] .home-partner-footer>p{max-width:72ch;margin:0;color:var(--muted,#53675e);font-size:12px;line-height:1.6}
-@media(max-width:800px){
- html[data-app=website][data-page=home] .home-club-compact,html[data-app=website][data-page=home] .home-partner-strip{grid-template-columns:1fr;gap:28px}
- html[data-app=website][data-page=home] .home-club-copy .ec-button{width:100%;justify-content:center}
- html[data-app=website][data-page=home] .home-partner-footer{grid-column:auto;display:grid;gap:12px}
-}
-@media(max-width:600px){
- html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions>.ec-text-link{grid-column:auto}
- html[data-app=website][data-page=home] .home-club-compact,html[data-app=website][data-page=home] .home-partner-strip{padding:24px 18px;border-radius:18px}
- html[data-app=website][data-page=home] .home-club-copy h2{font-size:30px}
- html[data-app=website][data-page=home] .home-partner-names{gap:6px}
- html[data-app=website][data-page=home] .home-partner-names li{padding:7px 9px;font-size:11px}
-}
-
-/* The first screen explains EcoGrid and offers three neutral entry points. */
-html[data-app=website][data-page=home][data-landing=main] .grid-hero{height:auto;min-height:max(710px,calc(100svh - 24px));max-height:none;padding-top:160px;padding-bottom:clamp(42px,6vw,68px)}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{min-height:max(500px,calc(100svh - 234px));height:auto;justify-content:center}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-principle{margin:0 0 14px}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{max-width:980px;margin-bottom:22px}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{max-width:760px;margin-bottom:18px}
-html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{margin:12px 0 0}
-@media(max-width:600px){
- html[data-app=website][data-page=home][data-landing=main] .grid-hero{min-height:max(680px,calc(100svh - 16px));padding:142px 18px 30px}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero-copy{min-height:max(508px,calc(100svh - 188px))}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{font-size:clamp(32px,9vw,40px);margin-bottom:14px}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{margin-bottom:14px;max-width:35ch}
- html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{margin-top:10px}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero{width:calc(100% - 16px);margin:8px;border-radius:22px;padding:142px 18px 32px}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{margin-bottom:18px;font-size:clamp(34px,10vw,43px);line-height:1.08;letter-spacing:-.05em}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero .grid-hero-intro{font-size:16px!important;line-height:1.62}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions{display:grid;gap:8px;margin-top:26px}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button{width:100%;min-height:54px;justify-content:center}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-text-link{justify-content:center}
  html[data-app=website][data-page=home][data-landing=main] .eco-guide-dock{position:absolute;top:88px;right:20px;bottom:auto;width:auto;margin:0;padding:0;z-index:39}
+ html[data-app=website][data-page=home][data-landing=main] .eco-guide-launch span{display:none}
+ html[data-app=website][data-page=home] .company-system{padding-block:56px}
+ html[data-app=website][data-page=home] .company-story-copy h2,html[data-app=website][data-page=home] .company-directions header h2,html[data-app=website][data-page=home] .company-standard-copy h2,html[data-app=website][data-page=home] .ec-faith-service--home .ec-faith-service-copy h2,html[data-app=website][data-page=home] .company-next>header h2{font-size:clamp(32px,9vw,40px);line-height:1.1}
+ html[data-app=website][data-page=home] .company-story-copy>p:not(.company-system-kicker),html[data-app=website][data-page=home] .ec-faith-service--home .ec-faith-service-points>p{font-size:15px;line-height:1.72}
+ html[data-app=website][data-page=home] .company-directions,html[data-app=website][data-page=home] .company-standard{padding:28px 19px;border-radius:20px}
+ html[data-app=website][data-page=home] .company-directions{margin-bottom:56px}
+ html[data-app=website][data-page=home] .company-standard,html[data-app=website][data-page=home] .ec-faith-service.ec-faith-service--home{margin-block:56px}
+ html[data-app=website][data-page=home] .company-next{padding-block:56px}
+ html[data-app=website][data-page=home] .company-direction-list a{grid-template-columns:1fr 24px;gap:7px 12px;min-height:102px;padding-block:14px}
+ html[data-app=website][data-page=home] .company-direction-list a>span:not(.company-direction-arrow){grid-column:1;font-size:13px}
+ html[data-app=website][data-page=home] .company-direction-arrow{grid-column:2;grid-row:1/3;align-self:center}
+ html[data-app=website][data-page=home] .company-next-grid>a{padding:24px 20px}
+ html[data-app=website][data-page=home] .home-partner-strip{margin-block:40px;padding:24px 18px;border-radius:18px}
+}
+
+@media(max-width:370px){
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero h1{font-size:32px}
+ html[data-app=website][data-page=home][data-landing=main] .grid-hero-principle{font-size:10px}
 }

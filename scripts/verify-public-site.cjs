@@ -61,7 +61,13 @@ for(const file of files){
    assert(text.includes('<link rel="alternate" hreflang="ru" href="'+russianCanonical+'">'),'Missing Russian alternate: '+rel);
    assert(text.includes('<link rel="alternate" hreflang="x-default" href="'+englishCanonical+'">'),'Missing default alternate: '+rel);
    assert(text.includes('id="eco-path-locale"'),'Missing canonical language bootstrap: '+rel);
-   if(russian){assert.match(text,/<html\b[^>]*\blang="ru"/,'Russian route must declare Russian: '+rel);assert(text.includes('<base href="'+websiteBase+'">'),'Russian route must keep root assets: '+rel);}
+   if(russian){
+    assert.match(text,/<html\b[^>]*\blang="ru"/,'Russian route must declare Russian: '+rel);
+    assert(text.includes('<base href="'+websiteBase+'">'),'Russian route must keep root assets: '+rel);
+    const title=text.match(/<title>([\s\S]*?)<\/title>/)?.[1]||'',description=text.match(/<meta name="description" content="([^"]*)">/)?.[1]||'';
+    assert.match(title,/[А-Яа-яЁё]/,'Russian route title must be localized: '+rel);
+    assert.match(description,/[А-Яа-яЁё]/,'Russian route description must be localized: '+rel);
+   }
    assert(text.includes('website-only.js'),'Missing public-only boundary: '+rel);
    if (workspace && text.includes('data-lead-form')) {
     let previous = -1;
@@ -93,8 +99,10 @@ for(const asset of ['site.js','trust.js','trust-content.js','funnel.js'])assert.
 // Public export must keep the ecosystem neutral while every project retains its own request path.
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFileSync(path.join(root,'plans/index.html'),'utf8');
 for(const route of ['charge','solar','compute'])assert.match(home,new RegExp('href="participate\\/'+route+'\\/"'),'Homepage project entry is missing: '+route);
-assert.match(home,/href="app\/#academy"/,'Homepage Academy evidence entry is missing');
+assert.match(home,/EcoGrid designs and operates energy infrastructure/,'Homepage must identify EcoGrid as an infrastructure company');
+assert.match(home,/href="academy\/#academy-routes"/,'Homepage Academy evidence entry is missing');
 assert.doesNotMatch(home,/data-public-plan-form|data-lead-form|src="public-plan-ui\.js/,'Homepage must introduce the company without a calculator or lead form');
+assert.doesNotMatch(home,/home-partner-names|Microsoft|Google|Apple|Bank of America/,'Homepage must not borrow authority from unverified partnership names');
 assert.match(home,/data-workspace-entry[^>]*class="ec-sign-in"/,'Visible account entry is missing');
 assert.match(home,/href="[^"]*workspace\/login\//,'Public sign-in must lead to the entry page');
 assert.doesNotMatch(home,/href="[^"]*install=1"/,'Installation belongs inside the account');
