@@ -38,8 +38,8 @@ html[data-app=website] .ec-header .ec-button-small{display:none}
 html[data-app=website] .ec-header .locale-switch{border:1px solid var(--line);background:#f5f8f6;border-radius:10px;padding:3px;display:inline-flex;gap:2px;order:1}
 html[data-app=website] .ec-header .locale-switch button{min-width:var(--ec-control-compact);min-height:var(--ec-control-compact);padding:7px;font-size:var(--ec-text-meta);color:#52685b;border:0;border-radius:7px}
 html[data-app=website] .ec-header .locale-switch button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 4px #123a2414}
-html[data-app=website] .ec-header .ec-menu-trigger{display:inline-flex;order:2;width:var(--ec-control-compact);height:var(--ec-control-compact);min-height:var(--ec-control-compact);padding:10px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px}
-html[data-app=website] .ec-header .ec-menu-trigger svg{stroke:currentColor;width:22px;height:22px}
+html[data-app=website] .ec-header .ec-menu-trigger{display:inline-flex;align-items:center;justify-content:center;order:2;width:var(--ec-control-compact);height:var(--ec-control-compact);min-height:var(--ec-control-compact);padding:10px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;line-height:0}
+html[data-app=website] .ec-header .ec-menu-trigger svg{display:block;flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 html[data-app=website] .ec-header .ec-nav{display:none}
 html[data-app=website] .ec-nav a{font-size:14px;color:var(--muted);white-space:nowrap}
 html[data-app=website] .ec-nav a[aria-current],html[data-app=website] .ec-nav a:hover{color:var(--teal)}
