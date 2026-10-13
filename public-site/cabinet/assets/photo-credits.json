@@ -18,6 +18,28 @@
       "kind": "AI-generated concept visualization",
       "usage": "EcoGrid Compute project illustrations",
       "disclosure": "The images visualize data-center and GPU infrastructure concepts. They do not document operating EcoGrid facilities or available inventory."
+    },
+    {
+      "paths": [
+        "assets/story/now-branded-480.webp",
+        "assets/story/now-branded-800.webp",
+        "assets/story/now-branded-1600.webp",
+        "assets/story/young-480.webp",
+        "assets/story/young-800.webp",
+        "assets/story/young-1600.webp",
+        "assets/story/florida-480.webp",
+        "assets/story/florida-800.webp",
+        "assets/story/florida-1600.webp",
+        "assets/story/letter-480.webp",
+        "assets/story/letter-800.webp",
+        "assets/story/letter-1600.webp",
+        "assets/story/station-480.webp",
+        "assets/story/station-800.webp",
+        "assets/story/station-1600.webp"
+      ],
+      "kind": "AI-generated story illustrations",
+      "usage": "EcoGrid company-story visuals",
+      "disclosure": "These images illustrate the narrative supplied by the project team. They are not documentary photographs or evidence of the founder's biography, company history, facilities or ownership."
     }
   ],
   "photos": [

@@ -44,7 +44,6 @@ html[data-app=website][data-page=home] .company-direction-list a:hover strong{co
 html[data-app=website][data-page=home] .company-direction-list strong{font-size:18px;line-height:1.35}
 html[data-app=website][data-page=home] .company-direction-list a>span:not(.company-direction-arrow){color:var(--muted,#53675e);font-size:14px;line-height:1.55}
 html[data-app=website][data-page=home] .company-direction-arrow{color:var(--teal,#006a4d);font-weight:800;text-align:right}
-html[data-app=website][data-page=home] .company-direction-note{grid-column:1/-1;margin:8px 0 0;padding-top:20px;border-top:1px solid #bfd4c9;color:var(--muted,#53675e);font-size:13px;line-height:1.65}
 
 html[data-app=website][data-page=home] .company-standard{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(44px,7vw,96px);align-items:start;margin-block:clamp(70px,9vw,112px);padding:clamp(38px,5.5vw,68px);border-radius:26px;background:#102b22;color:#fff}
 html[data-app=website][data-page=home] .company-standard .company-system-kicker{color:#cde8ae}
@@ -88,7 +87,6 @@ html[data-app=website][data-page=home][data-landing=main] .eco-guide-dock .eco-g
  html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-nav{display:none}
  html[data-app=website][data-page=home][data-landing=main] .grid-hero{padding-inline:38px}
  html[data-app=website][data-page=home] .company-system,html[data-app=website][data-page=home] .company-directions,html[data-app=website][data-page=home] .company-standard,html[data-app=website][data-page=home] .ec-faith-service.ec-faith-service--home{grid-template-columns:1fr;gap:34px}
- html[data-app=website][data-page=home] .company-direction-note{grid-column:auto}
 }
 
 @media(max-width:720px){

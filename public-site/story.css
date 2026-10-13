@@ -22,5 +22,4 @@
 .story-service{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(38px,7vw,92px);align-items:start}
 .story-service .story-heading{margin:0}
 .story-service-copy{padding-left:28px;border-left:2px solid #9fbd80}
-.story-service-copy .story-service-note{margin:24px 0 0;padding-top:18px;border-top:1px solid #c5d8cc;color:#586b61;font-size:12px;line-height:1.75}
-@media(max-width:700px){.story-service{grid-template-columns:1fr;gap:24px}.story-service-copy{padding-left:18px}.story-service-copy .story-service-note{font-size:11px}}
+@media(max-width:700px){.story-service{grid-template-columns:1fr;gap:24px}.story-service-copy{padding-left:18px}}
