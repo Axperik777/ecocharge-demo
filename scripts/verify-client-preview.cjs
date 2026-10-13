@@ -14,6 +14,10 @@ function verify(root){
  const nextSettlementEnd=finance.nextPeriodStart(state)+finance.settlementPeriodMs;
  assert.ok(Number.isFinite(nextSettlementEnd)&&nextSettlementEnd>Date.parse(fixture.generatedAt),'Client preview exposes an expired next settlement date');
  const html=fs.readFileSync(path.join(root,'client/index.html'),'utf8');
+ const entry=fs.readFileSync(path.join(root,'index.html'),'utf8');
+ assert(entry.includes('new URLSearchParams(location.search)'),'Client preview entry must preserve the requested locale');
+ assert(entry.includes('assets/ecocharge-mark.svg'),'Client preview entry must declare a local favicon');
+ assert(!entry.includes('http-equiv="refresh"'),'Client preview entry must not force the Russian locale');
  const profileAt=html.indexOf('src="central/profile-model.js'),ecosystemAt=html.indexOf('src="central/ecosystem.js');
  assert(profileAt>=0&&profileAt<ecosystemAt,'Profile model must load before the account UI');
  const profile=require(path.join(root,'central/profile-model.js'));
