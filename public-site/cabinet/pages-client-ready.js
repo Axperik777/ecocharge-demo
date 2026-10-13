@@ -1,6 +1,6 @@
 'use strict';
 (()=>{
- const notice=()=>openModal('<h2>'+ (window.EcoLocale?.language==='ru'?'Просмотр кабинета':'Account preview')+'</h2><p>'+escapeHtml(window.EcoPagesMessage())+'</p>');
+ const notice=()=>openModal('<h2>'+ (window.EcoLocale?.language==='ru'?'Статус кабинета':'Account status')+'</h2><p>'+escapeHtml(window.EcoPagesMessage())+'</p>');
  const style=document.createElement('style');style.textContent='.role-switch{display:none!important}';document.head.append(style);
  const copy=()=>{document.querySelectorAll('.cab-local-note').forEach(el=>el.textContent=window.EcoPagesMessage());};
  const previous=renderClientTab;renderClientTab=function(){previous();copy();};

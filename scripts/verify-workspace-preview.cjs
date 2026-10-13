@@ -1,10 +1,93 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict'),crypto=require('node:crypto');
-module.exports=function verify(root){
+const forbiddenVisibleCopy=/(?:\b(?:demo|demonstration|preview|sample|prototype|illustrative|simulated)\b|\bunverified\s+(?:story|legend)\b|(?:^|[^\p{L}\p{N}_])демо(?:[- ]?верси\p{L}*)?(?=$|[^\p{L}\p{N}_])|демонстраци\p{L}*|непроверенн\p{L}*\s+(?:истори|легенд)\p{L}*|пример\p{L}*\s+кабинет\p{L}*|(?:учебн|тестов)\p{L}*\s+(?:стенд|верси|кабинет|легенд)\p{L}*|для\s+иллюстраци\p{L}*|(?:предпросмотр|превью|прототип|иллюстративн|симуляц|симулированн|смоделированн|имитационн|фиктивн)\p{L}*)/iu;
+const decodeEntities=value=>String(value).replace(/&nbsp;|&#160;/gi,' ').replace(/&amp;/gi,'&').replace(/&quot;/gi,'"').replace(/&#0*39;|&apos;/gi,"'").replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/&#([0-9]+);/g,(_,n)=>String.fromCodePoint(Number(n)));
+const normalizeVisible=value=>decodeEntities(String(value).replace(/<[^>]*>/g,' ').replace(/\$\{[^}]*\}/g,' ')).replace(/\\(?:r?n|t)/g,' ').replace(/\\u\{([0-9a-f]+)\}/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/\\u([0-9a-f]{4})/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/\\x([0-9a-f]{2})/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/\\(['"`\\])/g,'$1').replace(/\s+/g,' ').trim();
+const tokenOnly=value=>/^(?:https?:|data:|mailto:|tel:|[#./[]|[a-z][a-z0-9+.-]*:)/i.test(value)||(!/[\sА-Яа-яЁё]/u.test(value)&&/^[\w./:?&=#%+@~\[\]-]+$/u.test(value));
+function visibleViolation(value){
+ const raw=String(value).trim(),text=normalizeVisible(value);
+ if(!text||!forbiddenVisibleCopy.test(text))return '';
+ const markupRemainder=raw.replace(/<[^>]*>/g,' ').replace(/<[^>]*$/g,' ').replace(/^[^<]*\b(?:data-[\w-]+|class|id|src|href|value|accept)\s*=\s*[^>]*>/i,' ').trim();
+ if(!markupRemainder&&/(?:data-[\w-]+|class\s*=|id\s*=|src\s*=|href\s*=|value\s*=|accept\s*=)/i.test(raw))return '';
+ if(!raw.includes('>')&&/^<\/?[a-z][^>]*(?:class|src|href|value|data-[\w-]+)\s*=/i.test(raw))return '';
+ if(!raw.includes('>')&&/[<>=]/.test(raw)&&/(?:data-[\w-]+|class\s*=|id\s*=|src\s*=|href\s*=|value\s*=|accept\s*=)/i.test(raw)&&!/[.!?](?:\s|<|$)/.test(raw))return '';
+ if(tokenOnly(text)&&!/^(?:Demo|DEMO|Demonstration|DEMONSTRATION|Preview|PREVIEW|Sample|SAMPLE|Prototype|PROTOTYPE|Illustrative|ILLUSTRATIVE|Simulated|SIMULATED|Демо|ДЕМО|Предпросмотр|ПРЕДПРОСМОТР|Прототип|ПРОТОТИП)$/u.test(text))return '';
+ return text;
+}
+function assertVisibleValue(value,label){const hit=visibleViolation(value);if(hit)assert.fail('Visible release marker in '+label+': '+hit.slice(0,240));}
+function htmlVisibleParts(html){
+ const source=String(html).replace(/<!--[\s\S]*?-->/g,' '),parts=[];
+ parts.push(source.replace(/<(?:script|style)\b[^>]*>[\s\S]*?<\/(?:script|style)>/gi,' ').replace(/<[^>]+>/g,' '));
+ for(const match of source.matchAll(/\b(?:alt|aria-label|title|placeholder|value)\s*=\s*(?:"([^"]*)"|'([^']*)')/gi))parts.push(match[1]??match[2]??'');
+ return parts;
+}
+const regexAfterWord=new Set(['return','throw','case','delete','typeof','void','new','in','instanceof','yield','await']);
+function skipQuoted(text,i,quote){for(i++;i<text.length;){const ch=text[i++];if(ch==='\\')i++;else if(ch===quote)break;}return i;}
+function skipRegex(text,i){let inClass=false;for(i++;i<text.length;){const ch=text[i++];if(ch==='\\')i++;else if(ch==='[')inClass=true;else if(ch===']')inClass=false;else if(ch==='/'&&!inClass)break;else if(ch==='\n'||ch==='\r')break;}while(/[a-z]/i.test(text[i]||''))i++;return i;}
+function skipTemplate(text,i){for(i++;i<text.length;){if(text[i]==='\\'){i+=2;continue;}if(text[i]==='`')return i+1;if(text[i]==='$'&&text[i+1]==='{'){const end=findExpressionEnd(text,i+2);i=end<text.length?end+1:text.length;continue;}i++;}return i;}
+function findExpressionEnd(text,i){
+ let depth=1,canStartRegex=true;
+ while(i<text.length){const ch=text[i];
+  if(/\s/.test(ch)){i++;continue;}
+  if(ch==='/'&&text[i+1]==='/'){i+=2;while(i<text.length&&text[i]!=='\n')i++;continue;}
+  if(ch==='/'&&text[i+1]==='*'){i+=2;while(i<text.length&&!(text[i]==='*'&&text[i+1]==='/'))i++;i+=2;continue;}
+  if(ch==='/'&&canStartRegex){i=skipRegex(text,i);canStartRegex=false;continue;}
+  if(ch==="'"||ch==='"'){i=skipQuoted(text,i,ch);canStartRegex=false;continue;}
+  if(ch==='`'){i=skipTemplate(text,i);canStartRegex=false;continue;}
+  if(/[A-Za-z_$]/.test(ch)){const start=i++;while(/[\w$]/.test(text[i]||''))i++;canStartRegex=regexAfterWord.has(text.slice(start,i));continue;}
+  if(/[0-9]/.test(ch)){i++;while(/[\w.]/.test(text[i]||''))i++;canStartRegex=false;continue;}
+  if(ch==='{'){depth++;canStartRegex=true;i++;continue;}
+  if(ch==='}'){if(--depth===0)return i;canStartRegex=false;i++;continue;}
+  canStartRegex=/[([=,:;!?&|+*%^~<>-]/.test(ch);i++;
+ }
+ return text.length;
+}
+function templateValues(text,i){
+ const values=[];let value='';
+ while(i<text.length){const ch=text[i++];
+  if(ch==='\\'&&i<text.length){value+=ch+text[i++];continue;}
+  if(ch==='`'){if(value)values.push(value);return {i,values};}
+  if(ch==='$'&&text[i]==='{'){if(value)values.push(value);value='';const start=++i,end=findExpressionEnd(text,i);values.push(...literalValues(text.slice(start,end)));i=end<text.length?end+1:text.length;continue;}
+  value+=ch;
+ }
+ if(value)values.push(value);return {i,values};
+}
+function literalValues(source){
+ const values=[],text=String(source);let i=0,canStartRegex=true;
+ while(i<text.length){
+  if(/\s/.test(text[i])){i++;continue;}
+  if(text[i]==='/'&&text[i+1]==='/'){i+=2;while(i<text.length&&text[i]!=='\n')i++;continue;}
+  if(text[i]==='/'&&text[i+1]==='*'){i+=2;while(i<text.length&&!(text[i]==='*'&&text[i+1]==='/'))i++;i+=2;continue;}
+  if(text[i]==='/'&&canStartRegex){i++;let inClass=false;while(i<text.length){const ch=text[i++];if(ch==='\\'){i++;continue;}if(ch==='[')inClass=true;else if(ch===']')inClass=false;else if(ch==='/'&&!inClass)break;else if(ch==='\n'||ch==='\r')break;}while(/[a-z]/i.test(text[i]||''))i++;canStartRegex=false;continue;}
+  const quote=text[i];
+  if(quote!=="'"&&quote!=='"'&&quote!=='`'){
+   if(/[A-Za-z_$]/.test(quote)){const start=i++;while(/[\w$]/.test(text[i]||''))i++;canStartRegex=regexAfterWord.has(text.slice(start,i));continue;}
+   if(/[0-9]/.test(quote)){i++;while(/[\w.]/.test(text[i]||''))i++;canStartRegex=false;continue;}
+   canStartRegex=/[({[=,:;!?&|+*%^~<>-]/.test(quote);i++;continue;
+  }
+  if(quote==='`'){const template=templateValues(text,i+1);values.push(...template.values);i=template.i;canStartRegex=false;continue;}
+  i++;let value='';
+  while(i<text.length){const ch=text[i++];if(ch==='\\'&&i<text.length){value+=ch+text[i++];continue;}if(ch===quote)break;value+=ch;}
+  values.push(value);canStartRegex=false;
+ }
+ return values;
+}
+function htmlViolations(html){const values=[...htmlVisibleParts(html)];for(const match of String(html).matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi))values.push(...literalValues(match[1]));return [...new Set(values.map(visibleViolation).filter(Boolean))];}
+function assetViolations(source){return [...new Set(literalValues(source).map(visibleViolation).filter(Boolean))];}
+function assertHtmlVisibleCopy(html,label){for(const hit of htmlViolations(html))assertVisibleValue(hit,label);}
+function assertAssetVisibleCopy(source,label){for(const hit of assetViolations(source))assertVisibleValue(hit,label);}
+function verifyVisibleFiles(root,files){
+ const localeFiles=files.filter(file=>/(?:^|[\\/])locale-(?:en|ru)\.js$/i.test(file)),regularFiles=files.filter(file=>!localeFiles.includes(file)),activeLiterals=new Set();
+ for(const file of regularFiles){const rel=path.relative(root,file).replaceAll('\\','/'),source=/\.(?:html|js|json|css)$/.test(file)?fs.readFileSync(file,'utf8'):'';if(file.endsWith('.html')){assertHtmlVisibleCopy(source,rel);for(const value of htmlVisibleParts(source))activeLiterals.add(value);for(const match of source.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi))for(const value of literalValues(match[1]))activeLiterals.add(value);}else if(/\.(?:js|json|css)$/.test(file)){assertAssetVisibleCopy(source,rel);for(const value of literalValues(source))activeLiterals.add(value);}}
+ for(const file of localeFiles){const rel=path.relative(root,file).replaceAll('\\','/'),context={window:{}};vm.createContext(context);vm.runInContext(fs.readFileSync(file,'utf8'),context,{filename:rel});const dictionary=context.window.ECOCHARGE_EN||context.window.ECOCHARGE_RU||{};for(const [key,value] of Object.entries(dictionary))if(activeLiterals.has(key))assertVisibleValue(value,rel+' translation for '+key);}
+}
+function verify(root){
+ assert.equal(visibleViolation('<option value="demo"'),'');assert.equal(visibleViolation('" accept="image/jpeg" hidden> <div data-identity-preview="'),'');assert.equal(visibleViolation('<option value="demo">Demo</option>'),'Demo');assert.equal(visibleViolation('<div class="x">Preview</div>'),'Preview');
  const manifest=JSON.parse(fs.readFileSync(path.join(root,'preview-manifest.json')));
  assert.equal(manifest.kind,'workspace-sandbox');assert.equal(manifest.source,'fresh-isolated-fixture');assert.equal(manifest.authentication,false);assert.equal(manifest.apiConnected,false);assert.equal(manifest.realPayments,false);assert.equal(manifest.activeOffer,'charge');assert.equal(manifest.chargeModel,'charge-fixed-obligation-v3');assert.equal(manifest.settlementDays,4);assert.equal(manifest.obligationFunding,'fictional-company-reserve');
  const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.join(d,e.name)]),files=walk(root);
  for(const f of files){const rel=path.relative(root,f).replaceAll('\\','/');assert(!/(?:^|\/)(?:server|private-data|config|node_modules)(?:\/|$)|\.sqlite|\.local\.|\.cjs$|initial-users|\.env|ДОСТУПЫ/i.test(rel),rel);if(/\.(js|html|json)$/.test(f)){const code=fs.readFileSync(f,'utf8');assert(!/https?:\/\/(?:localhost|127\.0\.0\.1)(?=[:/])/.test(code),'Local URL in '+rel);}}
+ verifyVisibleFiles(root,files);
  const currentUi=['central/caller-ui.js','central/workspace-model.js','central/energy-brief-ui.js','central/energy-journal.js'].map(file=>fs.readFileSync(path.join(root,file),'utf8')).join('\n');
  assert.doesNotMatch(currentUi,/Record a 4-day accrual|Weekly report available|First closed week|Compare the weekly model|Starting option \/ week|Alternative \/ week|Модель за неделю|Сравнить недельную модель|Недельный отч[её]т|Первая закрытая неделя|No plan periods closed|Monday report|Day \d+ of 7|День \d+ из 7|7-day period|Период 7 дней/i,'Workspace preview contains retired current-state copy');
  assert.match(currentUi,/Compare 4-day obligations/);assert.match(currentUi,/Account report available/);assert.match(currentUi,/First funded 4-day settlement/);
@@ -95,5 +178,7 @@ module.exports=function verify(root){
  assert(request('staff/chats').threads.some(t=>t.clientId===ctx.clientId&&t.awaitingReply&&t.equipment?.requestType==='compute'&&t.equipment?.intent==='capacity'));const cohort=request('staff/funnel').journeys.byRoute.find(r=>r.key==='nurture');assert.equal(cohort.contacts,1);assert.equal(cohort.consultations,1);assert.equal(cohort.accounts,1);assert.equal(cohort.paid,0);
  assert.equal(Object.keys(m.initial().accounts).length,1);
  return {ok:true,files:files.length,checks,privateData:false,networkApi:false,localPersistence:true};
-};
+}
+verify.visibleCopy={assetViolations,assertAssetVisibleCopy,assertHtmlVisibleCopy,htmlViolations,verifyVisibleFiles,visibleViolation};
+module.exports=verify;
 if(require.main===module)console.log(JSON.stringify(module.exports(path.resolve(process.argv[2]))));

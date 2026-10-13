@@ -21,8 +21,8 @@ actions['apply-plan']=()=>{
   if(!planIsComplete()||!$('#modal').open||!$('#modal [data-action="confirm-plan"]'))return;
   const p=planTerms();decisionTrack('plan_reviewed',{tier:p.tierId});
   const rows=p.stationIds.map(journeyStation).filter(Boolean);
-  $('#modal-content h2').textContent='Review your sample plan';
-  $('#modal-content .modal-list').insertAdjacentHTML('afterend',`<div class="d-review-stations">${rows.map(s=>`<span>${icon('pin')}${escapeHtml(journeyLabel(s))}</span>`).join('')}</div><div class="d-review-terms"><h3>Before you save</h3><dl><div><dt>Your ownership rights</dt><dd>Not created by this workspace</dd></div><div><dt>Fees & access to capital</dt><dd>Final terms pending</dd></div><div><dt>Basis of the monthly rate</dt><dd>Unverified model assumption</dd></div></dl><p>Selecting more locations changes the workspace input. It does not establish a higher real return.</p><a href="terms/" target="_blank" rel="noopener" data-decision-terms>Read rights, fees & exit conditions ↗</a></div>`);
+  $('#modal-content h2').textContent='Review your plan draft';
+  $('#modal-content .modal-list').insertAdjacentHTML('afterend',`<div class="d-review-stations">${rows.map(s=>`<span>${icon('pin')}${escapeHtml(journeyLabel(s))}</span>`).join('')}</div><div class="d-review-terms"><h3>Before you save</h3><dl><div><dt>Your ownership rights</dt><dd>Not created by this workspace</dd></div><div><dt>Fees & access to capital</dt><dd>Final terms pending</dd></div><div><dt>Basis of the monthly rate</dt><dd>Charge plan terms</dd></div></dl><p>The number of reference locations does not change the plan rate.</p><a href="terms/" target="_blank" rel="noopener" data-decision-terms>Read rights, fees & exit conditions ↗</a></div>`);
   const b=$('#modal [data-action="confirm-plan"]');
   if(isGuest()){
     b.dataset.action='decision-register-plan';b.textContent='Save with a profile →';
@@ -34,7 +34,7 @@ actions['decision-register-plan']=decisionSaveForRegistration;
 actions['decision-ask-plan']=()=>{
   if(!planIsComplete())return;
   const p=planTerms();contactComposer('plan',{entry:'plan-review',topic:'plan',plan:p.name,capital:p.capital,rate:p.rate,stationIds:p.stationIds.slice()});
-  ($('#care-message')||$('#support-message')).value=(window.EcoLocale?.t('I am reviewing this sample plan. Please explain the proposed investment rights, the evidence supporting the rate, fees and access to funds.')||'I am reviewing this sample plan. Please explain the proposed investment rights, the evidence supporting the rate, fees and access to funds.');
+  ($('#care-message')||$('#support-message')).value=(window.EcoLocale?.t('I am reviewing this plan draft. Please explain the proposed participation rights, the evidence supporting the rate, fees and access to funds.')||'I am reviewing this plan draft. Please explain the proposed participation rights, the evidence supporting the rate, fees and access to funds.');
 };
 const confirmBeforeDecision=actions['confirm-plan'];
 actions['confirm-plan']=()=>{if(isGuest()){decisionSaveForRegistration();return;}confirmBeforeDecision();if(demo.planDraft||isActivePlan()){try{sessionStorage.removeItem('ecocharge-working-plan');}catch{}decisionTrack('plan_saved',{tier:(demo.planDraft||demo.plan).tierId});}};
@@ -69,7 +69,7 @@ function renderDecisionSurfaces(){
     let steps=$('#decision-roadmap');
     if(!steps){steps=document.createElement('section');steps.id='decision-roadmap';steps.className='d-roadmap';dashboard.prepend(steps);}
     const saved=Boolean(demo.planDraft);
-    steps.innerHTML=`<div><span class="j-eyebrow">A CLEAR PATH THROUGH YOUR ACCOUNT</span><h2>Understand. Explore. Decide.</h2></div><ol><li><a href="inside-a-station/"><span>1</span><div><strong>Understand the business</strong><small>Try the operating-cost example</small></div>${journeyArrow()}</a></li><li><button data-action="journey-resume"><span>2</span><div><strong>${saved?'Review your saved example':'Build a sample plan'}</strong><small>${saved?'Your selection is kept in this browser':'Choose stations and a sample amount'}</small></div>${journeyArrow()}</button></li><li><button data-action="journey-documents"><span>3</span><div><strong>Review the terms</strong><small>Rights, evidence, fees and access</small></div>${journeyArrow()}</button></li></ol>`;
+    steps.innerHTML=`<div><span class="j-eyebrow">A CLEAR PATH THROUGH YOUR ACCOUNT</span><h2>Understand. Explore. Decide.</h2></div><ol><li><a href="inside-a-station/"><span>1</span><div><strong>Understand the business</strong><small>Review the operating-cost calculation</small></div>${journeyArrow()}</a></li><li><button data-action="journey-resume"><span>2</span><div><strong>${saved?'Review your saved selection':'Build your plan draft'}</strong><small>${saved?'Your selection is kept in this browser':'Choose stations and your amount'}</small></div>${journeyArrow()}</button></li><li><button data-action="journey-documents"><span>3</span><div><strong>Review the terms</strong><small>Rights, evidence, fees and access</small></div>${journeyArrow()}</button></li></ol>`;
   }
 }
 const decisionClientBefore=renderClientTab;
@@ -89,7 +89,7 @@ document.addEventListener('click',e=>{
 document.addEventListener('input',e=>{if(e.target.id==='investment-amount')keepWorkingExample();});
 document.addEventListener('change',e=>{if(e.target.matches('[data-pick-station]'))keepWorkingExample();});
 
-// Observe actual saved demo state rather than treating a submit-button click as success.
+// Observe actual saved account state rather than treating a submit-button click as success.
 let decisionTicketIds=new Set(demo.tickets.map(t=>t.id));
 let decisionRequests=new Map(demo.requests.map(r=>[r.id,r.status]));
 const persistBeforeDecision=persist;
@@ -100,16 +100,16 @@ persist=function(){persistBeforeDecision();
 
 function decisionDiagnostics(){
   const events=window.EcoChargeFunnel?.read()||[];
-  const stages=[['demo_opened','Demo opened'],['model_explored','Operating example explored'],['station_saved','Station saved'],['plan_reviewed','Plan reviewed'],['registration_completed','Profile created'],['plan_saved','Plan saved'],['question_saved','Question saved'],['demo_funding_requested','Funding requested']];
-  openModal(`<span class="j-eyebrow">LOCAL WORKSPACE DIAGNOSTICS</span><h2>See which steps were tested.</h2><p>Unique browser sessions per action. These are test interactions on this device, not advertising results or a count of real clients. Steps may happen in any order.</p><div class="d-diagnostics">${stages.map(([name,label])=>`<div><span>${label}</span><strong>${new Set(events.filter(e=>e.name===name).map(e=>e.visit)).size}</strong></div>`).join('')}</div><div class="modal-note">Last ${events.length} events retained (maximum 400). No names, email addresses, balances or message text are included. No analytics or advertising service receives these events.</div><button class="button primary" data-action="decision-export-events">Download demo event log</button>`);
+  const stages=[['demo_opened','Workspace opened'],['model_explored','Operating calculation explored'],['station_saved','Station saved'],['plan_reviewed','Plan reviewed'],['registration_completed','Profile created'],['plan_saved','Plan saved'],['question_saved','Question saved'],['demo_funding_requested','Funding requested']];
+  openModal(`<span class="j-eyebrow">LOCAL WORKSPACE DIAGNOSTICS</span><h2>Account activity on this device</h2><p>Unique browser sessions per action. This local log is not advertising analytics or a count of clients. Steps may happen in any order.</p><div class="d-diagnostics">${stages.map(([name,label])=>`<div><span>${label}</span><strong>${new Set(events.filter(e=>e.name===name).map(e=>e.visit)).size}</strong></div>`).join('')}</div><div class="modal-note">Last ${events.length} events retained (maximum 400). No names, email addresses, balances or message text are included. No analytics or advertising service receives these events.</div><button class="button primary" data-action="decision-export-events">Download local event log</button>`);
 }
 actions['decision-diagnostics']=decisionDiagnostics;
 actions['decision-export-events']=()=>{
-  const data=JSON.stringify({mode:'local-demo',exportedAt:new Date().toISOString(),events:window.EcoChargeFunnel?.read()||[]},null,2);
-  const url=URL.createObjectURL(new Blob([data],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='ecocharge-demo-events.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const data=JSON.stringify({mode:'local-account',exportedAt:new Date().toISOString(),events:window.EcoChargeFunnel?.read()||[]},null,2);
+  const url=URL.createObjectURL(new Blob([data],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='ecogrid-account-events.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 const decisionAdminBefore=renderAdmin;
-renderAdmin=function(){decisionAdminBefore();if(workspaceRole==='admin'&&adminTab==='overview')$('#admin-view').insertAdjacentHTML('beforeend','<section class="panel d-staff-diagnostics"><div><h2>Demo journey diagnostics</h2><p>Inspect the steps tested in this browser. Export an event log without contact or financial details.</p></div><button class="button secondary" data-action="decision-diagnostics">View local events →</button></section>');};
+renderAdmin=function(){decisionAdminBefore();if(workspaceRole==='admin'&&adminTab==='overview')$('#admin-view').insertAdjacentHTML('beforeend','<section class="panel d-staff-diagnostics"><div><h2>Local account diagnostics</h2><p>Inspect account activity recorded in this browser. Export an event log without contact or financial details.</p></div><button class="button secondary" data-action="decision-diagnostics">View local events →</button></section>');};
 
 const decisionInitBefore=init;
 init=async function(){await decisionInitBefore();

@@ -63,4 +63,46 @@
 .project-ai-offer{min-width:0}.project-ai-offer p{line-height:1.65}.project-ai-offer details{margin-top:16px}.project-ai-offer details p+p{margin-top:12px}.project-ai-status{font-size:14px;color:#496258}.ec-ai-note>.project-ai-offer{grid-column:1/-1;border-top:1px solid #c6d9d0;padding-top:18px}.ec-ai-note>.project-ai-offer h3{font-size:22px;margin:0 0 12px}
 @media(max-width:700px){.project-tools-grid article[data-ecogrid-ai]{display:block}.project-tools-grid article[data-ecogrid-ai] .project-ai-mark{margin-bottom:16px}.project-tools-grid .project-ai-offer{width:100%}}
 
+/* Stations is a short Charge introduction first, then a progressive location directory. */
+.ec-stations-page{padding-top:clamp(28px,4vw,52px)}
+.ec-stations-intro{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:clamp(42px,7vw,92px);align-items:center;padding:clamp(34px,5vw,66px);border-radius:24px;background:#0d2b22;color:#f7fbf9;overflow:hidden}
+.ec-stations-intro .ec-kicker{color:#8dd9ba;margin-bottom:18px}
+.ec-stations-intro h1{max-width:780px;font-size:clamp(39px,5vw,66px);line-height:1.08;letter-spacing:-.052em}
+.ec-stations-intro-copy>p{max-width:650px;margin-top:24px;color:#d3e5dd;font-size:17px;line-height:1.72}
+.ec-stations-intro .ec-hero-actions{margin-top:30px;flex-wrap:wrap}
+.ec-stations-intro .ec-button{border-color:#f7fbf9;background:#f7fbf9;color:#0d2b22}
+.ec-stations-intro .ec-button:hover{background:#dff5ea}
+.ec-stations-intro .ec-text-link{color:#a7dfc8}
+.ec-stations-value{list-style:none;margin:0;padding:0;border-top:1px solid #416057}
+.ec-stations-value li{display:grid;grid-template-columns:34px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid #416057}
+.ec-stations-value li>span{padding-top:3px;color:#8dd9ba;font-size:11px;font-weight:700;letter-spacing:.08em}
+.ec-stations-value h2{font-size:18px;line-height:1.35;letter-spacing:-.02em}
+.ec-stations-value p{margin-top:7px;color:#bcd2c8;font-size:14px;line-height:1.6}
+.ec-station-browser{scroll-margin-top:110px}
+.ec-station-card{content-visibility:auto;contain-intrinsic-size:auto 520px}
+.ec-station-data-visual,.ec-dialog-location-visual{position:relative;isolation:isolate;display:grid;align-content:end;justify-items:start;gap:7px;overflow:hidden;background:linear-gradient(145deg,#0d2b22 0%,#153f34 68%,#1d5a49 100%);color:#f7fbf9;text-align:left}
+.ec-station-data-visual::before,.ec-dialog-location-visual::before{content:"";position:absolute;z-index:-1;inset:14% -20% auto auto;width:74%;aspect-ratio:1;border:1px solid #8dd9ba55;border-radius:50%;box-shadow:0 0 0 42px #8dd9ba0a,0 0 0 84px #8dd9ba08}
+.ec-station-data-visual{width:100%;height:207px;padding:24px}
+.ec-station-data-visual>span,.ec-dialog-location-visual>span{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8dd9ba}
+.ec-station-data-visual>strong,.ec-dialog-location-visual>strong{font-size:clamp(25px,3vw,40px);line-height:1.05;letter-spacing:-.04em}
+.ec-station-data-visual>small,.ec-dialog-location-visual>small{font-size:11px;color:#d3e5dd}
+.ec-dialog-location-visual{min-height:325px;padding:clamp(28px,5vw,48px)}
+.ec-station-directory-heading{display:flex;align-items:end;justify-content:space-between;gap:48px;padding-top:clamp(56px,8vw,92px);padding-bottom:28px}
+.ec-station-directory-heading>div{max-width:670px}
+.ec-station-directory-heading .ec-kicker{margin-bottom:13px}
+.ec-station-directory-heading h2{font-size:clamp(33px,4vw,48px)}
+.ec-station-directory-heading p{margin-top:14px;font-size:15px;line-height:1.75}
+.ec-station-directory-heading>.ec-button{flex:none}
+.ec-station-browser.is-collapsed .ec-directory-controls,.ec-station-browser.is-collapsed .ec-empty{display:none!important}
+.ec-station-browser.is-collapsed .ec-station-grid{grid-template-columns:minmax(0,1fr);max-width:980px}
+.ec-station-browser.is-collapsed .ec-station-grid>[data-station-card]:not(:first-child){display:none!important}
+.ec-station-browser.is-collapsed .ec-station-card:first-child{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr)}
+.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-open{min-height:365px}
+.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-open img{height:100%;min-height:365px}
+.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-content{display:flex;flex-direction:column;padding:30px 30px 12px}
+.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-bottom{margin-top:auto}
+.ec-live-status{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media(max-width:800px){.ec-stations-intro{grid-template-columns:1fr;gap:36px}.ec-stations-value{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid #416057}.ec-stations-value li{display:block;padding:18px;border-right:1px solid #416057}.ec-stations-value li>span{display:block;margin-bottom:12px}.ec-station-browser.is-collapsed .ec-station-card:first-child{grid-template-columns:1fr}.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-open,.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-open img{min-height:280px;height:280px}}
+@media(max-width:650px){.ec-stations-page{padding-top:20px}.ec-stations-intro{margin-inline:-4px;padding:30px 24px;border-radius:18px}.ec-stations-intro h1{font-size:38px;line-height:1.12}.ec-stations-intro-copy>p{font-size:15px;line-height:1.72}.ec-stations-intro .ec-hero-actions{display:grid;gap:8px}.ec-stations-intro .ec-button{width:100%}.ec-stations-intro .ec-text-link{width:max-content}.ec-stations-value{display:block;border-left:0}.ec-stations-value li{display:grid;grid-template-columns:32px 1fr;padding:17px 0;border-right:0}.ec-station-directory-heading{display:block;padding-top:50px;padding-bottom:22px}.ec-station-directory-heading p{font-size:14px}.ec-station-directory-heading>.ec-button{width:100%;margin-top:22px}.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-open,.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-open img{min-height:238px;height:238px}.ec-station-browser.is-collapsed .ec-station-card:first-child .ec-station-content{padding:22px 22px 8px}.ec-dialog-location-visual{min-height:235px;padding:28px 25px}}
+
 html[data-app=website] .f-economics-inputs input[type=range]{min-height:44px}

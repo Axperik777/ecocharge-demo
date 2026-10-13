@@ -1,5 +1,5 @@
 'use strict';
-// Local demo attribution for public guides. Stores only bounded content identifiers in this browser tab.
+// Local attribution for public guides. Stores only bounded content identifiers in this browser tab.
 (() => {
   const storageKey='ecogrid-content-context-v1',eventKey='ecogrid-content-events-v1';
   const root=document.documentElement;

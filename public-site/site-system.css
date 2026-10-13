@@ -539,3 +539,13 @@ html[data-app=website] .ec-ai-note h2{max-width:100%}
 html[data-app=website] .lead-card label.lead-consent{min-height:44px;align-items:flex-start;padding-block:10px;box-sizing:border-box}
 html[data-app=website] .participate-footer a{display:inline-flex;align-items:center;min-height:44px;padding-block:10px;box-sizing:border-box}
 html[data-app=website] a.charge-brand{display:inline-flex;align-items:center;min-height:44px;box-sizing:border-box}
+
+/* Stations sales panel sits on a dark surface; override the global light-surface type tokens. */
+html[data-app=website] .ec-stations-intro h1,
+html[data-app=website] .ec-stations-value h2{color:#f7fbf9}
+html[data-app=website] .ec-stations-intro .ec-kicker,
+html[data-app=website] .ec-stations-value li>span{color:#8dd9ba}
+html[data-app=website] .ec-stations-intro .ec-text-link{color:#a7dfc8}
+html[data-app=website] .ec-stations-intro .ec-button:not(.ec-button-outline):not(.outline){border-color:#f7fbf9;background:#f7fbf9;color:#0d2b22}
+html[data-app=website] .ec-stations-intro .ec-button:not(.ec-button-outline):not(.outline):hover{border-color:#dff5ea;background:#dff5ea;color:#0d2b22}
+html[data-app=website] #site-dialog{overscroll-behavior:contain}

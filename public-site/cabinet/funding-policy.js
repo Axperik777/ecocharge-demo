@@ -38,6 +38,6 @@
     const ready=!!(!s.active&&p&&finance.valid(p.capital)&&p.capital>=finance.minimum&&s.available>=p.capital);
     return {visible:ready,draft:p,available:s.available,reserved:s.reserved,after:ready?finance.round(s.available-p.capital):null};
   }
-  function previewNotice(lang='en'){return lang==='ru'?'Превью оплаты: отправка заявки уведомит менеджера и администратора. Автоматического зачисления нет.':'Payment preview: submitting a request notifies your manager and administrator. No automatic credit.';}
+  function previewNotice(lang='en'){return lang==='ru'?'Заявка на пополнение поступит менеджеру и администратору. Баланс изменится только после проверки фактического поступления. Оплата на сайте станет доступна после подключения платёжного провайдера.':'The funding request goes to your manager and administrator. The balance changes only after the actual receipt is verified. Website payment becomes available after the payment provider is connected.';}
   return Object.freeze({offers,offer,state,pricing,removePendingFees,intent,activation,amountChips,previewNotice});
 });

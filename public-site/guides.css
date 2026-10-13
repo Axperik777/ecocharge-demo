@@ -42,6 +42,7 @@ html[data-app=website] .guide-responsibility strong{color:var(--teal);font-size:
 html[data-app=website] .guide-responsibility p{font-size:14px;line-height:1.7}
 html[data-app=website] .guide-article-body{--ec-wrap-max:1040px;padding-bottom:clamp(76px,9vw,126px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px}
 html[data-app=website] .guide-article-body>section,html[data-app=website] .guide-related{min-width:0;border:1px solid var(--line);border-radius:20px;background:#fff;padding:clamp(24px,4vw,42px)}
+html[data-app=website] :is(.guide-hub-hero,.guide-article-hero,.guide-article-body) :is(h1,h2){overflow-wrap:anywhere;hyphens:auto}
 html[data-app=website] .guide-article-body h2{font-size:clamp(27px,3.2vw,40px);line-height:1.2;margin:0 0 22px}
 html[data-app=website] .guide-article-body p:not(.ec-kicker){font-size:16px;line-height:1.78}
 html[data-app=website] .guide-article-body p:not(.ec-kicker)+p:not(.ec-kicker){margin-top:15px}
@@ -98,7 +99,8 @@ html[data-app=website] .guide-related a:hover{border-color:var(--teal)}
  html[data-app=website] .guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  html[data-app=website] .guide-evidence-grid{grid-template-columns:1fr}
  html[data-app=website] .guide-process ol{grid-template-columns:1fr}
- html[data-app=website] .guide-process li{display:grid;grid-template-columns:42px 1fr;gap:12px}
+ html[data-app=website] .guide-process li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px}
+ html[data-app=website] .guide-process li>*:nth-child(2){min-width:0}
  html[data-app=website] .guide-process li>span{margin:3px 0 0}
  html[data-app=website] .guide-related>div{grid-template-columns:1fr}
  html[data-app=website] .guide-related a{min-height:0}

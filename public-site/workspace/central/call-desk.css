@@ -7,6 +7,14 @@
 .call-controls select{width:100%;min-width:0;max-width:100%;box-sizing:border-box}
 @media(max-width:600px){.call-controls{grid-template-columns:minmax(0,1fr)}}
 
+/* EC-141: mobile script steps read as a paced sequence, not a ruled table. */
+@media(max-width:850px){
+ .call-desk details{margin-bottom:8px;border-bottom:0;border-radius:10px;overflow:hidden}
+ .call-desk details[open]{background:#202023}
+ .call-desk details p{padding:0 12px 20px}
+ .call-desk summary{padding:18px 12px}
+}
+
 .solar-sales-guide{margin:18px 0;font-size:13px;line-height:1.85}.solar-sales-guide summary{cursor:pointer;color:#e6e6e9;font-weight:600}.solar-sales-guide h3{font-size:15px;margin:22px 0 8px}.solar-sales-guide p{white-space:pre-line;max-width:900px}.solar-sales-guide a{color:#ceced1;text-decoration:underline}.solar-sales-guide small{color:#b9b9bc}
 
 .call-desk [hidden]{display:none!important}

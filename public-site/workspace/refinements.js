@@ -27,7 +27,7 @@ function refineBuilder() {
   heading.querySelector('p').textContent = 'Set your amount, choose reference stations and review one clear 4-day settlement estimate.';
   const layout = document.createElement('div'); layout.className = 'r-builder';
   const main = document.createElement('div'); main.className = 'r-builder-main';
-  const summary = document.createElement('aside'); summary.className = 'panel r-plan-summary'; summary.setAttribute('aria-label', 'Your sample plan summary');
+  const summary = document.createElement('aside'); summary.className = 'panel r-plan-summary'; summary.setAttribute('aria-label', 'Your Charge plan summary');
   summary.innerHTML = `<span class="j-eyebrow">YOUR EXAMPLE</span><h2>Review your selection</h2><dl class="r-summary-facts"><div><dt>Plan amount</dt><dd id="r-plan-capital"></dd></div><div><dt>Selected stations</dt><dd id="r-plan-count"></dd></div><div><dt>Calendar-month model rate</dt><dd id="r-plan-rate"></dd></div></dl>`;
   ['.allocation-math', '.formula-box', '.tariff-disclosure', '[data-action="apply-plan"]', '#tariff-error', '.contact-plan-cta'].forEach(selector => {const el = amount.querySelector(selector); if (el) summary.append(el);});
   // Contact extensions may use a different wrapper; preserve their original action.
@@ -45,7 +45,7 @@ function refineBuilder() {
   if (scenarios) {const details = document.createElement('details'); details.className = 'r-scenario-details'; details.innerHTML = '<summary>See the example over several weeks</summary>'; scenarios.before(details); details.append(scenarios);}
   const historyPanel = area.querySelector('.session-panel'); if (historyPanel) historyPanel.hidden = !demo.sessions.length;
   const help = document.createElement('a'); help.href = 'inside-a-station/'; help.className = 'r-model-link'; help.textContent = 'Explore charging revenue and operating costs →'; area.append(help);
-  area.insertAdjacentHTML('beforeend', `<div class="r-plan-dock"><div><span>Sample plan</span><strong id="r-dock-capital"></strong><small><span>Selected stations:</span> <span id="r-dock-count"></span></small></div><button class="button primary" data-action="r-review-plan">Review plan ${icon('arrow')}</button></div>`);
+  area.insertAdjacentHTML('beforeend', `<div class="r-plan-dock"><div><span>Your Charge plan</span><strong id="r-dock-capital"></strong><small><span>Selected stations:</span> <span id="r-dock-count"></span></small></div><button class="button primary" data-action="r-review-plan">Review plan ${icon('arrow')}</button></div>`);
   refinePlanSummary();
 }
 
@@ -80,7 +80,7 @@ function refineDashboard() {
     const actionsRow = welcome.querySelector('.cab-welcome-actions');
     if (actionsRow) actionsRow.innerHTML = `<a class="button secondary" href="inside-a-station/">Understand the business</a><button class="button secondary" data-action="explore-map">Explore stations</button>${cabButton('journey-resume', 'Build my plan ' + icon('arrow'), true)}`;
     welcome.querySelector('h1').textContent = 'Start with what interests you.';
-    welcome.querySelector('p').textContent = 'Explore the business, inspect a real location or build your own sample plan. No payment details needed.';
+    welcome.querySelector('p').textContent = 'Explore the business, inspect a real location or build your own Charge plan. No payment details needed.';
     welcome.querySelector('.cab-progress')?.remove();
   }
   if (!cabEvents().length) root.querySelector('.cab-activity')?.remove();

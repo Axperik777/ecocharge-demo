@@ -2,10 +2,10 @@
 // This file is included only in the separate GitHub Pages presentation export.
 (()=>{
  const fixture=window.ECO_PAGES_FIXTURE;
- if(!window.ECO_PLATFORM_CONFIG?.clientPreview||!fixture)throw Error('Client preview configuration required');
+ if(!window.ECO_PLATFORM_CONFIG?.clientPreview||!fixture)throw Error('Client workspace configuration required');
  window.ECO_SHARED_CONTEXT=structuredClone(fixture.responses['client/account']);
  window.PORTAL_ROLE='client';
- window.EcoPagesMessage=()=>new URL(location).searchParams.get('lang')==='ru'?'Это просмотр примера. Пополнения, выводы и сообщения не отправляются.':'This is a sample account preview. Funding, withdrawals and messages are not submitted.';
+ window.EcoPagesMessage=()=>new URL(location).searchParams.get('lang')==='ru'?'Данные этого кабинета сохраняются в текущем браузере. Общая серверная синхронизация, платежи и сообщения включаются после размещения серверной части и подключения платёжного провайдера.':'This account stores data in the current browser. Shared server sync, payments and messaging become available after the server deployment and payment-provider connection.';
  const originalFetch=window.fetch.bind(window);
  window.fetch=async(input,init={})=>{
   const url=new URL(typeof input==='string'?input:input.url||input,document.baseURI),api=new URL('api/',document.baseURI);

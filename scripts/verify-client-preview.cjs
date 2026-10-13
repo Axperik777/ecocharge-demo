@@ -1,5 +1,6 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const visibleCopy=require('./verify-workspace-preview.cjs').visibleCopy;
 function verify(root){
  const files=fs.readdirSync(root,{recursive:true,withFileTypes:true}).filter(e=>e.isFile()).map(e=>path.join(e.parentPath,e.name));
  const manifest=JSON.parse(fs.readFileSync(path.join(root,'preview-manifest.json'),'utf8'));
@@ -28,13 +29,14 @@ function verify(root){
  assert(!html.includes('src="central/client.js"'));assert(!html.includes('sessionStorage.setItem("ecocharge-entry'));
  for(const [,ref]of html.matchAll(/(?:src|href)="([^"?#]+\.(?:js|css|svg|png|webmanifest))(?:[?#][^"]*)?"/g))if(!ref.includes(':'))assert(fs.existsSync(path.join(root,ref)),'Missing '+ref);
  for(const file of files){const rel=path.relative(root,file).replaceAll('\\','/');assert(!/(^|\/)(?:server|crm|team|staff|private-data|login)(\/|$)|\.sqlite|\.local\.|initial-users|\.env|ДОСТУПЫ|\.cjs$/i.test(rel),'Private/server file '+rel);}
+ visibleCopy.verifyVisibleFiles(root,files);
  const boot=fs.readFileSync(path.join(root,'pages-client-bootstrap.js'),'utf8'),adapter=fs.readFileSync(path.join(root,'pages-client-adapter.js'),'utf8'),ready=fs.readFileSync(path.join(root,'pages-client-ready.js'),'utf8');
  assert(boot.includes("method==='GET'?fixture.responses[key]:undefined"));assert(adapter.includes('requestWithdrawal:blocked'));assert(ready.includes('event.stopImmediatePropagation()'));
  const currentUi=['weekly.js','tariffs.js','portal.js','cabinets.js','central/ecosystem.js','central/client-finance.js'].map(file=>fs.readFileSync(path.join(root,file),'utf8')).join('\n');
  assert.doesNotMatch(currentUi,/Record a 4-day accrual|Weekly report available|First closed week|Compare the weekly model|Starting option \/ week|Alternative \/ week|Модель за неделю|Сравнить недельную модель|Недельный отч[её]т|Первая закрытая неделя|Day \d+ of 7|День \d+ из 7|7-day period|Период 7 дней|Unlocked after the Charge journey|Available after confirmed Charge participation/i,'Client preview contains retired current-state copy');
  const retiredVocabulary=new RegExp('M\\u0069ning|\\u043c\\u0430\\u0439\\u043d|AS\\u0049C|EcoM\\u0069ner','iu');
  assert.doesNotMatch(currentUi,retiredVocabulary,'Client preview exposes retired product vocabulary');
- assert.match(currentUi,/Preview 4-day obligation/);assert.match(currentUi,/Company payable · not withdrawable/);
+ assert.match(currentUi,/Review 4-day obligation/);assert.match(currentUi,/Company payable · not withdrawable/);
  assert.match(currentUi,/data-expansion-stage="open"/);
  assert.match(currentUi,/EcoGrid Solar/);assert.match(currentUi,/EcoGrid Compute/);
  assert.match(currentUi,/GPU capacity for business workloads|GPU-мощность для бизнес-задач/,'Client preview must explain the active Compute route');

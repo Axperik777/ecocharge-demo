@@ -23,3 +23,17 @@
 .story-service .story-heading{margin:0}
 .story-service-copy{padding-left:28px;border-left:2px solid #9fbd80}
 @media(max-width:700px){.story-service{grid-template-columns:1fr;gap:24px}.story-service-copy{padding-left:18px}}
+
+/* EC-141: keep the station-model ledger calm and remove decorative rules. */
+.story-ledger{border:0}
+.story-ledger dl{display:grid;gap:7px}
+.story-ledger dl>div,.story-ledger dl>div:last-child{padding:10px 0;border:0}
+.story-ledger .ec-text-link,.story-ledger .ec-text-link:hover{text-decoration:none}
+.story-ledger .ec-text-link:hover{color:#38521e}
+
+/* EC-141: keep editorial labels readable without changing the visual hierarchy. */
+.story-eyebrow,.story-photo figcaption,.story-contents>span,.story-letter-copy .story-signature-role,.story-gallery .story-photo figcaption{font-size:11px!important}
+@media(max-width:600px){
+ .story-eyebrow,.story-stats dt,.story-contents>span,.story-contents a,.story-photo figcaption,.story-letter-place,.story-gallery .story-photo figcaption{font-size:11px!important}
+}
+@media(max-width:360px){.story-contents a{font-size:11px}}

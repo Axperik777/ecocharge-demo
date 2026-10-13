@@ -1,5 +1,6 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const visibleCopy=require('./verify-workspace-preview.cjs').visibleCopy;
 const root=path.resolve(process.argv[2]||'public-site');
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
 const previewRoot=path.join(root,'cabinet');
@@ -37,6 +38,7 @@ for(const key of ['accountBase','crmBase','apiBase'])assert.equal(config[key],''
 assert.equal(config.websiteBase,'https://axperik777.github.io/ecocharge-demo/');
 assert.equal(config.localeMode,'development');
 const base=new URL(config.websiteBase),forbidden=/^(?:client|login|register|team|staff|crm|central|server|private-data)(?:\/|$)/;
+visibleCopy.verifyVisibleFiles(root,files);
 for(const file of files){
  const rel=path.relative(root,file).replaceAll('\\','/');
  assert(!forbidden.test(rel),'Excluded application: '+rel);
@@ -99,7 +101,7 @@ for(const asset of ['site.js','trust.js','trust-content.js','funnel.js'])assert.
 // Public export must keep the ecosystem neutral while every project retains its own request path.
 const home=fs.readFileSync(path.join(root,'index.html'),'utf8'),plans=fs.readFileSync(path.join(root,'plans/index.html'),'utf8');
 for(const route of ['charge','solar','compute'])assert.match(home,new RegExp('href="participate\\/'+route+'\\/"'),'Homepage project entry is missing: '+route);
-assert.match(home,/EcoGrid designs and operates energy infrastructure/,'Homepage must identify EcoGrid as an infrastructure company');
+assert.match(home,/EcoGrid designs, builds and operates energy infrastructure/,'Homepage must identify EcoGrid as an infrastructure company');
 assert.match(home,/href="academy\/#academy-routes"/,'Homepage Academy evidence entry is missing');
 assert.doesNotMatch(home,/data-public-plan-form|data-lead-form|src="public-plan-ui\.js/,'Homepage must introduce the company without a calculator or lead form');
 assert.doesNotMatch(home,/home-partner-names|Microsoft|Google|Apple|Bank of America/,'Homepage must not borrow authority from unverified partnership names');

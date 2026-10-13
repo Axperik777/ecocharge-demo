@@ -65,13 +65,13 @@ function cabClientStep() {
 function cabEvents() {
   const p = cabPlan(), rows = [];
   if (p) rows.push({date: p.appliedAt, title: isActivePlan() && !demo.planDraft ? 'Plan activated' : 'Plan saved', detail: `${p.name} · ${money(p.capital)}`, action: 'journey-my-plan', glyph: 'assets'});
-  for (const r of demo.requests) rows.push({date: r.reviewedAt || r.date, title: `${r.type === 'topup' ? 'Funding' : 'Model withdrawal'} · ${money(r.amount)}`, detail: r.status, action: 'history', glyph: 'calendar'});
+  for (const r of demo.requests) rows.push({date: r.reviewedAt || r.date, title: `${r.type === 'topup' ? 'Funding' : 'Withdrawal'} · ${money(r.amount)}`, detail: r.status, action: 'history', glyph: 'calendar'});
   for (const t of demo.tickets) {
     const latest = threadMessages(t).at(-1);
     rows.push({date: latest?.date || t.date, title: latest?.from === 'manager' ? 'Manager replied' : 'Message saved', detail: t.service?.closed ? 'Closed' : t.status === 'Open' ? 'Awaiting reply' : 'Answered', thread: t.id, glyph: 'chat'});
   }
   for (const s of demo.sessions.filter(s => ['week','accrual'].includes(s.period))) rows.push({date: s.date, title: `${s.period==='week'?'Archived legacy credit':'4-day accrual'} · ${money(s.payout)}`, detail: `Period starting ${s.periodStart?.slice(0,10)||s.weekStart}`, credit: s.id, glyph: 'zap'});
-  for (const a of (demo.adjustments || [])) rows.push({date: a.date, title: 'Account updated by manager', detail: 'Model adjustment recorded', action: 'cab-account-details', glyph: 'filter'});
+  for (const a of (demo.adjustments || [])) rows.push({date: a.date, title: 'Account updated by manager', detail: 'Account adjustment recorded', action: 'cab-account-details', glyph: 'filter'});
   return rows.filter(e => Number.isFinite(Date.parse(e.date))).sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 }
 
@@ -85,7 +85,7 @@ function cabStationPreview() {
   const p = cabPlan(), ids = p?.stationIds || explorationState().saved;
   let rows = ids.map(journeyStation).filter(Boolean).slice(0, 2);
   if (!rows.length) rows = [journeyStation(121704) || stations[0]].filter(Boolean);
-  return `<section class="panel cab-stations"><div class="cab-section-heading"><h2>${p ? 'Your selected stations' : 'Explore a real location'}</h2><button class="text-button" data-action="${p ? 'journey-my-plan' : 'explore-map'}">${p ? 'View selection' : 'Open map'} ${icon('arrow')}</button></div>${rows.map(s => {const photo = journeyPhoto(s); return `<button class="cab-location" data-journey-open="${s.id}"><img src="${escapeHtml(photo.path)}" alt="${escapeHtml(photo.alt)}" width="180" height="128" loading="lazy" decoding="async"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.ports} DC ports${photo.kind==='illustration'?' · Illustration':''}</small></span>${icon('arrow')}</button>`;}).join('')}<small class="cab-caption">Reference locations · ownership is not established.</small></section>`;
+  return `<section class="panel cab-stations"><div class="cab-section-heading"><h2>${p ? 'Your selected stations' : 'Explore a real location'}</h2><button class="text-button" data-action="${p ? 'journey-my-plan' : 'explore-map'}">${p ? 'View selection' : 'Open map'} ${icon('arrow')}</button></div>${rows.map(s => {const photo = journeyPhoto(s); return `<button class="cab-location" data-journey-open="${s.id}"><img src="${escapeHtml(photo.path)}" alt="${escapeHtml(photo.alt)}" width="180" height="128" loading="lazy" decoding="async"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.ports} DC ports</small></span>${icon('arrow')}</button>`;}).join('')}<small class="cab-caption">Reference locations · ownership is not established.</small></section>`;
 }
 
 function cabManagerStrip() {
@@ -107,7 +107,7 @@ renderJourney = function () {
   welcome.className = 'panel client-next-step cab-welcome';
   welcome.dataset.state = step.state;
   welcome.innerHTML = `<div class="cab-welcome-top"><span class="j-eyebrow">${isGuest() ? 'YOUR WORKSPACE' : 'YOUR EcoGrid Charge ACCOUNT'}</span>${cabPill(step.tag, step.state === 'pending' ? 'amber' : 'mint')}</div><h1>${step.title}</h1><p>${step.copy}</p><div class="cab-welcome-actions j-hero-actions">${cabButton(step.action, step.label + ' ' + icon('arrow'), true)}<button class="text-button" data-action="manager">Ask my manager ${icon('chat')}</button></div><ol class="cab-progress" aria-label="Plan progress">${['Choose stations', 'Review & fund', 'Active plan'].map((label, i) => `<li class="${i < step.step ? 'complete' : i === step.step ? 'current' : ''}" ${i === step.step ? 'aria-current="step"' : ''}><span>${i < step.step ? '✓' : i + 1}</span>${label}</li>`).join('')}</ol>`;
-  root.innerHTML = `<section class="panel cab-summary"><div class="cab-section-heading"><h2>Account snapshot</h2><button class="text-button" data-action="cab-calculation">How it is calculated ${icon('arrow')}</button></div><dl class="cab-summary-values"><div><dt>${demo.planDraft ? 'Saved plan amount' : 'Plan amount'}</dt><dd>${p ? money(p.capital) : '—'}</dd><small>${demo.planDraft ? 'Not activated' : isActivePlan() ? 'Active plan capital' : 'Choose your amount'}</small></div><div><dt>Available balance</dt><dd>${money(Math.max(0, demo.balance - pendingWithdrawals()))}</dd><small>${pendingWithdrawals() ? money(pendingWithdrawals()) + ' reserved' : 'Sample funds'}</small></div><div><dt>Recorded credits</dt><dd>${money(credits)}</dd><button class="text-button" data-action="sessions">View calculations ${icon('arrow')}</button></div><div><dt>Selected stations</dt><dd>${p?.stationIds.length || 0}</dd><small>${p ? escapeHtml(p.name) : 'No plan selected'}</small></div></dl><div class="cab-summary-actions">${cabButton('topup', 'Add funds')}${cabButton('withdraw', 'Request withdrawal')}<button class="text-button" data-action="history">All activity ${icon('arrow')}</button></div></section><div class="cab-client-grid">${cabStationPreview()}${cabManagerStrip()}</div><section class="panel cab-activity"><div class="cab-section-heading"><h2>Latest activity</h2><button class="text-button" data-action="history">View all ${icon('arrow')}</button></div>${cabTimeline()}</section><nav class="cab-help" aria-label="Account help"><button data-action="journey-guide">${icon('file')} How it works</button><button data-action="journey-documents">Documents</button><a href="terms/">Terms & risks ↗</a></nav><p class="cab-local-note">${window.ECO_SHARED_CONTEXT?'Account data is saved on the shared server. No real payments.':'Demo data stays in this browser. No real payments.'}</p>`;
+  root.innerHTML = `<section class="panel cab-summary"><div class="cab-section-heading"><h2>Account snapshot</h2><button class="text-button" data-action="cab-calculation">How it is calculated ${icon('arrow')}</button></div><dl class="cab-summary-values"><div><dt>${demo.planDraft ? 'Saved plan amount' : 'Plan amount'}</dt><dd>${p ? money(p.capital) : '—'}</dd><small>${demo.planDraft ? 'Not activated' : isActivePlan() ? 'Active plan capital' : 'Choose your amount'}</small></div><div><dt>Available balance</dt><dd>${money(Math.max(0, demo.balance - pendingWithdrawals()))}</dd><small>${pendingWithdrawals() ? money(pendingWithdrawals()) + ' reserved' : 'Account funds'}</small></div><div><dt>Recorded credits</dt><dd>${money(credits)}</dd><button class="text-button" data-action="sessions">View calculations ${icon('arrow')}</button></div><div><dt>Selected stations</dt><dd>${p?.stationIds.length || 0}</dd><small>${p ? escapeHtml(p.name) : 'No plan selected'}</small></div></dl><div class="cab-summary-actions">${cabButton('topup', 'Add funds')}${cabButton('withdraw', 'Request withdrawal')}<button class="text-button" data-action="history">All activity ${icon('arrow')}</button></div></section><div class="cab-client-grid">${cabStationPreview()}${cabManagerStrip()}</div><section class="panel cab-activity"><div class="cab-section-heading"><h2>Latest activity</h2><button class="text-button" data-action="history">View all ${icon('arrow')}</button></div>${cabTimeline()}</section><nav class="cab-help" aria-label="Account help"><button data-action="journey-guide">${icon('file')} How it works</button><button data-action="journey-documents">Documents</button><a href="terms/">Terms & risks ↗</a></nav><p class="cab-local-note">${window.ECO_SHARED_CONTEXT?'Account data is saved on the shared server. Payments require provider confirmation.':'Account data stays on this device until the server is connected. Payments require provider confirmation.'}</p>`;
 };
 
 function cabContactButton() {
@@ -166,7 +166,7 @@ actions.history = () => {
 actions['cab-request-history'] = () => {
   cabRequestHistory();
   const summary = $('#modal-content>p');
-  if (summary) summary.innerHTML = `<span>Total model balance:</span> ${money(demo.balance)}<br><span>Reserved withdrawals:</span> ${money(pendingWithdrawals())}<br><span>Available balance:</span> ${money(demo.balance - pendingWithdrawals())}`;
+  if (summary) summary.innerHTML = `<span>Total account balance:</span> ${money(demo.balance)}<br><span>Reserved withdrawals:</span> ${money(pendingWithdrawals())}<br><span>Available balance:</span> ${money(demo.balance - pendingWithdrawals())}`;
 };
 
 const cabRequestTableBefore = requestTable;
@@ -202,7 +202,7 @@ reviewRequest = function (id, decision) {
 
 function cabTasks() {
   const rows = [];
-  for (const r of demo.requests.filter(r => r.status === 'Pending')) rows.push({type: 'payments', id: r.id, title: r.type === 'topup' ? 'Review funding' : 'Review model withdrawal', detail: money(r.amount), status: 'Needs review', date: r.date, score: 2, request: true});
+  for (const r of demo.requests.filter(r => r.status === 'Pending')) rows.push({type: 'payments', id: r.id, title: r.type === 'topup' ? 'Review funding' : 'Review withdrawal', detail: money(r.amount), status: 'Needs review', date: r.date, score: 2, request: true});
   for (const t of opsSortedTickets()) {
     const s = opsService(t), call = t.callback && t.callback.status !== 'cancelled' && Date.parse(t.callback.instant) > Date.now();
     if (!opsNeedsWork(t) && !call) continue;
@@ -237,12 +237,12 @@ function cabPlanPanel() {
 }
 
 function cabOperationsPanel() {
-  return `<section class="cab-card-section"><div class="cab-section-heading"><div><h2>Account operations</h2><p>Available balance: <strong>${money(demo.balance - pendingWithdrawals())}</strong></p></div>${cabButton('cab-edit-balance', 'Adjust model balance')}</div><div class="cab-operation-actions">${cabButton('simulate-session', 'Preview 4-day obligation')}${cabButton('sessions', 'Funded settlements')}</div>${withdrawalNotice()}${requestTable()}</section>`;
+  return `<section class="cab-card-section"><div class="cab-section-heading"><div><h2>Account operations</h2><p>Available balance: <strong>${money(demo.balance - pendingWithdrawals())}</strong></p></div>${cabButton('cab-edit-balance', 'Adjust account balance')}</div><div class="cab-operation-actions">${cabButton('simulate-session', 'Calculate 4-day obligation')}${cabButton('sessions', 'Funded settlements')}</div>${withdrawalNotice()}${requestTable()}</section>`;
 }
 
 function cabClientCard() {
   const content = cabSection === 'profile' ? cabProfile() : cabSection === 'plan' ? cabPlanPanel() : cabSection === 'operations' ? cabOperationsPanel() : cabSection === 'messages' ? supportTable() : `<section class="cab-card-section"><div class="cab-section-heading"><h2>Client change history</h2>${cabButton('account-audit', 'View adjustments')}</div>${activityPanel()}</section>`;
-  return `<section class="panel cab-client-card"><button class="text-button cab-back-list" data-action="cab-client-list">← All clients</button><header class="cab-client-header"><span class="cab-avatar">${cabInitials(demo.client.name)}</span><div><h2 translate="no">${escapeHtml(demo.client.name)}</h2><small><span translate="no">CL-1001</span> · <span>${cabStage()}</span></small></div><button class="text-button" data-action="view-client">Preview client ${icon('out')}</button></header><nav class="cab-card-tabs" aria-label="Client sections">${[['profile', 'Profile'], ['plan', 'Plan & stations'], ['operations', 'Operations'], ['messages', 'Messages'], ['history', 'History']].map(([id, label]) => `<button data-cab-section="${id}" ${cabSection === id ? 'aria-current="page"' : ''}>${label}</button>`).join('')}</nav><div class="cab-card-content">${content}</div></section>`;
+  return `<section class="panel cab-client-card"><button class="text-button cab-back-list" data-action="cab-client-list">← All clients</button><header class="cab-client-header"><span class="cab-avatar">${cabInitials(demo.client.name)}</span><div><h2 translate="no">${escapeHtml(demo.client.name)}</h2><small><span translate="no">CL-1001</span> · <span>${cabStage()}</span></small></div><button class="text-button" data-action="view-client">Open client account ${icon('out')}</button></header><nav class="cab-card-tabs" aria-label="Client sections">${[['profile', 'Profile'], ['plan', 'Plan & stations'], ['operations', 'Operations'], ['messages', 'Messages'], ['history', 'History']].map(([id, label]) => `<button data-cab-section="${id}" ${cabSection === id ? 'aria-current="page"' : ''}>${label}</button>`).join('')}</nav><div class="cab-card-content">${content}</div></section>`;
 }
 
 function cabSettingsPanel() {
@@ -250,8 +250,8 @@ function cabSettingsPanel() {
   if (cabSetting === 'contacts') content = managerIdentity();
   else if (cabSetting === 'stations') content = stationDirectory();
   else if (cabSetting === 'rates') content = tariffAdmin();
-  else content = `<section class="panel cab-card-section"><h2>Demo tools</h2><p>Local diagnostics and workspace controls.</p><div class="cab-tool-actions">${cabButton('decision-diagnostics', 'View local events')}${cabButton('reset', 'Reset workspace')}</div><p class="cab-caption">Changes sync between tabs in this browser. There is no shared client database.</p></section>`;
-  return `<nav class="cab-settings-tabs" aria-label="Workspace settings">${[['contacts', 'Manager contacts'], ['stations', 'Station directory'], ['rates', 'Plans'], ['tools', 'Demo tools']].map(([id, label]) => `<button data-cab-setting="${id}" aria-current="${cabSetting === id ? 'page' : 'false'}">${label}</button>`).join('')}</nav><div class="cab-settings-content">${content}</div>`;
+  else content = `<section class="panel cab-card-section"><h2>Local account tools</h2><p>Diagnostics and workspace controls for this device.</p><div class="cab-tool-actions">${cabButton('decision-diagnostics', 'View local events')}${cabButton('reset', 'Reset workspace')}</div><p class="cab-caption">Changes sync between tabs in this browser. Shared client data becomes available after the account server is connected.</p></section>`;
+  return `<nav class="cab-settings-tabs" aria-label="Workspace settings">${[['contacts', 'Manager contacts'], ['stations', 'Station directory'], ['rates', 'Plans'], ['tools', 'Account tools']].map(([id, label]) => `<button data-cab-setting="${id}" aria-current="${cabSetting === id ? 'page' : 'false'}">${label}</button>`).join('')}</nav><div class="cab-settings-content">${content}</div>`;
 }
 
 renderAdmin = function () {
@@ -260,14 +260,14 @@ renderAdmin = function () {
   if (restoringRoute) {const q = new URL(location).searchParams; cabSection = cabSections.includes(q.get('section')) ? q.get('section') : 'profile'; cabSetting = cabSettings.includes(q.get('section')) ? q.get('section') : 'contacts'; cabClientOpen = q.get('client') === 'CL-1001';}
   if (adminTab === 'plan') {adminTab = 'clients'; cabSection = 'plan'; cabClientOpen = true;}
   if (['stations', 'tariffs'].includes(adminTab)) {cabSetting = adminTab === 'stations' ? 'stations' : 'rates'; adminTab = 'settings';}
-  const titles = {overview: ['Today', 'Messages, requests and follow-ups that need your attention.'], clients: ['Clients', 'Profile, plan, operations and conversations in one place.'], requests: ['Messages', 'Reply with the client context and keep your next action nearby.'], settings: ['Settings', 'Contacts, directory and demo configuration.']};
+  const titles = {overview: ['Today', 'Messages, requests and follow-ups that need your attention.'], clients: ['Clients', 'Profile, plan, operations and conversations in one place.'], requests: ['Messages', 'Reply with the client context and keep your next action nearby.'], settings: ['Settings', 'Contacts, directory and account configuration.']};
   const [title, description] = titles[adminTab] || titles.overview;
   const tasks = cabTasks(), pending = demo.requests.filter(r => r.status === 'Pending').length, replies = demo.tickets.filter(t => !opsClosed(t) && t.status === 'Open').length;
   let content;
   if (adminTab === 'clients') content = `<div class="cab-client-workspace ${cabClientOpen ? 'detail-open' : ''}">${cabClientList()}${cabClientCard()}</div>`;
   else if (adminTab === 'requests') content = `<div class="cab-inbox-context"><span translate="no">${escapeHtml(demo.client.name)}</span>${cabPill(cabStage())}<button class="text-button" data-cab-section="profile">Open client card ${icon('arrow')}</button></div>${supportTable()}`;
   else if (adminTab === 'settings') content = cabSettingsPanel();
-  else content = `<section class="cab-today-counts" aria-label="Work summary"><button data-cab-queue="all"><strong>${tasks.length}</strong><span>Next actions</span></button><button data-cab-queue="replies"><strong>${replies}</strong><span>Needs reply</span></button><button data-cab-queue="payments"><strong>${pending}</strong><span>Requests to review</span></button></section>${cabQueue()}<section class="panel cab-today-client"><span class="cab-avatar">${cabInitials(demo.client.name)}</span><div><small>Your demo client</small><strong translate="no">${escapeHtml(demo.client.name)}</strong><span>${cabStage()}</span></div>${cabButton('cab-open-client', 'Open client card')}</section>`;
+  else content = `<section class="cab-today-counts" aria-label="Work summary"><button data-cab-queue="all"><strong>${tasks.length}</strong><span>Next actions</span></button><button data-cab-queue="replies"><strong>${replies}</strong><span>Needs reply</span></button><button data-cab-queue="payments"><strong>${pending}</strong><span>Requests to review</span></button></section>${cabQueue()}<section class="panel cab-today-client"><span class="cab-avatar">${cabInitials(demo.client.name)}</span><div><small>Client account</small><strong translate="no">${escapeHtml(demo.client.name)}</strong><span>${cabStage()}</span></div>${cabButton('cab-open-client', 'Open client card')}</section>`;
   $('#admin-view').className = 'cab-staff';
   $('#admin-view').innerHTML = `<header class="cab-page-heading"><div><span class="j-eyebrow">TEAM WORKSPACE</span><h1>${title}</h1><p>${description}</p></div>${adminTab === 'overview' ? cabButton('cab-open-client', 'Open client card') : ''}</header>${content}`;
   $('#profile-name').textContent = demo.manager.name; $('#profile-role').textContent = 'TEAM';
@@ -300,7 +300,7 @@ function cabBeforeValues() {return {balance: demo.balance, capital: demo.plan?.c
 function cabEditRows() {
   const q = (cabEdit?.query || '').toLowerCase().trim();
   const pool = q ? stations.filter(s => `${s.city} ${s.state} ${s.name} ${s.id}`.toLowerCase().includes(q)) : [...new Set([...(cabEdit?.ids || []), ...(window.ECOCHARGE_STATION_VISUALS?.featuredIds || [])])].map(journeyStation).filter(Boolean);
-  return pool.slice(0, 50).map(s => `<label class="cab-pick-row"><input type="checkbox" data-cab-pick="${s.id}" ${cabEdit.ids.includes(s.id) ? 'checked' : ''}><img src="${escapeHtml(journeyPhoto(s).path)}" alt="${escapeHtml(journeyPhoto(s).alt)}" width="84" height="64" loading="lazy"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.country==='CA'?'CA reference':'AFDC'} ${s.id}${journeyPhoto(s).kind==='illustration'?' · Illustration':''}</small></span></label>`).join('') || '<p>No matching locations.</p>';
+  return pool.slice(0, 50).map(s => `<label class="cab-pick-row"><input type="checkbox" data-cab-pick="${s.id}" ${cabEdit.ids.includes(s.id) ? 'checked' : ''}><img src="${escapeHtml(journeyPhoto(s).path)}" alt="${escapeHtml(journeyPhoto(s).alt)}" width="84" height="64" loading="lazy"><span><strong translate="no">${escapeHtml(journeyLabel(s))}</strong><small>${s.country==='CA'?'CA reference':'AFDC'} ${s.id}</small></span></label>`).join('') || '<p>No matching locations.</p>';
 }
 
 function cabEditPlanForm() {
@@ -321,15 +321,15 @@ actions['cab-edit-plan'] = () => {
 };
 
 function cabBalanceForm() {
-  openModal(`<h2>Adjust model balance</h2><p>Change the available sample funds separately from the plan.</p><form id="cab-balance-form"><label for="cab-balance-amount">Total model balance (USD)</label><input id="cab-balance-amount" type="number" inputmode="decimal" min="0" max="10000000" step=".01" value="${cabEdit.balance}" required><p class="form-hint">Reserved withdrawals: ${money(pendingWithdrawals())}</p><label for="cab-balance-reason">Reason for change</label><input id="cab-balance-reason" maxlength="180" value="${escapeHtml(cabEdit.reason || '')}" required><div id="cab-balance-error" class="form-error" role="alert"></div><button class="button primary" type="submit">Review changes</button></form>`);
+  openModal(`<h2>Adjust account balance</h2><p>Manual entries must be reconciled with an external payment receipt.</p><form id="cab-balance-form"><label for="cab-balance-amount">Total account balance (USD)</label><input id="cab-balance-amount" type="number" inputmode="decimal" min="0" max="10000000" step=".01" value="${cabEdit.balance}" required><p class="form-hint">Reserved withdrawals: ${money(pendingWithdrawals())}</p><label for="cab-balance-reason">Reason for change</label><input id="cab-balance-reason" maxlength="180" value="${escapeHtml(cabEdit.reason || '')}" required><div id="cab-balance-error" class="form-error" role="alert"></div><button class="button primary" type="submit">Review changes</button></form>`);
 }
 actions['cab-edit-balance'] = () => {if (role !== 'admin') return; cabEdit = {kind: 'balance', baseline: cabSnapshot(), balance: demo.balance, reason: ''}; cabBalanceForm();};
 
 function cabReviewChanges(after) {
   const before = cabBeforeValues();
   cabConfirmation = {...cabEdit, before, after};
-  const fields = cabEdit.kind === 'balance' ? [['balance', 'Model balance', money]] : [['capital', 'Plan amount', money], ['tariff', 'Charge plan', escapeHtml], ['stations', 'Selected stations', String], ['rate', 'Monthly model rate', n => n + '%']];
-  openModal(`<h2>Review account changes</h2><p translate="no">${escapeHtml(demo.client.name)}</p><div class="cab-review-table"><div class="cab-review-head"><span>Field</span><span>Before</span><span>After</span></div>${fields.map(([key, label, format]) => `<div><strong>${label}</strong><span>${format(before[key])}</span><b>${format(after[key])}</b></div>`).join('')}</div><div class="cab-note"><strong>Reason for change</strong><p translate="no">${escapeHtml(cabEdit.reason)}</p></div><p class="modal-note">Model adjustment only. The change will be recorded in the account history.</p><div id="cab-confirm-error" class="form-error" role="alert"></div><div class="cab-confirm-actions">${cabButton('cab-confirm-change', 'Save changes', true)}${cabButton('cab-back-edit', 'Back to editing')}</div>`);
+  const fields = cabEdit.kind === 'balance' ? [['balance', 'Account balance', money]] : [['capital', 'Plan amount', money], ['tariff', 'Charge plan', escapeHtml], ['stations', 'Selected stations', String], ['rate', 'Monthly plan rate', n => n + '%']];
+  openModal(`<h2>Review account changes</h2><p translate="no">${escapeHtml(demo.client.name)}</p><div class="cab-review-table"><div class="cab-review-head"><span>Field</span><span>Before</span><span>After</span></div>${fields.map(([key, label, format]) => `<div><strong>${label}</strong><span>${format(before[key])}</span><b>${format(after[key])}</b></div>`).join('')}</div><div class="cab-note"><strong>Reason for change</strong><p translate="no">${escapeHtml(cabEdit.reason)}</p></div><p class="modal-note">Manual account change. Treat it as funded only after external payment reconciliation.</p><div id="cab-confirm-error" class="form-error" role="alert"></div><div class="cab-confirm-actions">${cabButton('cab-confirm-change', 'Save changes', true)}${cabButton('cab-back-edit', 'Back to editing')}</div>`);
 }
 actions['cab-back-edit'] = () => {if (role !== 'admin' || !cabEdit) return; cabEdit.kind === 'plan' ? cabEditPlanForm() : cabBalanceForm();};
 actions['cab-confirm-change'] = () => {
@@ -345,7 +345,7 @@ actions['cab-confirm-change'] = () => {
   }
   demo.adjustments ??= [];
   demo.adjustments.unshift({actor: 'admin', kind: c.kind, date: new Date().toISOString(), reason: c.reason, before: c.before, after: c.after});
-  activity(c.kind === 'balance' ? 'Manager adjusted the model balance' : 'Manager updated the plan');
+  activity(c.kind === 'balance' ? 'Manager adjusted the account balance' : 'Manager updated the plan');
   cabConfirmation = null; cabEdit = null;
   persist(); $('#modal').close(); cabRoute(c.kind === 'balance' ? 'operations' : 'plan');
   toast('Changes saved in the client account and history.');

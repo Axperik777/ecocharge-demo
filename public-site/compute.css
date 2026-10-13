@@ -11,7 +11,7 @@ html[data-app=website] .compute-visual{position:relative;min-width:0;margin:0;ov
 html[data-app=website] .compute-visual::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,27,20,.05),rgba(6,27,20,.66))}
 html[data-app=website] .compute-visual img{display:block;width:100%;height:auto!important;aspect-ratio:3/2;object-fit:cover}
 html[data-app=website] .compute-visual-label{position:absolute;z-index:2;top:16px;right:16px;left:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-html[data-app=website] .compute-visual-label span{padding:8px 4px;border:1px solid rgba(200,238,149,.42);border-radius:999px;background:rgba(7,34,25,.72);color:#e5ffc3;font-size:9px;font-weight:800;letter-spacing:.09em;text-align:center}
+html[data-app=website] .compute-visual-label span{padding:8px 4px;border:1px solid rgba(200,238,149,.42);border-radius:999px;background:rgba(7,34,25,.72);color:#e5ffc3;font-size:11px;font-weight:800;letter-spacing:.09em;text-align:center}
 html[data-app=website] .compute-visual figcaption{position:absolute;z-index:2;right:16px;bottom:16px;left:16px;padding:11px 13px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(7,30,23,.88);color:#e8f3ee;font-size:13px;line-height:1.5}
 html[data-app=website] .compute-section{padding-block:clamp(54px,7vw,92px)}
 html[data-app=website] .compute-section-head{max-width:820px;margin-bottom:32px}
@@ -41,7 +41,7 @@ html[data-app=website] .compute-boundary p{margin:0;color:#c7d9d1;font-size:14px
 html[data-app=website] .compute-paths{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 html[data-app=website] .compute-path{display:flex;flex-direction:column;min-width:0;padding:clamp(24px,4vw,38px);border:1px solid var(--line,#d8e4de);border-radius:22px;background:#fff}
 html[data-app=website] .compute-path.is-primary{background:var(--compute-deep);color:#fff;border-color:var(--compute-deep)}
-html[data-app=website] .compute-path-label{margin:0 0 32px;color:var(--teal,#006a4d);font-size:10px;font-weight:800;letter-spacing:.11em}
+html[data-app=website] .compute-path-label{margin:0 0 32px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.11em}
 html[data-app=website] .compute-path.is-primary .compute-path-label{color:var(--compute-accent)}
 html[data-app=website] .compute-path h3{max-width:14ch;margin:0 0 14px;font-size:clamp(27px,3vw,38px);line-height:1.12;letter-spacing:-.04em}
 html[data-app=website] .compute-path.is-primary h3{color:#fff}
@@ -75,14 +75,14 @@ html[data-app=website] .compute-entry>.ec-button{min-height:54px;justify-content
 html[data-app=website] .compute-intent-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-block:0 54px}
 html[data-app=website] .compute-intent-cards a{display:flex;flex-direction:column;min-height:210px;padding:26px;border:1px solid var(--line,#d8e4de);border-radius:18px;background:#fff;color:inherit;text-decoration:none}
 html[data-app=website] .compute-intent-cards a:first-child{background:var(--compute-deep);color:#fff;border-color:var(--compute-deep)}
-html[data-app=website] .compute-intent-cards span{margin-bottom:28px;color:var(--teal,#006a4d);font-size:10px;font-weight:800;letter-spacing:.1em}
+html[data-app=website] .compute-intent-cards span{margin-bottom:28px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.1em}
 html[data-app=website] .compute-intent-cards a:first-child span{color:var(--compute-accent)}
 html[data-app=website] .compute-intent-cards strong{display:block;margin-bottom:10px;font-size:24px;line-height:1.25;letter-spacing:-.03em}
 html[data-app=website] .compute-intent-cards p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.62}
 html[data-app=website] .compute-intent-cards a:first-child p{color:#c9dcd3}
 html[data-app=website] .compute-brief{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0;padding:18px;border:1px solid var(--line,#d8e4de);border-radius:16px;background:var(--pale,#edf7f2)}
 html[data-app=website] .compute-brief legend{grid-column:1/-1;padding:0 4px;color:var(--ink,#102019);font-weight:700}
-html[data-app=website] .compute-brief label{min-width:0}
+html[data-app=website] .compute-brief label{min-width:0;overflow-wrap:anywhere;hyphens:auto}
 html[data-app=website] .compute-brief label:last-child{grid-column:1/-1}
 html[data-app=website] .compute-purpose-fields{display:grid;grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 html[data-app=website] .compute-purpose-fields[hidden]{display:none}
@@ -104,10 +104,10 @@ html[data-app=website][data-page="participate/compute"] .compute-decision ol{gap
 html[data-app=website][data-page="participate/compute"] .compute-decision ol>li{align-items:start}
 html[data-app=website][data-page="participate/compute"] .compute-decision-step{min-width:0}
 html[data-app=website][data-page="participate/compute"] .compute-decision-step>h3{margin-bottom:18px}
-html[data-app=website][data-page="participate/compute"] .compute-decision-lanes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
 html[data-app=website][data-page="participate/compute"] .compute-decision-lanes article{padding:18px;border:1px solid var(--line,#d8e4de);border-radius:14px;background:#fff}
 html[data-app=website][data-page="participate/compute"] .compute-decision-lanes article:first-child{border-color:var(--compute-line);background:var(--compute-deep);color:#fff}
-html[data-app=website][data-page="participate/compute"] .compute-decision-lanes small{display:block;margin-bottom:10px;color:var(--teal,#006a4d);font-size:10px;font-weight:800;letter-spacing:.1em}
+html[data-app=website][data-page="participate/compute"] .compute-decision-lanes small{display:block;margin-bottom:10px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.1em}
 html[data-app=website][data-page="participate/compute"] .compute-decision-lanes article:first-child small{color:var(--compute-accent)}
 html[data-app=website][data-page="participate/compute"] .compute-decision-lanes strong{display:block;margin-bottom:8px;font-size:16px;line-height:1.4}
 html[data-app=website][data-page="participate/compute"] .compute-decision-lanes p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.62}

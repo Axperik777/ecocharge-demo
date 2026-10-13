@@ -49,7 +49,7 @@ function mapSelectionPreview() {
   host.hidden = !s || !filteredStations().some(row => row.id === s.id) || mapMode !== 'map';
   if (host.hidden) return;
   const photo = stationPhoto(s);
-  host.innerHTML = `<img src="${escapeHtml(photo.path)}" alt="${escapeHtml(photo.alt)}" width="96" height="72"><div><strong translate="no">${escapeHtml(s.city)}, ${escapeHtml(s.state)}</strong>${stationSelectionBadge(s)}<small>${s.ports} DC ports${photo.kind==='illustration'?' · Illustration':''}</small><button class="text-button" data-journey-open="${s.id}">View station ${icon('arrow')}</button></div><button class="icon-btn" data-action="r-clear-selection" aria-label="Close station preview">×</button>`;
+  host.innerHTML = `<img src="${escapeHtml(photo.path)}" alt="${escapeHtml(photo.alt)}" width="96" height="72"><div><strong translate="no">${escapeHtml(s.city)}, ${escapeHtml(s.state)}</strong>${stationSelectionBadge(s)}<small>${s.ports} DC ports</small><button class="text-button" data-journey-open="${s.id}">View station ${icon('arrow')}</button></div><button class="icon-btn" data-action="r-clear-selection" aria-label="Close station card">×</button>`;
 }
 
 function mapChoose(id) {mapSelectedId = id; selectStation(id); mapSelectionPreview();}
@@ -72,7 +72,7 @@ renderMap = function () {
     if (group.length === 1) {
       const s = group[0], chosen = s.id === mapSelectedId;
       const showClosed=zoom>=9&&s.selectionClosed;
-      const marker = L.marker([s.lat, s.lng], {icon: L.divIcon({className: 'r-map-pin' + (showClosed ? ' selection-closed' : '') + (chosen ? ' selected' : '') + (demo.portfolio.includes(s.id) ? ' allocated' : ''), html: showClosed?'−':icon('zap'), iconSize: [36, 36], iconAnchor: [18, 18]}), title: `${s.city}, ${s.state} · ${mapText(s.selectionClosed?'Enrollment closed':'Open for selection')}`, alt: `${s.city}, ${s.state}`, keyboard: true});
+      const marker = L.marker([s.lat, s.lng], {icon: L.divIcon({className: 'r-map-pin' + (showClosed ? ' selection-closed' : '') + (chosen ? ' selected' : '') + (demo.portfolio.includes(s.id) ? ' allocated' : ''), html: showClosed?'−':icon('zap'), iconSize: [44, 44], iconAnchor: [22, 22]}), title: `${s.city}, ${s.state} · ${mapText(s.selectionClosed?'Enrollment closed':'Open for selection')}`, alt: `${s.city}, ${s.state}`, keyboard: true});
       marker.addTo(stationLayer).on('click', () => mapChoose(s.id));
       marker.bindTooltip(escapeHtml(s.name), {className: 'station-point-tip'});
     } else {
@@ -86,7 +86,7 @@ renderMap = function () {
 
 function renderMapList(rows = filteredStations()) {
   const host = $('#r-station-list'); if (!host || mapMode !== 'list') return;
-  host.innerHTML = `<div class="r-list-heading"><h2>Station directory</h2><span role="status">${rows.length.toLocaleString('en-US')} matching ${rows.length===1?'location':'locations'}</span></div><div class="r-location-list">${rows.slice(0,mapListLimit).map(s => {const p=stationPhoto(s); return `<button class="r-location-row" data-journey-open="${s.id}"><img src="${escapeHtml(p.path)}" alt="${escapeHtml(p.alt)}" width="120" height="90" loading="lazy"><span><strong translate="no">${escapeHtml(s.city)}, ${s.state}</strong><span translate="no">${escapeHtml(s.name)}</span>${stationSelectionBadge(s)}<small>${s.ports} DC ports${p.kind==='illustration'?' · Illustration':''}</small></span>${icon('arrow')}</button>`;}).join('')}</div>${!rows.length ? '<div class="cab-empty"><h3>No matching stations.</h3><p>Try another city or reset the filters.</p><button class="button secondary" data-action="r-reset-filters">Reset filters</button></div>' : rows.length>mapListLimit ? '<button class="button secondary r-load-more" data-action="r-more-stations">Show more stations</button>' : ''}`;
+  host.innerHTML = `<div class="r-list-heading"><h2>Station directory</h2><span role="status">${rows.length.toLocaleString('en-US')} matching ${rows.length===1?'location':'locations'}</span></div><div class="r-location-list">${rows.slice(0,mapListLimit).map(s => {const p=stationPhoto(s); return `<button class="r-location-row" data-journey-open="${s.id}"><img src="${escapeHtml(p.path)}" alt="${escapeHtml(p.alt)}" width="120" height="90" loading="lazy"><span><strong translate="no">${escapeHtml(s.city)}, ${s.state}</strong><span translate="no">${escapeHtml(s.name)}</span>${stationSelectionBadge(s)}<small>${s.ports} DC ports</small></span>${icon('arrow')}</button>`;}).join('')}</div>${!rows.length ? '<div class="cab-empty"><h3>No matching stations.</h3><p>Try another city or reset the filters.</p><button class="button secondary" data-action="r-reset-filters">Reset filters</button></div>' : rows.length>mapListLimit ? '<button class="button secondary r-load-more" data-action="r-more-stations">Show more stations</button>' : ''}`;
 }
 
 function mapWorkspace() {

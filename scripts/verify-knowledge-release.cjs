@@ -1,6 +1,7 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
-const root=path.resolve(__dirname,'../public-site/workspace'),ctx={window:{},structuredClone,crypto,URLSearchParams,console};vm.createContext(ctx);
+const localPublication=path.join(__dirname,'public-site','workspace'),sourcePublication=path.join(__dirname,'..','public-site','workspace');
+const root=path.resolve(process.argv[2]|| (fs.existsSync(localPublication)?localPublication:sourcePublication)),ctx={window:{},structuredClone,crypto,URLSearchParams,console};vm.createContext(ctx);
 for(const file of ['sandbox-data.js','sandbox-domain.js','sandbox-stations.js','sandbox-model.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),ctx);
 const w=ctx.window,seed=w.ECO_SANDBOX_SEED,model=w.createEcoSandbox(seed,w.EcoSandboxDomain,w.ECO_SANDBOX_STATIONS),manager={role:'ftd'},admin={role:'admin'};
 let db=model.initial();const get=(p,c=manager)=>model.execute(db,p,'GET',{},c).result;
