@@ -10,6 +10,9 @@
  ['project','Present Charge','Объяснить Charge',
   'Charging sessions are the project’s revenue source. Electricity, maintenance, site costs and demand affect the operating result. Let’s use one station example, then review the proposed participation and its calculation. The directory and calculation do not prove ownership or actual revenue.',
   'Источник выручки Charge — зарядные сессии. На результат влияют загрузка, электричество, обслуживание и расходы площадки. Покажу одну станцию, затем разберём предложенный формат участия и расчёт. Каталог и расчёт сами по себе не подтверждают владение или фактическую выручку.'],
+ ['values','Company principles','Принципы компании',
+  'According to the project team, EcoGrid founder James R. (Jim) Whitaker openly identifies as a Protestant Christian. For the company, that means telling the truth, acting lawfully, keeping commitments, helping people in need and treating nature responsibly. Under the stated policy, charitable giving uses only available company funds after expenses and obligations—never client or project funds. Faith is not a condition of access to EcoGrid or an argument for financial returns. Our environmental position is assessed through the actual energy mix, efficiency, equipment service life, repair and end-of-life handling—not a “zero harm” claim.',
+  'По информации команды проекта, основатель EcoGrid James R. (Jim) Whitaker открыто называет себя христианином-протестантом. Для компании это означает говорить правду, действовать законно, выполнять обязательства, помогать нуждающимся и ответственно относиться к природе. Согласно заявленной политике, благотворительность финансируется только из свободных средств компании после расходов и обязательств — никогда не из клиентских или проектных денег. Вера не является условием доступа к EcoGrid или аргументом доходности. Экологическую позицию оцениваем по фактическому энергомиксу, эффективности, сроку службы оборудования, ремонту и утилизации, а не по обещанию «нулевого вреда».'],
  ['interest','Check readiness for a proposal','Перейти к предложению',
   'Would you like to review a Charge proposal for an amount you are considering, or do we need to resolve a question first? If you are ready, we can review the terms today. Otherwise, we will agree on the information and next contact you need.',
   'Хотите разобрать предложение Charge на сумму, которую рассматриваете, или сначала закрыть конкретный вопрос? Если готовы, разберём условия сегодня. Если нет — согласуем нужный материал и следующий контакт.'],
@@ -127,6 +130,7 @@
    mapped.get('interest').title=ru?'Выбрать один шаг':'Choose one next step';
    mapped.get('interest').text=ru?'Зафиксируем, что вы хотите разобрать дальше: один конкретный проект, Клуб или один вопрос специалисту. Рекламный источник сохранится, а текущий интерес запишем отдельно.':'We will record what you want to explore next: one specific project, the Club or one question for a specialist. The advertising source remains unchanged; the current interest is recorded separately.';
    mapped.get('account').text=ru?'Покажу, где в кабинете будут видны Академия, выбранный проект, документы и чат. До выбора проекта не открываем предложение или пополнение.':'I’ll show where the Academy, selected project, documents and chat appear in the account. We do not open a proposal or funding step until a project is explicitly selected.';
+   ids=['open','goal','project','values','interest',...(!member?['register']:[]),'account','groups','close'];
   }
   return ids.map(id=>mapped.get(id));
  }

@@ -1,5 +1,25 @@
 {
   "note": "Documentary station images with photographer, source and license attribution. Dates describe the source photographs; edits and display crops are recorded in each entry.",
+  "visualizations": [
+    {
+      "paths": [
+        "assets/ecogrid-company-campus-1600.webp",
+        "assets/ecogrid-company-campus-720.webp"
+      ],
+      "kind": "AI-generated concept visualization",
+      "usage": "Decorative homepage background",
+      "disclosure": "The image presents an integrated energy and technology campus as a visual concept. It is not a photograph of an operating EcoGrid site."
+    },
+    {
+      "paths": [
+        "assets/compute-datacenter-campus.webp",
+        "assets/compute-gpu-server-hall.webp"
+      ],
+      "kind": "AI-generated concept visualization",
+      "usage": "EcoGrid Compute project illustrations",
+      "disclosure": "The images visualize data-center and GPU infrastructure concepts. They do not document operating EcoGrid facilities or available inventory."
+    }
+  ],
   "photos": [
     {
       "afdcId": 121746,
