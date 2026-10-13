@@ -21,7 +21,7 @@ html[data-app=website] .guide-card[id]{scroll-margin-top:96px}
 html[data-app=website] .guide-card::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:#89b9a2;opacity:.7}
 html[data-app=website] .guide-card[data-guide-project=solar]::before{background:#d5a928}
 html[data-app=website] .guide-card[data-guide-project=charge]::before{background:#3b82b5}
-html[data-app=website] .guide-card[data-guide-project=mining]::before{background:#607d6b}
+html[data-app=website] .guide-card[data-guide-project=compute]::before{background:#607d6b}
 html[data-app=website] .guide-card[data-guide-project=academy]::before{background:#8b74b9}
 html[data-app=website] .guide-card:hover{border-color:#afc9bc;transform:translateY(-2px);box-shadow:0 16px 36px #163a2a0b}
 html[data-app=website] .guide-card-meta{display:flex;justify-content:space-between;gap:14px;margin:0 0 24px;color:var(--teal);font-size:11px!important;line-height:1.5!important;font-weight:700;letter-spacing:.06em;text-transform:uppercase}

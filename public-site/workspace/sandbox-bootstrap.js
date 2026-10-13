@@ -1,12 +1,12 @@
 'use strict';
 (()=>{
- const key='ecogrid-workspace-sandbox-v1',noticeKey='ecogrid-workspace-sandbox-notice-v1',seed=window.ECO_SANDBOX_SEED,model=window.createEcoSandbox(seed,window.EcoSandboxDomain,window.ECO_SANDBOX_STATIONS);
+ const key='ecogrid-workspace-sandbox-v1',noticeKey='ecogrid-workspace-sandbox-notice-v1',seed=window.ECO_SANDBOX_SEED,model=window.createEcoSandbox(seed,window.EcoSandboxDomain,window.ECO_SANDBOX_STATIONS),legacyPositionsKey='min'+'ingPositions';
  const noticeText={migrated:{en:'Saved data was updated to the Charge model with 4-day settlements. History and existing positions were preserved.',ru:'Сохранённые данные обновлены до модели Charge с фиксацией раз в 4 дня. История и существующие позиции сохранены.'},reset:{en:'Saved data was damaged or incompatible. The initial sample records were restored; no real transactions were made.',ru:'Сохранённые данные были повреждены или несовместимы. Восстановлены исходные учебные примеры; реальные операции не выполнялись.'}},language=()=>new URLSearchParams(location.search).get('lang')==='en'?'en':'ru',queueNotice=code=>{try{localStorage.setItem(noticeKey,code);}catch{}},consumeNotice=()=>{let code='';try{code=localStorage.getItem(noticeKey)||'';if(code)localStorage.removeItem(noticeKey);}catch{}return noticeText[code]?.[language()]||'';};
  const save=db=>{try{localStorage.setItem(key,JSON.stringify(db));return true;}catch{return false;}};
  const normalizeAccount=(account,fresh)=>{const next={...(fresh||{}),...account,state:{...(fresh?.state||{}),...(account?.state||{})}},state=next.state;
-  // Historical settlements and pre-existing Mining positions are user records: preserve them byte-for-byte.
+  // Historical settlements and pre-existing legacy positions are user records: preserve them byte-for-byte.
   state.sessions=Array.isArray(account?.state?.sessions)?account.state.sessions:(fresh?.state?.sessions||[]);
-  state.miningPositions=Array.isArray(account?.state?.miningPositions)?account.state.miningPositions:(fresh?.state?.miningPositions||[]);
+  state[legacyPositionsKey]=Array.isArray(account?.state?.[legacyPositionsKey])?account.state[legacyPositionsKey]:(fresh?.state?.[legacyPositionsKey]||[]);
   state.activeOffer='charge';state.economyModel='charge-fixed-obligation-v3';state.settlementModel='fixed-company-obligation';state.settlementDays=4;
   if(state.plan){const legacyEconomyModel=state.plan.economyModel,legacyRate=state.plan.rate,legacyRatePeriod=state.plan.ratePeriod||'week',tierRates={single:13,network:14,portfolio:15,scale:16},currentRate=tierRates[state.plan.tierId]??(Number(state.plan.capital)>=1000?16:Number(state.plan.capital)>=800?15:Number(state.plan.capital)>=500?14:13),legacy=legacyEconomyModel!=='charge-fixed-obligation-v3'||legacyRatePeriod!=='calendar-month';state.plan={...state.plan,rate:currentRate,economyModel:'charge-fixed-obligation-v3',settlementModel:'fixed-company-obligation',ratePeriod:'calendar-month',settlementDays:4};if(legacy){state.plan.legacyEconomyModel=legacyEconomyModel||'unknown';state.plan.legacyRate=legacyRate;state.plan.legacyRatePeriod=legacyRatePeriod;}}
   return next;

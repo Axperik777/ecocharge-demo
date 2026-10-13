@@ -8,7 +8,7 @@ html[data-app=website] :is(h1,h2,h3,h4){color:var(--ec-color-text);font-weight:v
 :where(html[data-app=website] main) h2{font-size:var(--ec-size-h2);line-height:var(--ec-leading-h2)}
 :where(html[data-app=website] main) h3{font-size:var(--ec-size-h3);line-height:var(--ec-leading-h3);letter-spacing:-.02em}
 :where(html[data-app=website] main) p:not(:where(.grid-eyebrow,.ec-eyebrow,.ec-kicker,.solar-eyebrow,.web86-eyebrow)){font-size:var(--ec-text-body);line-height:var(--ec-leading-body);text-wrap:pretty}
-html[data-app=website] :is(small,figcaption,.lead-hint,.mining-caption){font-size:var(--ec-text-meta);line-height:var(--ec-leading-meta)}
+html[data-app=website] :is(small,figcaption,.lead-hint){font-size:var(--ec-text-meta);line-height:var(--ec-leading-meta)}
 html[data-app=website] :is(.ec-eyebrow,.ec-kicker,.grid-eyebrow,.solar-eyebrow,.web86-eyebrow){font-size:var(--ec-text-meta);font-weight:var(--ec-weight-action);line-height:var(--ec-leading-ui);letter-spacing:.1em;color:var(--ec-color-accent);margin:0 0 18px;text-transform:uppercase}
 :where(html[data-app=website]) :where(.ec-section){padding-block:var(--ec-section-y)}
 :where(html[data-app=website]) :where(.ec-section-tight){padding-block:var(--ec-section-y-tight)}
@@ -160,17 +160,16 @@ html[data-app=website] .lead-followup-consent :is(legend,.lead-consent){font-siz
 html[data-app=website] [data-lead-result][data-error=true]{color:#ad3039}
 html[data-app=website] [data-lead-result][data-success=true]{color:#166644;border-color:#bdd8c7}
 /* Secondary pages retain their working tools within the same light shell. */
-html[data-app=website] :is(.solar-page,.solar-home-entry,.mining-page){background:var(--paper);color:var(--ink);--solar-ink:#102019;--solar-blue:#52665b;--solar-light:#fff;--solar-accent:#006a4d;--solar-line:#dbe6e0;--mining-bg:#f5f8f6;--mining-panel:#fff;--mining-line:#dbe6e0;--mining-lime:#006a4d;--mining-mint:#006a4d}
-html[data-app=website][data-page=mining] body{background:var(--paper);color:var(--ink)}
-html[data-app=website] :is(.solar-page,.mining-page) :is(h1,h2,h3,h4,strong,dd,label,summary){color:var(--ink)}
-html[data-app=website] :is(.solar-page,.mining-page) :is(p,li,small,dt,figcaption){color:var(--muted)}
-html[data-app=website] :is(.solar-page,.mining-page) .ec-text-link{color:var(--teal)}
-html[data-app=website] :is(.solar-package,.solar-hardware,.solar-charger,.solar-review,.solar-charger-help,.solar-project-grid figure,.solar-install-strip figure,.mining-path,.mining-hardware article,.mining-scenarios article,.mining-calculation-result,.mining-scale-results,.mining-gallery figure){background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:var(--ec-radius-card-sm);overflow:hidden}
-html[data-app=website] :is(.solar-page,.mining-page) :is(section,dl>div,article,details){border-color:var(--line)}
+html[data-app=website] :is(.solar-page,.solar-home-entry){background:var(--paper);color:var(--ink);--solar-ink:#102019;--solar-blue:#52665b;--solar-light:#fff;--solar-accent:#006a4d;--solar-line:#dbe6e0}
+html[data-app=website] .solar-page :is(h1,h2,h3,h4,strong,dd,label,summary){color:var(--ink)}
+html[data-app=website] .solar-page :is(p,li,small,dt,figcaption){color:var(--muted)}
+html[data-app=website] .solar-page .ec-text-link{color:var(--teal)}
+html[data-app=website] :is(.solar-package,.solar-hardware,.solar-charger,.solar-review,.solar-charger-help,.solar-project-grid figure,.solar-install-strip figure){background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:var(--ec-radius-card-sm);overflow:hidden}
+html[data-app=website] .solar-page :is(section,dl>div,article,details){border-color:var(--line)}
 html[data-app=website] .solar-page .solar-intro h1 span{color:var(--teal)}
 html[data-app=website] :is(.solar-product,.solar-product-top,.solar-product-spec){border-color:var(--line);border-radius:var(--ec-radius-card-sm)}
 html[data-app=website] :is(.solar-page .solar-price,.solar-page .solar-price strong){font-size:32px!important;color:var(--ink);line-height:1.3}
-html[data-app=website] :is(.solar-page .solar-fine,.mining-caption){color:var(--muted)!important;font-size:12px!important;line-height:1.65!important}
+html[data-app=website] .solar-page .solar-fine{color:var(--muted)!important;font-size:12px!important;line-height:1.65!important}
 html[data-app=website] :is(.solar-hero-bottom>span,.solar-package-body>small,.solar-product figcaption,.solar-spec-list dt){color:var(--muted);font-size:12px}
 html[data-app=website] :is(.solar-hardware,.solar-charger) :is(p,small,dt,dd,summary){color:var(--muted);font-size:13px!important}
 html[data-app=website] .solar-hardware h3,html[data-app=website] .solar-charger h3{font-size:21px}
@@ -182,14 +181,8 @@ html[data-app=website] .solar-selected{background:var(--pale);color:var(--ink);b
 html[data-app=website] .solar-select{background:#fff!important;color:var(--teal)!important;border-color:#bdd2c6!important;font-size:14px!important;border-radius:10px}
 html[data-app=website] .solar-select:hover{background:var(--pale)!important}
 html[data-app=website] .solar-select[aria-pressed=true]{background:var(--teal)!important;color:#fff!important;border-color:var(--teal)!important}
-html[data-app=website] :is(.mining-page input,.mining-page select,.mining-page textarea,.solar-quote select){background:#fff;color:var(--ink);border:1px solid #b7cbbf;border-radius:10px;font:400 16px/1.5 var(--eg-font)}
-html[data-app=website] .mining-page .outline{color:var(--teal);background:#fff;border-color:#bdd2c6}
-html[data-app=website] .mining-catalog-bar>button{color:var(--teal)}
-html[data-app=website] .mining-scale button{background:#fff;color:var(--ink);border-color:var(--line);border-radius:10px}
-html[data-app=website] .mining-scale [aria-pressed=true]{background:var(--teal);color:#fff}
-html[data-app=website] .mining-page :is(.mining-water-row strong,.mining-scenarios strong,.mining-hardware article>strong){font-family:var(--eg-font);font-weight:600;color:var(--teal);font-variant-numeric:tabular-nums;letter-spacing:-.025em}
-html[data-app=website] .mining-page [data-loss=true]{color:#ad3039}
-html[data-app=website] :is(.mining-gallery figcaption,.solar-project-grid figcaption,.solar-install-strip figcaption){color:var(--muted);font-size:12px}
+html[data-app=website] .solar-quote select{background:#fff;color:var(--ink);border:1px solid #b7cbbf;border-radius:10px;font:400 16px/1.5 var(--eg-font)}
+html[data-app=website] :is(.solar-project-grid figcaption,.solar-install-strip figcaption){color:var(--muted);font-size:12px}
 html[data-app=website] :is(.ec-resource-grid article,.ec-rights-grid article,.ec-terms-grid article,.ec-public-plan-grid article,.ec-team-profile,.ec-calculator,.ec-station-card){border:1px solid var(--line);border-radius:var(--ec-radius-card-sm);background:#fff}
 html[data-app=website] :is(.ec-amount-presets,.ec-scenario-buttons,.f-scenarios) button{border-radius:10px;font-size:14px;min-height:44px}
 html[data-app=website] .ec-calculator-result{background:#102019;color:#fff;border-radius:16px}
@@ -202,14 +195,12 @@ html[data-app=website] .f-economics-result{background:#edf7f2;border-radius:var(
 html[data-app=website] .ec-model-tabs{border-radius:var(--ec-radius-control)}
 html[data-app=website] .ec-model-tabs button{font-size:14px}
 /* Intentionally dark educational diagrams: explicit text avoids inherited light-theme colours. */
-html[data-app=website] :is(.business-flow,.ec-model-scene,.v-technology-panel,.mining-process,.f-dark,.ec-dark-section,.ec-video-placeholder){background:#102019;color:#fff;border-color:#38624d;border-radius:var(--ec-radius-card)}
-html[data-app=website] :is(.business-flow,.ec-model-scene,.v-technology-panel,.mining-process,.f-dark,.ec-dark-section,.ec-video-placeholder) :is(h2,h3,strong,summary){color:#fff}
-html[data-app=website] :is(.business-flow,.ec-model-scene,.v-technology-panel,.mining-process,.f-dark,.ec-dark-section,.ec-video-placeholder) :is(p,small,dt,span){color:#d7e8de}
-html[data-app=website] :is(.business-flow,.ec-model-scene,.v-technology-panel,.mining-process,.f-dark,.ec-dark-section,.ec-video-placeholder) :is(.ec-text-link,b){color:#dff5e9}
+html[data-app=website] :is(.business-flow,.ec-model-scene,.v-technology-panel,.f-dark,.ec-dark-section,.ec-video-placeholder){background:#102019;color:#fff;border-color:#38624d;border-radius:var(--ec-radius-card)}
+html[data-app=website] :is(.business-flow,.ec-model-scene,.v-technology-panel,.f-dark,.ec-dark-section,.ec-video-placeholder) :is(h2,h3,strong,summary){color:#fff}
+html[data-app=website] :is(.business-flow,.ec-model-scene,.v-technology-panel,.f-dark,.ec-dark-section,.ec-video-placeholder) :is(p,small,dt,span){color:#d7e8de}
+html[data-app=website] :is(.business-flow,.ec-model-scene,.v-technology-panel,.f-dark,.ec-dark-section,.ec-video-placeholder) :is(.ec-text-link,b){color:#dff5e9}
 html[data-app=website] .business-flow :is(h2,p){color:#eef7f1!important}
-html[data-app=website] :is(.mining-net,.mining-rack,.mining-rack-unit,.ec-model-share,.ec-model-account,.ec-model-account-result){background:#234b3b;border-color:#486c57;color:#fff}
-html[data-app=website] .mining-process :is(.mining-caption,.mining-process-title){color:#d7e8de!important}
-html[data-app=website] .mining-process-title{font:600 12px/1.6 var(--eg-font);letter-spacing:.05em}
+html[data-app=website] :is(.ec-model-share,.ec-model-account,.ec-model-account-result){background:#234b3b;border-color:#486c57;color:#fff}
 html[data-app=website] .f-dark .f-questions a{border-color:#486c57}
 html[data-app=website] .f-dark .f-questions b{color:#dff5e9}
 html[data-app=website] .ec-footer{background:#edf3ef;color:var(--ink);border-top:1px solid var(--line);margin-top:0;padding-top:46px}
@@ -234,10 +225,6 @@ html[data-app=website] .solar-hardware-metrics b{color:var(--ink);font-size:19px
 html[data-app=website] .solar-hardware-metrics span>span{color:var(--muted);font-size:12px}
 html[data-app=website] .solar-source{color:var(--teal);font-size:12px;min-height:44px;display:inline-flex;align-items:center}
 html[data-app=website] :is(.solar-project-grid,.solar-install-strip) figcaption span{color:var(--muted);font-size:12px}
-html[data-app=website] .mining-catalog-bar>span{color:var(--muted);font-size:13px}
-html[data-app=website] .mining-water-row.total>span{color:var(--teal)}
-html[data-app=website] .mining-gallery figcaption a{color:var(--teal)}
-html[data-app=website] .mining-page .lead-card .lead-consent span{color:var(--muted)}
 html[data-app=website] .ec-model-scene h4{color:#fff;font-size:15px}
 html[data-app=website] .f-proof-list small{color:var(--muted)}
 html[data-app=website] .story-name-shell{background:#102019;color:#fff}
@@ -245,10 +232,10 @@ html[data-app=website] .story-name-shell h2{color:#fff}
 html[data-app=website] .story-next-shell{background:#e5f1e9}
 html[data-app=website] .lead-preferences{margin-top:18px;border-block:1px solid var(--line)}
 html[data-app=website] .lead-preferences>summary{font-size:13px;font-weight:600;color:var(--muted);padding-block:14px;min-height:48px;cursor:pointer}
-html[data-app=website] :is(.lead-card,.lead-card form,.lead-card fieldset,.lead-card [data-lead-fields],.mining-form-fields,.mining-form-fields label){min-width:0;min-inline-size:0}
+html[data-app=website] :is(.lead-card,.lead-card form,.lead-card fieldset,.lead-card [data-lead-fields]){min-width:0;min-inline-size:0}
 html[data-app=website] .solar-hardware-metrics>span{color:var(--muted);font-size:12px}
-html[data-app=website] :is(.solar-array>span,.solar-hardware-type,.solar-photo-caption,.solar-review-example-label,.ec-card-label,.ec-badge,.ec-status,.ec-evidence-status,.ec-evidence-top>span,.ec-evidence-top time,.ec-model-art-label,.business-source>span,.business-flow-head>div>span,.v-technology-panel-heading>span:first-child,.story-founder>span,.story cite,.story-ledger dd,.story-timeline li>span,.ec-directory-controls label,.ec-visual-filters span,.ec-station-photo-label,.station-selection-badge,.ec-station-region,.ec-station-region>span,.ec-station-specs>span,.ec-station-bottom>span,.mining-rack-unit span,.mining-calculator label,.mining-form-fields label){font-size:12px;line-height:1.6;letter-spacing:0}
-html[data-app=website] :is(.business-flow,.mining-process,.ec-model-scene) h4{color:#fff;font-size:15px}
+html[data-app=website] :is(.solar-array>span,.solar-hardware-type,.solar-photo-caption,.solar-review-example-label,.ec-card-label,.ec-badge,.ec-status,.ec-evidence-status,.ec-evidence-top>span,.ec-evidence-top time,.ec-model-art-label,.business-source>span,.business-flow-head>div>span,.v-technology-panel-heading>span:first-child,.story-founder>span,.story cite,.story-ledger dd,.story-timeline li>span,.ec-directory-controls label,.ec-visual-filters span,.ec-station-photo-label,.station-selection-badge,.ec-station-region,.ec-station-region>span,.ec-station-specs>span,.ec-station-bottom>span){font-size:12px;line-height:1.6;letter-spacing:0}
+html[data-app=website] :is(.business-flow,.ec-model-scene) h4{color:#fff;font-size:15px}
 html[data-app=website] .web86-model-details{margin-top:18px}
 html[data-app=website] .web86-model-details>summary{padding-block:14px;font-size:14px;font-weight:600;color:var(--teal);cursor:pointer;min-height:48px}
 html[data-app=website] .web86-model-details .business-flow{margin:12px 0 0}
@@ -269,7 +256,7 @@ html[data-app=website] .v-workspace-preview{background:#fff;color:var(--ink);bor
 html[data-app=website] .v-workspace-preview :is(a,.v-workspace-top){border-color:var(--line)}
 html[data-app=website] .v-workspace-preview :is(small,span){color:var(--muted)}
 html[data-app=website] .v-workspace-top>strong,html[data-app=website] .v-workspace-preview .ec-icon{color:var(--teal)}
-@media(max-width:480px){html[data-app=website] :is(.mining-calculator form,.mining-form-fields){grid-template-columns:minmax(0,1fr)}html[data-app=website] .solar-hardware-metrics{flex-wrap:wrap}}
+@media(max-width:480px){html[data-app=website] .solar-hardware-metrics{flex-wrap:wrap}}
 @media(max-width:1100px){html[data-app=website] .ec-header .ec-nav{display:none}html[data-app=website] .grid-hero{gap:36px}html[data-app=website] .web86-account{gap:40px}}
 @media(max-width:760px){
  html[data-app=website]{--ec-page-gutter:20px;--ec-size-h1:clamp(34px,7vw,46px);--ec-leading-h1:1.15;--ec-size-h2:28px;--ec-leading-h2:1.25;--ec-size-h3:20px;--ec-section-y:44px;scroll-padding-top:20px}

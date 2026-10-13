@@ -3,11 +3,11 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 function verify(root){
  const files=fs.readdirSync(root,{recursive:true,withFileTypes:true}).filter(e=>e.isFile()).map(e=>path.join(e.parentPath,e.name));
  const manifest=JSON.parse(fs.readFileSync(path.join(root,'preview-manifest.json'),'utf8'));
- assert.equal(manifest.source,'fresh-isolated-fixture');assert.equal(manifest.apiConnected,false);assert.equal(manifest.authentication,false);assert.equal(manifest.activeOffer,'charge');assert.equal(manifest.miningCapital,0);assert.equal(manifest.chargeModel,'charge-fixed-obligation-v3');assert.equal(manifest.settlementDays,4);assert.equal(manifest.obligationFunding,'fictional-company-reserve');
+ assert.equal(manifest.source,'fresh-isolated-fixture');assert.equal(manifest.apiConnected,false);assert.equal(manifest.authentication,false);assert.equal(manifest.activeOffer,'charge');assert.equal(manifest.chargeModel,'charge-fixed-obligation-v3');assert.equal(manifest.settlementDays,4);assert.equal(manifest.obligationFunding,'fictional-company-reserve');
  const ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'pages-client-data.js'),'utf8'),ctx);
  const fixture=ctx.window.ECO_PAGES_FIXTURE,row=fixture.responses['client/account'],state=row.state;
  assert.equal(state.plan.capital,250);assert.equal(state.plan.rate,13);assert.equal(state.plan.tierId,'single');assert.equal(state.plan.economyModel,'charge-fixed-obligation-v3');assert.equal(state.sessions.length,manifest.completedSettlements);assert.ok(state.sessions.length>=7);
- assert.deepEqual(state.miningPositions||[],[]);assert.equal(Math.round(state.balance*100),state.sessions.reduce((sum,s)=>sum+Math.round(s.payout*100),0));
+ assert.equal(Math.round(state.balance*100),state.sessions.reduce((sum,s)=>sum+Math.round(s.payout*100),0));
  assert.equal(row.client.email,'');assert.equal(row.client.phone,'');assert.equal(row.client.invite,null);
  const finance=require(path.join(root,'account-finance.js'));
  for(const period of state.sessions){assert.equal(period.period,'accrual');assert.equal(period.settlementDays,4);assert.equal(period.funded,period.obligation);assert.equal(period.payout,period.funded);assert.equal(period.companyPayable,0);assert.equal(period.participantPool,0);assert.equal(period.revenueApplied,0);assert.equal(period.reserveApplied,period.obligation);assert.equal(period.source,'manual_verified_settlement');assert.equal(period.obligation,finance.planAccrual(state.plan,period.periodStart,period.periodEnd));}
@@ -28,11 +28,14 @@ function verify(root){
  assert(boot.includes("method==='GET'?fixture.responses[key]:undefined"));assert(adapter.includes('requestWithdrawal:blocked'));assert(ready.includes('event.stopImmediatePropagation()'));
  const currentUi=['weekly.js','tariffs.js','portal.js','cabinets.js','central/ecosystem.js','central/client-finance.js'].map(file=>fs.readFileSync(path.join(root,file),'utf8')).join('\n');
  assert.doesNotMatch(currentUi,/Record a 4-day accrual|Weekly report available|First closed week|Compare the weekly model|Starting option \/ week|Alternative \/ week|Модель за неделю|Сравнить недельную модель|Недельный отч[её]т|Первая закрытая неделя|Day \d+ of 7|День \d+ из 7|7-day period|Период 7 дней|Unlocked after the Charge journey|Available after confirmed Charge participation/i,'Client preview contains retired current-state copy');
- assert.doesNotMatch(currentUi,/Project participation, EcoMiner equipment and managed capacity|Участие в проекте, оборудование EcoMiner и управляемые мощности/i,'Client preview exposes the retired Mining equipment-purchase framing');
- assert.match(currentUi,/Rent computing cells on EcoGrid farms|Аренда вычислительных ячеек на фермах EcoGrid/,'Client preview must describe Mining as computing-cell rental');
+ const retiredVocabulary=new RegExp('M\\u0069ning|\\u043c\\u0430\\u0439\\u043d|AS\\u0049C|EcoM\\u0069ner','iu');
+ assert.doesNotMatch(currentUi,retiredVocabulary,'Client preview exposes retired product vocabulary');
  assert.match(currentUi,/Preview 4-day obligation/);assert.match(currentUi,/Company payable · not withdrawable/);
  assert.match(currentUi,/data-expansion-stage="open"/);
- assert.match(currentUi,/EcoGrid Solar/);assert.match(currentUi,/EcoGrid Mining/);
+ assert.match(currentUi,/EcoGrid Solar/);assert.match(currentUi,/EcoGrid Compute/);
+ assert.match(currentUi,/GPU capacity for business workloads|GPU-мощность для бизнес-задач/,'Client preview must explain the active Compute route');
+ assert.match(currentUi,/compute:'equipment-compute'/,'Client preview must route Compute separately');
+ assert.doesNotMatch(currentUi,/data-eco-route="equipment-"\s*\+\s*"retired"/,'Client preview must not expose a retired route');
  assert.doesNotMatch(currentUi,/Not active yet · future company release|future-release/);
  return {files:files.length,capital:state.plan.capital,rate:state.plan.rate,settlements:state.sessions.length,balance:state.balance,privateData:false,serverOperations:false};
 }

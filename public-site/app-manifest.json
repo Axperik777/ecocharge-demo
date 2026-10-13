@@ -10,7 +10,7 @@
     "resources",
     "terms",
     "solar",
-    "mining",
+    "compute",
     "learn",
     "guides",
     "guides/energy-journey",
@@ -21,17 +21,19 @@
     "guides/why-charge-economics-start-with-location",
     "guides/what-happens-after-an-ev-plugs-in",
     "guides/how-to-read-the-charge-terms",
-    "guides/why-ecogrid-rents-computing-cells",
-    "guides/what-changes-a-mining-result",
+    "guides/why-ai-data-centers-need-more-than-chips",
+    "guides/what-changes-gpu-capacity-economics",
     "guides/how-to-review-an-energy-project",
     "guides/tax-policy-and-household-budget",
-    "guides/digital-assets-need-real-infrastructure",
+    "guides/ai-needs-physical-infrastructure",
     "guides/responsible-energy-is-not-impact-free",
+    "guides/why-ecogrid-rents-computing-cells",
+    "guides/digital-assets-need-real-infrastructure",
     "club",
     "academy",
     "participate/charge",
     "participate/solar",
-    "participate/mining",
+    "participate/compute",
     "app",
     "inside-a-station",
     "story"
@@ -46,5 +48,5 @@
     "apiBase": "",
     "landingId": "main"
   },
-  "createdAt": "2026-10-13T09:03:43.309Z"
+  "createdAt": "2026-10-13T13:38:26.204Z"
 }

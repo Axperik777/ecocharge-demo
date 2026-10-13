@@ -69,7 +69,7 @@ html[data-app=website] .eco-guide-dock .eco-guide-launch .eco-guide-character{wi
 }
 
 /* Page-level light-theme rules load after the component styles. Reassert the
-   complete dark-panel palette so Club, Mining and the other project pages do
+   complete dark-panel palette so Club and the other project pages do
    not inherit dark body text inside this component. */
 html[data-app=website] .eco-mission .eco-mission-kicker{color:#cde8ae}
 html[data-app=website] .eco-mission .eco-mission-copy h2,

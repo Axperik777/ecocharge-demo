@@ -21,6 +21,7 @@ html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button-outline{background:#cde8ae;color:#12382a;border-color:#cde8ae;backdrop-filter:none}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions .ec-button-outline:hover{background:#e0f1cd;color:#12382a;border-color:#e0f1cd}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero-actions>.ec-text-link{grid-column:1/-1;justify-self:center;min-height:44px;color:#fff;font-size:14px;text-decoration-color:#ffffff99}
+html[data-app=website][data-page=home][data-landing=main] .grid-hero-story-link{display:inline-flex;align-items:center;gap:10px;min-height:44px;margin-top:10px;color:#fff;font-size:13px;font-weight:700;text-decoration-color:#ffffff80}
 html[data-app=website][data-page=home][data-landing=main] .grid-hero :focus-visible{outline:3px solid #fff;outline-offset:4px}
 html[data-app=website][data-page=home][data-landing=main] .eco-home-mission{font-size:14px;line-height:1.7;margin:20px auto 0;text-align:center;max-width:850px;padding:0 24px;color:#52665b}
 html[data-app=website][data-page=home][data-landing=main] .grid-directions{border-top:0}
@@ -45,6 +46,45 @@ html[data-app=website][data-page=home][data-landing=main] .eco-guide-dock .eco-g
  html[data-app=website][data-page=home][data-landing=main] .eco-guide-dock{top:auto;right:16px;bottom:calc(88px + env(safe-area-inset-bottom,0px))}
  html[data-app=website][data-page=home][data-landing=main] .eco-guide-launch span{display:none}
  html[data-app=website][data-page=home][data-landing=main] .eco-home-mission{font-size:14px;text-align:left;margin-top:18px}
+}
+
+/* The homepage tells one company story before presenting three project paths. */
+html[data-app=website][data-page=home] .company-system{padding-block:clamp(62px,9vw,112px);scroll-margin-top:84px}
+html[data-app=website][data-page=home] .company-system>header{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:18px 54px;align-items:start;margin-bottom:36px}
+html[data-app=website][data-page=home] .company-system-kicker{grid-column:1/-1;margin:0;color:var(--teal,#006a4d);font-size:11px;font-weight:800;line-height:1.5;letter-spacing:.11em}
+html[data-app=website][data-page=home] .company-system>header h2{max-width:19ch;margin:0;font-size:clamp(34px,4.4vw,58px);font-weight:560;line-height:1.06;letter-spacing:-.055em}
+html[data-app=website][data-page=home] .company-system>header>p:last-child{max-width:65ch;margin:4px 0 0;color:var(--muted,#53675e);font-size:17px;line-height:1.72}
+html[data-app=website][data-page=home] .company-system-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:0;list-style:none;border:1px solid var(--line,#d8e4de);border-radius:22px;overflow:hidden;background:#fff}
+html[data-app=website][data-page=home] .company-system-steps li{position:relative;min-width:0;padding:24px;border-left:1px solid var(--line,#d8e4de)}
+html[data-app=website][data-page=home] .company-system-steps li:first-child{border-left:0}
+html[data-app=website][data-page=home] .company-system-steps li::after{content:"→";position:absolute;z-index:2;top:22px;right:-12px;display:grid;width:24px;height:24px;place-items:center;border-radius:50%;background:#cde8ae;color:#12382a;font-size:12px;font-weight:800}
+html[data-app=website][data-page=home] .company-system-steps li:last-child::after{display:none}
+html[data-app=website][data-page=home] .company-system-steps li>span{display:block;margin-bottom:42px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.1em}
+html[data-app=website][data-page=home] .company-system-steps h3{margin:0 0 10px;font-size:20px;line-height:1.3;letter-spacing:-.025em}
+html[data-app=website][data-page=home] .company-system-steps p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.65}
+html[data-app=website][data-page=home] .company-system-value{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+html[data-app=website][data-page=home] .company-system-value>div{padding:24px;border-radius:18px;background:#102b22;color:#fff}
+html[data-app=website][data-page=home] .company-system-value>div:last-child{background:#edf7f2;color:var(--ink,#102019)}
+html[data-app=website][data-page=home] .company-system-value strong{display:block;margin-bottom:9px;font-size:17px;line-height:1.4}
+html[data-app=website][data-page=home] .company-system-value p{margin:0;color:#c9dcd4;font-size:14px;line-height:1.66}
+html[data-app=website][data-page=home] .company-system-value>div:last-child p{color:var(--muted,#53675e)}
+@media(max-width:900px){
+ html[data-app=website][data-page=home] .company-system>header{grid-template-columns:1fr;gap:16px}
+ html[data-app=website][data-page=home] .company-system-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+ html[data-app=website][data-page=home] .company-system-steps li:nth-child(3){border-left:0;border-top:1px solid var(--line,#d8e4de)}
+ html[data-app=website][data-page=home] .company-system-steps li:nth-child(4){border-top:1px solid var(--line,#d8e4de)}
+ html[data-app=website][data-page=home] .company-system-steps li:nth-child(2)::after{display:none}
+}
+@media(max-width:620px){
+ html[data-app=website][data-page=home] .company-system{padding-block:52px}
+ html[data-app=website][data-page=home] .company-system>header h2{font-size:clamp(32px,9vw,42px)}
+ html[data-app=website][data-page=home] .company-system>header>p:last-child{font-size:15px}
+ html[data-app=website][data-page=home] .company-system-steps{grid-template-columns:1fr}
+ html[data-app=website][data-page=home] .company-system-steps li,html[data-app=website][data-page=home] .company-system-steps li:nth-child(3),html[data-app=website][data-page=home] .company-system-steps li:nth-child(4){display:grid;grid-template-columns:28px minmax(0,1fr);gap:0 12px;padding:18px;border-top:1px solid var(--line,#d8e4de);border-left:0}
+ html[data-app=website][data-page=home] .company-system-steps li:first-child{border-top:0}
+ html[data-app=website][data-page=home] .company-system-steps li::after,html[data-app=website][data-page=home] .company-system-steps li:nth-child(2)::after{display:none}
+ html[data-app=website][data-page=home] .company-system-steps li>span{grid-row:1/3;margin:4px 0 0}
+ html[data-app=website][data-page=home] .company-system-value{grid-template-columns:1fr}
 }
 /* Reserve the guide's row even on short screens and with long translated copy. */
 html[data-app=website][data-page=home][data-landing=main] .grid-hero{padding-top:170px;height:auto;min-height:max(710px,calc(100svh - 24px));max-height:none}

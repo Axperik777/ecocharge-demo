@@ -195,6 +195,11 @@ html[data-app=website] .solar-page .solar-ai li{color:#fff}
 .solar-page .solar-faq .ec-faq{border-color:var(--solar-line)}
 .solar-page .solar-faq summary{min-height:56px;color:var(--solar-ink)}
 .solar-page .solar-faq .ec-faq p{color:var(--solar-muted)}
+.solar-page .solar-system-link{display:grid;grid-template-columns:minmax(210px,.6fr) minmax(0,1.4fr);gap:12px 40px;margin-block:24px 56px;padding:clamp(24px,3.5vw,38px);border:1px solid #bcd7c9;border-radius:20px;background:linear-gradient(135deg,#edf7f2,#fff);color:var(--solar-ink)}
+.solar-page .solar-system-link>p{grid-column:1/-1;margin:0;color:var(--solar-green);font-size:11px;font-weight:800;letter-spacing:.09em}
+.solar-page .solar-system-link h2{margin:0;font-size:clamp(24px,2.8vw,34px);line-height:1.15;letter-spacing:-.035em}
+.solar-page .solar-system-link>div p{margin:12px 0 0;color:var(--solar-muted);line-height:1.65}
+.solar-page .solar-system-link>.ec-text-link{grid-column:2;justify-self:start;min-height:44px;align-items:center}
 .solar-home-entry{--solar-ink:#102019;--solar-green:#006a4d;--solar-line:#cbd9d2;display:grid;grid-template-columns:120px minmax(0,1fr) 220px;gap:32px;align-items:center;margin-block:30px 35px;padding-block:30px;border-block:1px solid var(--solar-line);border-radius:0;background:#f5f8f6;color:var(--solar-ink)}
 .solar-home-entry h2{color:var(--solar-ink)}
 .solar-home-entry p:not(.solar-eyebrow),.solar-home-price span,.solar-home-price small{color:#5f7169}
@@ -216,6 +221,7 @@ html[data-app=website] .solar-page .solar-ai li{color:#fff}
  .solar-page .solar-quote{padding:20px;margin-inline:0;border-radius:16px}.solar-page .solar-quote .lead-card{padding:18px}.solar-form-pair{grid-template-columns:1fr;gap:0}
  .solar-page .solar-package{display:block}.solar-page .solar-array img{height:210px;min-height:0}.solar-hardware-grid{grid-template-columns:1fr}.solar-catalog-disclosure>.solar-hardware-grid{padding:0 10px 10px}.solar-catalog-disclosure>summary{padding-inline:16px}
  .solar-reference-grid{grid-template-columns:1fr}.solar-reference figure img{height:230px}.solar-page .solar-participation{grid-template-columns:1fr;gap:22px}.solar-page .solar-participation .ec-button{width:100%}
+ .solar-page .solar-system-link{grid-template-columns:1fr;gap:14px;margin-block:20px 40px;padding:22px}.solar-page .solar-system-link>.ec-text-link{grid-column:1}
  .solar-home-entry{grid-template-columns:70px minmax(0,1fr);gap:18px}.solar-home-price{grid-column:1/-1;border-top:1px solid var(--solar-line);padding-top:15px}.solar-home-entry .ec-button{width:100%;white-space:normal}
 }
 /* These two Solar panels are also outer .ec-wrap containers. Preserve their

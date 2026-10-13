@@ -2,7 +2,7 @@
 .eco-shell{--eco-bg:#1c1c1f;--eco-card:#262629;--eco-raised:#303034;--eco-line:#3b3b40;--eco-text:#f3f3f5;--eco-muted:#b4b4bc;--eco-accent:#becaaa;background:var(--eco-bg);color:var(--eco-text)}
 .eco-shell .app-header,.eco-shell .topbar,.eco-shell .main-nav{background:var(--eco-bg);border-color:var(--eco-line)}
 .eco-shell .app-shell{max-width:1480px}.eco-shell #eco-workspace{max-width:1060px}.eco-shell #eco-workspace p{color:var(--eco-muted)}
-.eco-shell .eco-card,.eco-shell .eco-account-balance,.eco-shell .eco-account-plan,.eco-shell .eco-mining-portfolio,.eco-shell .eco-money-card{background:var(--eco-card);border-color:var(--eco-line);box-shadow:none}
+.eco-shell .eco-card,.eco-shell .eco-account-balance,.eco-shell .eco-account-plan,.eco-shell .eco-money-card{background:var(--eco-card);border-color:var(--eco-line);box-shadow:none}
 .eco-shell .eco-icon,.eco-shell .eco-wallet,.eco-shell .eco-button.secondary{background:var(--eco-raised);border-color:var(--eco-line);color:var(--eco-text)}
 .eco-shell .eco-button{font-size:14px;min-height:46px;border-radius:10px}.eco-shell .main-nav .nav-item{color:var(--eco-muted)}.eco-shell .main-nav .nav-item.active{background:#30332a;color:var(--eco-accent)}
 .eco-shell .icon{stroke:currentColor}.eco-shell .eg-welcome{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:6px 0 24px}.eg-welcome>div>span{font-size:13px;color:var(--eco-muted)}.eco-shell #eco-workspace .eg-welcome h1{font-size:24px;line-height:1.3;margin:4px 0 0;letter-spacing:-.5px}
@@ -13,7 +13,7 @@
 .eg-section{margin:28px 0}.eg-project-list{margin:15px 0 24px}.eg-project-row{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:13px;width:100%;min-height:88px;padding:16px 0;border:0;border-bottom:1px solid var(--eco-line);background:none;color:var(--eco-text);font:inherit;text-align:left;cursor:pointer}.eg-project-row strong,.eg-project-row small{display:block}.eg-project-row strong{font-size:15px}.eg-project-row small{font-size:12px;color:var(--eco-muted);margin-top:4px}.eg-project-symbol{display:grid;place-items:center;width:48px;height:48px;background:var(--eco-card);border-radius:50%;color:var(--eco-accent);overflow:hidden}.eg-project-symbol img{width:100%;height:100%;object-fit:contain;background:#fff}.eg-project-symbol svg{width:24px;height:24px}.eg-project-amount{text-align:right;font-variant-numeric:tabular-nums}
 .eg-discover{padding:25px 28px;background:#2c3027;border:1px solid #444c38;border-radius:18px;margin:25px 0}.eco-shell #eco-workspace .eg-discover h2{margin:7px 0 10px}.eg-discover p{max-width:650px}.eg-discover .eco-button{background:#383f2e;color:var(--eco-accent);border:0}
 .eg-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:26px 0}.eg-service{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;min-height:175px;padding:22px;border:1px solid transparent;border-radius:18px;background:var(--eco-card);color:var(--eco-text);font:inherit;text-align:left;cursor:pointer}.eg-service:hover{border-color:var(--eco-line)}.eg-service-icon{color:var(--eco-accent)}.eg-service-icon svg{width:25px;height:25px}.eg-service strong{font-size:17px}.eg-service small{font-size:13px;line-height:1.5;color:var(--eco-muted)}.eg-service-arrow{position:absolute;top:22px;right:22px;color:var(--eco-muted)}.eg-project-options{grid-template-columns:1fr 1fr}.eg-page-heading>p{max-width:650px}.eg-page-heading h1{margin-bottom:12px!important}
-.eco-shell .eco-mining-portfolio img{border-radius:14px}.eco-shell #modal{background:var(--eco-card);color:var(--eco-text);max-height:88dvh;overflow:auto;border:1px solid var(--eco-line)}.eco-shell :is(input,select,textarea){font-size:16px}.eco-shell button:focus-visible,.eco-shell a:focus-visible{outline:2px solid var(--eco-accent);outline-offset:4px}
+.eco-shell #modal{background:var(--eco-card);color:var(--eco-text);max-height:88dvh;overflow:auto;border:1px solid var(--eco-line)}.eco-shell :is(input,select,textarea){font-size:16px}.eco-shell button:focus-visible,.eco-shell a:focus-visible{outline:2px solid var(--eco-accent);outline-offset:4px}
 .eco-shell .main-nav .icon{width:22px;height:22px}.eco-shell .care-profile-links{display:flex;flex-direction:column;align-items:flex-start}.eco-shell .care-profile-links .eco-button{width:100%}
 @media(min-width:1100px){.eco-shell .main-nav{top:155px;width:182px}.eco-shell .main-nav .nav-item{gap:12px;padding:14px;font-size:14px}.eco-shell #client-view{margin-left:200px}.eg-balance{padding:32px}.eg-shortcuts{max-width:480px}}
 @media(max-width:1099px){.eco-shell .main-nav{display:flex;justify-content:space-around}.eco-shell .nav-item{min-width:0}}
@@ -68,7 +68,7 @@ html[data-eco-theme="dark"] .eco-shell .topbar .charge-shell{fill:var(--eg-text)
 .eco-shell #eco-workspace h2{font-size:20px;line-height:1.25;letter-spacing:-.45px;margin:0}
 .eco-shell #eco-workspace p{color:var(--eg-muted);line-height:1.6}
 .eco-shell .eco-kicker{color:var(--eg-muted);font-size:11px;letter-spacing:1.05px}
-.eco-shell .eco-card,.eco-shell .eco-account-balance,.eco-shell .eco-account-plan,.eco-shell .eco-mining-portfolio,.eco-shell .eco-money-card{background:var(--eg-surface);border:1px solid var(--eg-border);border-radius:var(--eg-radius);box-shadow:var(--eg-shadow);color:var(--eg-text)}
+.eco-shell .eco-card,.eco-shell .eco-account-balance,.eco-shell .eco-account-plan,.eco-shell .eco-money-card{background:var(--eg-surface);border:1px solid var(--eg-border);border-radius:var(--eg-radius);box-shadow:var(--eg-shadow);color:var(--eg-text)}
 .eco-shell .eco-card{padding:22px;margin:0;min-width:0}
 .eco-shell .eco-section-title{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px;min-width:0}
 .eco-shell .eco-section-title h1,.eco-shell .eco-section-title h2{min-width:0}
@@ -526,8 +526,6 @@ html[data-eco-theme=dark] .eco-shell #modal #modal-content :is(.payment-submit>.
 .eco-shell .r-location-row :is(small,span>span):not(.station-selection-badge){color:var(--eg-muted)}
 .eco-shell .station-selection-badge{background:var(--eg-brand-soft);border-color:var(--eg-border);color:var(--eg-brand)}
 .eco-shell .station-selection-badge.is-closed{background:var(--eg-surface-soft);color:var(--eg-muted)}
-.eco-shell .eco-mining-portfolio :is(small,p,dt){color:var(--eg-muted)}
-.eco-shell .eco-mining-position-status{color:var(--eg-brand)}
 .eco-shell #eco-workspace .eco-status{color:var(--eg-brand)}
 .eco-shell #eco-workspace label.eco-button{color:var(--eg-on-brand)}
 .eco-shell #eco-workspace label.eco-button.secondary{color:var(--eg-text)}

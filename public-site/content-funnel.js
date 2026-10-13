@@ -6,7 +6,7 @@
   const paths=new Set(['direct_project','community_interest','academy_education']);
   const slug=(value,max=80)=>{const text=String(value||'').trim().toLowerCase();return text.length<=max&&/^[a-z0-9][a-z0-9-]*$/.test(text)?text:'';};
   const iso=value=>{const text=String(value||'');return text.length<=32&&!Number.isNaN(Date.parse(text))?new Date(text).toISOString():'';};
-  const project=value=>['charge','solar','mining','academy','resources','guides'].includes(value)?value:'';
+  const project=value=>['charge','solar','compute','academy','resources','guides'].includes(value)?value:'';
   const clean=value=>{
     if(!value||typeof value!=='object')return null;
     const out={},fields={entryId:slug(value.entryId),lastId:slug(value.lastId),entryCluster:slug(value.entryCluster,60),cluster:slug(value.cluster,60),ctaId:slug(value.ctaId),ctaPosition:slug(value.ctaPosition,40),entryProject:project(value.entryProject),targetProject:project(value.targetProject),locale:['en','ru'].includes(value.locale)?value.locale:'',acquisitionPath:paths.has(value.acquisitionPath)?value.acquisitionPath:''};

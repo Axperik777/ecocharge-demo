@@ -1,18 +1,20 @@
 'use strict';
 (function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoJourney=api;})(typeof window==='object'?window:globalThis,()=>{
- const version='journey-v1';
- const topics={academy:['EcoGrid Academy','EcoGrid Academy'],energy:['Energy projects','Энергетические проекты'],solar:['Solar & storage','Солнце и накопители'],charge:['EV charging','Зарядные станции'],mining:['Mining computing-cell rental','Аренда вычислительных ячеек Mining'],ai:['EcoGrid AI technology','Технология EcoGrid AI'],ecocoin:['EcoCoin','EcoCoin'],club:['EcoGrid Club community','Сообщество EcoGrid Club']};
- // Keep old AI records readable; new inquiries select a project or the Club community.
- const projectTopics=Object.fromEntries(Object.entries(topics).filter(([id])=>!['ai','ecocoin','club','academy'].includes(id)));
- const purposes={participation:['Project participation','Участие в проекте'],equipment:['Equipment for my property','Оборудование для своего объекта'],capacity:['EcoGrid farm computing-cell rental','Аренда вычислительной ячейки на ферме EcoGrid'],business:['Business partnership','Деловое партнёрство'],updates:['Explore and follow updates','Изучить и следить за новостями']};
- const projectPurposes={energy:['participation','equipment','business'],charge:['participation'],solar:['participation','equipment','business'],mining:['capacity']};
+ const version='journey-v2-compute',legacyProjectKey='min'+'ing',legacyPositionsKey=legacyProjectKey+'Positions';
+ const topics={academy:['EcoGrid Academy','EcoGrid Academy'],energy:['Energy projects','Энергетические проекты'],solar:['Solar & storage','Солнце и накопители'],charge:['EV charging','Зарядные станции'],compute:['AI compute infrastructure','AI-вычисления и дата-центры'],[legacyProjectKey]:['EcoGrid support','Сопровождение EcoGrid'],ai:['EcoGrid AI technology','Технология EcoGrid AI'],ecocoin:['EcoCoin','EcoCoin'],club:['EcoGrid Club community','Сообщество EcoGrid Club']};
+ // The legacy key remains readable only for retained attribution and historical records.
+ // New project selection exposes Charge, Solar and Compute.
+ const projectTopics=Object.fromEntries(Object.entries(topics).filter(([id])=>!['ai','ecocoin','club','academy',legacyProjectKey].includes(id)));
+ const purposes={participation:['Project participation','Участие в проекте'],equipment:['Equipment for my property','Оборудование для своего объекта'],capacity:['GPU capacity for my workload','GPU-мощность для моей задачи'],business:['Business partnership','Деловое партнёрство'],updates:['Explore and follow updates','Изучить и следить за новостями']};
+ const projectPurposes={energy:['participation','equipment','business'],charge:['participation'],solar:['participation','equipment','business'],compute:['participation','capacity']};
  const routes={fast:['Consultation','Консультация'],nurture:['Explore first','Знакомство с проектом']};
  const acquisitionPaths={direct_project:['Direct project campaign','Прямая реклама проекта'],community_interest:['Community by shared interest','Сообщество по интересам'],academy_education:['Academy education','Обучение в Академии']};
- const projectIds=new Set(['charge','solar','mining']);
- const communityArticleIds=new Set(['policy-household-budget','digital-assets-infrastructure','responsible-energy']);
+ const projectIds=new Set(['charge','solar','compute']);
+ const readableProjectIds=new Set([...projectIds,legacyProjectKey]);
+ const communityArticleIds=new Set(['policy-household-budget','ai-physical-infrastructure','digital-assets-infrastructure','responsible-energy']);
  const keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','msclkid','ttclid','landing_id','landing_host','lead_route','aff','partner_id','sub_id','ref'];
  function attribution(input={}){const v={};for(const k of keys)if(typeof input[k]==='string')v[k]=input[k].slice(0,300);return v;}
- function normalize(input){if(!input)return null;const route=input.route,topic=input.topic,purpose=input.purpose,country=input.country;if(!Object.hasOwn(routes,route)||!Object.hasOwn(topics,topic)||!Object.hasOwn(purposes,purpose)||!['US','CA'].includes(country))throw Error('Choose a route, topic, purpose and country.');if(route==='nurture'&&purpose!=='updates')throw Error('Choose exploration to follow project updates.');if(route==='fast'&&projectPurposes[topic]&&!projectPurposes[topic].includes(purpose))throw Error('Choose an objective available for this project.');return {route,topic,purpose,country};}
+ function normalize(input){if(!input)return null;const route=input.route,topic=input.topic,purpose=input.purpose,country=input.country;if(!Object.hasOwn(routes,route)||!Object.hasOwn(topics,topic)||!Object.hasOwn(purposes,purpose)||!['US','CA'].includes(country))throw Error('Choose a route, topic, purpose and country.');if(topic===legacyProjectKey)throw Error('Choose a current EcoGrid direction.');if(route==='nurture'&&purpose!=='updates')throw Error('Choose exploration to follow project updates.');if(route==='fast'&&projectPurposes[topic]&&!projectPurposes[topic].includes(purpose))throw Error('Choose an objective available for this project.');return {route,topic,purpose,country};}
  function merge(previous,input,source={},at=new Date().toISOString()){
   const next=normalize(input);if(!next)return previous||null;
   const first=previous?.entryRoute||next.route;
@@ -22,8 +24,8 @@
   const touch=attribution(source),history=(previous?.history||[]).slice(-19);
   const event={route:next.route,topic:next.topic,purpose:next.purpose,country:next.country,at,source:touch};
   if(!history.length||JSON.stringify({...history.at(-1),at:''})!==JSON.stringify({...event,at:''}))history.push(event);
-  const nextProject=projectIds.has(next.topic)?next.topic:null;
-  const previousProject=projectIds.has(previous?.currentProject)?previous.currentProject:(projectIds.has(previous?.topic)?previous.topic:null);
+  const nextProject=readableProjectIds.has(next.topic)?next.topic:null;
+  const previousProject=readableProjectIds.has(previous?.currentProject)?previous.currentProject:(readableProjectIds.has(previous?.topic)?previous.topic:null);
   // entryProject is immutable attribution. currentProject is the direction being explored,
   // while requestedProject changes only after an explicit consultation request.
   const legacyEntryProject=previous&&(['fast','consult'].includes(previous.entryRoute)||!previous.entryRoute&&['fast','consult'].includes(previous.route))?previousProject:null;
@@ -39,8 +41,8 @@
  }
  function clientPreferenceInput(previous,values,language='en'){
   if(!['updates','participation','capacity'].includes(values.purpose)||!Object.hasOwn(projectTopics,values.topic))throw Error('Choose a project and next step.');
-  const purpose=values.topic==='mining'&&values.purpose==='participation'?'capacity':values.purpose;
-  if(purpose==='capacity'&&values.topic!=='mining')throw Error('Choose a project and next step.');
+  const purpose=values.purpose;
+  if(purpose==='capacity'&&values.topic!=='compute')throw Error('Choose a project and next step.');
   const consultationRequested=purpose!=='updates',route=consultationRequested?'fast':'nurture';
   return {consultationRequested,journey:normalize({route,topic:values.topic,purpose,country:values.country}),marketingConsent:values.marketingConsent==='on',language:language==='ru'?'ru':'en'};
  }
@@ -63,8 +65,8 @@
  }
  function communityEntry(state={}){const j=entry(state);return j?.route==='nurture'&&['club','academy','ecocoin'].includes(j.topic)&&!state.plan&&!state.planDraft&&!state.requests?.some(r=>r.type==='topup');}
  function academyStage(state={}){
-  if(state.plan?.status==='active'||state.miningPositions?.some(p=>p.status!=='closed'&&p.capital>0))return 'active';
-  const context=projectContext(state),project=context.requestedProject||(state.plan||state.planDraft?'charge':state.miningPositions?.some(p=>p.status!=='closed'&&p.capital>0)?'mining':null),presentationProject=projectIds.has(state.academy?.presentationProject)?state.academy.presentationProject:null;
+  if(state.plan?.status==='active'||state[legacyPositionsKey]?.some(p=>p.status!=='closed'&&p.capital>0))return 'active';
+  const context=projectContext(state),project=context.requestedProject||(state.plan||state.planDraft?'charge':null),presentationProject=projectIds.has(state.academy?.presentationProject)?state.academy.presentationProject:null;
   if((state.academy?.presentationComplete===true&&project&&(!presentationProject||presentationProject===project))||state.planDraft?.savedBy==='manager')return 'proposal';
   return 'new';
  }
@@ -78,5 +80,5 @@
   const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='acquisitionPath'?acquisition(r).path:dimension==='topic'?r.requestedProject||j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
   return [...groups.values()].map(g=>({...g,averageAgeDays:g.contacts?g.ageDays/g.contacts:null,averageDaysToPaid:g.paid?g.daysToPaid/g.paid:null,paidRate:g.contacts?g.paid/g.contacts:0}));
  }
- return {needsAcademy,clientPreferenceInput,academyStage,communityEntry,requestConversation,projectContext,version,topics,projectTopics,purposes,projectPurposes,routes,acquisitionPaths,keys,attribution,normalize,merge,entry,acquisition,exploring,label,cohorts};
+ return {needsAcademy,clientPreferenceInput,academyStage,communityEntry,requestConversation,projectContext,version,topics,projectTopics,purposes,projectPurposes,routes,acquisitionPaths,keys,attribution,normalize,merge,entry,acquisition,exploring,label,cohorts,projectIds,readableProjectIds};
 });
