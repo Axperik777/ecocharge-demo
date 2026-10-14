@@ -1,11 +1,13 @@
 html[data-app=website] .compute-page,html[data-app=website][data-page="participate/compute"]{--compute-night:#0b241c;--compute-deep:#12382b;--compute-line:#3b6556;--compute-accent:#c8ee95;--compute-cyan:#9edbd0}
 html[data-app=website] .compute-page{background:#f5f8f6;color:var(--ink,#102019)}
+html[data-app=website] .compute-page :is(#compute-result,#compute-system,#compute-formats,#compute-economics),html[data-app=website][data-page="participate/compute"] :is(#project-decision,#request-access){scroll-margin-top:96px}
 html[data-app=website] .compute-kicker{margin:0 0 14px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;line-height:1.45;letter-spacing:.12em;text-transform:uppercase}
 html[data-app=website] .compute-hero{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(380px,.98fr);gap:clamp(28px,5vw,72px);align-items:center;padding-block:clamp(42px,6vw,78px)}
 html[data-app=website] .compute-hero h1{max-width:17ch;margin:0;font-size:clamp(40px,4.5vw,64px);font-weight:580;line-height:1.04;letter-spacing:-.055em}
 html[data-app=website] .compute-lead{max-width:64ch;margin:24px 0 0;color:var(--muted,#53675e);font-size:18px;line-height:1.68}
 html[data-app=website] .compute-actions{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;margin-top:28px}
 html[data-app=website] .compute-actions .ec-button{min-height:54px;white-space:normal;line-height:1.35}
+html[data-app=website] .compute-actions .ec-text-link{display:inline-flex;min-height:44px;align-items:center}
 html[data-app=website] .compute-caption{max-width:74ch;margin:18px 0 0;color:var(--muted,#53675e);font-size:13px;line-height:1.65}
 html[data-app=website] .compute-visual{position:relative;min-width:0;margin:0;overflow:hidden;border-radius:26px;background:var(--compute-night);box-shadow:0 26px 72px rgba(13,46,36,.18)}
 html[data-app=website] .compute-visual::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(6,27,20,.05),rgba(6,27,20,.66))}
@@ -17,7 +19,25 @@ html[data-app=website] .compute-section{padding-block:clamp(54px,7vw,92px)}
 html[data-app=website] .compute-section-head{max-width:820px;margin-bottom:32px}
 html[data-app=website] .compute-section-head h2{max-width:18ch;margin:0;font-size:clamp(32px,4vw,52px);font-weight:580;line-height:1.08;letter-spacing:-.05em}
 html[data-app=website] .compute-section-head>p:last-child{max-width:68ch;margin:20px 0 0;color:var(--muted,#53675e);font-size:16px;line-height:1.7}
-html[data-app=website] .compute-market{border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website] .compute-earning,html[data-app=website] .compute-origin,html[data-app=website] .compute-market{border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website] .compute-earn-chain,html[data-app=website] .compute-company-chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
+html[data-app=website] .compute-earn-chain li,html[data-app=website] .compute-company-chain li{min-width:0;padding:22px;border:1px solid var(--line,#d8e4de);border-radius:16px;background:#fff}
+html[data-app=website] .compute-earn-chain li>span,html[data-app=website] .compute-company-chain li>span{display:block;margin-bottom:34px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.1em}
+html[data-app=website] .compute-earn-chain strong,html[data-app=website] .compute-company-chain strong{display:block;margin-bottom:9px;font-size:17px;line-height:1.35}
+html[data-app=website] .compute-earn-chain p,html[data-app=website] .compute-company-chain p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.62}
+html[data-app=website] .compute-earn-summary{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr) auto;gap:18px;align-items:center;margin-top:14px;padding:22px 24px;border-radius:16px;background:var(--compute-deep);color:#fff}
+html[data-app=website] .compute-earn-summary strong{font-size:17px;line-height:1.45}
+html[data-app=website] .compute-earn-summary p{margin:0;color:#c9dbd3;font-size:13px;line-height:1.6}
+html[data-app=website] .compute-earn-summary .ec-button{min-height:50px;background:var(--compute-accent);border-color:var(--compute-accent);color:var(--compute-night);white-space:nowrap}
+html[data-app=website] .compute-company-chain li:last-child{border-color:#87b9a3;background:var(--pale,#edf7f2)}
+html[data-app=website] .compute-company-value{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+html[data-app=website] .compute-company-value>div{padding:24px;border:1px solid var(--line,#d8e4de);border-radius:18px;background:#fff}
+html[data-app=website] .compute-company-value strong{display:block;margin-bottom:10px;font-size:18px;line-height:1.35}
+html[data-app=website] .compute-company-value p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.68}
+html[data-app=website] .compute-company-value .ec-text-link{display:inline-flex;min-height:44px;align-items:center;margin-top:12px}
+html[data-app=website] .compute-market-note{display:flex;gap:24px;align-items:center;justify-content:space-between;margin-top:12px;padding:20px 24px;border-left:3px solid var(--teal,#006a4d);background:#fff}
+html[data-app=website] .compute-market-note strong{display:block;margin-bottom:6px;font-size:16px}
+html[data-app=website] .compute-market-note p{max-width:74ch;margin:0;color:var(--muted,#53675e);font-size:13px;line-height:1.62}
 html[data-app=website] .compute-market-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 html[data-app=website] .compute-market-grid article{padding:26px;border:1px solid var(--line,#d8e4de);border-radius:18px;background:#fff}
 html[data-app=website] .compute-market-grid strong{display:block;margin-bottom:10px;font-size:20px;line-height:1.35}
@@ -27,7 +47,7 @@ html[data-app=website] .compute-source{display:inline-flex;min-height:44px;align
 html[data-app=website] .compute-spine-band{background:var(--compute-night);color:#f4fbf7}
 html[data-app=website] .compute-spine-band .compute-kicker{color:var(--compute-accent)}
 html[data-app=website] .compute-spine-band .compute-section-head h2{max-width:22ch;color:#fff}
-html[data-app=website] .compute-spine{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:0;list-style:none}
+html[data-app=website] .compute-spine{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;padding:0;list-style:none}
 html[data-app=website] .compute-spine li{position:relative;min-width:0;padding:22px 22px 24px;border-block:1px solid var(--compute-line);border-left:1px solid var(--compute-line)}
 html[data-app=website] .compute-spine li:last-child{border-right:1px solid var(--compute-line)}
 html[data-app=website] .compute-spine li::after{content:"→";position:absolute;z-index:2;top:22px;right:-12px;display:grid;width:24px;height:24px;place-items:center;border-radius:50%;background:var(--compute-accent);color:var(--compute-night);font-size:13px;font-weight:800}
@@ -39,6 +59,7 @@ html[data-app=website] .compute-boundary{display:grid;grid-template-columns:minm
 html[data-app=website] .compute-boundary strong{color:#fff;font-size:18px;line-height:1.4}
 html[data-app=website] .compute-boundary p{margin:0;color:#c7d9d1;font-size:14px;line-height:1.68}
 html[data-app=website] .compute-paths{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;max-width:820px;margin-inline:auto}
+html[data-app=website] .compute-offer-grid{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:14px;align-items:stretch}
 html[data-app=website] .compute-path{display:flex;flex-direction:column;min-width:0;padding:clamp(24px,4vw,38px);border:1px solid var(--line,#d8e4de);border-radius:22px;background:#fff}
 html[data-app=website] .compute-path.is-primary{background:var(--compute-deep);color:#fff;border-color:var(--compute-deep)}
 html[data-app=website] .compute-path-label{margin:0 0 32px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.11em}
@@ -54,6 +75,15 @@ html[data-app=website] .compute-path li::before{content:"↗";position:absolute;
 html[data-app=website] .compute-path.is-primary li::before{color:var(--compute-accent)}
 html[data-app=website] .compute-path .ec-button{width:100%;min-height:54px;justify-content:space-between;margin-top:auto;white-space:normal;line-height:1.35}
 html[data-app=website] .compute-path.is-primary .ec-button{background:var(--compute-accent);border-color:var(--compute-accent);color:var(--compute-night)}
+html[data-app=website] .compute-proof{min-width:0;overflow:hidden;border:1px solid var(--line,#d8e4de);border-radius:22px;background:#fff}
+html[data-app=website] .compute-proof>img{display:block;width:100%;height:auto!important;aspect-ratio:16/7;object-fit:cover}
+html[data-app=website] .compute-proof>div{padding:24px}
+html[data-app=website] .compute-proof .compute-path-label{margin-bottom:18px}
+html[data-app=website] .compute-proof ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0;padding:0;list-style:none}
+html[data-app=website] .compute-proof li{min-width:0;padding-top:14px;border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website] .compute-proof li strong,html[data-app=website] .compute-proof li span{display:block}
+html[data-app=website] .compute-proof li strong{margin-bottom:5px;font-size:15px;line-height:1.4}
+html[data-app=website] .compute-proof li span{color:var(--muted,#53675e);font-size:13px;line-height:1.58}
 html[data-app=website] .compute-economics{border-top:1px solid var(--line,#d8e4de)}
 html[data-app=website] .compute-equation{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;gap:8px;margin-bottom:18px}
 html[data-app=website] .compute-equation span,html[data-app=website] .compute-equation strong{display:grid;min-width:0;min-height:116px;place-items:center;padding:18px;border:1px solid var(--line,#d8e4de);border-radius:16px;background:#fff;font-size:14px;line-height:1.5;text-align:center}
@@ -129,17 +159,27 @@ html[data-app=website][data-page="participate/compute"] .project-system-link.ec-
  html[data-app=website] .compute-spine{grid-template-columns:repeat(2,minmax(0,1fr))}
  html[data-app=website] .compute-spine li:nth-child(2){border-right:1px solid var(--compute-line)}
  html[data-app=website] .compute-spine li:nth-child(2)::after{display:none}
+ html[data-app=website] .compute-spine li:nth-child(4){border-right:1px solid var(--compute-line)}
+ html[data-app=website] .compute-spine li:nth-child(4)::after{display:none}
+ html[data-app=website] .compute-earn-chain,html[data-app=website] .compute-company-chain{grid-template-columns:repeat(2,minmax(0,1fr))}
+ html[data-app=website] .compute-earn-summary{grid-template-columns:1fr 1fr}
+ html[data-app=website] .compute-earn-summary .ec-button{grid-column:1/-1;justify-content:space-between}
+ html[data-app=website] .compute-offer-grid{grid-template-columns:1fr}
  html[data-app=website] .compute-risk-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  html[data-app=website] .compute-equation{grid-template-columns:1fr}
   html[data-app=website] .compute-equation b{justify-self:center;transform:none}
  html[data-app=website] .compute-equation span,html[data-app=website] .compute-equation strong{min-height:72px}
 }
 @media(max-width:720px){
- html[data-app=website] .compute-hero h1{font-size:clamp(36px,10vw,48px)}
+ html[data-app=website] .compute-hero h1{font-size:clamp(34px,9.2vw,44px)}
  html[data-app=website] .compute-lead{font-size:16px}
  html[data-app=website] .compute-actions{display:grid;width:100%}
  html[data-app=website] .compute-actions .ec-button{width:100%;justify-content:space-between}
- html[data-app=website] .compute-market-grid,html[data-app=website] .compute-paths,html[data-app=website] .compute-intent-cards{grid-template-columns:1fr}
+ html[data-app=website] .compute-market-grid,html[data-app=website] .compute-paths,html[data-app=website] .compute-intent-cards,html[data-app=website] .compute-earn-chain,html[data-app=website] .compute-company-chain,html[data-app=website] .compute-company-value,html[data-app=website] .compute-proof ul{grid-template-columns:1fr}
+ html[data-app=website] .compute-earn-summary{grid-template-columns:1fr}
+ html[data-app=website] .compute-earn-summary .ec-button{grid-column:auto;width:100%;justify-content:space-between;white-space:normal}
+ html[data-app=website] .compute-earn-chain li>span,html[data-app=website] .compute-company-chain li>span{margin-bottom:16px}
+ html[data-app=website] .compute-market-note{display:grid;gap:10px}
  html[data-app=website] .compute-spine{grid-template-columns:1fr}
  html[data-app=website] .compute-spine li{border-right:1px solid var(--compute-line);border-bottom:0}
  html[data-app=website] .compute-spine li:last-child{border-bottom:1px solid var(--compute-line)}
@@ -152,6 +192,7 @@ html[data-app=website][data-page="participate/compute"] .project-system-link.ec-
  html[data-app=website] .compute-purpose-fields{padding:0}
  html[data-app=website] .compute-brief legend,html[data-app=website] .compute-brief label:last-child{grid-column:auto}
  html[data-app=website][data-page="participate/compute"] .compute-hero-actions,html[data-app=website][data-page="participate/compute"] .compute-decision ol,html[data-app=website][data-page="participate/compute"] .compute-decision-lanes,html[data-app=website][data-page="participate/compute"] .compute-review-card{grid-template-columns:1fr}
+ html[data-app=website][data-page="participate/compute"] .compute-participate-hero h1{font-size:clamp(34px,9vw,40px)}
  html[data-app=website][data-page="participate/compute"] .compute-hero-actions .ec-text-link{grid-column:auto}
  html[data-app=website][data-page="participate/compute"] .compute-review-card img{min-height:240px;aspect-ratio:16/10}
 }
