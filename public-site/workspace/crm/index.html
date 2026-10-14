@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-US" data-app="crm">
-<head><meta charset="utf-8"><style id="eco-first-paint">html{background:#f5f8f6;color-scheme:light}html[data-eco-theme=dark],html[data-crm-theme=dark]{background:#191d20;color-scheme:dark}html[data-eco-boot=pending] body{visibility:hidden}</style><script id="eco-first-paint-init">(()=>{const root=document.documentElement;root.dataset.ecoBoot='pending';let saved='';try{const key=root.dataset.app==='crm'?'ecogrid-crm-theme':'ecogrid-theme';saved=localStorage.getItem(key)||''}catch{}const dark=saved==='dark';if(root.dataset.app==='crm')root.dataset.crmTheme=dark?'dark':'light';else if(root.dataset.portal)root.dataset.ecoTheme=dark?'dark':'light';const release=()=>{delete root.dataset.ecoBoot;clearTimeout(fallback)};const fallback=setTimeout(release,5000);document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(release),{once:true});window.addEventListener('pageshow',event=>{if(event.persisted)release()});})();</script>
+<head><meta charset="utf-8"><style id="eco-first-paint">html{background:#f5f8f6;color-scheme:light}html[data-eco-theme=dark],html[data-crm-theme=dark]{background:#191d20;color-scheme:dark}html[data-eco-boot=pending] body{visibility:hidden}</style><script id="eco-first-paint-init">(()=>{const root=document.documentElement;root.dataset.ecoBoot='pending';let saved='';try{const key=root.dataset.app==='crm'?'ecogrid-crm-theme':'ecogrid-theme';saved=localStorage.getItem(key)||''}catch{}const dark=saved==='dark';if(root.dataset.app==='crm')root.dataset.crmTheme=dark?'dark':'light';else if(root.dataset.portal)root.dataset.ecoTheme=dark?'dark':'light';const release=()=>{delete root.dataset.ecoBoot;clearTimeout(fallback)};const fallback=setTimeout(release,5000);document.addEventListener('DOMContentLoaded',release,{once:true});window.addEventListener('pageshow',event=>{if(event.persisted)release()});})();</script>
   <script>try{document.documentElement.dataset.crmTheme=localStorage.getItem("ecogrid-crm-theme")==="dark"?"dark":"light"}catch{document.documentElement.dataset.crmTheme="light"}</script>
 
   <base href="../">
@@ -14,27 +14,27 @@
 
   <script src="language-policy.js?v=161083046d13"></script>
   <script src="platform-config.js?v=3e9f3ab5b8ef"></script>
-  <script src="platform.js?v=35dfd25566bd"></script>
+  <script src="platform.js?v=5d2a4e7d0028"></script>
   <script src="locale-en.js?v=eb4c39ca5790" defer></script>
-  <script src="locale-ru.js?v=63f4ce7b1200" defer></script>
+  <script src="locale-ru.js?v=cfbd1681539c" defer></script>
   <script src="locale.js?v=3144c3a7aab2" defer></script>
   <script src="demand-rhythm.js?v=e501b4e3847e" defer></script>
   <script src="calendar-yield.js?v=8825b9fea81f" defer></script>
   <script src="account-finance.js?v=4443e70f9d8e" defer></script>
   <script src="central/navigation.js?v=4bd44523755c" defer></script>
-  <script src="business-model.js?v=9de47d76f824" defer></script>
+  <script src="business-model.js?v=7f2a8aaeddee" defer></script>
   <script src="central/workspace-model.js?v=7fc3faa0a911" defer></script>
-  <script src="sandbox-data.js?v=3b1fd38c1640" defer></script><script src="sandbox-domain.js?v=be3d006361d8" defer></script><script src="sandbox-stations.js?v=c72320719412" defer></script><script src="sandbox-model.js?v=619f2f72bc86" defer></script><script src="sandbox-bootstrap.js?v=52803e11f1f9" defer></script><script src="central/ui.js?v=e67ad729b29a" defer></script>
-  <script src="central/finance-ui.js?v=948ac6cb6881" defer></script>
+  <script src="sandbox-data.js?v=45384ee64eb3" defer></script><script src="sandbox-domain.js?v=abaa69bd1bf2" defer></script><script src="sandbox-stations.js?v=c72320719412" defer></script><script src="sandbox-model.js?v=ad10e94c646d" defer></script><script src="sandbox-bootstrap.js?v=52803e11f1f9" defer></script><script src="central/ui.js?v=e67ad729b29a" defer></script>
+  <script src="central/finance-ui.js?v=3e043916dc3b" defer></script>
 
   <script src="central/identity-ui.js?v=cb672685dd1a" defer></script>
 
   <script src="central/knowledge-helper.js?v=ef6bf9edbe54" defer></script>
 
-  <script src="central/knowledge-ui.js?v=78678a15b3a6" defer></script>
+  <script src="central/knowledge-ui.js?v=72462a5d6cb9" defer></script>
 
   <script src="central/caller-model.js?v=8461ae73dc80" defer></script>
-  <script src="central/caller-ui.js?v=686fe9bd20d2" defer></script>
+  <script src="central/caller-ui.js?v=bc6efe4c195a" defer></script>
   <script src="central/funding-inbox.js?v=7238c812b491" defer></script>
 
 
@@ -50,29 +50,29 @@
   <script src="central/club-model.js?v=2d456cb774d3" defer></script>
   <script src="central/club-admin.js?v=420f3a744915" defer></script>
 
-  <script src="central/funnel-model.js?v=73ff3a89b0ab" defer></script>
-  <script src="central/funnel-ui.js?v=62b4b43f089a" defer></script>
+  <script src="central/funnel-model.js?v=a50968f84c62" defer></script>
+  <script src="central/funnel-ui.js?v=1636fb29c291" defer></script>
 
-  <script src="central/academy-script.js?v=00ca6a46ba43" defer></script>
-  <script src="central/call-scripts.js?v=4cddcc774aec" defer></script>
+  <script src="journey-model.js?v=5874644102bd" defer></script>
+  <script src="central/academy-script.js?v=d3c8b99af536" defer></script>
+  <script src="central/call-scripts.js?v=59e5435e50cc" defer></script>
   <script src="solar-guide.js?v=ef3ee21c865c" defer></script>
-  <script src="central/call-desk.js?v=9dc649b9725c" defer></script>
+  <script src="central/call-desk.js?v=881a6dbb9fb9" defer></script>
 
 
-  <script src="central/community-model.js?v=bc78439c006e" defer></script>
-  <script src="central/community-ui.js?v=0a9bd165c941" defer></script>
+  <script src="central/community-model.js?v=a9158a897803" defer></script>
+  <script src="central/community-ui.js?v=d7eea490f464" defer></script>
 
   <script src="central/crm-workbench.js?v=7d4498f2d261" defer></script>
   <script src="central/crm-experience.js?v=94249a269311" defer></script>
-  <script src="journey-model.js?v=13071ddb968a" defer></script>
-  <script src="central/journey-ui.js?v=b162e03814b1" defer></script>
+  <script src="central/journey-ui.js?v=cf553ed92561" defer></script>
 
-  <script src="central/crm.js?v=11b7165d9245" defer></script>
+  <script src="central/crm.js?v=ceb6a0931a83" defer></script>
 
 
-  <script src="charge-model.js?v=8a24c1105362"></script>
+  <script src="charge-model.js?v=8f1670021cd7"></script>
 
-<link rel="stylesheet" href="brand.css?v=e13b85ea8919"><link rel="stylesheet" href="crm.css?v=a05086d8f615"><link rel="stylesheet" href="central/central.css?v=5cff1ba51119"><link rel="stylesheet" href="locale.css?v=ebd3df6e0c49"><link rel="stylesheet" href="central/ecosystem.css?v=6c1ef3733d6f"><link rel="stylesheet" href="central/knowledge.css?v=2b1ba31d0398"><link rel="stylesheet" href="central/knowledge-helper.css?v=6c8ac4f2935d"><link rel="stylesheet" href="central/caller.css?v=b94b382dc888"><link rel="stylesheet" href="central/support-chat.css?v=f056592dc08a"><link rel="stylesheet" href="central/reply-queue.css?v=0bc18fc1476d"><link rel="stylesheet" href="central/energy-journal.css?v=a42011127770"><link rel="stylesheet" href="central/club.css?v=ff3819ee7ac2"><link rel="stylesheet" href="central/funnel.css?v=ac860ccb6322"><link rel="stylesheet" href="central/call-desk.css?v=00cd8a8e58c6"><link rel="stylesheet" href="central/crm-layout.css?v=453a6297e166"><link rel="stylesheet" href="central/community.css?v=97b2bbd2bfb2"><link rel="stylesheet" href="journey.css?v=f427d102de70"><link rel="stylesheet" href="typography.css?v=30f0740c0f45"><link rel="stylesheet" href="central/crm-experience.css?v=d2434e68e180"><link rel="stylesheet" href="charge-model.css?v=61e09246edb9"><link rel="stylesheet" href="sandbox.css?v=d8fa88794ca9"></head>
+<link rel="stylesheet" href="brand.css?v=e13b85ea8919"><link rel="stylesheet" href="crm.css?v=a05086d8f615"><link rel="stylesheet" href="central/central.css?v=5cff1ba51119"><link rel="stylesheet" href="locale.css?v=ebd3df6e0c49"><link rel="stylesheet" href="central/ecosystem.css?v=6c1ef3733d6f"><link rel="stylesheet" href="central/knowledge.css?v=2b1ba31d0398"><link rel="stylesheet" href="central/knowledge-helper.css?v=6c8ac4f2935d"><link rel="stylesheet" href="central/caller.css?v=b94b382dc888"><link rel="stylesheet" href="central/support-chat.css?v=f056592dc08a"><link rel="stylesheet" href="central/reply-queue.css?v=0bc18fc1476d"><link rel="stylesheet" href="central/energy-journal.css?v=a42011127770"><link rel="stylesheet" href="central/club.css?v=ff3819ee7ac2"><link rel="stylesheet" href="central/funnel.css?v=ac860ccb6322"><link rel="stylesheet" href="central/call-desk.css?v=d73d99d93268"><link rel="stylesheet" href="central/crm-layout.css?v=453a6297e166"><link rel="stylesheet" href="central/community.css?v=97b2bbd2bfb2"><link rel="stylesheet" href="journey.css?v=f427d102de70"><link rel="stylesheet" href="typography.css?v=30f0740c0f45"><link rel="stylesheet" href="central/crm-experience.css?v=d2434e68e180"><link rel="stylesheet" href="charge-model.css?v=61e09246edb9"><link rel="stylesheet" href="sandbox.css?v=d8fa88794ca9"></head>
 <body>
   <a class="crm-skip" href="#central-workspace-content">Skip to workspace</a>
   <header class="central-header">
@@ -110,5 +110,5 @@
     </div>
     <div id="central-dialog-body"></div>
   </dialog>
-<script src="sandbox-ui.js?v=28201201a985" defer></script></body>
+<script src="sandbox-ui.js?v=2c8e35d34cb1" defer></script></body>
 </html>

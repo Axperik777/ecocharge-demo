@@ -27,7 +27,8 @@ html[data-app=website][data-page=home] .ec-anchor-alias{display:block;position:r
 html[data-app=website][data-page=home] .company-system-kicker{margin:0 0 14px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;line-height:1.5;letter-spacing:.11em}
 
 html[data-app=website][data-page=home] .company-system{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:clamp(44px,7vw,96px);align-items:start;padding-block:clamp(72px,10vw,126px);scroll-margin-top:84px}
-html[data-app=website][data-page=home] .company-story-copy h2{max-width:16ch;margin:0 0 22px;font-size:clamp(38px,4.6vw,62px);font-weight:600;line-height:1.04;letter-spacing:-.055em;text-wrap:balance}
+html[data-app=website][data-page=home] .company-system>*{min-width:0}
+html[data-app=website][data-page=home] .company-story-copy h2{max-width:16ch;margin:0 0 22px;font-size:clamp(38px,4.6vw,62px);font-weight:600;line-height:1.04;letter-spacing:-.055em;text-wrap:balance;overflow-wrap:anywhere}
 html[data-app=website][data-page=home] .company-story-copy>p:not(.company-system-kicker){max-width:66ch;margin:0;color:var(--muted,#53675e);font-size:17px;line-height:1.78}
 html[data-app=website][data-page=home] .company-story-copy .ec-text-link{margin-top:22px;color:var(--teal,#006a4d)}
 html[data-app=website][data-page=home] .company-workline{display:grid;margin:32px 0 0;padding:0;list-style:none;border-top:1px solid var(--line,#d8e4de)}
@@ -54,7 +55,7 @@ html[data-app=website][data-page=home] .ec-text-link svg{width:18px;height:18px;
 html[data-app=website][data-page=home] .company-standard-list{display:grid;margin:0;padding:0;list-style:none;border-top:1px solid #b9d7c447}
 html[data-app=website][data-page=home] .company-standard-list li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:start;padding:19px 0;border-bottom:1px solid #b9d7c447}
 html[data-app=website][data-page=home] .company-standard-list span{padding-top:3px;color:#cde8ae;font-size:10px;font-weight:800;letter-spacing:.09em}
-html[data-app=website][data-page=home] .company-standard-list strong{color:#fff;font-size:16px;font-weight:600;line-height:1.55}
+html[data-app=website][data-page=home] .company-standard-list strong{color:#fff;font-size:16px;font-weight:600;line-height:1.55;overflow-wrap:anywhere}
 
 html[data-app=website][data-page=home] .ec-faith-service.ec-faith-service--home{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(40px,7vw,92px);align-items:start;margin-block:clamp(70px,9vw,112px);padding:0;border:0;border-radius:0;background:transparent}
 html[data-app=website][data-page=home] .ec-faith-service--home .ec-faith-kicker{margin:0 0 14px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.11em}

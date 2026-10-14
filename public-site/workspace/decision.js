@@ -12,7 +12,7 @@ function planIsComplete(){const tier=demo.tariffs.find(t=>t.id===chosenTier);ret
 function decisionSaveForRegistration(){
   if(!planIsComplete()){toast('Choose a valid amount and the required reference stations first.');return;}
   try{sessionStorage.setItem('ecocharge-plan-review',JSON.stringify(planTerms()));location.assign(window.EcoPlatform.url('account','register/?next=assets'));}
-  catch{toast('Browser storage is unavailable. Allow site storage to keep your selection.');}
+  catch{toast('Your selection could not be saved. Check your privacy settings and try again.');}
 }
 
 const applyBeforeDecision=actions['apply-plan'];
@@ -26,7 +26,7 @@ actions['apply-plan']=()=>{
   const b=$('#modal [data-action="confirm-plan"]');
   if(isGuest()){
     b.dataset.action='decision-register-plan';b.textContent='Save with a profile →';
-    $('#modal-content .modal-note').textContent='Next: add a display name to keep this plan in your account. No payment, server account or investment is created.';
+    $('#modal-content .modal-note').textContent='Next: add a display name to keep this plan in your account. Participation starts only after review and written documents.';
   }
   b.insertAdjacentHTML('afterend','<button class="button secondary" data-action="decision-ask-plan">Ask about this plan</button>');
 };
@@ -69,7 +69,7 @@ function renderDecisionSurfaces(){
     let steps=$('#decision-roadmap');
     if(!steps){steps=document.createElement('section');steps.id='decision-roadmap';steps.className='d-roadmap';dashboard.prepend(steps);}
     const saved=Boolean(demo.planDraft);
-    steps.innerHTML=`<div><span class="j-eyebrow">A CLEAR PATH THROUGH YOUR ACCOUNT</span><h2>Understand. Explore. Decide.</h2></div><ol><li><a href="inside-a-station/"><span>1</span><div><strong>Understand the business</strong><small>Review the operating-cost calculation</small></div>${journeyArrow()}</a></li><li><button data-action="journey-resume"><span>2</span><div><strong>${saved?'Review your saved selection':'Build your plan draft'}</strong><small>${saved?'Your selection is kept in this browser':'Choose stations and your amount'}</small></div>${journeyArrow()}</button></li><li><button data-action="journey-documents"><span>3</span><div><strong>Review the terms</strong><small>Rights, evidence, fees and access</small></div>${journeyArrow()}</button></li></ol>`;
+    steps.innerHTML=`<div><span class="j-eyebrow">A CLEAR PATH THROUGH YOUR ACCOUNT</span><h2>Understand. Explore. Decide.</h2></div><ol><li><a href="inside-a-station/"><span>1</span><div><strong>Understand the business</strong><small>Review the operating-cost calculation</small></div>${journeyArrow()}</a></li><li><button data-action="journey-resume"><span>2</span><div><strong>${saved?'Review your saved selection':'Build your plan draft'}</strong><small>${saved?'Saved to your account':'Choose stations and your amount'}</small></div>${journeyArrow()}</button></li><li><button data-action="journey-documents"><span>3</span><div><strong>Review the terms</strong><small>Rights, evidence, fees and access</small></div>${journeyArrow()}</button></li></ol>`;
   }
 }
 const decisionClientBefore=renderClientTab;
@@ -101,7 +101,7 @@ persist=function(){persistBeforeDecision();
 function decisionDiagnostics(){
   const events=window.EcoChargeFunnel?.read()||[];
   const stages=[['demo_opened','Workspace opened'],['model_explored','Operating calculation explored'],['station_saved','Station saved'],['plan_reviewed','Plan reviewed'],['registration_completed','Profile created'],['plan_saved','Plan saved'],['question_saved','Question saved'],['demo_funding_requested','Funding requested']];
-  openModal(`<span class="j-eyebrow">LOCAL WORKSPACE DIAGNOSTICS</span><h2>Account activity on this device</h2><p>Unique browser sessions per action. This local log is not advertising analytics or a count of clients. Steps may happen in any order.</p><div class="d-diagnostics">${stages.map(([name,label])=>`<div><span>${label}</span><strong>${new Set(events.filter(e=>e.name===name).map(e=>e.visit)).size}</strong></div>`).join('')}</div><div class="modal-note">Last ${events.length} events retained (maximum 400). No names, email addresses, balances or message text are included. No analytics or advertising service receives these events.</div><button class="button primary" data-action="decision-export-events">Download local event log</button>`);
+  openModal(`<span class="j-eyebrow">ACCOUNT ACTIVITY</span><h2>Account journey events</h2><p>Unique workspace visits per action. This log is not advertising analytics or a count of clients. Steps may happen in any order.</p><div class="d-diagnostics">${stages.map(([name,label])=>`<div><span>${label}</span><strong>${new Set(events.filter(e=>e.name===name).map(e=>e.visit)).size}</strong></div>`).join('')}</div><div class="modal-note">Last ${events.length} events retained (maximum 400). No names, email addresses, balances or message text are included. No analytics or advertising service receives these events.</div><button class="button primary" data-action="decision-export-events">Download event log</button>`);
 }
 actions['decision-diagnostics']=decisionDiagnostics;
 actions['decision-export-events']=()=>{
@@ -109,7 +109,7 @@ actions['decision-export-events']=()=>{
   const url=URL.createObjectURL(new Blob([data],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='ecogrid-account-events.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 const decisionAdminBefore=renderAdmin;
-renderAdmin=function(){decisionAdminBefore();if(workspaceRole==='admin'&&adminTab==='overview')$('#admin-view').insertAdjacentHTML('beforeend','<section class="panel d-staff-diagnostics"><div><h2>Local account diagnostics</h2><p>Inspect account activity recorded in this browser. Export an event log without contact or financial details.</p></div><button class="button secondary" data-action="decision-diagnostics">View local events →</button></section>');};
+renderAdmin=function(){decisionAdminBefore();if(workspaceRole==='admin'&&adminTab==='overview')$('#admin-view').insertAdjacentHTML('beforeend','<section class="panel d-staff-diagnostics"><div><h2>Account activity</h2><p>Inspect journey events without contact or financial details.</p></div><button class="button secondary" data-action="decision-diagnostics">View events →</button></section>');};
 
 const decisionInitBefore=init;
 init=async function(){await decisionInitBefore();

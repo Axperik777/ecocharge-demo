@@ -5,6 +5,13 @@
   const root = new URL('./', document.baseURI);
   const params = new URL(location.href).searchParams;
   const page = document.documentElement.dataset.page;
+  if(page==='plans'){
+    const target=new URL('participate/charge/',root);
+    target.search=location.search;
+    target.hash=location.hash;
+    location.replace(target.href);
+    return;
+  }
   const escape = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const arrow = '<svg class="ec-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>';
   const groups = EcoFinance.tiers;
@@ -14,7 +21,7 @@
     for(const key of ['view','tab','preview'])clean.searchParams.delete(key);
     history.replaceState(null,'',clean);
   }
-  // Keep first-touch campaign context locally; this workspace sends no analytics events.
+  // Keep first-touch campaign context for the lead and the sanitized GTM-ready funnel event bridge. Tag IDs are configured only at deployment.
   try {
     const context = {};
     for (const key of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid']) if(params.has(key)) context[key]=params.get(key).slice(0,300);
@@ -50,7 +57,7 @@
   }
   const preview = $('#preview-panel');
   if(preview){
-    const views={plan:preview.innerHTML,stations:`<div class="ec-preview-list"><div><strong>Market references, clear sources.</strong><small>Photos, addresses and third-party public station records.</small></div></div><div class="ec-preview-bottom"><span>Review market context in the workspace</span><a class="ec-text-link" href="stations/">Browse references ${arrow}</a></div>`,documents:`<div class="ec-preview-list"><div><strong>Your documents, in one place.</strong><small>Draft status and the evidence awaiting publication.</small></div></div><div class="ec-preview-bottom"><span>Read before making a decision</span><a class="ec-text-link" href="resources/">Open resources ${arrow}</a></div>`};
+    const views={plan:preview.innerHTML,stations:`<div class="ec-preview-list"><div><strong>Explore station locations.</strong><small>Photos, addresses and charging details.</small></div></div><div class="ec-preview-bottom"><span>Review locations in the workspace</span><a class="ec-text-link" href="stations/">Browse stations ${arrow}</a></div>`,documents:`<div class="ec-preview-list"><div><strong>Your documents, in one place.</strong><small>Project terms, evidence and signed files.</small></div></div><div class="ec-preview-bottom"><span>Read before making a decision</span><a class="ec-text-link" href="resources/">Open resources ${arrow}</a></div>`};
     wireTabs('[data-preview]',b=>{preview.innerHTML=views[b.dataset.preview];preview.setAttribute('aria-labelledby',b.id);});
   }
 
@@ -110,48 +117,5 @@
   function showPrivacy(){if(page==='resources'&&location.hash==='#privacy'){const detail=$('#privacy');if(detail){detail.open=true;requestAnimationFrame(()=>detail.scrollIntoView());}}}
   showPrivacy();window.addEventListener('hashchange',showPrivacy);
 
-  const form=$('#registration-form');
-  if(form){
-    const next=$('#register-next');
-    if(['dashboard','tariffs','map','documents','assets'].includes(params.get('next')))next.value=params.get('next');
-    const tier=groups.find(t=>t.id===params.get('tier'));
-    const intent=tier?{tierId:tier.id}:null;
-    if(intent){$('#registration-plan').hidden=false;$('#registration-plan').textContent=`Your selection: ${tier.name} · ${tier.count} reference ${tier.count===1?'station':'stations'}. Choose the amount and see the calculation inside your account.`;}
-    try{
-      const saved=JSON.parse(localStorage.getItem('ecocharge-demo-v1'));
-      if(saved?.client){$('#register-name').value=saved.client.name==='Lox'?'':saved.client.name;$('#register-email').value=saved.client.email==='lox@example.com'?'':saved.client.email;}
-      if(saved?.registration){form.insertAdjacentHTML('beforebegin','<div class="ec-continue">You already have a profile on this device. Your balance, plan and messages will be kept.<a class="ec-button ec-button-outline" href="login/">Continue with local sign-in '+arrow+'</a></div>');}
-    }catch{}
-    form.addEventListener('submit',e=>{
-      e.preventDefault();const name=$('#register-name').value.trim(),email=$('#register-email').value.trim();
-      if(name.length<2){$('#registration-error').textContent='Enter a display name with at least two characters.';$('#register-name').focus();return;}
-      if(!form.reportValidity())return;
-      try{
-        const raw=localStorage.getItem('ecocharge-demo-v1');let demo=raw?JSON.parse(raw):null;
-        if(demo&&(!Number.isFinite(demo.balance)||!['portfolio','requests','tickets','activity'].every(k=>Array.isArray(demo[k]))))throw Error('saved-data');
-        if(!demo)demo={balance:0,portfolio:[],requests:[],tickets:[],activity:[]};
-        demo.client={...demo.client,name,email:email||'local@example.com',status:demo.client?.status||'Active',note:demo.client?.note||''};
-        demo.registration={at:demo.registration?.at||new Date().toISOString(),mode:'local-device'};
-        const attribution=sessionStorage.getItem('ecocharge-attribution');if(attribution&&!demo.attribution)demo.attribution=JSON.parse(attribution);
-        let pending=null;
-        try{pending=JSON.parse(sessionStorage.getItem('ecocharge-plan-review')||'null');}catch{}
-        const group=groups.find(g=>g.id===pending?.tierId);
-        if(group&&Number.isFinite(pending.capital)&&pending.capital>=250&&pending.capital<=1e7&&Math.abs(pending.capital*100-Math.round(pending.capital*100))<.00001&&Array.isArray(pending.stationIds)&&new Set(pending.stationIds).size===group.count&&pending.stationIds.every(Number.isInteger)){
-          const rate=group.rate;
-          demo.planDraft={tierId:group.id,name:group.name,capital:pending.capital,stationIds:pending.stationIds.slice(),rate,period:'week',appliedAt:new Date().toISOString()};
-          next.value='assets';
-        }
-        sessionStorage.setItem('ecocharge-entry:client',JSON.stringify({role:'client',user:'lox',at:Date.now()}));
-        if(intent)sessionStorage.setItem('ecocharge-explore',JSON.stringify(intent));
-        localStorage.setItem('ecocharge-demo-v1',JSON.stringify(demo));
-        sessionStorage.removeItem('ecocharge-plan-review');
-        sessionStorage.removeItem('ecocharge-working-plan');
-        window.EcoChargeFunnel?.track('registration_completed',{page:'register'});
-        if(pending&&demo.planDraft)window.EcoChargeFunnel?.track('plan_saved',{tier:demo.planDraft.tierId});
-        form.querySelector('[type=submit]').disabled=true;
-        location.assign(window.EcoPlatform.url('account','client/?tab='+next.value));
-      }catch(error){$('#registration-error').textContent=error.message==='saved-data'?'Existing account data could not be read. Use client sign-in to review it before creating a profile.':'Browser storage is unavailable. Allow site storage, then try again. No account was created on a server.';}
-    });
-  }
   window.EcoChargePublic={openDialog};
 })();

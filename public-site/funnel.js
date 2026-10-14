@@ -36,7 +36,7 @@
         const box=document.createElement('div');box.className='f-registration-selection';
         const title=document.createElement('strong');title.textContent='Your example is ready to save';
         const detail=document.createElement('div');detail.textContent=`${pending.stationIds.length} ${pending.stationIds.length===1?'reference station':'reference stations'} · ${new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(pending.capital)}`;
-        const note=document.createElement('p');note.textContent='Your selection stays with you. This creates a local profile, not an investment or a server account.';
+        const note=document.createElement('p');note.textContent='Your selection is saved to your account. Participation begins only after project review and written documents.';
         box.append(title,detail,note);$('#registration-form').before(box);
         $('.ec-registration-card h2').textContent='Save your plan';
         $('#registration-form [type=submit]').firstChild.textContent='Save plan & open my account ';

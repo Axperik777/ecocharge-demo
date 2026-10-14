@@ -134,13 +134,22 @@ html[data-app=website] .project-system-link>.ec-text-link{grid-column:2;justify-
 /* EC-131: the first two screens follow one decision sequence on every project. */
 html[data-app=website] .project-decision{padding-block:clamp(38px,5vw,64px);border-block:1px solid var(--line,#d8e4de);scroll-margin-top:88px}
 html[data-app=website] .project-decision>ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0;padding:0;list-style:none}
-html[data-app=website] .project-decision.project-decision-three>ol{grid-template-columns:repeat(3,minmax(0,1fr))}
 html[data-app=website] .project-decision li{min-width:0;padding:20px;border:1px solid var(--line,#d8e4de);border-radius:var(--ec-radius-card,18px);background:#fff}
-html[data-app=website] .project-decision li[data-decision-step=risk]{background:#fffaf0;border-color:#e7d8ad}
+html[data-app=website] .project-decision li[data-decision-step=proof]{background:#f7faf8;border-color:#cadbd2}
 html[data-app=website] .project-decision li[data-decision-step=next]{background:var(--pale,#edf7f2);border-color:#bdd7ca}
 html[data-app=website] .project-decision li>span{display:block;margin-bottom:22px;color:var(--teal,#006a4d);font-size:11px;font-weight:800;letter-spacing:.1em}
 html[data-app=website] .project-decision h3{margin:0 0 10px;font-size:18px;line-height:1.35;letter-spacing:-.02em}
 html[data-app=website] .project-decision p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.62}
+html[data-app=website] .project-proof-links{display:grid;gap:2px;margin-top:14px}
+html[data-app=website] .project-proof-links .ec-text-link,html[data-app=website] .project-decision-cta{justify-content:space-between;min-height:44px;font-size:13px;line-height:1.45}
+html[data-app=website] .project-decision-cta{margin-top:14px}
+html[data-app=website] .project-risk-line{display:grid;grid-template-columns:minmax(180px,.55fr) minmax(0,1fr) auto;align-items:center;gap:18px 28px;padding-block:22px;border-bottom:1px solid var(--line,#d8e4de)}
+html[data-app=website] .project-risk-line>strong{font-size:15px;line-height:1.45}
+html[data-app=website] .project-risk-line>p{margin:0;color:var(--muted,#53675e);font-size:14px;line-height:1.65}
+html[data-app=website] .project-risk-line>.ec-text-link{min-height:44px;white-space:nowrap}
+html[data-app=website] .project-form-proof{margin-top:24px;padding-top:20px;border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website] .project-form-proof>strong{display:block;max-width:38ch;font-size:15px;line-height:1.5}
+html[data-app=website] .project-form-proof .project-proof-links{max-width:420px;margin-top:10px}
 html[data-app=website] .charge-example{display:grid;grid-template-columns:minmax(220px,.65fr) minmax(0,1.35fr);gap:24px 38px;margin-bottom:16px;padding:26px;border:1px solid #b9d6c8;border-radius:var(--ec-radius-card,18px);background:var(--pale,#edf7f2)}
 html[data-app=website] .charge-example .ec-kicker{margin:0 0 10px;color:var(--teal,#006a4d)}
 html[data-app=website] .charge-example h3{margin:0;font-size:clamp(21px,2.2vw,29px);line-height:1.3;letter-spacing:-.03em}
@@ -151,12 +160,12 @@ html[data-app=website] .charge-example dd{margin:0;font-size:15px;line-height:1.
 html[data-app=website] .charge-example>p{grid-column:1/-1;margin:0;padding-top:18px;border-top:1px solid #c7dbd1;color:var(--muted,#53675e);font-size:13px;line-height:1.65}
 @media(max-width:900px){
  html[data-app=website] .project-decision>ol{grid-template-columns:repeat(2,minmax(0,1fr))}
- html[data-app=website] .project-decision.project-decision-three>ol{grid-template-columns:repeat(3,minmax(0,1fr))}
+ html[data-app=website] .project-risk-line{grid-template-columns:1fr}
+ html[data-app=website] .project-risk-line>.ec-text-link{white-space:normal}
 }
 @media(max-width:680px){
  html[data-app=website] .project-decision{padding-block:38px}
  html[data-app=website] .project-decision>ol{grid-template-columns:1fr}
- html[data-app=website] .project-decision.project-decision-three>ol{grid-template-columns:1fr}
  html[data-app=website] .project-decision li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:0 12px;padding:17px}
  html[data-app=website] .project-decision li>span{grid-row:1/3;margin:3px 0 0}
  html[data-app=website] .project-decision h3{font-size:17px}

@@ -39,7 +39,8 @@ function verify(root){
  assert.match(currentUi,/Review 4-day obligation/);assert.match(currentUi,/Company payable · not withdrawable/);
  assert.match(currentUi,/data-expansion-stage="open"/);
  assert.match(currentUi,/EcoGrid Solar/);assert.match(currentUi,/EcoGrid Compute/);
- assert.match(currentUi,/GPU capacity for business workloads|GPU-мощность для бизнес-задач/,'Client preview must explain the active Compute route');
+ assert.match(currentUi,/Compute infrastructure participation|Участие в вычислительной инфраструктуре/,'Client preview must explain the active Compute route');
+ assert.doesNotMatch(currentUi,/GPU capacity for business workloads|GPU-мощность для бизнес-задач/,'Client preview must not revive the retired capacity route');
  assert.match(currentUi,/compute:'equipment-compute'/,'Client preview must route Compute separately');
  assert.doesNotMatch(currentUi,/data-eco-route="equipment-"\s*\+\s*"retired"/,'Client preview must not expose a retired route');
  assert.doesNotMatch(currentUi,/Not active yet · future company release|future-release/);

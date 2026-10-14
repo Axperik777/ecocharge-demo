@@ -11,6 +11,7 @@ const files=walk(root).filter(f=>!f.startsWith(previewRoot+path.sep)&&!f.startsW
 const websiteBase='https://axperik777.github.io/ecocharge-demo/';
 const publishedPath=new URL(websiteBase).pathname.replace(/\/?$/,'/');
 const legacyAliases=Object.freeze({
+ plans:'participate/charge',
  'guides/why-ecogrid-rents-computing-cells':'guides/why-ai-data-centers-need-more-than-chips',
  'guides/digital-assets-need-real-infrastructure':'guides/ai-needs-physical-infrastructure'
 });
@@ -53,7 +54,7 @@ for(const file of files){
    if(legacyAliases[route]){
     assert.match(text,/<meta name="robots" content="noindex,follow">/,'Legacy alias must be noindex,follow: '+rel);
     assert.doesNotMatch(text,/data-lead-form/,'Legacy alias must not expose an active lead form: '+rel);
-    assert(text.includes(legacyAliases[route]+'/'),'Legacy alias must send visitors to Compute: '+rel);
+    assert(text.includes(legacyAliases[route]+'/'),'Legacy alias must send visitors to its current route: '+rel);
    }else{
     assert.match(text,/<meta name="robots" content="index,follow,max-image-preview:large">/,'Public page is not indexable: '+rel);
     assert.doesNotMatch(text,/noindex|nofollow/i,'Public page still blocks search: '+rel);
@@ -80,7 +81,7 @@ for(const file of files){
     }
    }
    assert(!/<section\b[^>]*class="[^"]*\b(?:v-workspace-shell|f-study-finish)\b/.test(text),'Orphaned account preview section: '+rel);
-   const documentBase=new URL(text.match(/<base href="([^"]+)"/)?.[1]||canonical,canonical);
+    const pageUrl=new URL((russian?'ru/':'')+(route?route+'/':''),websiteBase),documentBase=new URL(text.match(/<base href="([^"]+)"/)?.[1]||pageUrl.href,pageUrl.href);
    for(const match of text.matchAll(/(?:href|src)="([^"#]+)"/g)){
     const ref=match[1].replaceAll('&amp;','&');
     if(/^(?:data:|mailto:|tel:)/.test(ref)||/^(?:\.\.\/)+$/.test(ref))continue;
@@ -125,10 +126,8 @@ for(const route of ['charge','solar','compute']){
  assert.match(page,new RegExp('name="journeyTopic" value="'+route+'"'),'Project request must preserve its topic: '+route);
 }
 const compute=fs.readFileSync(path.join(root,'participate/compute/index.html'),'utf8'),computeOverview=fs.readFileSync(path.join(root,'compute/index.html'),'utf8'),computeText=visibleText(compute)+' '+visibleText(computeOverview);
-assert.match(compute,/name="journeyPurpose"/,'Compute must expose a project-specific intent selector');
-assert.match(compute,/<option value="capacity">[^<]+<\/option>/,'Compute must expose the GPU-capacity intent');
-assert.match(compute,/<option value="participation">[^<]+<\/option>/,'Compute must expose the infrastructure-participation intent');
-assert.match(compute,/name="computeRequestedCapacity"/,'Compute capacity request must collect requested capacity');
+assert.match(compute,/name="journeyPurpose"[^>]*value="participation"/,'Compute must keep participation as its fixed project intent');
+assert.doesNotMatch(compute,/<option value="capacity">|name="computeRequestedCapacity"|purpose=capacity/,'Compute must not expose the retired capacity route');
 assert.doesNotMatch(computeText,/13\s*\/\s*14\s*\/\s*15\s*\/\s*16|42%|Every 4 days|Каждые 4 дня|\+1 percentage point|\+1 процентн/i,'Compute must not inherit Charge economics');
 assert.match(computeText,/Solar and storage[^.]{0,240}do not mean continuous operation from sunlight alone/i,'Compute must explain that shared infrastructure is not a solar-only 24/7 claim');
 assert.match(plans,/participate\/charge\//,'Public plans must retain the Charge project link');

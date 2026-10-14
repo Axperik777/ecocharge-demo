@@ -4,10 +4,10 @@
  const keys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','landing_id','landing_host','lead_route','aff','partner_id','sub_id','msclkid','ttclid','ref'];
  const bases={website:config.websiteBase||base.href,account:config.accountBase||base.href,crm:config.crmBase||base.href};
  const params=new URL(location).searchParams;
- let attribution={};try{const saved=JSON.parse(sessionStorage.getItem('ecocharge-attribution')||'{}');if(saved&&typeof saved==='object')for(const key of keys)if(typeof saved[key]==='string')attribution[key]=saved[key].slice(0,300);}catch{}
- for(const key of keys)if(!attribution[key]&&params.has(key))attribution[key]=params.get(key).slice(0,300);
- if(app==='website'){attribution.landing_id ||= config.landingId||'main';attribution.landing_host ||= location.host;attribution.lead_route ||= 'website';}
- try{if(Object.keys(attribution).length)sessionStorage.setItem('ecocharge-attribution',JSON.stringify(attribution));}catch{}
+ let attribution={},firstTouchSealed=false;try{const raw=sessionStorage.getItem('ecocharge-attribution');firstTouchSealed=raw!==null&&raw!==undefined;const saved=JSON.parse(raw||'{}');if(saved&&typeof saved==='object')for(const key of keys)if(typeof saved[key]==='string')attribution[key]=saved[key].slice(0,300);}catch{}
+ if(!firstTouchSealed)for(const key of keys){const firstKey='first_'+key;if(params.has(firstKey))attribution[key]=params.get(firstKey).slice(0,300);else if(params.has(key))attribution[key]=params.get(key).slice(0,300);}
+ if(!firstTouchSealed&&app==='website'){attribution.landing_id ||= config.landingId||'main';attribution.landing_host ||= location.host;attribution.lead_route ||= 'website';}
+ try{if(!firstTouchSealed)sessionStorage.setItem('ecocharge-attribution',JSON.stringify(attribution));}catch{}
  let currentAttribution={...attribution};try{const saved=JSON.parse(sessionStorage.getItem('ecogrid-last-attribution')||'{}');for(const key of keys)if(typeof saved[key]==='string')currentAttribution[key]=saved[key].slice(0,300);}catch{}
  const campaignKeys=['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid','aff','partner_id','sub_id','msclkid','ttclid','ref'];if(campaignKeys.some(key=>params.has(key))){for(const key of campaignKeys)delete currentAttribution[key];for(const key of keys)if(params.has(key))currentAttribution[key]=params.get(key).slice(0,300);}
  try{sessionStorage.setItem('ecogrid-last-attribution',JSON.stringify(currentAttribution));}catch{}
@@ -18,7 +18,7 @@
   let language=params.get('lang');try{language=window.EcoLocale?.language||language||localStorage.getItem('ecocharge-locale');}catch{}
   if(window.ECO_PLATFORM_CONFIG?.localeMode==='launch'&&!(surface==='crm'&&window.ECO_STAFF_ROLE==='admin'))language='en';
   if(['en','ru'].includes(language))next.searchParams.set('lang',language);
-  if(surface==='account')for(const key of keys)if(currentAttribution[key]&&!next.searchParams.has(key))next.searchParams.set(key,currentAttribution[key]);
+  if(surface==='account')for(const key of keys){if(attribution[key]&&!next.searchParams.has('first_'+key))next.searchParams.set('first_'+key,attribution[key]);if(currentAttribution[key]&&!next.searchParams.has(key))next.searchParams.set(key,currentAttribution[key]);}
   return next.href;
  }
  function rewrite(link){
