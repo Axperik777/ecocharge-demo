@@ -3,7 +3,7 @@ html[data-app=website][data-page=home][data-landing=main] .ec-header{position:ab
 html[data-app=website][data-page=home][data-landing=main] .ec-header-inner{max-width:none;width:100%;min-height:56px;padding:0 14px}
 html[data-app=website][data-page=home][data-landing=main] .ec-header .charge-brand{--brand-ink:#fff;--brand-accent:#cfee9f;--brand-caption:#fff}
 html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-nav a,html[data-app=website][data-page=home][data-landing=main] .ec-header .eco-install-link{color:#fff}
-html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-sign-in{color:#fff;border-color:#ffffff70;background:#0b251db8;backdrop-filter:blur(12px)}
+html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-sign-in{color:#fff;border-color:#ffffff70;background:#30453e;-webkit-backdrop-filter:none;backdrop-filter:none}
 html[data-app=website][data-page=home][data-landing=main] .ec-header .ec-menu-trigger{width:46px;height:46px;min-height:46px;border:1px solid #ffffff70;border-radius:50%;background:#ffffffed;color:#00503d}
 
 html[data-app=website][data-page=home][data-landing=main] .grid-hero{position:relative;isolation:isolate;display:flex;align-items:flex-end;width:calc(100% - 24px);max-width:none;min-height:max(720px,calc(100svh - 24px));margin:12px;padding:156px clamp(42px,6vw,96px) 74px;border:1px solid #ffffff3d;border-radius:28px;overflow:hidden;background:#12382b;color:#fff}
