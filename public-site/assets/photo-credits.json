@@ -6,7 +6,7 @@
         "assets/ecogrid-company-campus-1600.webp",
         "assets/ecogrid-company-campus-720.webp"
       ],
-      "kind": "AI-generated concept visualization",
+      "kind": "Concept visualization",
       "usage": "Decorative homepage background",
       "disclosure": "The image presents an integrated energy and technology campus as a visual concept. It is not a photograph of an operating EcoGrid site."
     },
@@ -15,7 +15,7 @@
         "assets/compute-datacenter-campus.webp",
         "assets/compute-gpu-server-hall.webp"
       ],
-      "kind": "AI-generated concept visualization",
+      "kind": "Concept visualization",
       "usage": "EcoGrid Compute project illustrations",
       "disclosure": "The images visualize data-center and GPU infrastructure concepts. They do not document operating EcoGrid facilities or available inventory."
     },
@@ -37,9 +37,9 @@
         "assets/story/station-800.webp",
         "assets/story/station-1600.webp"
       ],
-      "kind": "AI-generated story illustrations",
+      "kind": "Story visualizations",
       "usage": "EcoGrid company-story visuals",
-      "disclosure": "These images illustrate the narrative supplied by the project team. They are not documentary photographs or evidence of the founder's biography, company history, facilities or ownership."
+      "disclosure": "These concept visualizations support the narrative. They are not documentary photographs or evidence of the founder's biography, company history, facilities or ownership."
     }
   ],
   "photos": [
@@ -213,7 +213,7 @@
       "license": "CC BY 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "caption": "Electrify America charging equipment at Walmart 2539 (Spokane Valley, WA), 15727 E Broadway Ave. Photo of this location.",
-      "modifications": "AI-assisted retouch removed the overlaid graphic from the pavement area. Resized and converted to WebP. Original photographer and CC BY 4.0 attribution retained.",
+      "modifications": "The overlaid graphic was removed from the pavement area. Resized and converted to WebP. Original photographer and CC BY 4.0 attribution retained.",
       "imageUrl": "https://media.openchargemap.io/images/US/OCM295552/OCM-295552.orig.2024050912373256.jpg",
       "photographer": "AndyK",
       "dateUploaded": "2024-05-09",
