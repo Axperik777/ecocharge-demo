@@ -75,7 +75,7 @@
  #modal .payment-checkout .payment-crypto{grid-template-columns:1fr;gap:10px;margin:10px 0 4px}
  #modal .payment-checkout .payment-qr-wrap{width:124px;margin:0 auto}
  #modal .payment-checkout #payment-qr{min-height:124px}
- #modal .payment-checkout .payment-qr-wrap>small{white-space:nowrap;margin-left:-40px;margin-right:-40px}
+ #modal .payment-checkout .payment-qr-wrap>small{white-space:normal;margin:5px 0 0;overflow-wrap:anywhere}
  #modal .payment-checkout .payment-terms>summary{min-height:36px}
  #modal .payment-checkout .payment-links{gap:8px}
 }
