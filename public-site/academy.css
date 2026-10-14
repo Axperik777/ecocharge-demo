@@ -43,7 +43,7 @@ html[data-app=website] .academy-topic-links a{display:flex;align-items:center;mi
 html[data-app=website] .academy-topic-links a:first-child{padding-top:0}
 html[data-app=website] .academy-topic-links a:hover{color:var(--teal)}
 html[data-app=website] .academy-solar-note{margin:18px 0 0;color:var(--muted);font-size:13px;line-height:1.6}
-html[data-app=website] .academy-solar-note a{color:var(--ink);font-weight:700}
+html[data-app=website] .academy-solar-note a{display:inline-flex;align-items:center;min-height:44px;padding-block:6px;color:var(--ink);font-weight:700}
 
 @media(max-width:800px){.academy-hero{grid-template-columns:1fr;padding-block:24px 36px;gap:24px}.academy-brand{font-size:22px}html[data-app=website] .academy-promo{grid-template-columns:1fr;gap:22px}html[data-app=website] .academy-direct,html[data-app=website] .academy-route-grid,html[data-app=website] .academy-route-next{grid-template-columns:1fr}html[data-app=website] .academy-direct a{min-height:116px}}
 @media(max-width:420px){html[data-app=website] .club-community-symbol{width:64px;height:64px;border-radius:18px}html[data-app=website] .club-community-symbol svg{width:40px;height:40px}}

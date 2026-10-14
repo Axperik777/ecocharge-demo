@@ -98,6 +98,7 @@ html[data-app=website] .eco-environment .eco-value-pair h3{font-size:23px;line-h
 html[data-app=website] .eco-environment .eco-value-pair p,
 html[data-app=website] .eco-environment .eco-environment-grid p,
 html[data-app=website] .eco-environment details p{font-size:14px;line-height:1.7}
+html[data-app=website] .eco-environment details a{display:inline-flex;min-height:44px;align-items:center}
 html[data-app=website] .eco-environment .eco-environment-grid h3{font-size:21px;line-height:1.25}
 
 /* Eco is a transparent navigation helper: each row names the task and the
