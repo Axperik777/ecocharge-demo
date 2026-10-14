@@ -84,10 +84,11 @@ html[data-app=website] .compute-brief{display:grid;grid-template-columns:repeat(
 html[data-app=website] .compute-brief legend{grid-column:1/-1;padding:0 4px;color:var(--ink,#102019);font-weight:700}
 html[data-app=website] .compute-brief label{min-width:0;overflow-wrap:anywhere;hyphens:auto}
 html[data-app=website] .compute-brief label:last-child{grid-column:1/-1}
-html[data-app=website] .compute-purpose-fields{display:grid;grid-column:1/-1;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+html[data-app=website] .compute-purpose-fields{display:grid;grid-column:1/-1;grid-template-columns:1fr;gap:14px}
 html[data-app=website] .compute-purpose-fields[hidden]{display:none}
 html[data-app=website] .compute-brief .compute-note{grid-column:1/-1}
 html[data-app=website] .compute-brief .compute-shared{grid-column:1/-1}
+html[data-app=website] .compute-brief :is(input,select,textarea){width:100%;min-width:0;max-width:100%;box-sizing:border-box}
 html[data-app=website] .compute-brief textarea{min-height:116px;resize:vertical}
 
 html[data-app=website][data-page="participate/compute"] .compute-participate-hero{align-items:center;padding-top:clamp(34px,5vw,64px)}
@@ -98,7 +99,6 @@ html[data-app=website][data-page="participate/compute"] .compute-hero-actions{di
 html[data-app=website][data-page="participate/compute"] .compute-hero-actions .ec-button{min-height:56px;justify-content:space-between;white-space:normal;line-height:1.35}
 html[data-app=website][data-page="participate/compute"] .compute-hero-actions .ec-button-outline{background:transparent;color:var(--teal,#006a4d)}
 html[data-app=website][data-page="participate/compute"] .compute-hero-actions .ec-text-link{grid-column:1/-1}
-html[data-app=website][data-page="participate/compute"] .compute-hero-boundary{max-width:66ch;margin:18px 0 0;padding-top:16px;border-top:1px solid var(--line,#d8e4de);color:var(--muted,#53675e);font-size:13px;line-height:1.6}
 html[data-app=website][data-page="participate/compute"] .participate-project-photo img{display:block;width:100%;height:auto!important;aspect-ratio:3/2;object-fit:cover}
 html[data-app=website][data-page="participate/compute"] .compute-decision ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 html[data-app=website][data-page="participate/compute"] .compute-decision ol>li{align-items:start}
