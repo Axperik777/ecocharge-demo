@@ -223,6 +223,8 @@ html[data-eco-theme="dark"] .eco-shell .topbar .charge-shell{fill:var(--eg-text)
 .eco-shell .eg-summary-glyph{width:32px;height:32px;right:14px;top:14px}
 .eco-shell .eg-summary-glyph .eg-art{width:23px;height:23px}
 .eco-shell .eg-dashboard-grid{grid-template-areas:"projects event" "operations support"}
+.eco-shell .eg-dashboard-grid.is-learning{margin-top:16px}
+@media(min-width:1201px){.eco-shell .eg-dashboard-grid.is-learning{grid-template-areas:"projects support" "operations support"}}
 .eco-shell .eg-project-list{margin:0}
 .eco-shell .eg-next-event{grid-template-columns:36px minmax(0,1fr);gap:10px;padding:18px}
 .eco-shell .eg-next-event>.eg-card-icon{width:36px;height:36px;border-radius:10px}
@@ -304,7 +306,7 @@ html[data-eco-theme="dark"] .eco-shell .eg-art .lightline{stroke:#d2e4d9}
  .eco-shell .eg-summary-card>strong{font-size:23px;margin:9px 0 3px;letter-spacing:-.5px}
  .eco-shell .eg-summary-card>small{font-size:12px;line-height:1.45}
  .eco-shell .eg-summary-glyph{display:none}
- .eco-shell .eg-dashboard-grid{grid-template-areas:"projects" "event" "operations" "support";gap:12px}
+ .eco-shell .eg-dashboard-grid{grid-template-areas:"projects" "event" "operations" "support";gap:12px}.eco-shell .eg-dashboard-grid.is-learning{margin-top:12px}
  .eco-shell .eg-project-copy strong{font-size:14px}
  .eco-shell .eg-project-copy small{font-size:12px}
  .eco-shell .eg-project-amount strong{font-size:14px}
