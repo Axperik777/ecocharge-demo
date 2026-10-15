@@ -62,6 +62,15 @@
   const requestedProject=projectIds.has(j.requestedProject)?j.requestedProject:(['fast','consult'].includes(j.route)?currentProject:null);
   return {entryProject:entryProject||null,currentProject:currentProject||null,requestedProject:requestedProject||null};
  }
+ function activeCompute(record={}){const state=record?.state||record||{},position=state.computeParticipation,capital=Number(position?.capital);return position?.project==='compute'&&position?.route==='participation'&&position?.status==='active'&&Number.isFinite(capital)&&capital>0;}
+ function activeProjectIds(record={}){const state=record?.state||record||{},ids=[];if(state.plan?.status==='active')ids.push('charge');if(activeCompute(record))ids.push('compute');return ids;}
+ function newRequestAfterActivation(record={},project){
+  if(!projectIds.has(project)||projectContext(record).requestedProject!==project)return false;
+  const state=record?.state||record||{},activatedAt=project==='compute'?state.computeParticipation?.activatedAt:project==='charge'?state.plan?.appliedAt:null,activated=Date.parse(activatedAt);
+  if(!Number.isFinite(activated))return false;
+  const j=entry(record)||{},history=Array.isArray(j.history)?j.history:[];
+  return history.some(item=>item?.route==='fast'&&item.topic===project&&(project!=='compute'||item.purpose==='participation')&&Number.isFinite(Date.parse(item.at))&&Date.parse(item.at)>activated);
+ }
  function acquisition(record={}){
   const state=record.state||record,content=record.context?.content||state.content||{},j=entry(record)||{};
   const entryArticle=typeof content.entryId==='string'&&/^[a-z0-9][a-z0-9-]{0,79}$/.test(content.entryId)?content.entryId:'';
@@ -73,9 +82,10 @@
  }
  function communityEntry(state={}){const j=entry(state);return j?.route==='nurture'&&['club','academy','ecocoin'].includes(j.topic)&&!state.plan&&!state.planDraft&&!state.requests?.some(r=>r.type==='topup');}
  function academyStage(state={}){
-  if(state.plan?.status==='active'||state[legacyPositionsKey]?.some(p=>p.status!=='closed'&&p.capital>0))return 'active';
+  if(activeProjectIds(state).length||state[legacyPositionsKey]?.some(p=>p.status!=='closed'&&p.capital>0))return 'active';
   const context=projectContext(state),project=context.requestedProject||(state.plan||state.planDraft?'charge':null),presentationProject=projectIds.has(state.academy?.presentationProject)?state.academy.presentationProject:null;
-  if((state.academy?.presentationComplete===true&&project&&(!presentationProject||presentationProject===project))||state.planDraft?.savedBy==='manager')return 'proposal';
+  const exactPresentation=state.academy?.presentationComplete===true&&project&&presentationProject===project,managerChargeDraft=state.planDraft?.savedBy==='manager'&&project==='charge';
+  if(exactPresentation||managerChargeDraft)return 'proposal';
   return 'new';
  }
  // Presentation controls the first funding prompt, not access to existing money.
@@ -88,5 +98,5 @@
   const groups=new Map();for(const r of rows){const j=r.journey||{},key=dimension==='acquisitionPath'?acquisition(r).path:dimension==='topic'?r.requestedProject||j.topic||'unknown':dimension==='partner'?(j.firstSource?.partner_id||j.firstSource?.aff||r.source?.partner_id||r.source?.aff||'direct'):j.entryRoute||'legacy';let g=groups.get(key);if(!g){g={key,contacts:0,consultations:0,qualified:0,accounts:0,paid:0,ageDays:0,daysToPaid:0};groups.set(key,g);}g.contacts++;g.consultations+=!!j.consultationAt||(!j.entryRoute&&r.connected)?1:0;g.qualified+=r.qualified?1:0;g.accounts+=r.account?1:0;const started=Date.parse(j.enteredAt||r.created);if(Number.isFinite(started))g.ageDays+=Math.max(0,at-started)/86400000;if(r.paidAt&&Number.isFinite(Date.parse(r.paidAt))){g.paid++;if(Number.isFinite(started))g.daysToPaid+=Math.max(0,Date.parse(r.paidAt)-started)/86400000;}}
   return [...groups.values()].map(g=>({...g,averageAgeDays:g.contacts?g.ageDays/g.contacts:null,averageDaysToPaid:g.paid?g.daysToPaid/g.paid:null,paidRate:g.contacts?g.paid/g.contacts:0}));
  }
- return {needsAcademy,clientPreferenceInput,academyStage,communityEntry,requestConversation,projectContext,archivedComputeCapacity,version,topics,projectTopics,purposes,projectPurposes,routes,acquisitionPaths,keys,attribution,normalize,merge,entry,acquisition,exploring,label,cohorts,projectIds,readableProjectIds};
+ return {needsAcademy,clientPreferenceInput,academyStage,communityEntry,requestConversation,projectContext,activeCompute,activeProjectIds,newRequestAfterActivation,archivedComputeCapacity,version,topics,projectTopics,purposes,projectPurposes,routes,acquisitionPaths,keys,attribution,normalize,merge,entry,acquisition,exploring,label,cohorts,projectIds,readableProjectIds};
 });

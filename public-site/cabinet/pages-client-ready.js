@@ -7,6 +7,6 @@
  actions.signout=()=>location.assign(window.ECO_PLATFORM_CONFIG.websiteBase+'?lang='+(window.EcoLocale?.language||'en'));
  actions.reset=()=>location.reload();
  document.addEventListener('click',event=>{const target=event.target.closest('[data-open-live-chat],[data-action="chat"],[data-action="message"],[data-action="call"],[data-role="admin"]');if(target){event.preventDefault();event.stopImmediatePropagation();notice();}},true);
- document.addEventListener('submit',event=>{event.preventDefault();event.stopImmediatePropagation();notice();},true);
+document.addEventListener('submit',event=>{if(event.target.matches?.('[data-stellar-readonly-form], [data-stellar-quote-form]'))return;event.preventDefault();event.stopImmediatePropagation();notice();},true);
  document.addEventListener('ecocharge:locale',copy);copy();
 })();

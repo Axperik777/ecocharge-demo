@@ -46,7 +46,19 @@
     "accountBase": "",
     "crmBase": "",
     "apiBase": "",
-    "landingId": "main"
+    "landingId": "main",
+    "stellar": {
+      "enabled": false,
+      "assetKind": "",
+      "network": "PUBLIC",
+      "horizonUrl": "https://horizon.stellar.org/",
+      "assetCode": "",
+      "issuer": "",
+      "quoteAssetCode": "USDC",
+      "quoteAssetIssuer": "",
+      "slippageBps": 100,
+      "quoteTtlSeconds": 60
+    }
   },
-  "createdAt": "2026-10-15T07:54:55.768Z"
+  "createdAt": "2026-10-15T09:55:16.534Z"
 }
