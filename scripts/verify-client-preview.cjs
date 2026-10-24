@@ -7,7 +7,7 @@ function verify(root){
  assert.equal(manifest.source,'fresh-isolated-fixture');assert.equal(manifest.apiConnected,false);assert.equal(manifest.authentication,false);assert.equal(manifest.activeOffer,'charge');assert.equal(manifest.chargeModel,'charge-fixed-obligation-v3');assert.equal(manifest.settlementDays,4);assert.equal(manifest.obligationFunding,'fictional-company-reserve');
  const ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'pages-client-data.js'),'utf8'),ctx);
  const fixture=ctx.window.ECO_PAGES_FIXTURE,row=fixture.responses['client/account'],state=row.state;
- assert.equal(state.plan.capital,250);assert.equal(state.plan.rate,13);assert.equal(state.plan.tierId,'single');assert.equal(state.plan.economyModel,'charge-fixed-obligation-v3');assert.equal(state.sessions.length,manifest.completedSettlements);assert.ok(state.sessions.length>=7);
+ assert.equal(state.preferences?.language,'en');assert.equal(state.plan.capital,250);assert.equal(state.plan.rate,13);assert.equal(state.plan.tierId,'single');assert.equal(state.plan.economyModel,'charge-fixed-obligation-v3');assert.equal(state.sessions.length,manifest.completedSettlements);assert.ok(state.sessions.length>=7);
  assert.equal(Math.round(state.balance*100),state.sessions.reduce((sum,s)=>sum+Math.round(s.payout*100),0));
  assert.equal(row.client.email,'');assert.equal(row.client.phone,'');assert.equal(row.client.invite,null);
  const finance=require(path.join(root,'account-finance.js'));
@@ -16,9 +16,15 @@ function verify(root){
  assert.ok(Number.isFinite(nextSettlementEnd)&&nextSettlementEnd>Date.parse(fixture.generatedAt),'Client preview exposes an expired next settlement date');
  const html=fs.readFileSync(path.join(root,'client/index.html'),'utf8');
  const entry=fs.readFileSync(path.join(root,'index.html'),'utf8');
- assert(entry.includes('new URLSearchParams(location.search)'),'Client preview entry must preserve the requested locale');
+ const cfg={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),cfg);assert.equal(cfg.window.ECO_PLATFORM_CONFIG.localeMode,'launch');
+ assert(entry.includes('client/?lang=en'),'Client preview entry must force English');
+ assert.doesNotMatch(entry,/lang=ru|===\s*["']ru["']/,'Client preview entry must not preserve a Russian request');
  assert(entry.includes('assets/ecocharge-mark.svg'),'Client preview entry must declare a local favicon');
- assert(!entry.includes('http-equiv="refresh"'),'Client preview entry must not force the Russian locale');
+ assert(!entry.includes('http-equiv="refresh"'),'Client preview entry must use its English redirect script');
+ assert(!fs.existsSync(path.join(root,'locale-ru.js')),'Client preview must not ship the Russian locale bundle');
+ assert.doesNotMatch(html,/locale-ru\.js|data-language="ru"/,'Client HTML must not expose Russian locale controls or assets');
+ const visible=html.replace(/<!--[\s\S]*?-->/g,' ').replace(/<(?:script|style)\b[^>]*>[\s\S]*?<\/(?:script|style)>/gi,' ').replace(/<[^>]+>/g,' ');
+ assert.doesNotMatch(visible,/[А-Яа-яЁё]/,'Client HTML contains visible Russian copy');
  const profileAt=html.indexOf('src="central/profile-model.js'),ecosystemAt=html.indexOf('src="central/ecosystem.js');
  assert(profileAt>=0&&profileAt<ecosystemAt,'Profile model must load before the account UI');
  const profile=require(path.join(root,'central/profile-model.js'));
@@ -39,7 +45,7 @@ function verify(root){
  assert.match(currentUi,/Review 4-day obligation/);assert.match(currentUi,/Company payable · not withdrawable/);
  assert.match(currentUi,/data-expansion-stage="open"/);
  assert.match(currentUi,/EcoGrid Solar/);assert.match(currentUi,/EcoGrid Compute/);
- assert.match(currentUi,/Compute infrastructure participation|Участие в вычислительной инфраструктуре/,'Client preview must explain the active Compute route');
+ assert.match(currentUi,/Compute infrastructure participation/,'Client preview must explain the active Compute route in English');
  assert.doesNotMatch(currentUi,/GPU capacity for business workloads|GPU-мощность для бизнес-задач/,'Client preview must not revive the retired capacity route');
  assert.match(currentUi,/compute:'equipment-compute'/,'Client preview must route Compute separately');
  assert.doesNotMatch(currentUi,/data-eco-route="equipment-"\s*\+\s*"retired"/,'Client preview must not expose a retired route');

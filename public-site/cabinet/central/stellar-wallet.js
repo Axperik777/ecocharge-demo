@@ -12,7 +12,7 @@
  const isRu=()=>window.EcoLocale?.language==='ru';
  const t=(en,ru)=>isRu()?ru:en;
  const esc=value=>String(value??'').replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
- const textError=error=>String(error?.message||error||t('The wallet did not complete the request.','Кошелёк не завершил запрос.')).slice(0,240);
+ const textError=error=>{const value=String(error?.message||error||'The wallet did not complete the request.').slice(0,240);return /[А-Яа-яЁё]/.test(value)?'The wallet did not complete the request.':value;};
  const normalizeNetwork=value=>{const v=String(value||'').toUpperCase();if(v.includes('TEST'))return 'TESTNET';if(v.includes('PUBLIC')||v.includes('MAIN'))return 'PUBLIC';return '';};
  const networkLabel=value=>value==='PUBLIC'?t('Stellar Public Network','Публичная сеть Stellar'):value==='TESTNET'?t('Stellar Testnet','Тестовая сеть Stellar'):t('Not configured','Не настроена');
  const assetType=code=>code.length<=4?'credit_alphanum4':'credit_alphanum12';

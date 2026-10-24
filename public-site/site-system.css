@@ -31,13 +31,10 @@ html[data-app=website] .ec-header .charge-brand{--brand-ink:#102019;--brand-acce
 html[data-app=website] .ec-header .charge-brand{min-height:var(--ec-control-compact)}
 html[data-app=website] .charge-wordmark{font-weight:700;letter-spacing:-.045em}
 html[data-app=website] .ec-header-actions{gap:12px;align-items:center;margin-left:auto}
-html[data-app=website] .ec-header :is(.ec-button-small,.ec-sign-in,.ec-menu-trigger,.locale-switch button){min-height:var(--ec-control-compact)}
+html[data-app=website] .ec-header :is(.ec-button-small,.ec-sign-in,.ec-menu-trigger){min-height:var(--ec-control-compact)}
 html[data-app=website] .ec-header .ec-sign-in{display:inline-flex;align-items:center;justify-content:center;min-height:var(--ec-control-compact);padding:10px 15px;border:1px solid var(--line);border-radius:var(--ec-radius-control);font-size:14px;font-weight:var(--ec-weight-action);white-space:nowrap;color:var(--ink)}
 html[data-app=website] .ec-header .ec-sign-in:hover{background:var(--pale);color:var(--teal)}
 html[data-app=website] .ec-header .ec-button-small{display:none}
-html[data-app=website] .ec-header .locale-switch{border:1px solid var(--line);background:#f5f8f6;border-radius:10px;padding:3px;display:inline-flex;gap:2px;order:1}
-html[data-app=website] .ec-header .locale-switch button{min-width:var(--ec-control-compact);min-height:var(--ec-control-compact);padding:7px;font-size:var(--ec-text-meta);color:#52685b;border:0;border-radius:7px}
-html[data-app=website] .ec-header .locale-switch button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 4px #123a2414}
 html[data-app=website] .ec-header .ec-menu-trigger{display:inline-flex;align-items:center;justify-content:center;order:2;width:var(--ec-control-compact);height:var(--ec-control-compact);min-height:var(--ec-control-compact);padding:10px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;line-height:0}
 html[data-app=website] .ec-header .ec-menu-trigger svg{display:block;flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 html[data-app=website] .ec-header .ec-nav{display:none}
@@ -282,8 +279,6 @@ html[data-app=website] .v-workspace-top>strong,html[data-app=website] .v-workspa
  html[data-app=website] .ec-header .charge-wordmark{font-size:22px}
  html[data-app=website] .ec-header-actions{gap:7px}
  html[data-app=website] .ec-header .ec-sign-in{font-size:13px;padding:9px 11px}
- html[data-app=website] .ec-header .locale-switch{padding:2px;gap:0}
- html[data-app=website] .ec-header .locale-switch button{min-width:var(--ec-control-compact);padding:6px;min-height:var(--ec-control-compact)}
  html[data-app=website] .ec-header .ec-menu-trigger{width:var(--ec-control-compact);min-height:var(--ec-control-compact);height:var(--ec-control-compact);padding:9px}
  html[data-app=website] .ec-breadcrumb{padding-top:12px}
  html[data-app=website] .ec-breadcrumb a{display:inline-flex;align-items:center;min-height:44px}
@@ -340,7 +335,6 @@ html[data-app=website] .v-workspace-top>strong,html[data-app=website] .v-workspa
  html[data-app=website] .ec-header .ec-header-inner{gap:8px}
  html[data-app=website] .ec-header-actions{gap:5px}
  html[data-app=website] .ec-header .ec-sign-in{padding:8px;font-size:12px}
- html[data-app=website] .ec-header .locale-switch button{min-width:27px;padding:4px}
  html[data-app=website] .grid-hero-actions{flex-direction:column;align-items:stretch;gap:10px}
  html[data-app=website] .grid-hero-actions .ec-text-link{justify-content:center}
  html[data-app=website] .web86-account-preview{padding:18px}
@@ -392,11 +386,6 @@ html[data-app=website] .grid-catalog-links>a:hover{border-color:var(--teal)}
 @media(max-width:800px){html[data-app=website] .grid-hero{grid-template-columns:minmax(0,1fr);gap:28px}html[data-app=website] .grid-hero h1{font-size:clamp(32px,5.8vw,44px)}html[data-app=website] .grid-hero-visual figure img{height:auto;aspect-ratio:3/2}html[data-app=website] .grid-direction-cards{grid-template-columns:minmax(0,1fr)}html[data-app=website] .grid-community-links{gap:24px}html[data-app=website] .grid-equipment-entry{padding:24px}}
 @media(max-width:480px){html[data-app=website] .grid-community-links,html[data-app=website] .web86-equipment .grid-catalog-links{grid-template-columns:minmax(0,1fr)}html[data-app=website] .grid-equipment-entry>a{width:100%;justify-content:center}html[data-app=website] .grid-catalog-links>a{min-height:64px}}
 
-html[data-app=website] #site-menu .ec-menu-language{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:16px 0;margin-bottom:10px;border-bottom:1px solid var(--line);color:var(--muted)}
-html[data-app=website] #site-menu .ec-menu-language:not(:has([data-locale-switch])){display:none}
-html[data-app=website] #site-menu .locale-switch{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:3px;gap:2px}
-html[data-app=website] #site-menu .locale-switch button{min-width:48px;min-height:44px;padding:10px;font-family:var(--eg-font);font-size:13px;border-radius:7px;color:var(--muted)}
-html[data-app=website] #site-menu .locale-switch button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 4px #123a2414}
 /* Navigation is a right-side drawer; other dialogs keep their centered layout. */
 html[data-app=website] #site-menu{position:fixed;inset:0 0 0 auto;margin:0;width:min(440px,100%);max-width:100%;height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;box-sizing:border-box;border-width:0 0 0 1px;border-radius:var(--ec-radius-card) 0 0 var(--ec-radius-card);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:24px}
 html[data-app=website] #site-menu::backdrop{background:#10201980;backdrop-filter:blur(3px)}

@@ -4,7 +4,7 @@
  if(!form)return;
  const field=name=>form.elements.namedItem(name);
  const system=field('solarSystem'),panel=field('solarPanel'),storage=field('solarBattery'),battery=field('solarBatteryModel'),country=field('solarCountry'),zip=field('solarZip'),bill=field('solarBill'),summary=form.querySelector('[data-solar-selection]');
- const t=value=>window.EcoLocale?.t(value)||value;
+ const t=value=>value;
  const scrollToForm=target=>{
   document.getElementById('solar-fit')?.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
   setTimeout(()=>target?.focus?.({preventScroll:true}),0);
@@ -26,7 +26,7 @@
   const selectedSystem=EcoSolar.find(system.value),selectedPanel=EcoSolar.panel(panel.value),selectedBattery=EcoSolar.battery(battery.value);
   if(!selectedSystem||!selectedPanel)return;
   const array=EcoSolar.arrayFor(selectedSystem.id,selectedPanel.id);
-  const reference=new Intl.NumberFormat(window.EcoLocale?.language==='ru'?'ru-RU':'en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(selectedSystem.estimateUsd);
+  const reference=new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(selectedSystem.estimateUsd);
   const parts=[selectedSystem.name,EcoSolar.brandName(selectedPanel),array.panels+' × '+selectedPanel.powerW+' W',array.arrayKw.toFixed(2)+' kW DC',t('Planning reference')+': '+reference];
   if(wantsStorage)parts.push(selectedBattery?EcoSolar.brandName(selectedBattery)+' · '+selectedBattery.capacityKWh+' kWh':t('Battery model to be selected with the specialist'));
   parts.push(t('Final equipment and complete price require the property review.'));
@@ -36,6 +36,5 @@
  document.querySelectorAll('[data-panel-pick]').forEach(button=>button.addEventListener('click',()=>{panel.value=button.dataset.panelPick;paint();scrollToForm(panel);}));
  document.querySelectorAll('[data-battery-pick]').forEach(button=>button.addEventListener('click',()=>{storage.value='yes';battery.value=button.dataset.batteryPick;paint();scrollToForm(battery);}));
  for(const element of [system,panel,storage,battery,country])element.addEventListener('change',paint);
- document.addEventListener('ecocharge:locale',paint);
  paint();
 })();

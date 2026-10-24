@@ -4,7 +4,7 @@
  const key='ecocharge-locale',ruAllowed=()=>window.EcoLanguagePolicy?.allowRussian({mode:window.ECO_PLATFORM_CONFIG?.localeMode,app:document.documentElement.dataset.app,role:window.ECO_STAFF_ROLE})!==false,valid=v=>v==='ru'&&ruAllowed()?'ru':'en';
  let language='en';try{language=valid(localStorage.getItem(key))}catch{}
  const requested=new URL(location.href).searchParams.get('lang');if(['en','ru'].includes(requested)){language=valid(requested);try{localStorage.setItem(key,language)}catch{}}
- if(!ruAllowed()&&requested==='ru'){const url=new URL(location.href);url.searchParams.set('lang','en');history.replaceState(history.state,'',url);}
+ if(!ruAllowed()){language='en';try{localStorage.setItem(key,'en')}catch{}if(requested==='ru'){const url=new URL(location.href);url.searchParams.set('lang','en');history.replaceState(history.state,'',url);}}
  const messages=window.ECOCHARGE_RU||{},normalize=s=>s.replace(/\s+/g,' ').trim();
  const english=window.ECOCHARGE_EN||{};
  const englishLower=new Map(Object.entries(english).map(([k,v])=>[k.toLowerCase(),v]));

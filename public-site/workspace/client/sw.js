@@ -1,6 +1,6 @@
 'use strict';
 // Only a public offline page is stored. Never cache signed-in HTML, APIs or mutations.
-const ROOT=new URL('./',self.location.href),CACHE='eco-client-offline-v2-'+ROOT.pathname,OFFLINE=new URL('offline.html',ROOT).href;
+const ROOT=new URL('./',self.location.href),CACHE='eco-client-offline-v3-'+ROOT.pathname,OFFLINE=new URL('offline.html',ROOT).href;
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.add(new Request(OFFLINE,{cache:'reload',credentials:'omit'}))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('eco-client-offline-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

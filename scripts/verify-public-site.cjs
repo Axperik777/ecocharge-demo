@@ -8,7 +8,9 @@ const preview=fs.existsSync(previewRoot)?require('./verify-client-preview.cjs')(
 const workspaceRoot=path.join(root,'workspace');
 const workspace=fs.existsSync(workspaceRoot)?require('./verify-workspace-preview.cjs')(workspaceRoot):null;
 const files=walk(root).filter(f=>!f.startsWith(previewRoot+path.sep)&&!f.startsWith(workspaceRoot+path.sep)),manifest=JSON.parse(fs.readFileSync(path.join(root,'app-manifest.json'),'utf8'));
-const websiteBase='https://axperik777.github.io/ecocharge-demo/';
+const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),context);
+const config=context.window.ECO_PLATFORM_CONFIG;
+const websiteBase=config.websiteBase;
 const publishedPath=new URL(websiteBase).pathname.replace(/\/?$/,'/');
 const legacyAliases=Object.freeze({
  plans:'participate/charge',
@@ -27,17 +29,18 @@ const retiredPublicVocabulary=new RegExp('\\bM'+'ining\\b|май'+'нинг|ма
 assert.equal(manifest.app,'website');
 assert.equal(manifest.routes.length,35);
 for(const r of ['app','academy','learn','guides','club','compute','participate/charge','participate/solar','participate/compute',...Object.keys(legacyAliases)])assert(manifest.routes.includes(r));
-for(const route of retiredPublicRoutes){assert(!manifest.routes.includes(route),'Retired public route remains in the manifest: '+route);assert(!fs.existsSync(path.join(root,route)),'Retired public route remains in the export: '+route);assert(!fs.existsSync(path.join(root,'ru',route)),'Retired Russian public route remains in the export: '+route);}
+for(const route of retiredPublicRoutes){assert(!manifest.routes.includes(route),'Retired public route remains in the manifest: '+route);assert(!fs.existsSync(path.join(root,route)),'Retired public route remains in the export: '+route);}
 const guideRoutes=manifest.routes.filter(route=>route.startsWith('guides/'));
 const activeGuideRoutes=guideRoutes.filter(route=>!legacyAliases[route]);
 assert.equal(guideRoutes.length,16,'Expected 14 active guides plus 2 neutral legacy aliases');
 assert.equal(activeGuideRoutes.length,14,'Expected 14 active standalone guide articles');
-const context={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),context);
-const config=context.window.ECO_PLATFORM_CONFIG;
 assert.equal(config.websiteOnly,true);
 for(const key of ['accountBase','crmBase','apiBase'])assert.equal(config[key],'');
-assert.equal(config.websiteBase,'https://axperik777.github.io/ecocharge-demo/');
-assert.equal(config.localeMode,'development');
+assert.equal(new URL(config.websiteBase).protocol,'https:');
+assert(config.websiteBase.endsWith('/'),'Public websiteBase must end with /');
+assert.equal(config.localeMode,'launch');
+assert(!fs.existsSync(path.join(root,'ru')),'English-only public export must not contain /ru routes');
+for(const asset of ['locale.js','locale.css','locale-en.js','locale-ru.js','charge-model.js','business-ui.js'])assert(!fs.existsSync(path.join(root,asset)),'English-only public export must not ship '+asset);
 const base=new URL(config.websiteBase),forbidden=/^(?:client|login|register|team|staff|crm|central|server|private-data)(?:\/|$)/;
 visibleCopy.verifyVisibleFiles(root,files);
 for(const file of files){
@@ -47,10 +50,13 @@ for(const file of files){
  if(/\.(?:html|css|js|json)$/.test(file)){
   const text=fs.readFileSync(file,'utf8');
   assert(!/https?:\/\/(?:localhost|127\.0\.0\.1)(?=[:/])/i.test(text),'Local URL: '+rel);
+  assert.doesNotMatch(text,/[А-Яа-яЁё]/,'English-only public artifact contains Russian copy: '+rel);
+  assert.doesNotMatch(text,/(?:[?&]lang=ru\b|\/ru\/)/i,'English-only public artifact contains a Russian URL path or query: '+rel);
+  assert.doesNotMatch(text,/data-site-language-host|data-locale-switch|class="locale-switch"/,'English-only public artifact contains a language control: '+rel);
   if(file.endsWith('.html')){
    assert.doesNotMatch(renderedSurface(text),retiredPublicVocabulary,'Public HTML exposes retired vocabulary: '+rel);
-   const russian=rel.startsWith('ru/'),routeRel=russian?rel.slice(3):rel,route=routeRel==='index.html'?'':routeRel.replace(/\/index\.html$/,'').replace(/\/$/,'');
-   const canonicalRoute=legacyAliases[route]||route,englishCanonical=new URL(canonicalRoute?canonicalRoute+'/':'',websiteBase).href,russianCanonical=new URL('ru/'+(canonicalRoute?canonicalRoute+'/':''),websiteBase).href,canonical=russian?russianCanonical:englishCanonical;
+   const route=rel==='index.html'?'':rel.replace(/\/index\.html$/,'').replace(/\/$/,'');
+   const canonicalRoute=legacyAliases[route]||route,englishCanonical=new URL(canonicalRoute?canonicalRoute+'/':'',websiteBase).href,canonical=englishCanonical;
    if(legacyAliases[route]){
     assert.match(text,/<meta name="robots" content="noindex,follow">/,'Legacy alias must be noindex,follow: '+rel);
     assert.doesNotMatch(text,/data-lead-form/,'Legacy alias must not expose an active lead form: '+rel);
@@ -61,16 +67,11 @@ for(const file of files){
    }
    assert(text.includes('<link rel="canonical" href="'+canonical+'">'),'Wrong canonical URL: '+rel);
    assert(text.includes('<link rel="alternate" hreflang="en" href="'+englishCanonical+'">'),'Missing English alternate: '+rel);
-   assert(text.includes('<link rel="alternate" hreflang="ru" href="'+russianCanonical+'">'),'Missing Russian alternate: '+rel);
+   assert.doesNotMatch(text,/hreflang="ru"/,'English-only page advertises a Russian alternate: '+rel);
    assert(text.includes('<link rel="alternate" hreflang="x-default" href="'+englishCanonical+'">'),'Missing default alternate: '+rel);
-   assert(text.includes('id="eco-path-locale"'),'Missing canonical language bootstrap: '+rel);
-   if(russian){
-    assert.match(text,/<html\b[^>]*\blang="ru"/,'Russian route must declare Russian: '+rel);
-    assert(text.includes('<base href="'+websiteBase+'">'),'Russian route must keep root assets: '+rel);
-    const title=text.match(/<title>([\s\S]*?)<\/title>/)?.[1]||'',description=text.match(/<meta name="description" content="([^"]*)">/)?.[1]||'';
-    assert.match(title,/[А-Яа-яЁё]/,'Russian route title must be localized: '+rel);
-    assert.match(description,/[А-Яа-яЁё]/,'Russian route description must be localized: '+rel);
-   }
+   assert.doesNotMatch(text,/id="eco-path-locale"/,'English-only page must not contain locale routing bootstrap: '+rel);
+   assert.match(text,/<html\b[^>]*\blang="(?:en|en-US)"/,'Public route must declare English: '+rel);
+    assert.doesNotMatch(text,/\b(?:locale(?:-en|-ru)?\.js|locale\.css)(?:\?[^"']*)?/,'Public HTML loads a locale runtime: '+rel);
    assert(text.includes('website-only.js'),'Missing public-only boundary: '+rel);
    if (workspace && text.includes('data-lead-form')) {
     let previous = -1;
@@ -81,7 +82,7 @@ for(const file of files){
     }
    }
    assert(!/<section\b[^>]*class="[^"]*\b(?:v-workspace-shell|f-study-finish)\b/.test(text),'Orphaned account preview section: '+rel);
-    const pageUrl=new URL((russian?'ru/':'')+(route?route+'/':''),websiteBase),documentBase=new URL(text.match(/<base href="([^"]+)"/)?.[1]||pageUrl.href,pageUrl.href);
+    const pageUrl=new URL(route?route+'/':'',websiteBase),documentBase=new URL(text.match(/<base href="([^"]+)"/)?.[1]||pageUrl.href,pageUrl.href);
    for(const match of text.matchAll(/(?:href|src)="([^"#]+)"/g)){
     const ref=match[1].replaceAll('&amp;','&');
     if(/^(?:data:|mailto:|tel:)/.test(ref)||/^(?:\.\.\/)+$/.test(ref))continue;
@@ -95,8 +96,9 @@ for(const file of files){
   }
  }
 }
-for(const route of manifest.routes){assert(fs.existsSync(path.join(root,route,'index.html')));assert(fs.existsSync(path.join(root,'ru',route,'index.html')),'Missing Russian route: '+route);}
-for(const route of manifest.routes){const canonical=new URL(route?route+'/':'',websiteBase).href,ru=new URL('ru/'+(route?route+'/':''),websiteBase).href;for(const url of [canonical,ru])legacyAliases[route]?assert(!sitemap.includes('<loc>'+url.replaceAll('&','&amp;')+'</loc>'),'Legacy alias must be excluded from sitemap: '+url):assert(sitemap.includes('<loc>'+url.replaceAll('&','&amp;')+'</loc>'),'Sitemap URL missing: '+url);}
+for(const route of manifest.routes)assert(fs.existsSync(path.join(root,route,'index.html')));
+for(const route of manifest.routes){const canonical=new URL(route?route+'/':'',websiteBase).href;legacyAliases[route]?assert(!sitemap.includes('<loc>'+canonical.replaceAll('&','&amp;')+'</loc>'),'Legacy alias must be excluded from sitemap: '+canonical):assert(sitemap.includes('<loc>'+canonical.replaceAll('&','&amp;')+'</loc>'),'Sitemap URL missing: '+canonical);}
+assert.doesNotMatch(sitemap,/\/ru\//,'English-only sitemap must not include Russian routes');
 for(const route of ['', 'participate/charge','participate/compute','compute','plans','resources','how-it-works','guides',...activeGuideRoutes]){const file=path.join(root,route,'index.html');assert.doesNotMatch(visibleText(fs.readFileSync(file,'utf8')),staleCurrentCadence,'Current route exposes the retired weekly cadence: /'+route);}
 for(const asset of ['site.js','trust.js','trust-content.js','funnel.js'])assert.doesNotMatch(fs.readFileSync(path.join(root,asset),'utf8'),staleCurrentCadence,'Active public UI script exposes the retired weekly cadence: '+asset);
 // Public export must keep the ecosystem neutral while every project retains its own request path.

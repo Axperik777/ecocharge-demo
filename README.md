@@ -60,8 +60,8 @@ CRM поднимает тему только по вопросу клиента 
 
 ## Публичные интерфейсы
 
-- [Сайт](https://axperik777.github.io/ecocharge-demo/ru/)
-- [Кабинет клиента](https://axperik777.github.io/ecocharge-demo/workspace/client/?lang=ru)
+- [Сайт](https://axperik777.github.io/ecocharge-demo/)
+- [Кабинет клиента](https://axperik777.github.io/ecocharge-demo/workspace/client/?lang=en)
 - [CRM менеджера](https://axperik777.github.io/ecocharge-demo/workspace/crm/?role=manager&lang=ru&tab=today)
 - [CRM Admin / Team Lead](https://axperik777.github.io/ecocharge-demo/workspace/crm/?role=admin&lang=ru&tab=today)
 

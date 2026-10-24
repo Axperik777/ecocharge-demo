@@ -16,7 +16,7 @@
   if(!Object.hasOwn(bases,surface))throw Error('Unknown app destination');const next=new URL(path,bases[surface]);
   if(next.origin!==new URL(bases[surface]).origin)throw Error('Unexpected app destination');
   let language=params.get('lang');try{language=window.EcoLocale?.language||language||localStorage.getItem('ecocharge-locale');}catch{}
-  if(window.ECO_PLATFORM_CONFIG?.localeMode==='launch'&&!(surface==='crm'&&window.ECO_STAFF_ROLE==='admin'))language='en';
+  if(surface!=='crm')language='en';
   if(['en','ru'].includes(language))next.searchParams.set('lang',language);
   if(surface==='account')for(const key of keys){if(attribution[key]&&!next.searchParams.has('first_'+key))next.searchParams.set('first_'+key,attribution[key]);if(currentAttribution[key]&&!next.searchParams.has(key))next.searchParams.set(key,currentAttribution[key]);}
   return next.href;

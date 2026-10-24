@@ -9,7 +9,7 @@
   const project=value=>['charge','solar','compute','academy','resources','guides'].includes(value)?value:'';
   const clean=value=>{
     if(!value||typeof value!=='object')return null;
-    const out={},fields={entryId:slug(value.entryId),lastId:slug(value.lastId),entryCluster:slug(value.entryCluster,60),cluster:slug(value.cluster,60),ctaId:slug(value.ctaId),ctaPosition:slug(value.ctaPosition,40),entryProject:project(value.entryProject),targetProject:project(value.targetProject),locale:['en','ru'].includes(value.locale)?value.locale:'',acquisitionPath:paths.has(value.acquisitionPath)?value.acquisitionPath:''};
+    const out={},fields={entryId:slug(value.entryId),lastId:slug(value.lastId),entryCluster:slug(value.entryCluster,60),cluster:slug(value.cluster,60),ctaId:slug(value.ctaId),ctaPosition:slug(value.ctaPosition,40),entryProject:project(value.entryProject),targetProject:project(value.targetProject),locale:['en','ru'].includes(value.locale)?'en':'',acquisitionPath:paths.has(value.acquisitionPath)?value.acquisitionPath:''};
     for(const [key,item]of Object.entries(fields))if(item)out[key]=item;
     if(typeof value.articleAssist==='boolean')out.articleAssist=value.articleAssist;
     for(const key of ['entryAt','lastAt','ctaAt']){const item=iso(value[key]);if(item)out[key]=item;}
@@ -24,9 +24,7 @@
   const track=(name,props)=>window.EcoChargeFunnel?.track(name,props);
   const carryToRegistration=link=>{if(!link||!state)return;try{const url=new URL(link.href,document.baseURI);if(!/(?:^|\/)register\/$/.test(url.pathname))return;const values={acquisition_path:state.acquisitionPath,content_entry:state.entryId,content_last:state.lastId,content_entry_cluster:state.entryCluster,content_cluster:state.cluster,content_entry_project:state.entryProject,content_target_project:state.targetProject,content_locale:state.locale,content_entry_at:state.entryAt,content_last_at:state.lastAt,article_assist:state.articleAssist===true?'1':'0'};for(const[key,value]of Object.entries(values))if(value)url.searchParams.set(key,value);link.href=url.href;}catch{}};
   const currentUrl=(()=>{try{return new URL(location.href);}catch{return null;}})();
-  const requestedLocale=currentUrl?.searchParams.get('lang')||'';
-  const localeSource=String(requestedLocale||root.lang||'').toLowerCase();
-  const current={id:slug(root.dataset.contentId),cluster:slug(root.dataset.contentCluster,60),targetProject:project(root.dataset.contentProject),acquisitionPath:paths.has(root.dataset.contentPath)?root.dataset.contentPath:'',locale:localeSource.startsWith('ru')?'ru':localeSource.startsWith('en')?'en':''};
+  const current={id:slug(root.dataset.contentId),cluster:slug(root.dataset.contentCluster,60),targetProject:project(root.dataset.contentProject),acquisitionPath:paths.has(root.dataset.contentPath)?root.dataset.contentPath:'',locale:'en'};
   let state=read();
   const route=String(root.dataset.route||'').replace(/^\/+|\/+$/g,'');
   const requestedPath=currentUrl&&paths.has(currentUrl.searchParams.get('acquisition_path'))?currentUrl.searchParams.get('acquisition_path'):'';

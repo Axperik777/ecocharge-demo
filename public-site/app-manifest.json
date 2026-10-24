@@ -41,7 +41,7 @@
   "bases": {
     "mode": "website-only",
     "websiteOnly": true,
-    "localeMode": "development",
+    "localeMode": "launch",
     "websiteBase": "https://axperik777.github.io/ecocharge-demo/",
     "accountBase": "",
     "crmBase": "",
@@ -60,5 +60,5 @@
       "quoteTtlSeconds": 60
     }
   },
-  "createdAt": "2026-10-15T09:55:16.534Z"
+  "createdAt": "2026-10-24T07:08:38.643Z"
 }
