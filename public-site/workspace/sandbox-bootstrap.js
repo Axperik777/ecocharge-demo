@@ -13,8 +13,10 @@
  };
  const migrate=db=>{if(!db||typeof db!=='object'||!db.accounts||typeof db.accounts!=='object')throw Error('Invalid saved workspace.');if(db.schema===seed.schema)return db;if(db.schema!==1||seed.schema!==2)throw Error('Unsupported saved workspace schema.');const fresh=model.initial(),accounts={};for(const [uid,account]of Object.entries(db.accounts))accounts[uid]=normalizeAccount(account,fresh.accounts?.[uid]);return {...fresh,...db,schema:seed.schema,activeOffer:'charge',chargeModel:'charge-fixed-obligation-v3',settlementDays:4,accounts};};
  const read=()=>{const raw=localStorage.getItem(key);if(!raw)return model.initial();try{const stored=JSON.parse(raw),db=migrate(stored);if(db!==stored){save(db);queueNotice('migrated');}return db;}catch{const fresh=model.initial();save(fresh);queueNotice('reset');return fresh;}};
- const initial=read(),params=new URL(location).searchParams;
- let clientId=params.get('client')||localStorage.getItem('ecogrid-sandbox-client')||Object.keys(initial.accounts)[0];if(!initial.accounts[clientId])clientId=Object.keys(initial.accounts)[0];
+ const params=new URL(location).searchParams,showcase=clientSurface&&params.get('showcase')==='portfolio',initial=showcase?model.initial():read();
+ if(showcase){save(initial);localStorage.removeItem('ecogrid-sandbox-client');}
+ const showcaseClientId=showcase?initial.qa?.portfolio?.clientId:null;
+ let clientId=showcaseClientId||params.get('client')||localStorage.getItem('ecogrid-sandbox-client')||Object.keys(initial.accounts)[0];if(!initial.accounts[clientId])clientId=Object.keys(initial.accounts)[0];
  const requestedRole=params.get('role'),role=requestedRole==='manager'?'ftd':requestedRole==='admin'?'admin':sessionStorage.getItem('ecogrid-sandbox-role')==='ftd'?'ftd':'admin';
  if(requestedRole)sessionStorage.setItem('ecogrid-sandbox-role',role);
  const context=()=>({clientId,role});
