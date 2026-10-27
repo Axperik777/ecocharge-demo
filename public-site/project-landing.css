@@ -134,7 +134,7 @@ html[data-app=website] .project-form-proof .project-proof-links{max-width:420px;
 }
 
 /* Charge paid-traffic landing: one operational story and one application action. */
-html[data-app=website][data-page="participate/charge"]{--ink:#111b22;--teal:#007b6b;--muted:#52666d;--line:#ccdadd;--charge-action:#1769e8;--charge-action-hover:#0f55c7}
+html[data-app=website][data-page="participate/charge"]{--ink:#111b22;--teal:#007b6b;--muted:#52666d;--line:#ccdadd;--charge-action:#1769e8;--charge-action-hover:#0f55c7;--ec-color-accent:#1769e8;--ec-color-accent-hover:#0f55c7;--ec-color-focus:#1769e8}
 html[data-app=website][data-page="participate/charge"] .ec-header .ec-header-actions>.ec-button{display:inline-flex}
 html[data-app=website][data-page="participate/charge"] :is(.ec-header .ec-button,.charge-hero .ec-button,.charge-sticky-cta .ec-button){border-color:var(--charge-action);background:var(--charge-action);color:#fff;box-shadow:0 12px 28px rgba(23,105,232,.2)}
 html[data-app=website][data-page="participate/charge"] :is(.ec-header .ec-button,.charge-hero .ec-button,.charge-sticky-cta .ec-button):is(:hover,:focus-visible){border-color:var(--charge-action-hover);background:var(--charge-action-hover);color:#fff}
