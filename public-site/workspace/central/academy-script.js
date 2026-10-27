@@ -2,8 +2,8 @@
 (function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('../journey-model.js'):root.EcoJourney);if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoAcademyScript=api;})(typeof window==='object'?window:globalThis,(journeyModel)=>{
  const rows=[
  ['open','Charge request','Заявка на Charge',
-  'Hi [name], I’m [specialist] with EcoGrid Academy. You requested a Charge Project Walkthrough. Is now a good time?',
-  'Здравствуйте, [имя]. Я [специалист] EcoGrid Academy. Вы запросили разбор проекта Charge. Удобно сейчас?'],
+  'Hi [name], [specialist] from EcoGrid Academy. You requested a Charge availability check and participation overview. Can we talk now?',
+  'Здравствуйте, [имя]. Я [специалист] EcoGrid Academy. Вы запросили проверку доступности Charge и объяснение, как работает участие. Удобно сейчас?'],
  ['goal','Understand the decision','Уточнить задачу',
   'What do you need to understand first: the client result, where it comes from, the evidence, the risks or the next step?',
   'Что нужно понять сначала: результат для клиента, его источник, доказательства, риски или следующий шаг?'],
