@@ -2,14 +2,14 @@
 (function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('../journey-model.js'):root.EcoJourney);if(typeof module==='object'&&module.exports)module.exports=api;else root.EcoAcademyScript=api;})(typeof window==='object'?window:globalThis,(journeyModel)=>{
  const rows=[
  ['open','Charge request','Заявка на Charge',
-  'Hi [name], I’m [specialist] with EcoGrid Academy. You requested this project. Is now a good time for a short decision review?',
-  'Здравствуйте, [имя]. Я [специалист] EcoGrid Academy. Вы запросили этот проект. Удобно коротко разобрать решение?'],
+  'Hi [name], I’m [specialist] with EcoGrid Academy. You requested a Charge Project Walkthrough. Is now a good time?',
+  'Здравствуйте, [имя]. Я [специалист] EcoGrid Academy. Вы запросили разбор проекта Charge. Удобно сейчас?'],
  ['goal','Understand the decision','Уточнить задачу',
   'What do you need to understand first: the client result, where it comes from, the evidence, the risks or the next step?',
   'Что нужно понять сначала: результат для клиента, его источник, доказательства, риски или следующий шаг?'],
  ['project','Present Charge','Объяснить Charge',
-  'Charging sessions are the project’s revenue source. Electricity, maintenance, site costs and demand affect the operating result. Let’s use one station example, then review the proposed participation and its calculation. The directory explains the infrastructure; project documents confirm ownership and actual revenue.',
-  'Источник выручки Charge — зарядные сессии. На результат влияют загрузка, электричество, обслуживание и расходы площадки. Покажу одну станцию, затем разберём предложенный формат участия и расчёт. Каталог объясняет инфраструктуру; владение и фактическую выручку подтверждают документы проекта.'],
+  'Charging sessions are the project’s revenue source. Electricity, maintenance, site costs and demand affect the operating result. A directory entry can explain the infrastructure, but it does not establish EcoGrid ownership, operating rights or actual revenue. First confirm that a project is available for the client’s jurisdiction, then report every required evidence item as available for review, pending confirmation or outstanding.',
+  'Источник выручки Charge — зарядные сессии. На результат влияют загрузка, электричество, обслуживание и расходы площадки. Запись каталога помогает объяснить инфраструктуру, но не подтверждает владение EcoGrid, права на эксплуатацию или фактическую выручку. Сначала подтвердите доступность проекта для юрисдикции клиента, затем назовите статус каждого обязательного подтверждения: доступно для проверки, ожидает подтверждения или отсутствует.'],
   ['values','Company principles','Принципы компании',
    'EcoGrid verifies sites, explains economics, separates facts from forecasts and records responsibilities. The founder’s Protestant convictions guide conduct but never change access or project terms.',
    'EcoGrid проверяет объекты, объясняет экономику, отделяет факты от прогнозов и фиксирует ответственность. Протестантские убеждения основателя направляют поведение, но не меняют доступ или условия проектов.'],
@@ -73,8 +73,8 @@
   else{ids=['open','goal','project','values','interest','close'];}
   const charge=typeof module==='object'&&module.exports?require('../charge-model.js'):globalThis.EcoChargeModel;
   const text=(...keys)=>keys.map(k=>charge.copy(k,language)).join(' ');
-   mapped.get('project').text=ru?'После активации договора план создаёт фиксированное обязательство компании 13 / 14 / 15 / 16% за календарный месяц UTC с непрерывным начислением. Сначала его покрывают 42% подтверждённой выручки Charge; допустимый дефицит покрывает резерв, а остаток остаётся задолженностью компании. Каждые четыре дня к выводу доступна только профинансированная и рассчитанная прибыль.':'After agreement activation, the plan creates a fixed company obligation of 13 / 14 / 15 / 16% for a UTC calendar month, accrued continuously. Forty-two percent of verified Charge revenue funds it first; the reserve covers eligible shortfalls, and any remainder stays company payable. Every four days, only funded settled profit becomes withdrawable.';
-   mapped.get('proposal').text=ru?'До решения проверьте сторону договора, минимум три доступные станции, подтверждение выручки, резерв, комиссии, выход и подписанный договор. Это не банковский вклад; возможна полная потеря капитала.':'Before deciding, verify the contracting entity, at least three eligible chargers, revenue evidence, reserve rules, fees, exit and the signed agreement. This is not a bank deposit; full loss is possible.';
+   mapped.get('project').text=ru?'Сначала подтвердите доступность Charge для юрисдикции клиента. Если проект недоступен, остановитесь: не обсуждайте сумму, оплату или активацию. Если доступен, покажите путь: оплата водителя → операционные расходы → подтверждённая выручка Charge → 42% на обязательства компании → допустимый резерв. Ставки и четырёхдневный расчёт берутся только из его письменного предложения.':'First confirm Charge availability in the client’s jurisdiction. If unavailable, stop: do not discuss amount, payment or activation. If available, show the path: driver payment → operating costs → verified Charge revenue → 42% for company obligations → eligible reserve. Rates and four-day settlement come only from its written offer.';
+   mapped.get('proposal').text=ru?'Назовите статус каждого обязательного пункта: доступно для проверки, ожидает подтверждения или отсутствует. Проверьте сторону договора, права на эксплуатацию, станции, выручку и расходы, резерв, комиссии, договор, риски и выход. Отсутствующее подтверждение нельзя называть проверенным. Это не банковский вклад; возможна полная потеря капитала.':'Report each required item as available for review, pending confirmation or outstanding. Check the contracting entity, operating rights, chargers, revenue and costs, reserve, fees, agreement, risks and exit. Never call missing evidence verified. This is not a bank deposit; full loss is possible.';
   mapped.get('proposal').note=text('proof');
   if(nonChargeProject&&!supportingActive){
    mapped.get('open').title=ru?'Запрос по выбранному проекту':'Selected project request';
@@ -160,10 +160,10 @@
     [ru?'Как меньшая загрузка или ранняя замена оборудования повлияют на решение?':'How would lower utilization or early hardware replacement affect your decision?'],
     [ru?'Какие подтверждения и письменные условия нужны до решения?':'Which evidence and written terms do you need before deciding?']
    ]:selectedProject==='solar'?solarQuestions:selectedProject==='charge'?[
-    [ru?'Вы сравниваете конкретную сумму или сначала оцениваете модель Charge?':'Are you comparing a specific amount or first evaluating the Charge model?'],
-    [ru?'Что мешает решению: подтверждения, расчёт, доступ к деньгам или выход?':'What blocks the decision: evidence, settlement, access to funds or exit?'],
-    [ru?'Какой риск решения неприемлем, пока вопрос не закрыт?':'Which decision risk is unacceptable while that remains unresolved?'],
-    [ru?'Какой документ, расчёт или сценарий сделает решение понятным?':'Which document, calculation or scenario would make the decision clear?']
+    [ru?'Почему вы запросили разбор Charge и что хотите проверить в первую очередь?':'What made you request the Charge walkthrough, and what do you want to verify first?'],
+    [ru?'Что меньше всего понятно: источник выручки, обязательство компании, статус подтверждений или выход капитала?':'Which part is least clear: the revenue source, company obligation, evidence status or capital exit?'],
+    [ru?'Если это останется неясным, что помешает вам рассматривать проект?':'If that remains unclear, what would stop you from considering the project?'],
+    [ru?'Если подтвердить доступность проекта и недостающие доказательства, следующий шаг станет понятнее?':'Would confirming project availability and the missing evidence make the next decision easier?']
    ]:[
     [ru?'Что вы уже посмотрели и какое направление рассматриваете?':'What have you already reviewed, and which direction are you considering?'],
     [ru?'Чего не хватает, чтобы выбрать следующий маршрут?':'What is missing before you can choose the next route?'],

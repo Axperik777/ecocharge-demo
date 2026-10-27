@@ -8,6 +8,7 @@
 .ec-rights-grid p{font-size:13px;line-height:1.9;margin:14px 0 22px}
 .ec-evidence-status{display:inline-flex;align-items:center;gap:7px;max-width:100%;font-size:10px;line-height:1.6;color:#655435;background:#f3eee3;padding:6px 9px;border-radius:4px}
 .ec-evidence-status:before{content:'';width:5px;height:5px;border-radius:50%;background:#9a8252;flex-shrink:0}
+.ec-evidence-status.is-available{color:#075f46;background:#e3f3eb}.ec-evidence-status.is-available:before{background:#087454}.ec-evidence-status.is-review{color:#5f4a1c;background:#fff2d8}.ec-evidence-status.is-review:before{background:#b77a16}.ec-evidence-status.is-pending{color:#743d34;background:#f7e9e5}.ec-evidence-status.is-pending:before{background:#a64e3f}
 .ec-rights-grid .ec-evidence-status{margin-top:auto}.ec-rights-grid .ec-text-link{margin-top:19px;font-size:12px;min-height:44px}
 .ec-section-footnote{font-size:11px;line-height:1.9;margin-top:20px;color:var(--muted)}
 .ec-introduction{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
@@ -18,6 +19,7 @@
 .ec-video-placeholder>strong{font-size:28px;line-height:1.35;letter-spacing:-.04em;font-weight:500}
 .ec-video-pending{display:block;background:#414144;color:#dedee1;padding:6px 12px;font-size:11px;line-height:1.6;border-radius:30px;margin-top:24px}
 .ec-video-placeholder>p{font-size:11px;color:#bebec1;line-height:1.8;margin-top:13px}
+.ec-intro-principle{align-items:flex-start;text-align:left}.ec-intro-principle>strong{max-width:16ch}.ec-intro-principle ol{width:100%;margin:30px 0 0;padding:0;list-style:none;border-top:1px solid #52565a}.ec-intro-principle li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:center;min-height:54px;border-bottom:1px solid #52565a;color:#d8dfdc;font-size:12px;line-height:1.5}.ec-intro-principle li span{color:#78d3ab;font-size:10px;font-weight:800;letter-spacing:.08em}
 .ec-intro-video{width:100%;aspect-ratio:4/3;background:var(--navy);border-radius:9px}
 .ec-introduction-copy>p{font-size:14px;margin-top:18px;line-height:1.9}
 .ec-intro-chapters{list-style:none;margin:21px 0;padding:0}.ec-intro-chapters li{border-top:1px solid var(--line);padding:12px 0;font-size:11px;line-height:1.8;color:var(--muted)}.ec-intro-chapters span{display:block;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px}

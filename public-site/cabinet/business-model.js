@@ -4,7 +4,7 @@
  // Teaching inputs only. Channel routing is illustrative and changes with the scenario;
  // it is never a fixed company/client or revenue split.
  const config=Object.freeze({version:'energy-routing-v3-compute',dispatchLimitKw:900,solarPeakKw:1800,chargingPrice:.45,utilityPrice:.18,solarStorageCost:.12,sessionKwh:30,sessionsPerDay:20,exampleDays:30,monthlyOperatingCost:3000,exampleReceipts:1000,lowerReceipts:600,siteCosts:150,serviceCosts:120,reserves:80,inverseShare:.004,inverseCostRatio:.35,inverseKwhPrice:.25});
- // Product narrative for the diploma model; this does not connect live AI or change financial calculations.
+ // Product narrative only; this module does not connect a live AI service or change financial calculations.
  const aiContent=Object.freeze({
   "energy": {
     "title": [
