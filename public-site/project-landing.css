@@ -133,7 +133,7 @@ html[data-app=website] .project-form-proof .project-proof-links{max-width:420px;
  html[data-app=website] .project-decision h3{font-size:17px}
 }
 
-/* Charge paid-traffic landing: one operational story and one project-review action. */
+/* Charge paid-traffic landing: one operational story and one application action. */
 html[data-app=website][data-page="participate/charge"] .ec-header .ec-header-actions>.ec-button{display:inline-flex}
 html[data-app=website][data-page="participate/charge"] .charge-hero{padding-bottom:clamp(38px,5vw,62px)}
 html[data-app=website][data-page="participate/charge"] .charge-hero-label,
@@ -145,6 +145,7 @@ html[data-app=website][data-page="participate/charge"] .charge-hero-system{posit
 html[data-app=website][data-page="participate/charge"] .charge-hero-system::before{content:"";position:absolute;right:-145px;bottom:-160px;width:360px;height:360px;border:1px solid rgba(119,210,170,.2);border-radius:50%;box-shadow:0 0 0 48px rgba(119,210,170,.04),0 0 0 96px rgba(119,210,170,.025);pointer-events:none}
 html[data-app=website][data-page="participate/charge"] .charge-hero-equipment{position:relative;z-index:1;display:grid;min-height:250px;place-items:center;border-radius:18px;background:#eef7f2}
 html[data-app=website][data-page="participate/charge"] .charge-hero-equipment img{width:min(70%,270px);height:230px;object-fit:contain;mix-blend-mode:multiply}
+html[data-app=website][data-page="participate/charge"] .charge-hero-equipment small{position:absolute;right:12px;bottom:10px;left:12px;color:#53675e;font-size:10px;line-height:1.4;text-align:center}
 html[data-app=website][data-page="participate/charge"] .charge-hero-stack{position:relative;z-index:1;display:grid;margin:0;color:#fff}
 html[data-app=website][data-page="participate/charge"] .charge-hero-stack>div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px;padding:14px 4px;border-top:1px solid rgba(255,255,255,.14)}
 html[data-app=website][data-page="participate/charge"] .charge-hero-stack dt{font-size:14px;font-weight:750;line-height:1.45}
@@ -166,6 +167,8 @@ html[data-app=website][data-page="participate/charge"] .charge-decision .ec-butt
 
 html[data-app=website][data-page="participate/charge"] .charge-operator{display:grid;gap:26px;margin-block:clamp(34px,6vw,72px);padding:clamp(18px,3vw,32px);border:1px solid #c5d9ce;border-radius:24px;background:linear-gradient(135deg,#edf7f2,#fff)}
 html[data-app=website][data-page="participate/charge"] .charge-operator>div{min-width:0}
+html[data-app=website][data-page="participate/charge"] .charge-operator--text{display:block;padding:clamp(26px,4vw,48px)}
+html[data-app=website][data-page="participate/charge"] .charge-operator--text .charge-operator-story{max-width:960px;margin-inline:auto}
 html[data-app=website][data-page="participate/charge"] .charge-operator-portrait{min-width:0;margin:0;overflow:hidden;border-radius:18px;background:#102019}
 html[data-app=website][data-page="participate/charge"] .charge-operator-portrait img{width:100%;aspect-ratio:4/3;object-fit:cover}
 html[data-app=website][data-page="participate/charge"] .charge-operator-portrait figcaption{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 15px;color:#fff;font-size:12px;line-height:1.5}
@@ -230,6 +233,7 @@ html[data-app=website][data-page="participate/charge"] .charge-sticky-cta{displa
 
 @media(min-width:901px){
  html[data-app=website][data-page="participate/charge"] .charge-operator{grid-template-columns:minmax(340px,.88fr) minmax(0,1.12fr);align-items:center}
+ html[data-app=website][data-page="participate/charge"] .charge-operator--text{display:block}
  html[data-app=website][data-page="participate/charge"] .charge-operator-capabilities{grid-template-columns:repeat(3,minmax(0,1fr))}
  html[data-app=website][data-page="participate/charge"] .charge-operator-capabilities article{padding:15px}
  html[data-app=website][data-page="participate/charge"] .charge-operator-capabilities h3{font-size:15px}

@@ -120,8 +120,8 @@ for(const route of ['login','register']){
  assert.doesNotMatch(entry,/http-equiv="refresh"|location\.replace\(/,'Public entry must not bypass sign-in or redirect to CRM: '+route);
 }
 assert.doesNotMatch(plans,/data-public-plan-form|project-calculator/,'Public plans must stay informational and must not activate a browser calculator');
-assert.match(plans,/review the current plan, account reporting and exact written terms together with Academy in your client account/i,'Public plans must move the detailed review into Academy and the client account');
-assert.match(plans,/href="participate\/charge\/#request-access"[^>]*>Request a Charge project review/i,'Public plans must continue to the Charge project review');
+assert.match(plans,/Apply, speak with EcoGrid Academy, complete registration if you continue, then review the project in your client account or by phone before deciding\./i,'Public plans must explain the Charge application path');
+assert.match(plans,/href="participate\/charge\/#request-access"[^>]*>Start my Charge application/i,'Public plans must continue to the Charge application');
 assert.doesNotMatch(plans,/13\s*(?:\/|–|-)\s*14\s*(?:\/|–|-)\s*15\s*(?:\/|–|-)\s*16|42\s*%|percentage point|four[- ]day|every 4 days/i,'Public plans must not publish rates or settlement mechanics before the guided review');
 for(const route of ['charge','solar','compute']){
  const page=fs.readFileSync(path.join(root,'participate',route,'index.html'),'utf8');
@@ -129,8 +129,10 @@ for(const route of ['charge','solar','compute']){
  assert.match(page,new RegExp('name="journeyTopic" value="'+route+'"'),'Project request must preserve its topic: '+route);
 }
 const charge=fs.readFileSync(path.join(root,'participate/charge/index.html'),'utf8'),chargeText=visibleText(charge);
-assert.match(charge,/Request a Charge project review/,'Charge acquisition landing must keep one project-review action');
-assert.match(charge,/Academy opens the Charge walkthrough in your client account/,'Charge acquisition landing must explain the guided account walkthrough');
+assert.match(charge,/Start my Charge application/,'Charge acquisition landing must keep one application action');
+assert.match(charge,/EcoGrid is an energy company that owns and operates EV charging stations/,'Charge acquisition landing must explain who owns and operates the infrastructure');
+assert.match(charge,/Submit your application[\s\S]*EcoGrid Academy calls you[\s\S]*Complete secure registration[\s\S]*Review the project in your account or by phone[\s\S]*Make your decision/,'Charge acquisition landing must explain the complete application-to-decision route');
+assert.match(charge,/This location is not owned or operated by EcoGrid/,'Charge acquisition landing must separate the external market reference from EcoGrid-owned infrastructure');
 assert.doesNotMatch(chargeText,/13\s*(?:\/|–|-)\s*14\s*(?:\/|–|-)\s*15\s*(?:\/|–|-)\s*16|42\s*%|percentage point|four[- ]day|every 4 days/i,'Charge acquisition landing must not publish rates or settlement mechanics');
 const compute=fs.readFileSync(path.join(root,'participate/compute/index.html'),'utf8'),computeOverview=fs.readFileSync(path.join(root,'compute/index.html'),'utf8'),computeText=visibleText(compute)+' '+visibleText(computeOverview);
 assert.match(compute,/name="journeyPurpose"[^>]*value="participation"/,'Compute must keep participation as its fixed project intent');
