@@ -120,13 +120,18 @@ for(const route of ['login','register']){
  assert.doesNotMatch(entry,/http-equiv="refresh"|location\.replace\(/,'Public entry must not bypass sign-in or redirect to CRM: '+route);
 }
 assert.doesNotMatch(plans,/data-public-plan-form|project-calculator/,'Public plans must stay informational and must not activate a browser calculator');
-assert.match(plans,/13(?:%|–16%)|16%/,'Public plans must explain the current calendar-month Charge range');
-assert.match(plans,/4[- ]day(?:s)?|four[- ]day(?:s)?/i,'Public plans must explain the 4-day settlement cadence');
+assert.match(plans,/review the current plan, account reporting and exact written terms together with Academy in your client account/i,'Public plans must move the detailed review into Academy and the client account');
+assert.match(plans,/href="participate\/charge\/#request-access"[^>]*>Request a Charge project review/i,'Public plans must continue to the Charge project review');
+assert.doesNotMatch(plans,/13\s*(?:\/|–|-)\s*14\s*(?:\/|–|-)\s*15\s*(?:\/|–|-)\s*16|42\s*%|percentage point|four[- ]day|every 4 days/i,'Public plans must not publish rates or settlement mechanics before the guided review');
 for(const route of ['charge','solar','compute']){
  const page=fs.readFileSync(path.join(root,'participate',route,'index.html'),'utf8');
  assert.match(page,/data-lead-form/,'Project must expose its own request form: '+route);
  assert.match(page,new RegExp('name="journeyTopic" value="'+route+'"'),'Project request must preserve its topic: '+route);
 }
+const charge=fs.readFileSync(path.join(root,'participate/charge/index.html'),'utf8'),chargeText=visibleText(charge);
+assert.match(charge,/Request a Charge project review/,'Charge acquisition landing must keep one project-review action');
+assert.match(charge,/Academy opens the Charge walkthrough in your client account/,'Charge acquisition landing must explain the guided account walkthrough');
+assert.doesNotMatch(chargeText,/13\s*(?:\/|–|-)\s*14\s*(?:\/|–|-)\s*15\s*(?:\/|–|-)\s*16|42\s*%|percentage point|four[- ]day|every 4 days/i,'Charge acquisition landing must not publish rates or settlement mechanics');
 const compute=fs.readFileSync(path.join(root,'participate/compute/index.html'),'utf8'),computeOverview=fs.readFileSync(path.join(root,'compute/index.html'),'utf8'),computeText=visibleText(compute)+' '+visibleText(computeOverview);
 assert.match(compute,/name="journeyPurpose"[^>]*value="participation"/,'Compute must keep participation as its fixed project intent');
 assert.doesNotMatch(compute,/<option value="capacity">|name="computeRequestedCapacity"|purpose=capacity/,'Compute must not expose the retired capacity route');
