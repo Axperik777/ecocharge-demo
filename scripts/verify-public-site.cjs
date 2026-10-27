@@ -130,12 +130,12 @@ for(const route of ['charge','solar','compute']){
 }
 const charge=fs.readFileSync(path.join(root,'participate/charge/index.html'),'utf8'),chargeText=visibleText(charge);
 assert.match(charge,/Check Charge availability/,'Charge acquisition landing must keep one low-friction availability action');
-assert.match(charge,/EV drivers pay to charge\. EcoGrid runs the business behind every session[\s\S]*new project built around Electrify America’s operating charging network[\s\S]*charging revenue, operating costs and your client account connect/,'Charge acquisition landing must explain the project, network and source of operating revenue');
+assert.match(charge,/EV drivers pay to charge\. EcoGrid runs the business behind every session[\s\S]*operating network of company-owned fast-charging sites[\s\S]*charging revenue, operating costs and your client account connect/,'Charge acquisition landing must explain the project, network and source of operating revenue');
 assert.match(charge,/A driver plugs in and charges[\s\S]*Driver payment is recorded[\s\S]*Site, power and uptime are managed[\s\S]*Revenue and costs are reconciled[\s\S]*See how the operating result is reported/,'Charge acquisition landing must connect the physical service to the client account');
 assert.match(charge,/Send your request[\s\S]*EcoGrid Academy calls you[\s\S]*Complete secure registration[\s\S]*Review the project in your account or by phone[\s\S]*Make your decision/,'Charge acquisition landing must explain the complete request-to-decision route');
-assert.match(charge,/Electrify America network reference: Costco Clermont, Florida/,'Charge acquisition landing must identify the verified Electrify America network reference');
-assert.match(charge,/Solar Glow™ 1 and other renewable energy certificates/,'Charge acquisition landing must connect the network to its renewable-energy approach without claiming a site-specific mix');
-assert.match(charge,/data-charge-session-walkthrough[\s\S]*Electrify America charging site[\s\S]*CLIENT ACCOUNT WALKTHROUGH/,'Charge acquisition landing must show a real network session and the account walkthrough');
+assert.match(charge,/Operating-site reference: Costco Clermont, Florida/,'Charge acquisition landing must identify the operating-site reference');
+assert.match(charge,/EcoGrid combines charging operations with energy planning, monitoring and field service/,'Charge acquisition landing must connect the session to the operating system');
+assert.match(charge,/data-charge-session-walkthrough[\s\S]*Operating fast-charging site[\s\S]*CLIENT ACCOUNT WALKTHROUGH/,'Charge acquisition landing must show a real site session and the account walkthrough');
 assert.doesNotMatch(chargeText,/13\s*(?:\/|–|-)\s*14\s*(?:\/|–|-)\s*15\s*(?:\/|–|-)\s*16|42\s*%|percentage point|four[- ]day|every 4 days/i,'Charge acquisition landing must not publish rates or settlement mechanics');
 const compute=fs.readFileSync(path.join(root,'participate/compute/index.html'),'utf8'),computeOverview=fs.readFileSync(path.join(root,'compute/index.html'),'utf8'),computeText=visibleText(compute)+' '+visibleText(computeOverview);
 assert.match(compute,/name="journeyPurpose"[^>]*value="participation"/,'Compute must keep participation as its fixed project intent');

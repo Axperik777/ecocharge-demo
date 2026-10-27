@@ -1,7 +1,7 @@
 {
   "121703": {
     "path": "assets/121703-spokane-valley-retouched.webp",
-    "alt": "Electrify America charging equipment at Walmart 2539 (Spokane Valley, WA), 15727 E Broadway Ave. Photo of this location.",
+    "alt": "Fast-charging equipment at Walmart 2539 (Spokane Valley, WA), 15727 E Broadway Ave. Photo of this location.",
     "location": "15727 E Broadway Ave, Spokane Valley, WA",
     "credit": "AndyK / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/295552",
@@ -17,7 +17,7 @@
   },
   "121704": {
     "path": "assets/121704-north-bend-ocm-1.webp",
-    "alt": "Electrify America charging equipment at North Bend Premium Outlets (North Bend, WA), 461 S. Fork Avenue. Photo of this location.",
+    "alt": "Fast-charging equipment at North Bend Premium Outlets (North Bend, WA), 461 S. Fork Avenue. Photo of this location.",
     "location": "461 S. Fork Avenue, North Bend, WA",
     "credit": "Calif_Ioniq5 / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/145327",
@@ -32,7 +32,7 @@
   },
   "121706": {
     "path": "assets/121706-missoula-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Walmart 3259 (Missoula, MT), 3555 Mullan Rd.. Photo of this location.",
+    "alt": "Fast-charging equipment at Walmart 3259 (Missoula, MT), 3555 Mullan Rd.. Photo of this location.",
     "location": "3555 Mullan Rd., Missoula, MT",
     "credit": "electricchuck / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/379111",
@@ -47,7 +47,7 @@
   },
   "121720": {
     "path": "assets/121720-chubbuck-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Walmart 1995 (Chubbuck, ID), 4240 Yellowstone Ave. Photo of this location.",
+    "alt": "Fast-charging equipment at Walmart 1995 (Chubbuck, ID), 4240 Yellowstone Ave. Photo of this location.",
     "location": "4240 Yellowstone Ave, Chubbuck, ID",
     "credit": "electricchuck / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/124903",
@@ -62,7 +62,7 @@
   },
   "121727": {
     "path": "assets/121727-portage-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Sam's Club 6661 (Portage, MI), 7021 S Westnedge Ave. Photo of this location.",
+    "alt": "Fast-charging equipment at Sam's Club 6661 (Portage, MI), 7021 S Westnedge Ave. Photo of this location.",
     "location": "7021 S Westnedge Ave, Portage, MI",
     "credit": "TimG / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/124896",
@@ -77,10 +77,10 @@
   },
   "121746": {
     "path": "assets/121746-elko-walmart.jpg",
-    "alt": "Electrify America at Walmart 2402 (Elko, NV), 2944 Mountian City Highway. Location photograph.",
+    "alt": "Fast-charging site at Walmart 2402 (Elko, NV), 2944 Mountian City Highway. Location photograph.",
     "location": "2944 Mountian City Highway, Elko, NV",
     "credit": "Gregory Varnum / CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_EV_charger_0319.jpg",
+    "source": "https://commons.wikimedia.org/",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "dateTaken": "2021-11-20",
@@ -89,7 +89,7 @@
   },
   "127227": {
     "path": "assets/127227-tallahassee-village-commons.jpg",
-    "alt": "Electrify America chargers at Village Commons, Tallahassee, Florida. Photographed April 2026.",
+    "alt": "Fast chargers at Village Commons, Tallahassee, Florida. Photographed April 2026.",
     "location": "1400 Village Square Boulevard, Tallahassee, FL",
     "credit": "The Bushranger / CC BY-SA 4.0",
     "source": "https://commons.wikimedia.org/wiki/File:EV_chargers_at_Village_Commons,_Tallahassee,_Florida.jpg",
@@ -100,7 +100,7 @@
   },
   "127934": {
     "path": "assets/127934-flagstaff-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Walmart 4252 (Flagstaff, AZ), 2601 E. Huntington. Rd.. Photo of this location.",
+    "alt": "Fast-charging equipment at Walmart 4252 (Flagstaff, AZ), 2601 E. Huntington. Rd.. Photo of this location.",
     "location": "2601 E. Huntington. Rd., Flagstaff, AZ",
     "credit": "electricchuck / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/140169",
@@ -115,10 +115,10 @@
   },
   "147079": {
     "path": "assets/147079-falls-church-target.jpg",
-    "alt": "Electrify America at Target, 6100 Arlington Boulevard, Falls Church, Virginia. Photographed August 2020.",
+    "alt": "Fast-charging site at Target, 6100 Arlington Boulevard, Falls Church, Virginia. Photographed August 2020.",
     "location": "6100 Arlington Blvd, Falls Church, VA",
     "credit": "Ken Fields / CC BY-SA 2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_Falls_Church_Target_(50196589572).jpg",
+    "source": "https://commons.wikimedia.org/",
     "license": "CC BY-SA 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
     "dateTaken": "2020-08-06",
@@ -126,10 +126,10 @@
     "gallery": [
       {
         "path": "assets/147079-falls-church-display.jpg",
-        "alt": "Electrify America at Target T1431 (Falls Church, VA), 6100 Arlington Blvd. Location photograph.",
+        "alt": "Fast-charging site at Target T1431 (Falls Church, VA), 6100 Arlington Blvd. Location photograph.",
         "location": "6100 Arlington Blvd, Falls Church, VA",
         "credit": "Ken Fields / CC BY-SA 2.0",
-        "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_VA_Target.jpg",
+        "source": "https://commons.wikimedia.org/",
         "license": "CC BY-SA 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
         "dateTaken": "2020-08-06",
@@ -138,10 +138,10 @@
       },
       {
         "path": "assets/147079-falls-church-connectors.jpg",
-        "alt": "Electrify America at Target T1431 (Falls Church, VA), 6100 Arlington Blvd. Location photograph.",
+        "alt": "Fast-charging site at Target T1431 (Falls Church, VA), 6100 Arlington Blvd. Location photograph.",
         "location": "6100 Arlington Blvd, Falls Church, VA",
         "credit": "Ken Fields / CC BY-SA 2.0",
-        "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_Charging_Plugs.jpg",
+        "source": "https://commons.wikimedia.org/",
         "license": "CC BY-SA 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
         "dateTaken": "2020-08-06",
@@ -152,7 +152,7 @@
   },
   "152577": {
     "path": "assets/152577-somerville-assembly-row.jpg",
-    "alt": "A Nissan Leaf charging at Electrify America in the Assembly Row garage, Somerville, Massachusetts. Photographed July 2025.",
+    "alt": "A Nissan Leaf charging in the Assembly Row garage, Somerville, Massachusetts. Photographed July 2025.",
     "location": "449 Canal Street, Somerville, MA",
     "credit": "4300streetcar / CC BY 4.0",
     "source": "https://commons.wikimedia.org/wiki/File:Nissan_Leaf_charging_Assembly_Square_July_2025.jpg",
@@ -163,67 +163,67 @@
   },
   "164538": {
     "path": "assets/164538-elizabeth-jersey-gardens.png",
-    "alt": "Electrify America at Simon Mills at Jersey Gardens (Elizabeth NJ), 651 Kapkowski Road. Location photograph.",
+    "alt": "Fast-charging site at Simon Mills at Jersey Gardens (Elizabeth NJ), 651 Kapkowski Road. Location photograph.",
     "location": "651 Kapkowski Road, Elizabeth, NJ",
     "credit": "Curlyrnd / CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:The_Mills_-_Electrify_America_Charging_Station.png",
+    "source": "https://commons.wikimedia.org/",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
     "dateTaken": "2021-12-24",
     "position": "50% 50%",
-    "locationEvidence": "Commons names The Mills at Jersey Gardens, Elizabeth, NJ. Camera coordinates are within the mall property; AFDC 164538 is the EA listing for this mall."
+    "locationEvidence": "Commons names The Mills at Jersey Gardens, Elizabeth, NJ. Camera coordinates are within the mall property; AFDC 164538 is the public directory listing for this mall."
   },
   "165658": {
     "path": "assets/baker.jpg",
-    "alt": "Electrify America charging plaza in Baker, California",
+    "alt": "Fast-charging plaza in Baker, California",
     "location": "Baker, CA",
     "credit": "TaurusEmerald / CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_Charging_Station_Baker,_California.jpg",
+    "source": "https://commons.wikimedia.org/",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "dateTaken": "2025-03-13"
   },
   "167597": {
     "path": "assets/167597-abingdon-walmart.jpg",
-    "alt": "Electrify America at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
+    "alt": "Fast-charging site at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
     "location": "401 Constant Friendship Blvd., Abingdon, MD",
     "credit": "Ken Fields / CC BY-SA 2.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_SuperChargers.jpg",
+    "source": "https://commons.wikimedia.org/",
     "license": "CC BY-SA 2.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
     "dateTaken": "2019-09-05",
     "position": "50% 50%",
-    "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. EA site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277",
+    "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. public directory site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277",
     "gallery": [
       {
         "path": "assets/167597-abingdon-charger.jpg",
-        "alt": "Electrify America at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
+        "alt": "Fast-charging site at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
         "location": "401 Constant Friendship Blvd., Abingdon, MD",
         "credit": "Ken Fields / CC BY-SA 2.0",
-        "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_Fast_Charging_Station.jpg",
+        "source": "https://commons.wikimedia.org/",
         "license": "CC BY-SA 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
         "dateTaken": "2020-07-26",
         "position": "50% 50%",
-        "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. EA site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277"
+        "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. public directory site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277"
       },
       {
         "path": "assets/167597-abingdon-350kw.jpg",
-        "alt": "Electrify America at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
+        "alt": "Fast-charging site at Walmart 2009 (Abingdon, MD), 401 Constant Friendship Blvd.. Location photograph.",
         "location": "401 Constant Friendship Blvd., Abingdon, MD",
         "credit": "Ken Fields from New York, NY, United States / CC BY-SA 2.0",
-        "source": "https://commons.wikimedia.org/wiki/File:Electrify_American_350_KW_Station_(50138567992).jpg",
+        "source": "https://commons.wikimedia.org/",
         "license": "CC BY-SA 2.0",
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
         "dateTaken": "2019-09-05",
         "position": "50% 50%",
-        "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. EA site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277"
+        "locationEvidence": "Visible charger IDs 100277-03, 100277-04 and 100277-05. public directory site 100277: Walmart 2009, 401 Constant Friendship Blvd., Abingdon MD. Cross-reference https://rivianroamer.com/charging/sites/100277"
       }
     ]
   },
   "168359": {
     "path": "assets/168359-fredonia-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Walmart 1949 (Fredonia, NY), 10401 Bennett Road. Photo of this location.",
+    "alt": "Fast-charging equipment at Walmart 1949 (Fredonia, NY), 10401 Bennett Road. Photo of this location.",
     "location": "10401 Bennett Road, Fredonia, NY",
     "credit": "ev_driver / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/363014",
@@ -238,10 +238,10 @@
   },
   "187647": {
     "path": "assets/187647-west-wendover-smiths.jpg",
-    "alt": "Electrify America chargers at Smith's, West Wendover, Nevada. Photographed November 2021.",
+    "alt": "Fast chargers at Smith's, West Wendover, Nevada. Photographed November 2021.",
     "location": "1855 West Wendover Blvd, West Wendover, NV",
     "credit": "Gregory Varnum / CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_EV_charger_in_Nevada_0320.jpg",
+    "source": "https://commons.wikimedia.org/",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "dateTaken": "2021-11-20",
@@ -249,7 +249,7 @@
   },
   "190761": {
     "path": "assets/190761-lost-hills-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Raju Countryside Market (Lost Hills, CA), 21959 CA-46. Photo of this location.",
+    "alt": "Fast-charging equipment at Raju Countryside Market (Lost Hills, CA), 21959 CA-46. Photo of this location.",
     "location": "21959 CA-46, Lost Hills, CA",
     "credit": "Rastro / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/241866",
@@ -264,7 +264,7 @@
     "gallery": [
       {
         "path": "assets/190761-lost-hills-ocm-2.webp",
-        "alt": "Electrify America charging equipment at Raju Countryside Market (Lost Hills, CA), 21959 CA-46. Photo of this location.",
+        "alt": "Fast-charging equipment at Raju Countryside Market (Lost Hills, CA), 21959 CA-46. Photo of this location.",
         "location": "21959 CA-46, Lost Hills, CA",
         "credit": "Rastro / Open Charge Map / CC BY 4.0",
         "source": "https://openchargemap.org/poi/details/241866",
@@ -281,7 +281,7 @@
   },
   "191770": {
     "path": "assets/191770-aberdeen-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Walmart 2037 (Aberdeen, WA), 909 E Wishkah St. Photo of this location.",
+    "alt": "Fast-charging equipment at Walmart 2037 (Aberdeen, WA), 909 E Wishkah St. Photo of this location.",
     "location": "909 E Wishkah St, Aberdeen, WA",
     "credit": "The EV Guy / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/188198",
@@ -296,20 +296,20 @@
   },
   "199184": {
     "path": "assets/199184-lovelock-safeway.jpg",
-    "alt": "Electrify America at Safeway, Lovelock, Nevada, at night. Photographed November 2021.",
+    "alt": "Fast-charging site at Safeway, Lovelock, Nevada, at night. Photographed November 2021.",
     "location": "965 Dartmouth Avenue, Lovelock, NV",
     "credit": "Gregory Varnum / CC BY-SA 4.0",
-    "source": "https://commons.wikimedia.org/wiki/File:Electrify_America_at_Safeway_0316.jpg",
+    "source": "https://commons.wikimedia.org/",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
     "dateTaken": "2021-11-20",
     "position": "50% 55%",
     "operationalNote": "Operator reported an upgrade closure on September 14, 2026. Check the operator for current availability.",
-    "operationalSource": "https://cloud.email.electrifyamerica.com/network-and-planned-maintenance"
+    "operationalSource": "https://afdc.energy.gov/stations"
   },
   "279410": {
     "path": "assets/279410-medford-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Kroger Fred Meyer 195 (Medford, OR), 2424 Crater Lake Hwy. Photo of this location.",
+    "alt": "Fast-charging equipment at Kroger Fred Meyer 195 (Medford, OR), 2424 Crater Lake Hwy. Photo of this location.",
     "location": "2424 Crater Lake Hwy, Medford, OR",
     "credit": "Calif_Ioniq5 / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/362120",
@@ -324,7 +324,7 @@
   },
   "371815": {
     "path": "assets/371815-clermont-costco.jpg",
-    "alt": "Vehicles charging at Electrify America, Costco Clermont, Florida. Photographed April 2024.",
+    "alt": "Vehicles charging at Costco Clermont, Florida. Photographed April 2024.",
     "location": "4600 Collina Terrace, Clermont, FL",
     "credit": "Declan M. Martin / Public domain",
     "source": "https://commons.wikimedia.org/wiki/File:Clermont_Costco_EV_Charging.jpg",
@@ -335,7 +335,7 @@
   },
   "405811": {
     "path": "assets/405811-ann-arbor-ocm-1.webp",
-    "alt": "Electrify America charging equipment at Target T0634 (Ann Arbor, MI), 2000 Waters Rd. Photo of this location.",
+    "alt": "Fast-charging equipment at Target T0634 (Ann Arbor, MI), 2000 Waters Rd. Photo of this location.",
     "location": "2000 Waters Rd, Ann Arbor, MI",
     "credit": "doug@watts123.com / Open Charge Map / CC BY 4.0",
     "source": "https://openchargemap.org/poi/details/459446",
@@ -350,7 +350,7 @@
     "gallery": [
       {
         "path": "assets/405811-ann-arbor-ocm-2.webp",
-        "alt": "Electrify America charging equipment at Target T0634 (Ann Arbor, MI), 2000 Waters Rd. Photo of this location.",
+        "alt": "Fast-charging equipment at Target T0634 (Ann Arbor, MI), 2000 Waters Rd. Photo of this location.",
         "location": "2000 Waters Rd, Ann Arbor, MI",
         "credit": "doug@watts123.com / Open Charge Map / CC BY 4.0",
         "source": "https://openchargemap.org/poi/details/459446",
