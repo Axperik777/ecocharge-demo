@@ -129,10 +129,10 @@ for(const route of ['charge','solar','compute']){
  assert.match(page,new RegExp('name="journeyTopic" value="'+route+'"'),'Project request must preserve its topic: '+route);
 }
 const charge=fs.readFileSync(path.join(root,'participate/charge/index.html'),'utf8'),chargeText=visibleText(charge);
-assert.match(charge,/Start my Charge application/,'Charge acquisition landing must keep one application action');
-assert.match(charge,/Invest in an EcoGrid Charge project built around operating EV charging stations[\s\S]*EcoGrid owns and operates the stations[\s\S]*Drivers pay for completed charging sessions/,'Charge acquisition landing must explain the project, ownership and source of operating revenue');
-assert.match(charge,/Driver connects and charges[\s\S]*Driver payment is recorded[\s\S]*EcoGrid runs the site[\s\S]*Revenue and costs are matched[\s\S]*Applicable result recorded/,'Charge acquisition landing must connect the physical service to the client account');
-assert.match(charge,/Submit your application[\s\S]*EcoGrid Academy calls you[\s\S]*Complete secure registration[\s\S]*Review the project in your account or by phone[\s\S]*Make your decision/,'Charge acquisition landing must explain the complete application-to-decision route');
+assert.match(charge,/Check Charge availability/,'Charge acquisition landing must keep one low-friction availability action');
+assert.match(charge,/EV drivers pay to charge\. EcoGrid runs the business behind every session[\s\S]*EcoGrid owns and operates the charging infrastructure[\s\S]*charging revenue, operating costs and your client account connect/,'Charge acquisition landing must explain the project, ownership and source of operating revenue');
+assert.match(charge,/A driver plugs in and charges[\s\S]*Driver payment is recorded[\s\S]*Site, power and uptime are managed[\s\S]*Revenue and costs are reconciled[\s\S]*See how the operating result is reported/,'Charge acquisition landing must connect the physical service to the client account');
+assert.match(charge,/Send your request[\s\S]*EcoGrid Academy calls you[\s\S]*Complete secure registration[\s\S]*Review the project in your account or by phone[\s\S]*Make your decision/,'Charge acquisition landing must explain the complete request-to-decision route');
 assert.match(charge,/This location is not owned or operated by EcoGrid/,'Charge acquisition landing must separate the external market reference from EcoGrid-owned infrastructure');
 assert.doesNotMatch(chargeText,/13\s*(?:\/|–|-)\s*14\s*(?:\/|–|-)\s*15\s*(?:\/|–|-)\s*16|42\s*%|percentage point|four[- ]day|every 4 days/i,'Charge acquisition landing must not publish rates or settlement mechanics');
 const compute=fs.readFileSync(path.join(root,'participate/compute/index.html'),'utf8'),computeOverview=fs.readFileSync(path.join(root,'compute/index.html'),'utf8'),computeText=visibleText(compute)+' '+visibleText(computeOverview);
