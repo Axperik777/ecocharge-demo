@@ -6472,8 +6472,8 @@
   "sourceType": "statement",
   "titleRu": "Tesla: 13,5 ГВт·ч накопителей во втором квартале 2026 года",
   "titleEn": "Tesla reports 13.5 GWh of storage deployments in Q2 2026",
-  "bodyRu": "Tesla сообщила о 13,5 ГВт·ч развёрнутых накопителей и 480 126 поставленных автомобилях. Это операционные показатели компании, а не сведения о результатах EcoGrid.",
-  "bodyEn": "Tesla reported storage deployments of 13.5 GWh and 480,126 vehicle deliveries. These are Tesla operating figures, not EcoGrid results.",
+  "bodyRu": "Tesla сообщила о 13,5 ГВт·ч развёрнутых накопителей и 480 126 поставленных автомобилях. EcoGrid Club использует эти данные как рыночный контекст для накопителей и спроса на электротранспорт.",
+  "bodyEn": "Tesla reported storage deployments of 13.5 GWh and 480,126 vehicle deliveries. EcoGrid Club uses these figures as market context for storage and electric-vehicle demand.",
   "createdAt": "2026-07-02T12:00:00.000Z",
   "updatedAt": "2026-07-02T12:00:00.000Z"
  },

@@ -1,1 +1,28 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="assets/ecocharge-mark.svg"><title>EcoGrid · Client workspace</title></head><body><a id="client-entry" href="client/?lang=en">Open EcoGrid client workspace</a><script>(()=>{const target="client/?lang=en"+location.hash;document.getElementById("client-entry").href=target;location.replace(target)})();</script></body></html>
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EcoGrid · Client workspace</title>
+</head>
+<body>
+  <main>
+    <h1>EcoGrid client workspace</h1>
+    <p><a id="client-entry" href="https://axperik777.github.io/ecocharge-demo/workspace/client/?lang=en">Open client workspace</a></p>
+  </main>
+  <script>
+  (() => {
+    const target = new URL("https://axperik777.github.io/ecocharge-demo/workspace/client/");
+    const input = new URLSearchParams(location.search);
+    for (const key of ['tab', 'client', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
+      if (input.has(key)) target.searchParams.set(key, input.get(key));
+    }
+    target.searchParams.set('lang', 'en');
+    target.hash = location.hash;
+    document.getElementById('client-entry').href = target.href;
+    location.replace(target.href);
+  })();
+  </script>
+</body>
+</html>

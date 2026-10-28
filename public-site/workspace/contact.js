@@ -86,7 +86,7 @@ document.addEventListener('submit',e=>{
     const topic=$('#contact-topic').value,isCall=topic==='call';
     const appointment=isCall?{date:$('#callback-date').value,time:$('#callback-time').value,timeZone:$('#callback-zone').value}:null;
     if(isCall){const instant=window.EcoChargeCallback?.validate(appointment);if(!instant){$('#support-error').textContent='Choose a future time in the selected time zone. Avoid an unavailable or repeated daylight-saving time.';return}appointment.instant=instant;}
-    const text=isCall?`Preferred callback: ${appointment.date} at ${appointment.time} (${appointment.timeZone}). Time to be confirmed.\n\n${message}`:message;
+    const text=isCall?`Requested callback: ${appointment.date} at ${appointment.time} (${appointment.timeZone}).\n\n${message}`:message;
     const id=messageId();demo.tickets.push({id,subject:contactTopics[topic],context:form._context,message:text,appointment,status:'Open',date:now,reply:'',messages:[{from:'client',text,date:now}]});
     window.EcoChargeDrafts?.clear(form);contactDraft=null;activity(`Client sent ${contactTopics[topic].toLowerCase()}`);persist();
     openModal(`<div class="success-icon">✓</div><h2>${isCall?'Callback request saved':'Your question is in the inbox'}</h2><p>${isCall?'The requested time awaits confirmation.':'Your manager can review your question and the selected details.'}</p>${contextMarkup(form._context)}<div class="modal-note">Conversation added to your account inbox. Replies appear here.</div><button class="button primary" data-thread="${id}">View my request ${icon('arrow')}</button>`);

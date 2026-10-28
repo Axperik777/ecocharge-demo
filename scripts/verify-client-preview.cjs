@@ -1,56 +1,47 @@
 'use strict';
-const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
-const visibleCopy=require('./verify-workspace-preview.cjs').visibleCopy;
-function verify(root){
- const files=fs.readdirSync(root,{recursive:true,withFileTypes:true}).filter(e=>e.isFile()).map(e=>path.join(e.parentPath,e.name));
- const manifest=JSON.parse(fs.readFileSync(path.join(root,'preview-manifest.json'),'utf8'));
- assert.equal(manifest.source,'fresh-isolated-fixture');assert.equal(manifest.apiConnected,false);assert.equal(manifest.authentication,false);assert.equal(manifest.activeOffer,'charge');assert.equal(manifest.chargeModel,'charge-fixed-obligation-v3');assert.equal(manifest.settlementDays,4);assert.equal(manifest.obligationFunding,'fictional-company-reserve');
- const ctx={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'pages-client-data.js'),'utf8'),ctx);
- const fixture=ctx.window.ECO_PAGES_FIXTURE,row=fixture.responses['client/account'],state=row.state;
- assert.equal(state.preferences?.language,'en');assert.equal(state.plan.capital,250);assert.equal(state.plan.rate,13);assert.equal(state.plan.tierId,'single');assert.equal(state.plan.economyModel,'charge-fixed-obligation-v3');assert.equal(state.sessions.length,manifest.completedSettlements);assert.ok(state.sessions.length>=7);
- assert.equal(Math.round(state.balance*100),state.sessions.reduce((sum,s)=>sum+Math.round(s.payout*100),0));
- assert.equal(row.client.email,'');assert.equal(row.client.phone,'');assert.equal(row.client.invite,null);
- const finance=require(path.join(root,'account-finance.js'));
- for(const period of state.sessions){assert.equal(period.period,'accrual');assert.equal(period.settlementDays,4);assert.equal(period.funded,period.obligation);assert.equal(period.payout,period.funded);assert.equal(period.companyPayable,0);assert.equal(period.participantPool,0);assert.equal(period.revenueApplied,0);assert.equal(period.reserveApplied,period.obligation);assert.equal(period.source,'manual_verified_settlement');assert.equal(period.obligation,finance.planAccrual(state.plan,period.periodStart,period.periodEnd));}
- const nextSettlementEnd=finance.nextPeriodStart(state)+finance.settlementPeriodMs;
- assert.ok(Number.isFinite(nextSettlementEnd)&&nextSettlementEnd>Date.parse(fixture.generatedAt),'Client preview exposes an expired next settlement date');
- const html=fs.readFileSync(path.join(root,'client/index.html'),'utf8');
- const entry=fs.readFileSync(path.join(root,'index.html'),'utf8');
- const cfg={window:{}};vm.runInNewContext(fs.readFileSync(path.join(root,'platform-config.js'),'utf8'),cfg);assert.equal(cfg.window.ECO_PLATFORM_CONFIG.localeMode,'launch');
- assert(entry.includes('client/?lang=en'),'Client preview entry must force English');
- assert.doesNotMatch(entry,/lang=ru|===\s*["']ru["']/,'Client preview entry must not preserve a Russian request');
- assert(entry.includes('assets/ecocharge-mark.svg'),'Client preview entry must declare a local favicon');
- assert(!entry.includes('http-equiv="refresh"'),'Client preview entry must use its English redirect script');
- assert(!fs.existsSync(path.join(root,'locale-ru.js')),'Client preview must not ship the Russian locale bundle');
- assert.doesNotMatch(html,/locale-ru\.js|data-language="ru"/,'Client HTML must not expose Russian locale controls or assets');
- const visible=html.replace(/<!--[\s\S]*?-->/g,' ').replace(/<(?:script|style)\b[^>]*>[\s\S]*?<\/(?:script|style)>/gi,' ').replace(/<[^>]+>/g,' ');
- assert.doesNotMatch(visible,/[А-Яа-яЁё]/,'Client HTML contains visible Russian copy');
- const profileAt=html.indexOf('src="central/profile-model.js'),ecosystemAt=html.indexOf('src="central/ecosystem.js');
- assert(profileAt>=0&&profileAt<ecosystemAt,'Profile model must load before the account UI');
- const profile=require(path.join(root,'central/profile-model.js'));
- assert.equal(typeof profile.selectedZone,'function','Client preview profile model is outdated');
- assert.equal(profile.selectedZone('America/New_York'),'America/New_York');
- assert(!html.includes('href="client/?tab=dashboard" aria-label="EcoGrid home"'),'Home logo must point to the website');
- assert(html.includes('pages-client-bootstrap.js'));assert(html.includes('pages-client-adapter.js'));
- assert(!html.includes('src="central/client.js"'));assert(!html.includes('sessionStorage.setItem("ecocharge-entry'));
- for(const [,ref]of html.matchAll(/(?:src|href)="([^"?#]+\.(?:js|css|svg|png|webmanifest))(?:[?#][^"]*)?"/g))if(!ref.includes(':'))assert(fs.existsSync(path.join(root,ref)),'Missing '+ref);
- for(const file of files){const rel=path.relative(root,file).replaceAll('\\','/');assert(!/(^|\/)(?:server|crm|team|staff|private-data|login)(\/|$)|\.sqlite|\.local\.|initial-users|\.env|ДОСТУПЫ|\.cjs$/i.test(rel),'Private/server file '+rel);}
- visibleCopy.verifyVisibleFiles(root,files);
- const boot=fs.readFileSync(path.join(root,'pages-client-bootstrap.js'),'utf8'),adapter=fs.readFileSync(path.join(root,'pages-client-adapter.js'),'utf8'),ready=fs.readFileSync(path.join(root,'pages-client-ready.js'),'utf8');
- assert(boot.includes("method==='GET'?fixture.responses[key]:undefined"));assert(adapter.includes('requestWithdrawal:blocked'));assert(ready.includes('event.stopImmediatePropagation()'));
- const currentUi=['weekly.js','tariffs.js','portal.js','cabinets.js','central/ecosystem.js','central/client-finance.js'].map(file=>fs.readFileSync(path.join(root,file),'utf8')).join('\n');
- assert.doesNotMatch(currentUi,/Record a 4-day accrual|Weekly report available|First closed week|Compare the weekly model|Starting option \/ week|Alternative \/ week|Модель за неделю|Сравнить недельную модель|Недельный отч[её]т|Первая закрытая неделя|Day \d+ of 7|День \d+ из 7|7-day period|Период 7 дней|Unlocked after the Charge journey|Available after confirmed Charge participation/i,'Client preview contains retired current-state copy');
- const retiredVocabulary=new RegExp('M\\u0069ning|\\u043c\\u0430\\u0439\\u043d|AS\\u0049C|EcoM\\u0069ner','iu');
- assert.doesNotMatch(currentUi,retiredVocabulary,'Client preview exposes retired product vocabulary');
- assert.match(currentUi,/Review 4-day obligation/);assert.match(currentUi,/Company payable · not withdrawable/);
- assert.match(currentUi,/data-expansion-stage="open"/);
- assert.match(currentUi,/EcoGrid Solar/);assert.match(currentUi,/EcoGrid Compute/);
- assert.match(currentUi,/Compute infrastructure participation/,'Client preview must explain the active Compute route in English');
- assert.doesNotMatch(currentUi,/GPU capacity for business workloads|GPU-мощность для бизнес-задач/,'Client preview must not revive the retired capacity route');
- assert.match(currentUi,/compute:'equipment-compute'/,'Client preview must route Compute separately');
- assert.doesNotMatch(currentUi,/data-eco-route="equipment-"\s*\+\s*"retired"/,'Client preview must not expose a retired route');
- assert.doesNotMatch(currentUi,/Not active yet · future company release|future-release/);
- return {files:files.length,capital:state.plan.capital,rate:state.plan.rate,settlements:state.sessions.length,balance:state.balance,privateData:false,serverOperations:false};
+
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const visibleCopy = require('./verify-workspace-preview.cjs').visibleCopy;
+
+function verify(root) {
+  const files = fs.readdirSync(root, { recursive: true, withFileTypes: true })
+    .filter(entry => entry.isFile())
+    .map(entry => path.join(entry.parentPath, entry.name));
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'compatibility-manifest.json'), 'utf8'));
+  assert.equal(manifest.kind, 'client-compatibility-redirect');
+  assert.equal(manifest.locale, 'en');
+  assert.equal(manifest.apiConnected, false);
+  assert.equal(manifest.serverOperations, false);
+  assert.match(manifest.canonicalTarget, /\/workspace\/client\/$/);
+
+  for (const relative of ['index.html', 'client/index.html']) {
+    const html = fs.readFileSync(path.join(root, relative), 'utf8');
+    assert(html.includes(manifest.canonicalTarget));
+    assert(html.includes("target.searchParams.set('lang', 'en')"));
+    assert(html.includes('location.replace(target.href)'));
+    assert.doesNotMatch(html, /lang=ru|[А-Яа-яЁё]/);
+    const visible = html
+      .replace(/<!--[^]*?-->/g, ' ')
+      .replace(/<(?:script|style)\b[^>]*>[^]*?<\/(?:script|style)>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ');
+    assert.doesNotMatch(visible, /demo|preview|sample|AFDC|public station|ownership/i);
+  }
+
+  for (const file of files) {
+    const relative = path.relative(root, file).replaceAll('\\', '/');
+    assert(!/(?:^|\/)(?:server|crm|team|staff|private-data|login)(?:\/|$)|\.sqlite|\.local\.|initial-users|\.env|ДОСТУПЫ|\.cjs$/i.test(relative), `Private/server file ${relative}`);
+  }
+  visibleCopy.verifyVisibleFiles(root, files);
+  return {
+    files: files.length,
+    redirect: true,
+    target: manifest.canonicalTarget,
+    privateData: false,
+    serverOperations: false
+  };
 }
-if(require.main===module)console.log(JSON.stringify(verify(path.resolve(process.argv[2]||'public-site/cabinet'))));
-module.exports=verify;
+
+if (require.main === module) console.log(JSON.stringify(verify(path.resolve(process.argv[2] || 'public-site/cabinet'))));
+module.exports = verify;
