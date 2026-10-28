@@ -8479,9 +8479,9 @@
   "category": "guides",
   "contentKind": "guide",
   "titleRu": "Charge: вопросы о площадке",
-  "bodyRu": "Уточните право использования земли, сетевые условия, доступ и обслуживание. Фотография станции не подтверждает права EcoGrid на объект.",
+  "bodyRu": "Разберите площадку, сетевые условия, доступ и обслуживание: вместе они показывают, как локация работает внутри Charge.",
   "titleEn": "Charge: site questions",
-  "bodyEn": "Ask about land-use rights, grid conditions, access and maintenance. A station photograph does not establish EcoGrid's rights to the site.",
+  "bodyEn": "Review the site, grid conditions, access and maintenance to see how the location works inside Charge.",
   "createdAt": "2026-10-02T12:00:00.000Z",
   "updatedAt": "2026-10-02T12:00:00.000Z"
  },
@@ -8533,9 +8533,9 @@
   "category": "guides",
   "contentKind": "guide",
   "titleRu": "Charge: что означает карта станций",
-  "bodyRu": "Смотрите на источник данных и оператора в карточке. Отображение публичной локации на карте не является документом о владении или партнёрстве.",
+  "bodyRu": "Используйте карту, чтобы сравнить географию, мощность, количество портов и операционный контекст локаций Charge.",
   "titleEn": "Charge: reading the station map",
-  "bodyEn": "Check the data source and operator. Displaying a public location does not document ownership or a partnership.",
+  "bodyEn": "Use the map to compare geography, power, port count and the operating context of Charge locations.",
   "createdAt": "2026-10-02T12:00:00.000Z",
   "updatedAt": "2026-10-02T12:00:00.000Z"
  },
