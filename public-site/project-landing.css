@@ -168,8 +168,6 @@ html[data-app=website][data-page="participate/charge"] .charge-photo-label{posit
 html[data-app=website][data-page="participate/charge"] .charge-photo-label small{color:#007b6b;font-size:9px;font-weight:850;line-height:1.35;letter-spacing:.1em}
 html[data-app=website][data-page="participate/charge"] .charge-photo-label strong{color:#0b2330;font-size:14px;line-height:1.35}
 html[data-app=website][data-page="participate/charge"] .charge-photo-status{position:absolute;top:12px;left:12px;padding:7px 10px;border:1px solid rgba(255,255,255,.72);border-radius:999px;background:rgba(11,35,48,.84);color:#fff;font-size:9px;font-weight:850;line-height:1.3;letter-spacing:.09em;box-shadow:0 8px 20px rgba(11,35,48,.16);transition:background-color .2s ease,color .2s ease}
-html[data-app=website][data-page="participate/charge"] .charge-session-photo figcaption{padding:9px 12px;color:#61737a;font-size:10px;line-height:1.5}
-html[data-app=website][data-page="participate/charge"] .charge-session-photo figcaption a{color:#315d69;text-decoration:underline;text-underline-offset:2px}
 html[data-app=website][data-page="participate/charge"] .charge-session-flow{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;min-width:0;margin:0;padding:0;list-style:none}
 html[data-app=website][data-page="participate/charge"] .charge-session-flow li{min-width:0}
 html[data-app=website][data-page="participate/charge"] .charge-session-flow button{display:grid;width:100%;min-height:92px;grid-template-columns:28px minmax(0,1fr);gap:9px;align-items:start;padding:12px;border:1px solid #cadadd;border-radius:13px;background:#fff;color:#0b2330;text-align:left;cursor:pointer;transition:border-color .2s ease,background-color .2s ease,transform .2s ease}
