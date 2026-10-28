@@ -128,12 +128,14 @@ for(const route of ['charge','solar','compute']){
  assert.match(page,/data-lead-form/,'Project must expose its own request form: '+route);
  assert.match(page,new RegExp('name="journeyTopic" value="'+route+'"'),'Project request must preserve its topic: '+route);
 }
-const charge=fs.readFileSync(path.join(root,'participate/charge/index.html'),'utf8'),chargeText=visibleText(charge);
+const charge=fs.readFileSync(path.join(root,'participate/charge/index.html'),'utf8'),chargeText=visibleText(charge),chargeSessionFigure=charge.match(/<figure class="charge-session-photo">[\s\S]*?<\/figure>/)?.[0]||'',chargeReferenceFigure=charge.match(/<figure class="charge-reference-photo">[\s\S]*?<\/figure>/)?.[0]||'';
 assert.match(charge,/Request my Charge project review/,'Charge acquisition landing must keep one low-friction project-review action');
 assert.match(charge,/Invest in the business behind fast charging\.[\s\S]*Drivers pay for completed charging sessions[\s\S]*revenue and operating costs are reconciled[\s\S]*client account/,'Charge acquisition landing must explain the project, network and source of operating revenue');
 assert.match(charge,/A driver plugs in and charges[\s\S]*Driver payment is recorded[\s\S]*Site, power and uptime are managed[\s\S]*Revenue and costs are reconciled[\s\S]*See how the operating result is reported/,'Charge acquisition landing must connect the physical service to the client account');
 assert.match(charge,/Send your application[\s\S]*EcoGrid Academy calls you[\s\S]*Complete secure registration[\s\S]*Follow the same site in your account or by phone[\s\S]*Make your decision/,'Charge acquisition landing must explain the complete request-to-decision route');
-assert.match(charge,/Operating-site reference: Aberdeen, Washington/,'Charge acquisition landing must identify the continuous operating-site reference');
+assert.match(charge,/data-station-reference="191770"[\s\S]*Aberdeen is the operating-site reference used throughout this walkthrough/,'Charge acquisition landing must identify the continuous operating-site reference');
+assert.doesNotMatch(chargeSessionFigure,/<figcaption\b/,'Charge session photo must not show a technical caption strip');
+assert.doesNotMatch(chargeReferenceFigure,/<figcaption\b/,'Charge reference photo must not show a technical caption strip');
 assert.match(charge,/company-owned (?:fast-charging business|charging sites)/i,'Charge acquisition landing must identify the operating model');
 assert.match(charge,/Paid demand starts with completed sessions[\s\S]*Energy and operating costs shape the result[\s\S]*reconciled result reaches the account/i,'Charge acquisition landing must connect demand, costs and the account result');
 assert.match(charge,/data-charge-session-walkthrough[\s\S]*Operating fast-charging site[\s\S]*CLIENT ACCOUNT[\s\S]*One real site\. The same operating logic\.[\s\S]*Follow the same site in your account or by phone/i,'Charge acquisition landing must show one continuous real-site and account walkthrough');

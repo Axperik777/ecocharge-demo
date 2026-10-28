@@ -253,7 +253,6 @@ html[data-app=website][data-page="participate/charge"] .charge-operator-capabili
 html[data-app=website][data-page="participate/charge"] .charge-reference{display:grid;gap:26px;align-items:stretch;padding-block:clamp(44px,6vw,76px);border-block:1px solid var(--line,#d8e4de)}
 html[data-app=website][data-page="participate/charge"] .charge-reference-photo{align-self:start;display:flex;min-width:0;margin:0;overflow:hidden;border:1px solid #c8d8dc;border-radius:22px;background:#e9f1f3;flex-direction:column}
 html[data-app=website][data-page="participate/charge"] .charge-reference-photo img{display:block;width:100%;height:clamp(320px,42vw,560px);object-fit:cover;object-position:center 48%}
-html[data-app=website][data-page="participate/charge"] .charge-reference-photo figcaption{padding:14px 16px;color:#536970;font-size:12px;line-height:1.6}
 html[data-app=website][data-page="participate/charge"] .charge-reference-copy{min-width:0;padding-block:4px}
 html[data-app=website][data-page="participate/charge"] .charge-reference-copy h2{margin:0;font-size:clamp(28px,3.2vw,42px);line-height:1.15;letter-spacing:-.04em}
 html[data-app=website][data-page="participate/charge"] .charge-reference-copy>p:not(.charge-section-label){margin:18px 0;color:var(--muted,#53675e);font-size:16px;line-height:1.7}
