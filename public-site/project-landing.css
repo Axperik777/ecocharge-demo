@@ -149,6 +149,8 @@ html[data-app=website][data-page="participate/charge"] .charge-hero .participate
 html[data-app=website][data-page="participate/charge"] .charge-hero .project-hero-actions{margin-top:28px}
 html[data-app=website][data-page="participate/charge"] .charge-hero .project-hero-actions .ec-button{min-height:54px;padding-inline:22px}
 html[data-app=website][data-page="participate/charge"] .charge-hero-microcopy{margin:10px 0 0;color:var(--muted,#53675e);font-size:14px;line-height:1.55}
+html[data-app=website][data-page="participate/charge"] .charge-review-scope{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+html[data-app=website][data-page="participate/charge"] .charge-review-scope li{display:inline-flex;min-height:32px;align-items:center;padding:6px 10px;border:1px solid #c9dadd;border-radius:999px;background:rgba(255,255,255,.84);color:#334b54;font-size:12px;font-weight:700;line-height:1.35}
 html[data-app=website][data-page="participate/charge"] .charge-company-proof{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:4px 0 0;border:1px solid #cad9dd;border-radius:18px;background:rgba(255,255,255,.84);box-shadow:0 12px 30px rgba(11,35,48,.055)}
 html[data-app=website][data-page="participate/charge"] .charge-company-proof>div{min-width:0;padding:17px 20px;border-left:1px solid #d4e0e3}
 html[data-app=website][data-page="participate/charge"] .charge-company-proof>div:first-child{border-left:0}
@@ -268,8 +270,10 @@ html[data-app=website][data-page="participate/charge"] .charge-reference-links .
 
 html[data-app=website][data-page="participate/charge"] .charge-faq{max-width:920px;padding-block:clamp(48px,6vw,76px)}
 
-html[data-app=website][data-page="participate/charge"] .charge-request{margin-block:clamp(26px,5vw,64px);padding:clamp(28px,4.5vw,54px);border:1px solid #c5d7db;border-radius:28px;background:linear-gradient(135deg,#e4f0f3,#f8fbfb);color:#0b2330}
-html[data-app=website][data-page="participate/charge"] .charge-request>div:first-child{align-self:start;padding-top:8px}
+html[data-app=website][data-page="participate/charge"] .charge-request{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"intro form" "process form";column-gap:70px;row-gap:0;margin-block:clamp(26px,5vw,64px);padding:clamp(28px,4.5vw,54px);scroll-margin-top:96px;border:1px solid #c5d7db;border-radius:28px;background:linear-gradient(135deg,#e4f0f3,#f8fbfb);color:#0b2330}
+html[data-app=website][data-page="participate/charge"] .charge-request-intro{grid-area:intro;align-self:start;padding-top:8px}
+html[data-app=website][data-page="participate/charge"] .charge-request-process{grid-area:process;min-width:0}
+html[data-app=website][data-page="participate/charge"] .charge-request>.participate-form{grid-area:form;align-self:start}
 html[data-app=website][data-page="participate/charge"] .charge-legacy-anchor{display:block;scroll-margin-top:96px}
 html[data-app=website][data-page="participate/charge"] .charge-request .charge-section-label{color:#007b6b}
 html[data-app=website][data-page="participate/charge"] .charge-request h2{margin:0;color:#0b2330}
@@ -311,6 +315,10 @@ html[data-app=website][data-page="participate/charge"] .charge-sticky-cta{displa
  html[data-app=website][data-page="participate/charge"] .charge-hero{grid-template-columns:1fr;gap:28px}
  html[data-app=website][data-page="participate/charge"] .charge-decision{border-radius:22px}
  html[data-app=website][data-page="participate/charge"] .charge-hero-system{min-height:0}
+}
+
+@media(max-width:800px){
+ html[data-app=website][data-page="participate/charge"] .charge-request{grid-template-columns:1fr;grid-template-areas:"intro" "form" "process";row-gap:18px}
 }
 
 @media(max-width:720px){
