@@ -10,7 +10,7 @@ function keepWorkingExample(){
 function isGuest(){try{return workspaceRole==='client'&&JSON.parse(sessionStorage.getItem('ecocharge-entry:client')||'{}').guest===true;}catch{return false;}}
 function planIsComplete(){const tier=demo.tariffs.find(t=>t.id===chosenTier);return tier&&validDemoInvestment(investmentDraft)&&new Set(chosenStations).size===tier.count&&chosenStations.every(id=>stations.some(s=>s.id===id));}
 function decisionSaveForRegistration(){
-  if(!planIsComplete()){toast('Choose a valid amount and the required reference stations first.');return;}
+  if(!planIsComplete()){toast('Choose a valid amount and the required charging locations first.');return;}
   try{sessionStorage.setItem('ecocharge-plan-review',JSON.stringify(planTerms()));location.assign(window.EcoPlatform.url('account','register/?next=assets'));}
   catch{toast('Your selection could not be saved. Check your privacy settings and try again.');}
 }
@@ -21,8 +21,8 @@ actions['apply-plan']=()=>{
   if(!planIsComplete()||!$('#modal').open||!$('#modal [data-action="confirm-plan"]'))return;
   const p=planTerms();decisionTrack('plan_reviewed',{tier:p.tierId});
   const rows=p.stationIds.map(journeyStation).filter(Boolean);
-  $('#modal-content h2').textContent='Review your plan draft';
-  $('#modal-content .modal-list').insertAdjacentHTML('afterend',`<div class="d-review-stations">${rows.map(s=>`<span>${icon('pin')}${escapeHtml(journeyLabel(s))}</span>`).join('')}</div><div class="d-review-terms"><h3>Before you save</h3><dl><div><dt>Your ownership rights</dt><dd>Not created by this workspace</dd></div><div><dt>Fees & access to capital</dt><dd>Final terms pending</dd></div><div><dt>Basis of the monthly rate</dt><dd>Charge plan terms</dd></div></dl><p>The number of reference locations does not change the plan rate.</p><a href="terms/" target="_blank" rel="noopener" data-decision-terms>Read rights, fees & exit conditions ↗</a></div>`);
+  $('#modal-content h2').textContent='Review your plan selection';
+  $('#modal-content .modal-list').insertAdjacentHTML('afterend',`<div class="d-review-stations">${rows.map(s=>`<span>${icon('pin')}${escapeHtml(journeyLabel(s))}</span>`).join('')}</div><div class="d-review-terms"><h3>Before you save</h3><dl><div><dt>Selected locations</dt><dd>${rows.length} in this plan</dd></div><div><dt>Plan calculation</dt><dd>Calendar-month rate · 4-day settlement</dd></div><div><dt>Written terms</dt><dd>Reviewed with your project specialist</dd></div></dl><p>The number of selected locations does not multiply the plan capital or rate.</p><a href="terms/" target="_blank" rel="noopener" data-decision-terms>Read fees, risks & exit conditions ↗</a></div>`);
   const b=$('#modal [data-action="confirm-plan"]');
   if(isGuest()){
     b.dataset.action='decision-register-plan';b.textContent='Save with a profile →';
@@ -34,7 +34,7 @@ actions['decision-register-plan']=decisionSaveForRegistration;
 actions['decision-ask-plan']=()=>{
   if(!planIsComplete())return;
   const p=planTerms();contactComposer('plan',{entry:'plan-review',topic:'plan',plan:p.name,capital:p.capital,rate:p.rate,stationIds:p.stationIds.slice()});
-  ($('#care-message')||$('#support-message')).value=(window.EcoLocale?.t('I am reviewing this plan draft. Please explain the proposed participation rights, the evidence supporting the rate, fees and access to funds.')||'I am reviewing this plan draft. Please explain the proposed participation rights, the evidence supporting the rate, fees and access to funds.');
+  ($('#care-message')||$('#support-message')).value=(window.EcoLocale?.t('I am reviewing this Charge plan. Please explain the selected locations, the basis of the rate, fees, risks and access to funds.')||'I am reviewing this Charge plan. Please explain the selected locations, the basis of the rate, fees, risks and access to funds.');
 };
 const confirmBeforeDecision=actions['confirm-plan'];
 actions['confirm-plan']=()=>{if(isGuest()){decisionSaveForRegistration();return;}confirmBeforeDecision();if(demo.planDraft||isActivePlan()){try{sessionStorage.removeItem('ecocharge-working-plan');}catch{}decisionTrack('plan_saved',{tier:(demo.planDraft||demo.plan).tierId});}};
@@ -58,7 +58,7 @@ function renderDecisionSurfaces(){
     tabs.hidden=false;tabs.innerHTML=decisionTabs();
   }else if(tabs)tabs.hidden=true;
   const heading=$('#tariffs-section .section-heading p');
-  if(heading)heading.textContent='Choose reference locations and inspect the 4-day settlement estimate.';
+  if(heading)heading.textContent='Choose charging locations and inspect the 4-day settlement estimate.';
   const builder=$('#tariffs-section');
   if(builder&&tab==='tariffs'){
     const apply=builder.querySelector('[data-action="apply-plan"]');if(apply)apply.textContent='Review my example →';
@@ -69,7 +69,7 @@ function renderDecisionSurfaces(){
     let steps=$('#decision-roadmap');
     if(!steps){steps=document.createElement('section');steps.id='decision-roadmap';steps.className='d-roadmap';dashboard.prepend(steps);}
     const saved=Boolean(demo.planDraft);
-    steps.innerHTML=`<div><span class="j-eyebrow">A CLEAR PATH THROUGH YOUR ACCOUNT</span><h2>Understand. Explore. Decide.</h2></div><ol><li><a href="inside-a-station/"><span>1</span><div><strong>Understand the business</strong><small>Review the operating-cost calculation</small></div>${journeyArrow()}</a></li><li><button data-action="journey-resume"><span>2</span><div><strong>${saved?'Review your saved selection':'Build your plan draft'}</strong><small>${saved?'Saved to your account':'Choose stations and your amount'}</small></div>${journeyArrow()}</button></li><li><button data-action="journey-documents"><span>3</span><div><strong>Review the terms</strong><small>Rights, evidence, fees and access</small></div>${journeyArrow()}</button></li></ol>`;
+    steps.innerHTML=`<div><span class="j-eyebrow">A CLEAR PATH THROUGH YOUR ACCOUNT</span><h2>Understand. Explore. Decide.</h2></div><ol><li><a href="inside-a-station/"><span>1</span><div><strong>Understand the business</strong><small>Review the operating-cost calculation</small></div>${journeyArrow()}</a></li><li><button data-action="journey-resume"><span>2</span><div><strong>${saved?'Review your saved selection':'Build your plan selection'}</strong><small>${saved?'Saved to your account':'Choose locations and your amount'}</small></div>${journeyArrow()}</button></li><li><button data-action="journey-documents"><span>3</span><div><strong>Review the terms</strong><small>Rights, evidence, fees and access</small></div>${journeyArrow()}</button></li></ol>`;
   }
 }
 const decisionClientBefore=renderClientTab;

@@ -95,7 +95,7 @@
     "121739": {
       "kind": "illustration",
       "path": "assets/illustrations/station-121739.svg",
-      "alt": "Station reference for Stratford, CT.",
+      "alt": "Charging location in Stratford, CT.",
       "location": "411 Barnum Ave Cutoff, Stratford, CT",
       "source": "https://afdc.energy.gov/stations#/station/121739",
       "credit": "EcoGrid"
@@ -103,7 +103,7 @@
     "121805": {
       "kind": "illustration",
       "path": "assets/illustrations/station-121805.svg",
-      "alt": "Station reference for Las Vegas, NV.",
+      "alt": "Charging location in Las Vegas, NV.",
       "location": "7400 Las Vegas Blvd S, Las Vegas, NV",
       "source": "https://afdc.energy.gov/stations#/station/121805",
       "credit": "EcoGrid"
@@ -111,7 +111,7 @@
     "121820": {
       "kind": "illustration",
       "path": "assets/illustrations/station-121820.svg",
-      "alt": "Station reference for Little Rock, AR.",
+      "alt": "Charging location in Little Rock, AR.",
       "location": "8801 Baseline Road, Little Rock, AR",
       "source": "https://afdc.energy.gov/stations#/station/121820",
       "credit": "EcoGrid"
@@ -119,7 +119,7 @@
     "122276": {
       "kind": "illustration",
       "path": "assets/illustrations/station-122276.svg",
-      "alt": "Station reference for Aulac, NB.",
+      "alt": "Charging location in Aulac, NB.",
       "location": "170 Aulac Road, Aulac, NB",
       "source": "https://afdc.energy.gov/stations#/station/122276",
       "credit": "EcoGrid"
@@ -127,7 +127,7 @@
     "122277": {
       "kind": "illustration",
       "path": "assets/illustrations/station-122277.svg",
-      "alt": "Station reference for Saint Leonard, NB.",
+      "alt": "Charging location in Saint Leonard, NB.",
       "location": "382 Rue Saint Jean, Saint Leonard, NB",
       "source": "https://afdc.energy.gov/stations#/station/122277",
       "credit": "EcoGrid"
@@ -135,7 +135,7 @@
     "124686": {
       "kind": "illustration",
       "path": "assets/illustrations/station-124686.svg",
-      "alt": "Station reference for Houston, TX.",
+      "alt": "Charging location in Houston, TX.",
       "location": "13750 East Freeway, Houston, TX",
       "source": "https://afdc.energy.gov/stations#/station/124686",
       "credit": "EcoGrid"
@@ -143,7 +143,7 @@
     "149362": {
       "kind": "illustration",
       "path": "assets/illustrations/station-149362.svg",
-      "alt": "Station reference for Vancouver, BC.",
+      "alt": "Charging location in Vancouver, BC.",
       "location": "701 W Georgia Street, Vancouver, BC",
       "source": "https://afdc.energy.gov/stations#/station/149362",
       "credit": "EcoGrid"
@@ -151,7 +151,7 @@
     "150357": {
       "kind": "illustration",
       "path": "assets/illustrations/station-150357.svg",
-      "alt": "Station reference for Los Angeles, CA.",
+      "alt": "Charging location in Los Angeles, CA.",
       "location": "12316 W Washington Blvd, Los Angeles, CA",
       "source": "https://afdc.energy.gov/stations#/station/150357",
       "credit": "EcoGrid"
@@ -159,7 +159,7 @@
     "153242": {
       "kind": "illustration",
       "path": "assets/illustrations/station-153242.svg",
-      "alt": "Station reference for Souris, PE.",
+      "alt": "Charging location in Souris, PE.",
       "location": "63 Main Street, Souris, PE",
       "source": "https://afdc.energy.gov/stations#/station/153242",
       "credit": "EcoGrid"
@@ -167,7 +167,7 @@
     "153430": {
       "kind": "illustration",
       "path": "assets/illustrations/station-153430.svg",
-      "alt": "Station reference for Portage la Prairie, MB.",
+      "alt": "Charging location in Portage la Prairie, MB.",
       "location": "2100 Saskatchewan Ave, Portage la Prairie, MB",
       "source": "https://afdc.energy.gov/stations#/station/153430",
       "credit": "EcoGrid"
@@ -175,7 +175,7 @@
     "153432": {
       "kind": "illustration",
       "path": "assets/illustrations/station-153432.svg",
-      "alt": "Station reference for Regina, SK.",
+      "alt": "Charging location in Regina, SK.",
       "location": "2325 Prince of Wales Drive, Regina, SK",
       "source": "https://afdc.energy.gov/stations#/station/153432",
       "credit": "EcoGrid"
@@ -183,7 +183,7 @@
     "153460": {
       "kind": "illustration",
       "path": "assets/illustrations/station-153460.svg",
-      "alt": "Station reference for Prawda, MB.",
+      "alt": "Charging location in Prawda, MB.",
       "location": "506 Provincial Rd 506, Prawda, MB",
       "source": "https://afdc.energy.gov/stations#/station/153460",
       "credit": "EcoGrid"
@@ -191,7 +191,7 @@
     "165405": {
       "kind": "illustration",
       "path": "assets/illustrations/station-165405.svg",
-      "alt": "Station reference for New Castle, DE.",
+      "alt": "Charging location in New Castle, DE.",
       "location": "4000 N. DuPont Hwy, New Castle, DE",
       "source": "https://afdc.energy.gov/stations#/station/165405",
       "credit": "EcoGrid"
@@ -199,7 +199,7 @@
     "167164": {
       "kind": "illustration",
       "path": "assets/illustrations/station-167164.svg",
-      "alt": "Station reference for Orlando, FL.",
+      "alt": "Charging location in Orlando, FL.",
       "location": "8001 S. Orange Blossom Trail, Orlando, FL",
       "source": "https://afdc.energy.gov/stations#/station/167164",
       "credit": "EcoGrid"
@@ -207,7 +207,7 @@
     "168271": {
       "kind": "illustration",
       "path": "assets/illustrations/station-168271.svg",
-      "alt": "Station reference for Charlotte, NC.",
+      "alt": "Charging location in Charlotte, NC.",
       "location": "7735 North Tryon Street, Charlotte, NC",
       "source": "https://afdc.energy.gov/stations#/station/168271",
       "credit": "EcoGrid"
@@ -215,7 +215,7 @@
     "170404": {
       "kind": "illustration",
       "path": "assets/illustrations/station-170404.svg",
-      "alt": "Station reference for Seattle, WA.",
+      "alt": "Charging location in Seattle, WA.",
       "location": "9019 Rainier Ave S, Seattle, WA",
       "source": "https://afdc.energy.gov/stations#/station/170404",
       "credit": "EcoGrid"
@@ -223,7 +223,7 @@
     "190426": {
       "kind": "illustration",
       "path": "assets/illustrations/station-190426.svg",
-      "alt": "Station reference for Denver, CO.",
+      "alt": "Charging location in Denver, CO.",
       "location": "7800 Smith Rd., Denver, CO",
       "source": "https://afdc.energy.gov/stations#/station/190426",
       "credit": "EcoGrid"
@@ -231,7 +231,7 @@
     "190999": {
       "kind": "illustration",
       "path": "assets/illustrations/station-190999.svg",
-      "alt": "Station reference for Nashville, TN.",
+      "alt": "Charging location in Nashville, TN.",
       "location": "61 East Thompson Lane, Nashville, TN",
       "source": "https://afdc.energy.gov/stations#/station/190999",
       "credit": "EcoGrid"
@@ -239,7 +239,7 @@
     "200542": {
       "kind": "illustration",
       "path": "assets/illustrations/station-200542.svg",
-      "alt": "Station reference for Hope, BC.",
+      "alt": "Charging location in Hope, BC.",
       "location": "19700 Klassen Road, Hope, BC",
       "source": "https://afdc.energy.gov/stations#/station/200542",
       "credit": "EcoGrid"
@@ -247,7 +247,7 @@
     "201475": {
       "kind": "illustration",
       "path": "assets/illustrations/station-201475.svg",
-      "alt": "Station reference for Phoenix, AZ.",
+      "alt": "Charging location in Phoenix, AZ.",
       "location": "3246 E Bell Road, Phoenix, AZ",
       "source": "https://afdc.energy.gov/stations#/station/201475",
       "credit": "EcoGrid"
@@ -255,7 +255,7 @@
     "213071": {
       "kind": "illustration",
       "path": "assets/illustrations/station-213071.svg",
-      "alt": "Station reference for Atlanta, GA.",
+      "alt": "Charging location in Atlanta, GA.",
       "location": "2036 Johnson Ferry Rd NE, Atlanta, GA",
       "source": "https://afdc.energy.gov/stations#/station/213071",
       "credit": "EcoGrid"
@@ -263,7 +263,7 @@
     "223364": {
       "kind": "illustration",
       "path": "assets/illustrations/station-223364.svg",
-      "alt": "Station reference for Trepassey, NL.",
+      "alt": "Charging location in Trepassey, NL.",
       "location": "110 Main Rd, Trepassey, NL",
       "source": "https://afdc.energy.gov/stations#/station/223364",
       "credit": "EcoGrid"
@@ -271,7 +271,7 @@
     "224185": {
       "kind": "illustration",
       "path": "assets/illustrations/station-224185.svg",
-      "alt": "Station reference for New Minas, NS.",
+      "alt": "Charging location in New Minas, NS.",
       "location": "5477 Prospect Road, Hwy 101W, Exit 12, New Minas, NS",
       "source": "https://afdc.energy.gov/stations#/station/224185",
       "credit": "EcoGrid"
@@ -279,7 +279,7 @@
     "229457": {
       "kind": "illustration",
       "path": "assets/illustrations/station-229457.svg",
-      "alt": "Station reference for Vance, AL.",
+      "alt": "Charging location in Vance, AL.",
       "location": "11 Mercedes Dr, Vance, AL",
       "source": "https://afdc.energy.gov/stations#/station/229457",
       "credit": "EcoGrid"
@@ -287,7 +287,7 @@
     "238607": {
       "kind": "illustration",
       "path": "assets/illustrations/station-238607.svg",
-      "alt": "Station reference for Edmonton, AB.",
+      "alt": "Charging location in Edmonton, AB.",
       "location": "6004 Currents Dr NW, Edmonton, AB",
       "source": "https://afdc.energy.gov/stations#/station/238607",
       "credit": "EcoGrid"
@@ -295,7 +295,7 @@
     "255331": {
       "kind": "illustration",
       "path": "assets/illustrations/station-255331.svg",
-      "alt": "Station reference for Pearl City, HI.",
+      "alt": "Charging location in Pearl City, HI.",
       "location": "1131 Kuala St, Pearl City, HI",
       "source": "https://afdc.energy.gov/stations#/station/255331",
       "credit": "EcoGrid"
@@ -303,7 +303,7 @@
     "279342": {
       "kind": "illustration",
       "path": "assets/illustrations/station-279342.svg",
-      "alt": "Station reference for San Francisco, CA.",
+      "alt": "Charging location in San Francisco, CA.",
       "location": "928 Harrison Street, San Francisco, CA",
       "source": "https://afdc.energy.gov/stations#/station/279342",
       "credit": "EcoGrid"
@@ -311,7 +311,7 @@
     "279355": {
       "kind": "illustration",
       "path": "assets/illustrations/station-279355.svg",
-      "alt": "Station reference for Portland, OR.",
+      "alt": "Charging location in Portland, OR.",
       "location": "7404 N Interstate Ave, Portland, OR",
       "source": "https://afdc.energy.gov/stations#/station/279355",
       "credit": "EcoGrid"
@@ -319,7 +319,7 @@
     "279381": {
       "kind": "illustration",
       "path": "assets/illustrations/station-279381.svg",
-      "alt": "Station reference for Washington, DC.",
+      "alt": "Charging location in Washington, DC.",
       "location": "3222 M St NW, Washington, DC",
       "source": "https://afdc.energy.gov/stations#/station/279381",
       "credit": "EcoGrid"
@@ -327,7 +327,7 @@
     "279398": {
       "kind": "illustration",
       "path": "assets/illustrations/station-279398.svg",
-      "alt": "Station reference for San Diego, CA.",
+      "alt": "Charging location in San Diego, CA.",
       "location": "7007 Friars Road, San Diego, CA",
       "source": "https://afdc.energy.gov/stations#/station/279398",
       "credit": "EcoGrid"
@@ -335,7 +335,7 @@
     "304892": {
       "kind": "illustration",
       "path": "assets/illustrations/station-304892.svg",
-      "alt": "Station reference for St-Louis de Blandford, QC.",
+      "alt": "Charging location in St-Louis de Blandford, QC.",
       "location": "185 2ième rang (Sortie 228 de autoroute 20), St-Louis de Blandford, QC",
       "source": "https://afdc.energy.gov/stations#/station/304892",
       "credit": "EcoGrid"
@@ -343,7 +343,7 @@
     "321180": {
       "kind": "illustration",
       "path": "assets/illustrations/station-321180.svg",
-      "alt": "Station reference for Mississauga, ON.",
+      "alt": "Charging location in Mississauga, ON.",
       "location": "1077 N Service Rd, Mississauga, ON",
       "source": "https://afdc.energy.gov/stations#/station/321180",
       "credit": "EcoGrid"
@@ -351,7 +351,7 @@
     "355557": {
       "kind": "illustration",
       "path": "assets/illustrations/station-355557.svg",
-      "alt": "Station reference for Kananaskis, AB.",
+      "alt": "Charging location in Kananaskis, AB.",
       "location": "100 Nakoda Way, Kananaskis, AB",
       "source": "https://afdc.energy.gov/stations#/station/355557",
       "credit": "EcoGrid"
@@ -359,7 +359,7 @@
     "360096": {
       "kind": "illustration",
       "path": "assets/illustrations/station-360096.svg",
-      "alt": "Station reference for St John's, NL.",
+      "alt": "Charging location in St John's, NL.",
       "location": "45 Pippy Place, St John's, NL",
       "source": "https://afdc.energy.gov/stations#/station/360096",
       "credit": "EcoGrid"
@@ -367,7 +367,7 @@
     "360732": {
       "kind": "illustration",
       "path": "assets/illustrations/station-360732.svg",
-      "alt": "Station reference for Hay River, NT.",
+      "alt": "Charging location in Hay River, NT.",
       "location": "4 Capital Drive, Hay River, NT",
       "source": "https://afdc.energy.gov/stations#/station/360732",
       "credit": "EcoGrid"
@@ -375,7 +375,7 @@
     "375811": {
       "kind": "illustration",
       "path": "assets/illustrations/station-375811.svg",
-      "alt": "Station reference for Hay River, NT.",
+      "alt": "Charging location in Hay River, NT.",
       "location": "4 Capital Drive, Hay River, NT",
       "source": "https://afdc.energy.gov/stations#/station/375811",
       "credit": "EcoGrid"
@@ -383,7 +383,7 @@
     "416799": {
       "kind": "illustration",
       "path": "assets/illustrations/station-416799.svg",
-      "alt": "Station reference for Whitehorse, YT.",
+      "alt": "Charging location in Whitehorse, YT.",
       "location": "4178 4 Ave, Whitehorse, YT",
       "source": "https://afdc.energy.gov/stations#/station/416799",
       "credit": "EcoGrid"
@@ -391,7 +391,7 @@
     "417769": {
       "kind": "illustration",
       "path": "assets/illustrations/station-417769.svg",
-      "alt": "Station reference for Santa Monica, CA.",
+      "alt": "Charging location in Santa Monica, CA.",
       "location": "1802 Santa Monica Boulevard, Santa Monica, CA",
       "source": "https://afdc.energy.gov/stations#/station/417769",
       "credit": "EcoGrid"
@@ -399,7 +399,7 @@
     "421384": {
       "kind": "illustration",
       "path": "assets/illustrations/station-421384.svg",
-      "alt": "Station reference for Chicago, IL.",
+      "alt": "Charging location in Chicago, IL.",
       "location": "2746 N Clybourn Ave, Chicago, IL",
       "source": "https://afdc.energy.gov/stations#/station/421384",
       "credit": "EcoGrid"
@@ -407,7 +407,7 @@
     "449153": {
       "kind": "illustration",
       "path": "assets/illustrations/station-449153.svg",
-      "alt": "Station reference for Austin, TX.",
+      "alt": "Charging location in Austin, TX.",
       "location": "1000 E 41st St, Austin, TX",
       "source": "https://afdc.energy.gov/stations#/station/449153",
       "credit": "EcoGrid"
@@ -415,7 +415,7 @@
     "456872": {
       "kind": "illustration",
       "path": "assets/illustrations/station-456872.svg",
-      "alt": "Station reference for Miami, FL.",
+      "alt": "Charging location in Miami, FL.",
       "location": "11401 NW 12th St, Miami, FL",
       "source": "https://afdc.energy.gov/stations#/station/456872",
       "credit": "EcoGrid"
@@ -423,7 +423,7 @@
     "458385": {
       "kind": "illustration",
       "path": "assets/illustrations/station-458385.svg",
-      "alt": "Station reference for Philadelphia, PA.",
+      "alt": "Charging location in Philadelphia, PA.",
       "location": "2206 S Christopher Columbus Blvd, Philadelphia, PA",
       "source": "https://afdc.energy.gov/stations#/station/458385",
       "credit": "EcoGrid"
@@ -431,7 +431,7 @@
     "461472": {
       "kind": "illustration",
       "path": "assets/illustrations/station-461472.svg",
-      "alt": "Station reference for Ajax, ON.",
+      "alt": "Charging location in Ajax, ON.",
       "location": "40 Kingston Rd E, Ajax, ON",
       "source": "https://afdc.energy.gov/stations#/station/461472",
       "credit": "EcoGrid"
@@ -439,7 +439,7 @@
     "464691": {
       "kind": "illustration",
       "path": "assets/illustrations/station-464691.svg",
-      "alt": "Station reference for Goffs, NS.",
+      "alt": "Charging location in Goffs, NS.",
       "location": "60 Sky Blvd, Goffs, NS",
       "source": "https://afdc.energy.gov/stations#/station/464691",
       "credit": "EcoGrid"
@@ -447,7 +447,7 @@
     "900000001": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000001.svg",
-      "alt": "Station reference for North Vancouver, BC.",
+      "alt": "Charging location in North Vancouver, BC.",
       "location": "2032 Lonsdale Avenue, North Vancouver, BC",
       "source": "https://www.tesla.com/findus/location/supercharger/NorthVancouverBCsupercharger",
       "credit": "EcoGrid"
@@ -455,7 +455,7 @@
     "900000002": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000002.svg",
-      "alt": "Station reference for Burnaby, BC.",
+      "alt": "Charging location in Burnaby, BC.",
       "location": "4567 Lougheed Highway, Burnaby, BC",
       "source": "https://www.tesla.com/findus/location/supercharger/BurnabyBCsupercharger",
       "credit": "EcoGrid"
@@ -463,7 +463,7 @@
     "900000003": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000003.svg",
-      "alt": "Station reference for Edmonton, AB.",
+      "alt": "Charging location in Edmonton, AB.",
       "location": "5015 111 St NW, Edmonton, AB",
       "source": "https://www.tesla.com/findus/location/supercharger/edmontonsupercharger",
       "credit": "EcoGrid"
@@ -471,7 +471,7 @@
     "900000004": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000004.svg",
-      "alt": "Station reference for Montréal, QC.",
+      "alt": "Charging location in Montréal, QC.",
       "location": "985 Boul. St Laurent, Montréal, QC",
       "source": "https://www.tesla.com/findus/location/supercharger/MontrealQCsupercharger",
       "credit": "EcoGrid"
@@ -479,7 +479,7 @@
     "900000005": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000005.svg",
-      "alt": "Station reference for Ottawa, ON.",
+      "alt": "Charging location in Ottawa, ON.",
       "location": "50 Rideau Suite #300, Ottawa, ON",
       "source": "https://www.tesla.com/findus/location/supercharger/ottawasupercharger",
       "credit": "EcoGrid"
@@ -487,7 +487,7 @@
     "900000006": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000006.svg",
-      "alt": "Station reference for Victoria, BC.",
+      "alt": "Charging location in Victoria, BC.",
       "location": "3440 Saanich Road, Victoria, BC",
       "source": "https://www.tesla.com/findus/location/supercharger/victoriabcsupercharger",
       "credit": "EcoGrid"
@@ -495,7 +495,7 @@
     "900000007": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000007.svg",
-      "alt": "Station reference for West Kelowna, BC.",
+      "alt": "Charging location in West Kelowna, BC.",
       "location": "525 Highway 97 South, West Kelowna, BC",
       "source": "https://www.tesla.com/findus/location/supercharger/WestKelownaBCsupercharger",
       "credit": "EcoGrid"
@@ -503,7 +503,7 @@
     "900000008": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000008.svg",
-      "alt": "Station reference for Richmond, BC.",
+      "alt": "Charging location in Richmond, BC.",
       "location": "4660 Garden City Rd, Richmond, BC",
       "source": "https://www.tesla.com/findus/location/supercharger/17226",
       "credit": "EcoGrid"
@@ -511,7 +511,7 @@
     "900000009": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000009.svg",
-      "alt": "Station reference for Nanaimo, BC.",
+      "alt": "Charging location in Nanaimo, BC.",
       "location": "3200 N Island Hwy, Nanaimo, BC",
       "source": "https://www.tesla.com/findus/location/supercharger/17998",
       "credit": "EcoGrid"
@@ -519,7 +519,7 @@
     "900000010": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000010.svg",
-      "alt": "Station reference for Calgary, AB.",
+      "alt": "Charging location in Calgary, AB.",
       "location": "1102 Macleod Trail SE, Calgary, AB",
       "source": "https://www.tesla.com/findus/location/supercharger/4001402",
       "credit": "EcoGrid"
@@ -527,7 +527,7 @@
     "900000011": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000011.svg",
-      "alt": "Station reference for Canmore, AB.",
+      "alt": "Charging location in Canmore, AB.",
       "location": "1719 Bow Valley Trail, Canmore, AB",
       "source": "https://www.tesla.com/findus/location/supercharger/canmoreabsupercharger",
       "credit": "EcoGrid"
@@ -535,7 +535,7 @@
     "900000012": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000012.svg",
-      "alt": "Station reference for Red Deer County, AB.",
+      "alt": "Charging location in Red Deer County, AB.",
       "location": "179 Leva Avenue, Red Deer County, AB",
       "source": "https://www.tesla.com/findus/location/supercharger/reddeeralbertasupercharger",
       "credit": "EcoGrid"
@@ -543,7 +543,7 @@
     "900000013": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000013.svg",
-      "alt": "Station reference for Saskatoon, SK.",
+      "alt": "Charging location in Saskatoon, SK.",
       "location": "3035 Clarence Avenue South, Saskatoon, SK",
       "source": "https://www.tesla.com/findus/location/supercharger/SaskatoonSKsupercharger",
       "credit": "EcoGrid"
@@ -551,7 +551,7 @@
     "900000014": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000014.svg",
-      "alt": "Station reference for Moose Jaw, SK.",
+      "alt": "Charging location in Moose Jaw, SK.",
       "location": "1251 Main Street N #7, Moose Jaw, SK",
       "source": "https://www.tesla.com/findus/location/supercharger/moosejawshopsupercharger",
       "credit": "EcoGrid"
@@ -559,7 +559,7 @@
     "900000015": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000015.svg",
-      "alt": "Station reference for Winnipeg, MB.",
+      "alt": "Charging location in Winnipeg, MB.",
       "location": "1485 Portage Avenue, Winnipeg, MB",
       "source": "https://www.tesla.com/findus/location/supercharger/winnipegportagesupercharger",
       "credit": "EcoGrid"
@@ -567,7 +567,7 @@
     "900000016": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000016.svg",
-      "alt": "Station reference for Brandon, MB.",
+      "alt": "Charging location in Brandon, MB.",
       "location": "921 18th Street North, Brandon, MB",
       "source": "https://www.tesla.com/findus/location/supercharger/brandonmanitobasupercharger",
       "credit": "EcoGrid"
@@ -575,7 +575,7 @@
     "900000017": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000017.svg",
-      "alt": "Station reference for Toronto, ON.",
+      "alt": "Charging location in Toronto, ON.",
       "location": "111 Princes' Boulevard, Toronto, ON",
       "source": "https://www.tesla.com/findus/location/supercharger/torontolibertyvillagesupercharger",
       "credit": "EcoGrid"
@@ -583,7 +583,7 @@
     "900000018": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000018.svg",
-      "alt": "Station reference for London, ON.",
+      "alt": "Charging location in London, ON.",
       "location": "4350 Wellington Road South, London, ON",
       "source": "https://www.tesla.com/findus/location/supercharger/londononsupercharger",
       "credit": "EcoGrid"
@@ -591,7 +591,7 @@
     "900000019": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000019.svg",
-      "alt": "Station reference for Kingston, ON.",
+      "alt": "Charging location in Kingston, ON.",
       "location": "88 Dalton Ave, Kingston, ON",
       "source": "https://www.tesla.com/findus/location/supercharger/kingstonondaltonavesupercharger",
       "credit": "EcoGrid"
@@ -599,7 +599,7 @@
     "900000020": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000020.svg",
-      "alt": "Station reference for Québec City, QC.",
+      "alt": "Charging location in Québec City, QC.",
       "location": "3373 Rue de l'Hétrière, Québec City, QC",
       "source": "https://www.tesla.com/findus/location/supercharger/SaintAugustinDeDesmauresQCsupercharger",
       "credit": "EcoGrid"
@@ -607,7 +607,7 @@
     "900000021": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000021.svg",
-      "alt": "Station reference for Laval, QC.",
+      "alt": "Charging location in Laval, QC.",
       "location": "3035 Boulevard le Carrefour, Laval, QC",
       "source": "https://www.tesla.com/findus/location/supercharger/lavalsupercharger",
       "credit": "EcoGrid"
@@ -615,7 +615,7 @@
     "900000022": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000022.svg",
-      "alt": "Station reference for Waasis, NB.",
+      "alt": "Charging location in Waasis, NB.",
       "location": "415 Nevers Road, Waasis, NB",
       "source": "https://www.tesla.com/findus/location/supercharger/lincolnnbsupercharger",
       "credit": "EcoGrid"
@@ -623,7 +623,7 @@
     "900000023": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000023.svg",
-      "alt": "Station reference for Miramichi, NB.",
+      "alt": "Charging location in Miramichi, NB.",
       "location": "2491 King George Hwy, Miramichi, NB",
       "source": "https://www.tesla.com/findus/location/supercharger/13995",
       "credit": "EcoGrid"
@@ -631,7 +631,7 @@
     "900000024": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000024.svg",
-      "alt": "Station reference for Enfield, NS.",
+      "alt": "Charging location in Enfield, NS.",
       "location": "6757 Highway 2, Enfield, NS",
       "source": "https://www.tesla.com/findus/location/supercharger/enfieldsupercharger",
       "credit": "EcoGrid"
@@ -639,7 +639,7 @@
     "900000025": {
       "kind": "illustration",
       "path": "assets/illustrations/station-900000025.svg",
-      "alt": "Station reference for Charlottetown, PE.",
+      "alt": "Charging location in Charlottetown, PE.",
       "location": "12 Milky Way, Charlottetown, PE",
       "source": "https://www.tesla.com/findus/location/supercharger/CharlottetownPEIsupercharger",
       "credit": "EcoGrid"

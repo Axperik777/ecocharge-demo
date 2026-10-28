@@ -24,7 +24,7 @@ function refineBuilder() {
   const model = $('#decision-model-link'); if (model) model.remove();
   const heading = area.querySelector('.tariff-hero');
   heading.querySelector('.tariff-unit')?.remove();
-  heading.querySelector('p').textContent = 'Set your amount, choose reference stations and review one clear 4-day settlement estimate.';
+  heading.querySelector('p').textContent = 'Set your amount, choose charging locations and review one clear 4-day settlement estimate.';
   const layout = document.createElement('div'); layout.className = 'r-builder';
   const main = document.createElement('div'); main.className = 'r-builder-main';
   const summary = document.createElement('aside'); summary.className = 'panel r-plan-summary'; summary.setAttribute('aria-label', 'Your Charge plan summary');
@@ -36,8 +36,8 @@ function refineBuilder() {
   const tierSection = document.createElement('section'); tierSection.className = 'panel r-tier-section';
   tierSection.innerHTML = '<div class="section-heading"><h2><span class="r-step">2</span> Choose a station group</h2></div><p class="r-explain">Choose a tariff whose minimum fits your amount. Rates are per calendar month.</p>';
   tierSection.append(tiers);
-  picker.querySelector('h2').innerHTML = '<span class="r-step">3</span> Choose reference stations';
-  picker.querySelector('.picker-note').textContent = 'Reference choices are preselected. Change any station before saving. Public listings do not establish company ownership.';
+  picker.querySelector('h2').innerHTML = '<span class="r-step">3</span> Choose charging locations';
+  picker.querySelector('.picker-note').textContent = 'A starting group is preselected. Change any location before saving; your specialist will connect the final selection with the written plan terms.';
   picker.insertAdjacentHTML('beforeend', '<p id="r-selection-status" class="r-selection-status" role="status"></p>');
   main.append(amount, tierSection, picker); layout.append(main, summary);
   area.querySelector('.tariff-workspace')?.remove(); heading.after(layout);

@@ -75,7 +75,7 @@ if(window.ECO_SHARED_CONTEXT){
   finally{savingPaymentPlan=false;if(b?.isConnected)b.disabled=false;}
  };
  document.addEventListener('ecocharge:locale',()=>{renderNumbers();renderLifecycle();});
-actions['preview-contract']=()=>openModal(`<div class="shared-contract-preview">${window.EcoLocale?.html(contractContent())||contractContent()}</div><button class="button primary" data-action="print-contract">${ft('Print unsigned draft','Печать неподписанного черновика')}</button><button class="button secondary" data-action="contract">${ft('Download draft PDF','Скачать черновик PDF')}</button>`);
+ actions['preview-contract']=()=>{tab='documents';renderClientTab();};
  // Explicit review before an already funded draft is activated.
   actions['activate-draft']=()=>{const p=demo.planDraft;if(!p)return;chosenTier=p.tierId;investmentDraft=p.capital;chosenStations=p.stationIds.slice();openModal(`<h2 translate="no">${ft('Activate your saved plan','Активация сохранённого плана')}</h2><p translate="no">${safeText(tierName(p.name))} · ${money(p.capital)} · ${p.rate}% / ${ft('calendar month','календарный месяц')}</p><p translate="no">${ft('Estimated 4-day accrual','Расчётное начисление за 4 дня')}: ${money(EcoFinance.planSettlement(p))}</p><p translate="no">${ft('Available balance after activation','Свободный остаток после активации')}: ${money(availableForPlan()-p.capital)}</p><button class="button primary" data-action="confirm-plan" translate="no">${ft('Confirm activation','Подтвердить активацию')}</button>`);};
  function addUpgradeReview(){const current=EcoFinance.summary(demo).active,tier=EcoFinance.tiers.find(p=>p.id===chosenTier),confirm=$('#modal [data-action="confirm-plan"]');if(!tier||!confirm||!$('#modal').open)return;

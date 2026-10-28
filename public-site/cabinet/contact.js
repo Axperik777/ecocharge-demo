@@ -12,7 +12,7 @@ function inquiryContext(topic){
   return {entry:tab,topic,stationId:topic==='station'?selected?.id:null,stationName:topic==='station'?selected?.name:null,plan:p?.name||null,capital:Number.isFinite(amount)?amount:null,rate:p?.rate||null,stationIds:draft?chosenStations.slice():demo.plan?.stationIds.slice()||[]};
 }
 function contextMarkup(c){if(!c)return '';return `<div class="inquiry-context">${icon(c.stationId?'pin':'file')}<div><strong>${escapeHtml(c.stationName||c.plan&&c.plan+' plan'||contactTopics[c.topic]||'Account discussion')}</strong><small>${c.stationId?'AFDC '+c.stationId+' · ':''}${c.plan?escapeHtml(c.plan)+' · ':''}${c.capital?money(c.capital)+' total · ':''}${c.rate?c.rate+'% per calendar month':'Your manager will see this context.'}</small></div></div>`}
-function configuredChannels(){const m=demo.manager;return `<div class="contact-channel-links">${[['email','Email','mail'],['whatsapp','WhatsApp','phone'],['telegram','Telegram','chat']].map(([key,label,i])=>`<button type="button" data-contact="${key}">${icon(i)}<span>${label}<small>${m[key]?'Open channel':'Not connected'}</small></span>${icon('out')}</button>`).join('')}</div>`}
+function configuredChannels(){const m=demo.manager,rows=[['email','Email','mail'],['whatsapp','WhatsApp','phone'],['telegram','Telegram','chat']].filter(([key])=>m[key]);return rows.length?`<div class="contact-channel-links">${rows.map(([key,label,i])=>`<button type="button" data-contact="${key}">${icon(i)}<span>${label}<small>Open channel</small></span>${icon('out')}</button>`).join('')}</div>`:''}
 function contactComposer(topic='general',context=null){
   ensureManager();
   const c=context||inquiryContext(topic),isCall=topic==='call';
@@ -40,10 +40,10 @@ actions.call=()=>contactComposer('call');
 actions['guided-support']=()=>contactComposer('plan');
 supportModal=kind=>kind==='chat'?showConversations():contactComposer(kind==='call'?'call':'general');
 actions.manager=()=>{
-  ensureManager();openModal(`<div class="contact-eyebrow">YOUR ACCOUNT MANAGER</div><h2>${escapeHtml(demo.manager.name)}</h2><p>Choose what you need help with.</p><div class="contact-topic-grid">${[['plan','Compare plans','zap'],['station','Discuss this station','pin'],['documents','Review documents','file'],['call','Request a call','phone']].map(([topic,label,i])=>`<button data-contact-topic="${topic}">${icon(i)}<span>${label}</span>${icon('arrow')}</button>`).join('')}</div><button class="button primary" data-action="conversations">My conversations ${unreadReplies()?`· ${unreadReplies()} new`:''} ${icon('chat')}</button>${configuredChannels()}<p class="form-hint">Verified contact channels appear after the team adds them to the account.</p>`)
+  ensureManager();openModal(`<div class="contact-eyebrow">YOUR ACCOUNT MANAGER</div><h2>${escapeHtml(demo.manager.name)}</h2><p>Choose what you need help with.</p><div class="contact-topic-grid">${[['plan','Compare plans','zap'],['station','Discuss this station','pin'],['documents','Review documents','file'],['call','Request a call','phone']].map(([topic,label,i])=>`<button data-contact-topic="${topic}">${icon(i)}<span>${label}</span>${icon('arrow')}</button>`).join('')}</div><button class="button primary" data-action="conversations">My conversations ${unreadReplies()?`· ${unreadReplies()} new`:''} ${icon('chat')}</button>${configuredChannels()}`)
 };
 const originalContactManager=contactManager;
-  contactManager=function(channel){if(!demo.manager[channel]){openModal(`<h2>${channel==='email'?'Email':channel==='whatsapp'?'WhatsApp':'Telegram'} · contact channel</h2><p>This channel has not been added to the manager profile yet. Write through the account inbox.</p><button class="button primary" data-contact-topic="general">Write in account inbox ${icon('chat')}</button>${role==='admin'?'<button class="button secondary" data-action="manager-settings">Add contact details</button>':''}`);return}originalContactManager(channel)};
+  contactManager=function(channel){if(!demo.manager[channel]){contactComposer('general');return}originalContactManager(channel)};
 function renderContactSurfaces(){
   ensureManager();
   let welcome=$('#client-next-step');
