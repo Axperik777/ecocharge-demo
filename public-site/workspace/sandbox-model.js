@@ -1,6 +1,8 @@
 'use strict';
 // Local presentation state. This module has no network or authentication capability.
 window.createEcoSandbox=function(seed,domain,stations){
+ // Showcase next steps are exported relative to the build day; move them by whole days so an older publication never presents an expired agreed step.
+ seed=(s=>{const made=Date.parse(s?.generatedAt),lag=Date.now()-made,day=864e5;if(!Number.isFinite(made)||lag<=0)return s;const shift=Math.ceil(lag/day)*day,copy=structuredClone(s),walk=v=>{if(!v||typeof v!=='object')return;if(Array.isArray(v)){v.forEach(walk);return;}for(const [k,x]of Object.entries(v)){if((k==='nextContact'||k==='nextDueAt')&&typeof x==='string'){const t=Date.parse(x);if(Number.isFinite(t))v[k]=new Date(t+shift).toISOString();}else walk(x);}};walk(copy);return copy;})(seed);
  const clone=v=>structuredClone(v),F=domain.finance,P=domain.policy,O=domain.operations,J=domain.journey,C=domain.compute,S=domain.solar,Calls=domain.calls||window.EcoCallScripts,legacyProjectKey='min'+'ing',chargeAvailabilityStatuses=new Set(['unconfirmed','available_for_review','not_available']);
  const ids=new Set(stations.map(s=>s.id));ids.closed=new Set(stations.filter(s=>s.selectionClosed).map(s=>s.id));
  const now=()=>new Date().toISOString(),id=p=>p+'-'+crypto.randomUUID(),fail=(m,status=400)=>{const e=Error(m);e.status=status;throw e;};
