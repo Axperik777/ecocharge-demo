@@ -112,3 +112,9 @@ html[data-app=website] .ec-faith-service-points>.ec-text-link svg{display:block;
 html[data-app=website] .ec-faith-service--club{margin-top:clamp(40px,6vw,70px);margin-bottom:clamp(40px,6vw,70px)}
 @media(max-width:760px){html[data-app=website] .ec-faith-service{grid-template-columns:1fr;gap:24px;padding:28px 22px;border-radius:18px}html[data-app=website] .ec-faith-service-copy h2{font-size:31px}html[data-app=website] .ec-faith-service-copy>p:last-child{font-size:15px}html[data-app=website] .ec-faith-service-points p{font-size:13px}}
 @media(max-width:370px){html[data-app=website] .ec-faith-service{padding:24px 17px}html[data-app=website] .ec-faith-service-copy h2{font-size:28px}}
+/* EC-156 service photos on the home page */
+html[data-app=website] .ec-faith-service-photos{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:6px 0 0;padding:0;list-style:none}
+html[data-app=website] .ec-faith-service-photos figure{margin:0;overflow:hidden;border-radius:16px;background:#dfece5}
+html[data-app=website] .ec-faith-service-photos img{display:block;width:100%;aspect-ratio:1/1;height:auto;object-fit:cover}
+html[data-app=website] .ec-faith-service-photos figcaption{padding:10px 12px;color:#31483d;font-size:13px;line-height:1.4}
+@media (max-width:720px){html[data-app=website] .ec-faith-service{grid-template-columns:1fr}html[data-app=website] .ec-faith-service-photos{grid-template-columns:1fr 1fr}html[data-app=website] .ec-faith-service-photos li:first-child{grid-column:1/-1}}

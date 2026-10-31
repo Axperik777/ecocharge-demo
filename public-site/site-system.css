@@ -562,3 +562,10 @@ html[data-app=website] .ec-stations-intro .ec-text-link{color:#a7dfc8}
 html[data-app=website] .ec-stations-intro .ec-button:not(.ec-button-outline):not(.outline){border-color:#f7fbf9;background:#f7fbf9;color:#0d2b22}
 html[data-app=website] .ec-stations-intro .ec-button:not(.ec-button-outline):not(.outline):hover{border-color:#dff5ea;background:#dff5ea;color:#0d2b22}
 html[data-app=website] #site-dialog{overscroll-behavior:contain}
+/* EC-156 Club community gallery */
+html[data-app=website] .club-gallery>p{max-width:62ch;color:var(--muted,#53675e);line-height:1.7}
+html[data-app=website] .club-gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0 0;padding:0;list-style:none}
+html[data-app=website] .club-gallery-grid figure{margin:0;overflow:hidden;border:1px solid #d8e4de;border-radius:16px;background:#fff}
+html[data-app=website] .club-gallery-grid img{display:block;width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;background:#e9f1ec}
+html[data-app=website] .club-gallery-grid figcaption{padding:10px 12px 12px;color:#31483d;font-size:13px;line-height:1.45}
+@media (min-width:900px){html[data-app=website] .club-gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}}

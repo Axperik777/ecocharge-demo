@@ -1,0 +1,14 @@
+/* EC-157 company media carousels */
+html[data-app=website] .media-library{padding-block:clamp(40px,6vw,72px);border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website] .media-library>header{max-width:68ch}
+html[data-app=website] .media-kicker{margin:0 0 8px;color:#006a4d;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+html[data-app=website] .media-library h2{margin:0;font-size:clamp(28px,3.2vw,42px);line-height:1.15;letter-spacing:-.04em;text-wrap:balance}
+html[data-app=website] .media-library>header>p:last-child{margin:14px 0 0;color:var(--muted,#53675e);font-size:16px;line-height:1.7}
+html[data-app=website] .media-set{margin-top:30px;min-width:0}
+html[data-app=website] .media-set h3{display:flex;align-items:baseline;gap:10px;margin:0 0 12px;font-size:18px;line-height:1.35}
+html[data-app=website] .media-set h3 small{color:var(--muted,#53675e);font-size:13px;font-weight:500}
+html[data-app=website] .media-strip{display:grid;grid-auto-flow:column;grid-auto-columns:min(78vw,300px);gap:12px;margin:0;padding:0 0 12px;list-style:none;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin;align-items:start}
+html[data-app=website] .media-strip:focus-visible{outline:2px solid #00694e;outline-offset:4px;border-radius:12px}
+html[data-app=website] .media-strip>li{scroll-snap-align:start;min-width:0}
+html[data-app=website] .media-strip img{display:block;width:100%;height:auto;border:1px solid #d8e4de;border-radius:14px;background:#e9f1ec}
+@media (min-width:900px){html[data-app=website] .media-strip{grid-auto-columns:280px;gap:16px}}

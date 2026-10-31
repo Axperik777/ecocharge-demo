@@ -374,3 +374,20 @@ html[data-app=website][data-page="participate/charge"] .charge-sticky-cta{displa
 @media(prefers-reduced-motion:reduce){
  html[data-app=website][data-page="participate/charge"] :is(.charge-photo-status,.charge-session-flow button){transition:none}
 }
+/* EC-156 funnel visuals: operations strip, network track record, team at the form */
+html[data-app=website][data-page="participate/charge"] :is(.charge-operations,.charge-proof){padding-block:clamp(40px,6vw,72px)}
+html[data-app=website][data-page="participate/charge"] .charge-proof{border-top:1px solid var(--line,#d8e4de)}
+html[data-app=website][data-page="participate/charge"] :is(.charge-operations,.charge-proof) .project-section-heading h2{margin:6px 0 0;font-size:clamp(28px,3.2vw,42px);line-height:1.15;letter-spacing:-.04em;text-wrap:balance}
+html[data-app=website][data-page="participate/charge"] .charge-proof .project-section-heading>p:not(.charge-section-label){margin:14px 0 0;max-width:62ch;color:var(--muted,#53675e);font-size:16px;line-height:1.7}
+html[data-app=website][data-page="participate/charge"] :is(.charge-operations-grid,.charge-proof-grid){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:26px 0 0;padding:0;list-style:none}
+html[data-app=website][data-page="participate/charge"] :is(.charge-operations-grid,.charge-proof-grid)>li{display:flex;flex-direction:column;height:100%;margin:0;overflow:hidden;border:1px solid #cbdcd3;border-radius:18px;background:#fff}
+html[data-app=website][data-page="participate/charge"] :is(.charge-operations-grid,.charge-proof-grid) img{display:block;width:100%;aspect-ratio:4/5;height:auto;object-fit:cover;background:#e9f1ec}
+html[data-app=website][data-page="participate/charge"] .charge-proof-grid img{aspect-ratio:1/1;object-fit:contain;background:#0f2a20}
+html[data-app=website][data-page="participate/charge"] :is(.charge-operations-grid,.charge-proof-grid) .charge-tile-copy{display:grid;gap:5px;padding:14px 14px 16px}
+html[data-app=website][data-page="participate/charge"] :is(.charge-operations-grid,.charge-proof-grid) .charge-tile-copy small{color:#006a4d;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+html[data-app=website][data-page="participate/charge"] :is(.charge-operations-grid,.charge-proof-grid) .charge-tile-copy strong{color:var(--ink,#102019);font-size:15px;line-height:1.45;overflow-wrap:anywhere}
+html[data-app=website][data-page="participate/charge"] .charge-proof-note{max-width:72ch;margin:20px 0;color:var(--muted,#53675e);font-size:13px;line-height:1.6}
+html[data-app=website][data-page="participate/charge"] .charge-request-team{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:center;margin:20px 0 0}
+html[data-app=website][data-page="participate/charge"] .charge-request-team img{display:block;width:96px;height:120px;object-fit:cover;border-radius:14px}
+html[data-app=website][data-page="participate/charge"] .charge-request-team p{margin:0;color:#31483d;font-size:14px;line-height:1.55}
+@media (min-width:900px){html[data-app=website][data-page="participate/charge"] :is(.charge-operations-grid,.charge-proof-grid){grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}}
